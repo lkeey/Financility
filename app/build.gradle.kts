@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.androidx.material3)
 
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.jetbrains.compose.navigation)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
