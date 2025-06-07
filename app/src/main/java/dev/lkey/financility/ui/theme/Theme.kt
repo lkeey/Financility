@@ -1,6 +1,5 @@
 package dev.lkey.financility.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -14,12 +13,16 @@ import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
     primary = Color(0xFF2AE881),
-    surface = Color(0xFFF3EDF7)
+    surface = Color(0xFFF3EDF7),
+    onSurfaceVariant = Color(0xFFEFFAFF),
+    onSurface = Color(0xFFFEF7FF)
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = Color(0xFF2AE881),
-    surface = Color(0xFFF3EDF7)
+    surface = Color(0xFFF3EDF7),
+    onSurfaceVariant = Color(0xFFEFFAFF),
+    onSurface = Color(0xFFFEF7FF)
 )
 
 @Composable

@@ -2,6 +2,8 @@ package dev.lkey.financility
 
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomAppBar
@@ -24,12 +26,12 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import dev.lkey.financility.feature_articles.ArticlesScreen
 import dev.lkey.financility.feature_bill.BillScreen
-import dev.lkey.financility.feature_bill.BillView
 import dev.lkey.financility.feature_expenses.ExpensesScreen
 import dev.lkey.financility.feature_income.IncomeScreen
 import dev.lkey.financility.feature_settings.SettingsScreen
 import dev.lkey.financility.navigation.Bar
 import dev.lkey.financility.navigation.Route
+import dev.lkey.financility.navigation.splash.SplashScreen
 import dev.lkey.financility.ui.theme.FinancilityTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -38,53 +40,74 @@ fun FinancilityApp() {
     FinancilityTheme {
 
         val navController = rememberNavController()
-
         val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+
+        val isSplash = Route.Splash.toString() in currentRoute.toString()
 
         Scaffold (
             bottomBar = {
-                BottomAppBar (
-                    containerColor = MaterialTheme.colorScheme.surface
-                ) {
-                    for (bar in Bar.items) {
-                        NavigationBarItem(
-                            selected = bar.route.toString() in currentRoute.toString(),
-                            onClick = {
-                                navController.navigate(bar.route)
-                            },
-                            icon = {
-                                Icon(
-                                    painter = painterResource(id = bar.icon),
-                                    contentDescription = bar.title
-                                )
-                            },
-                            label = { Text(bar.title) }
-                        )
+                if (!isSplash) {
+                    BottomAppBar(
+                        containerColor = MaterialTheme.colorScheme.surface
+                    ) {
+                        for (bar in Bar.items) {
+                            NavigationBarItem(
+                                selected = bar.route.toString() in currentRoute.toString(),
+                                onClick = {
+                                    navController.navigate(bar.route)
+                                },
+                                icon = {
+                                    Icon(
+                                        painter = painterResource(id = bar.icon),
+                                        contentDescription = bar.title
+                                    )
+                                },
+                                label = { Text(bar.title) }
+                            )
+                        }
                     }
                 }
             },
             topBar = {
-                TopAppBar(
-                    title = {
-                        Text(
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            text = "Top Bar",
-                            textAlign = TextAlign.Center
+                if (!isSplash) {
+
+                    TopAppBar(
+                        title = {
+                            Text(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                text = "Top Bar",
+                                textAlign = TextAlign.Center
+                            )
+                        },
+                        colors = TopAppBarDefaults.topAppBarColors(
+                            containerColor = MaterialTheme.colorScheme.primary
                         )
-                    },
-                    colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.primary
                     )
-                )
+                }
             },
+            modifier = Modifier
+                .fillMaxSize(),
+            containerColor =
+                    if (isSplash) MaterialTheme.colorScheme.onSurfaceVariant
+                    else MaterialTheme.colorScheme.onSurface,
+
         ) { padding ->
             NavHost(
                 navController = navController,
-                startDestination = Route.Expenses,
+                startDestination = Route.Splash,
                 modifier = Modifier
                     .padding(padding)
             ) {
+                composable<Route.Splash>(
+                    exitTransition = { slideOutHorizontally() },
+                    popEnterTransition = { slideInHorizontally() }
+                ) {
+                    SplashScreen(
+                        navController = navController
+                    )
+                }
+
                 navigation<Route.Expenses>(
                     startDestination = Route.TodayExpenses
                 ) {
