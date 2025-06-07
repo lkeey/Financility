@@ -20,9 +20,18 @@ sealed interface Route {
     data object Bill : Route
 
     @Serializable
+    data object CurrentBill : Route
+
+    @Serializable
     data object Articles : Route
 
     @Serializable
+    data object MyArticles : Route
+
+    @Serializable
     data object Settings : Route
+
+    @Serializable
+    data object AllSettings : Route
 
 }

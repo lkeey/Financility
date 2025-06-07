@@ -22,8 +22,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import dev.lkey.financility.feature_articles.ArticlesScreen
+import dev.lkey.financility.feature_bill.BillScreen
+import dev.lkey.financility.feature_bill.BillView
 import dev.lkey.financility.feature_expenses.ExpensesScreen
 import dev.lkey.financility.feature_income.IncomeScreen
+import dev.lkey.financility.feature_settings.SettingsScreen
 import dev.lkey.financility.navigation.Bar
 import dev.lkey.financility.navigation.Route
 import dev.lkey.financility.ui.theme.FinancilityTheme
@@ -102,6 +106,45 @@ fun FinancilityApp() {
                         popEnterTransition = { slideInHorizontally() }
                     ) {
                         IncomeScreen(
+                            navController = navController
+                        )
+                    }
+                }
+
+                navigation<Route.Bill>(
+                    startDestination = Route.CurrentBill
+                ) {
+                    composable<Route.CurrentBill>(
+                        exitTransition = { slideOutHorizontally() },
+                        popEnterTransition = { slideInHorizontally() }
+                    ) {
+                        BillScreen(
+                            navController = navController
+                        )
+                    }
+                }
+
+                navigation<Route.Articles>(
+                    startDestination = Route.MyArticles
+                ) {
+                    composable<Route.MyArticles>(
+                        exitTransition = { slideOutHorizontally() },
+                        popEnterTransition = { slideInHorizontally() }
+                    ) {
+                        ArticlesScreen(
+                            navController = navController
+                        )
+                    }
+                }
+
+                navigation<Route.Settings>(
+                    startDestination = Route.AllSettings
+                ) {
+                    composable<Route.AllSettings>(
+                        exitTransition = { slideOutHorizontally() },
+                        popEnterTransition = { slideInHorizontally() }
+                    ) {
+                        SettingsScreen(
                             navController = navController
                         )
                     }
