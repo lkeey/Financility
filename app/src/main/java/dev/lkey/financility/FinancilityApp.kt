@@ -11,6 +11,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -51,18 +53,29 @@ fun FinancilityApp() {
                         containerColor = MaterialTheme.colorScheme.surface
                     ) {
                         for (bar in Bar.items) {
+                            val isSelected = bar.route.toString() in currentRoute.toString()
                             NavigationBarItem(
-                                selected = bar.route.toString() in currentRoute.toString(),
+                                selected = isSelected,
+                                colors = NavigationBarItemDefaults.colors(
+                                    indicatorColor = MaterialTheme.colorScheme.outline
+                                ),
                                 onClick = {
                                     navController.navigate(bar.route)
                                 },
                                 icon = {
                                     Icon(
                                         painter = painterResource(id = bar.icon),
-                                        contentDescription = bar.title
+                                        contentDescription = bar.title,
+                                        tint = if (isSelected) MaterialTheme.colorScheme.surfaceTint
+                                            else MaterialTheme.colorScheme.inverseOnSurface
                                     )
                                 },
-                                label = { Text(bar.title) }
+                                label = {
+                                    Text(
+                                        text = bar.title,
+                                        color = MaterialTheme.colorScheme.inverseOnSurface,
+                                    )
+                                }
                             )
                         }
                     }
@@ -77,6 +90,7 @@ fun FinancilityApp() {
                                 modifier = Modifier
                                     .fillMaxWidth(),
                                 text = "Top Bar",
+                                color = MaterialTheme.colorScheme.inverseOnSurface,
                                 textAlign = TextAlign.Center
                             )
                         },

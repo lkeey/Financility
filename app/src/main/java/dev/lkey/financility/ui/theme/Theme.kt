@@ -15,14 +15,20 @@ private val DarkColorScheme = darkColorScheme(
     primary = Color(0xFF2AE881),
     surface = Color(0xFFF3EDF7),
     onSurfaceVariant = Color(0xFFEFFAFF),
-    onSurface = Color(0xFFFEF7FF)
+    onSurface = Color(0xFFFEF7FF),
+    inverseOnSurface = Color(0xFF1D1B20),
+    outline = Color(0xFFD4FAE6),
+    surfaceTint = Color(0xFF29E881)
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = Color(0xFF2AE881),
     surface = Color(0xFFF3EDF7),
     onSurfaceVariant = Color(0xFFEFFAFF),
-    onSurface = Color(0xFFFEF7FF)
+    onSurface = Color(0xFFFEF7FF),
+    inverseOnSurface = Color(0xFF1D1B20),
+    outline = Color(0xFFD3FAE6),
+    surfaceTint = Color(0xFF29E881)
 )
 
 @Composable
