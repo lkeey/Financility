@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -13,7 +14,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import dev.lkey.financility.navigation.Bar
 import dev.lkey.financility.ui.theme.FinancilityTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -26,22 +29,19 @@ fun FinancilityApp() {
                 BottomAppBar (
                     containerColor = MaterialTheme.colorScheme.surface
                 ) {
-                    NavigationBarItem(
-                        selected = false,
-                        onClick = { /* Navigate */ },
-                        icon = {
-
-                        },
-                        label = { Text("Home") }
-                    )
-                    NavigationBarItem(
-                        selected = false,
-                        onClick = { /* Navigate */ },
-                        icon = {
-
-                        },
-                        label = { Text("Settings") }
-                    )
+                    for (bar in Bar.items) {
+                        NavigationBarItem(
+                            selected = false,
+                            onClick = { /* Navigate */ },
+                            icon = {
+                                Icon(
+                                    painter = painterResource(id = bar.icon),
+                                    contentDescription = bar.title
+                                )
+                            },
+                            label = { Text(bar.title) }
+                        )
+                    }
                 }
             },
             topBar = {
