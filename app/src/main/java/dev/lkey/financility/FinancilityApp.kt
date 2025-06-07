@@ -1,6 +1,7 @@
 package dev.lkey.financility
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -12,6 +13,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import dev.lkey.financility.ui.theme.FinancilityTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -21,7 +23,9 @@ fun FinancilityApp() {
 
         Scaffold (
             bottomBar = {
-                BottomAppBar {
+                BottomAppBar (
+                    containerColor = MaterialTheme.colorScheme.surface
+                ) {
                     NavigationBarItem(
                         selected = false,
                         onClick = { /* Navigate */ },
@@ -42,7 +46,14 @@ fun FinancilityApp() {
             },
             topBar = {
                 TopAppBar(
-                    title = { Text("Top Bar") },
+                    title = {
+                        Text(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            text = "Top Bar",
+                            textAlign = TextAlign.Center
+                        )
+                    },
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.primary
                     )
