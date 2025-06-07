@@ -31,7 +31,7 @@ fun FinancilityTopBar (
             containerColor = MaterialTheme.colorScheme.primary
         ),
         actions = {
-            icon
+            icon.invoke()
         },
     )
 }
