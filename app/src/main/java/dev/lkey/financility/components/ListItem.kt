@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun ListItem (
     title: String,
-    trailingText: String,
+    trailingText: String? = null,
     trailingIcon: Int? = null,
     description: String? = null,
     emoji: String? = null,
@@ -36,10 +36,16 @@ fun ListItem (
     Column (
         modifier = Modifier
             .fillMaxWidth()
-            .background(backgroundColor)
-            ,
+            .background(backgroundColor),
         verticalArrangement = Arrangement.Center
     ) {
+
+//        HorizontalDivider(
+//            modifier = Modifier
+//                .height(1.dp)
+//                .fillMaxWidth(),
+//            color = MaterialTheme.colorScheme.surfaceDim,
+//        )
 
 //        Spacer(Modifier.height(8.dp))
 
@@ -86,14 +92,16 @@ fun ListItem (
                 }
             }
 
-            Text(
-                text = trailingText,
-                color = MaterialTheme.colorScheme.inverseOnSurface,
-                fontWeight = FontWeight.W400,
-                fontSize = 16.sp,
-                lineHeight = 24.sp,
-                letterSpacing = 0.5.sp,
-            )
+            trailingText?.let {
+                Text(
+                    text = trailingText,
+                    color = MaterialTheme.colorScheme.inverseOnSurface,
+                    fontWeight = FontWeight.W400,
+                    fontSize = 16.sp,
+                    lineHeight = 24.sp,
+                    letterSpacing = 0.5.sp,
+                )
+            }
 
             Spacer(modifier = Modifier.width(12.dp))
 
