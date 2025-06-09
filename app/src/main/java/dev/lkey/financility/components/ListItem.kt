@@ -114,7 +114,6 @@ fun ListItem (
                 .height(1.dp)
                 .fillMaxWidth(),
             color = MaterialTheme.colorScheme.surfaceDim,
-
         )
     }
 }

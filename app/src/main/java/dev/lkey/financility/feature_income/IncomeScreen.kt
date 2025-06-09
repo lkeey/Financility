@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -34,11 +35,15 @@ fun IncomeScreen (
             FinancilityTopBar(
                 title = "Доходы сегодня",
                 icon = {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_history),
-                        contentDescription = "История",
-                        tint = MaterialTheme.colorScheme.surfaceContainer
-                    )
+                    IconButton(
+                        onClick = { /* TODO */ }
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_history),
+                            contentDescription = "История",
+                            tint = MaterialTheme.colorScheme.surfaceContainer
+                        )
+                    }
                 }
             )
         },

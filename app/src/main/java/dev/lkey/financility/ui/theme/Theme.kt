@@ -21,7 +21,8 @@ private val DarkColorScheme = darkColorScheme(
     surfaceTint = Color(0xFF29E881),
     surfaceContainer = Color(0xFF49454F),
     surfaceContainerLow = Color(0xFFD4FAE6),
-    surfaceDim = Color(0xFFCAC4D0)
+    surfaceDim = Color(0xFFCAC4D0),
+    primaryContainer = Color(0xFFECE6F0)
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -34,7 +35,8 @@ private val LightColorScheme = lightColorScheme(
     surfaceTint = Color(0xFF29E881),
     surfaceContainer = Color(0xFF49454F),
     surfaceContainerLow = Color(0xFFD4FAE6),
-    surfaceDim = Color(0xFFCAC4D0)
+    surfaceDim = Color(0xFFCAC4D0),
+    primaryContainer = Color(0xFFECE6F0)
 )
 
 @Composable
