@@ -4,31 +4,28 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import dev.lkey.financility.R
 import dev.lkey.financility.components.ListItem
 import dev.lkey.financility.feature_expenses.data.MockTransactionModel
+import dev.lkey.financility.feature_expenses.data.TransactionResponseModel
+import dev.lkey.financility.feature_expenses.data.network.RemoteTransactionDataSourceImpl
+import kotlinx.coroutines.coroutineScope
 
 @Composable
 fun ExpensesView (
     modifier: Modifier = Modifier
 ) {
+    var transactions by remember { mutableStateOf<List<TransactionResponseModel>?>(null) }
 
-    val mockData = listOf(
-        MockTransactionModel(
-            emoji = "\uD83D\uDC57",
-            title = "Аренда квартиры",
-        ),
-        MockTransactionModel(
-            emoji = "\uD83D\uDC57",
-            title = "Одежда",
-        ),
-        MockTransactionModel(
-            emoji = "\uD83D\uDC57",
-            title = "На собачку",
-            description = "Джек"
-        ),
-    )
+    LaunchedEffect(Unit) {
+        transactions = RemoteTransactionDataSourceImpl().getTodayTransactions()
+    }
 
     Column (
         modifier = modifier
@@ -42,13 +39,13 @@ fun ExpensesView (
             trailingText = "436 000 ₽"
         )
 
-        mockData.forEach {
+        transactions?.forEach {
             ListItem(
                 trailingIcon = R.drawable.ic_light_arrow,
-                emoji = it.emoji,
-                title = it.title,
-                description = it.description,
-                trailingText = it.cost
+                emoji = it.categoryModel.emoji,
+                title = it.categoryModel.name,
+                description = it.comment,
+                trailingText = it.amount
             )
         }
     }
