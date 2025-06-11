@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -31,6 +32,7 @@ fun ListItem (
     trailingIcon: Int? = null,
     description: String? = null,
     emoji: String? = null,
+    height: Dp = 56.dp,
     backgroundColor: Color = MaterialTheme.colorScheme.onSurface,
 ) {
     Column (
@@ -51,7 +53,7 @@ fun ListItem (
 
         Row (
             modifier = Modifier
-                .height(68.dp)
+                .height(height)
                 .fillMaxSize()
                 .padding(horizontal = 12.dp),
             verticalAlignment = Alignment.CenterVertically

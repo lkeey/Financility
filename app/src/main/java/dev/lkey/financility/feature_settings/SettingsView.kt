@@ -1,11 +1,39 @@
 package dev.lkey.financility.feature_settings
 
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import dev.lkey.financility.R
+import dev.lkey.financility.components.FinancilityToggleListItem
+import dev.lkey.financility.components.ListItem
 
 @Composable
 fun SettingsView (
-
+    modifier: Modifier = Modifier
 ) {
-    Text("Settings")
+
+    val options = listOf("Основной цвет", "Звуки", "Хаптики", "Код пароль", "Синхронизация", "Язык", "О программе")
+
+    Column (
+        modifier = modifier
+            .fillMaxSize()
+    ){
+        FinancilityToggleListItem(
+            title = "Светлая темная авто",
+            isChecked = false,
+            onClick = {
+                /* TODO */
+            }
+        )
+
+        options.forEach {
+            ListItem(
+                trailingIcon = R.drawable.ic_dark_arrow,
+                title = it,
+                height = 56.dp
+            )
+        }
+    }
 }
