@@ -69,9 +69,9 @@ fun FinancilityToggleListItem (
                     checkedThumbColor = MaterialTheme.colorScheme.primary,
                     checkedTrackColor = MaterialTheme.colorScheme.primaryContainer,
                     checkedBorderColor = MaterialTheme.colorScheme.primary,
-                    uncheckedThumbColor = Color(0xFF7C7681),
-                    uncheckedTrackColor = Color(0xFFE9E5EC),
-                    uncheckedBorderColor = Color(0xFF7C7681)
+                    uncheckedThumbColor = MaterialTheme.colorScheme.secondaryContainer,
+                    uncheckedTrackColor = MaterialTheme.colorScheme.onSecondary,
+                    uncheckedBorderColor = MaterialTheme.colorScheme.secondaryContainer
                 )
             )
         }
