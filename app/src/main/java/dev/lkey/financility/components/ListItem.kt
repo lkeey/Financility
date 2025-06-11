@@ -42,15 +42,6 @@ fun ListItem (
         verticalArrangement = Arrangement.Center
     ) {
 
-//        HorizontalDivider(
-//            modifier = Modifier
-//                .height(1.dp)
-//                .fillMaxWidth(),
-//            color = MaterialTheme.colorScheme.surfaceDim,
-//        )
-
-//        Spacer(Modifier.height(8.dp))
-
         Row (
             modifier = Modifier
                 .height(height)
@@ -116,8 +107,6 @@ fun ListItem (
                 )
             }
         }
-
-//        Spacer(Modifier.height(8.dp))
 
         HorizontalDivider(
             modifier = Modifier
