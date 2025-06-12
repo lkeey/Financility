@@ -3,11 +3,11 @@ package dev.lkey.financility.feature_expenses.data.repository
 import dev.lkey.financility.feature_expenses.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_expenses.domain.model.CategoryModel
 import dev.lkey.financility.feature_expenses.domain.model.TransactionModel
-import dev.lkey.financility.feature_expenses.domain.repository.TransactionRepository
+import dev.lkey.financility.feature_expenses.domain.repository.ExpensesRepository
 
-class TransactionRepositoryImpl : TransactionRepository {
+class ExpensesRepositoryImpl : ExpensesRepository {
 
-    override suspend fun getTodayTransactions(): List<TransactionModel> {
+    override suspend fun getTodayExpenses(): List<TransactionModel> {
         /* TODO API */
 
         val acc = AccountBriefModel(
@@ -25,7 +25,7 @@ class TransactionRepositoryImpl : TransactionRepository {
                     id = 0,
                     name = "Аренда квартиры",
                     emoji = "\uD83C\uDFE1",
-                    isIncome = true
+                    isIncome = false
                 ),
                 amount = "100 000 ₽",
                 transactionDate = "...",
@@ -40,7 +40,7 @@ class TransactionRepositoryImpl : TransactionRepository {
                     id = 0,
                     name = "Одежда",
                     emoji = "\uD83D\uDC57",
-                    isIncome = true
+                    isIncome = false
                 ),
                 amount = "100 000 ₽",
                 transactionDate = "...",
@@ -55,7 +55,7 @@ class TransactionRepositoryImpl : TransactionRepository {
                     id = 0,
                     name = "На собачку",
                     emoji = "\uD83D\uDC36",
-                    isIncome = true
+                    isIncome = false
                 ),
                 amount = "100 000 ₽",
                 transactionDate = "...",
@@ -70,7 +70,7 @@ class TransactionRepositoryImpl : TransactionRepository {
                     id = 0,
                     name = "На собачку",
                     emoji = "\uD83D\uDC36",
-                    isIncome = true
+                    isIncome = false
                 ),
                 amount = "100 000 ₽",
                 transactionDate = "...",
@@ -85,7 +85,7 @@ class TransactionRepositoryImpl : TransactionRepository {
                     id = 0,
                     name = "Ремонт квартиры",
                     emoji = "РК",
-                    isIncome = true
+                    isIncome = false
                 ),
                 amount = "100 000 ₽",
                 transactionDate = "...",
@@ -100,7 +100,7 @@ class TransactionRepositoryImpl : TransactionRepository {
                     id = 0,
                     name = "Продукты",
                     emoji = "\uD83C\uDF6D",
-                    isIncome = true
+                    isIncome = false
                 ),
                 amount = "100 000 ₽",
                 transactionDate = "...",
@@ -115,7 +115,7 @@ class TransactionRepositoryImpl : TransactionRepository {
                     id = 0,
                     name = "Спортзал",
                     emoji = "\uD83C\uDFCB\uFE0F",
-                    isIncome = true
+                    isIncome = false
                 ),
                 amount = "100 000 ₽",
                 transactionDate = "...",
@@ -130,7 +130,7 @@ class TransactionRepositoryImpl : TransactionRepository {
                     id = 0,
                     name = "Медицина",
                     emoji = "\uD83D\uDC8A",
-                    isIncome = true
+                    isIncome = false
                 ),
                 amount = "100 000 ₽",
                 transactionDate = "...",

@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_income
+package dev.lkey.financility.feature_income.presentation.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -11,6 +11,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -19,11 +21,16 @@ import androidx.navigation.NavController
 import dev.lkey.financility.R
 import dev.lkey.financility.components.FinancilityBottomBar
 import dev.lkey.financility.components.FinancilityTopBar
+import dev.lkey.financility.feature_income.presentation.IncomeViewModel
 
 @Composable
 fun IncomeScreen (
-    navController: NavController
+    navController: NavController,
+    viewModel: IncomeViewModel = IncomeViewModel()
 ) {
+
+    val state by viewModel.state.collectAsState()
+
     Scaffold (
         bottomBar = {
             FinancilityBottomBar(
@@ -68,7 +75,8 @@ fun IncomeScreen (
     ) { padding ->
 
         IncomeView(
-            modifier = Modifier.padding(padding)
+            modifier = Modifier.padding(padding),
+            state = state
         )
 
     }

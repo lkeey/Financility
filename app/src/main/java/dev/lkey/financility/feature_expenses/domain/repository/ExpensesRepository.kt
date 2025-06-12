@@ -2,8 +2,8 @@ package dev.lkey.financility.feature_expenses.domain.repository
 
 import dev.lkey.financility.feature_expenses.domain.model.TransactionModel
 
-interface TransactionRepository {
+interface ExpensesRepository {
 
-    suspend fun getTodayTransactions(): List<TransactionModel>
+    suspend fun getTodayExpenses(): List<TransactionModel>
 
 }
