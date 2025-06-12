@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun ListItem (
+fun FinancilityListItem (
     title: String,
     trailingText: String? = null,
     trailingIcon: Int? = null,

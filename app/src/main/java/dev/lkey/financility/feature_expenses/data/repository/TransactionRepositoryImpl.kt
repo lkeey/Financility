@@ -5,9 +5,7 @@ import dev.lkey.financility.feature_expenses.domain.model.CategoryModel
 import dev.lkey.financility.feature_expenses.domain.model.TransactionModel
 import dev.lkey.financility.feature_expenses.domain.repository.TransactionRepository
 
-class TransactionRepositoryImpl (
-
-) : TransactionRepository {
+class TransactionRepositoryImpl : TransactionRepository {
 
     override suspend fun getTodayTransactions(): List<TransactionModel> {
         /* TODO API */
@@ -19,7 +17,7 @@ class TransactionRepositoryImpl (
             currency = "..."
         )
 
-        val mockData = listOf(
+        return listOf(
             TransactionModel(
                 id = 0,
                 account = acc,
@@ -141,8 +139,6 @@ class TransactionRepositoryImpl (
                 updatedAt = "...",
             ),
         )
-
-        return mockData
     }
 
 }

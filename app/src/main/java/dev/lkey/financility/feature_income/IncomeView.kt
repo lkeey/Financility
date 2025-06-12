@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import dev.lkey.financility.components.ListItem
+import dev.lkey.financility.components.FinancilityListItem
 
 @Composable
 fun IncomeView (
@@ -26,7 +26,7 @@ fun IncomeView (
         modifier = modifier
             .fillMaxSize()
     ){
-        ListItem(
+        FinancilityListItem(
             title = "Всего",
             description = null,
             backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,

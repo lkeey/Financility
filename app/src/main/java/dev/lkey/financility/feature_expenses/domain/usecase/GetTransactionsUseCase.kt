@@ -4,7 +4,7 @@ import dev.lkey.financility.feature_expenses.data.repository.TransactionReposito
 import dev.lkey.financility.feature_expenses.domain.model.TransactionModel
 import dev.lkey.financility.feature_expenses.domain.repository.TransactionRepository
 
-class GetTransactionUseCase {
+class GetTransactionsUseCase {
 
     private val repository: TransactionRepository = TransactionRepositoryImpl()
 

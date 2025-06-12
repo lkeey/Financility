@@ -2,8 +2,7 @@ package dev.lkey.financility.feature_expenses.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.lkey.financility.feature_expenses.domain.repository.TransactionRepository
-import dev.lkey.financility.feature_expenses.domain.usecase.GetTransactionUseCase
+import dev.lkey.financility.feature_expenses.domain.usecase.GetTransactionsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
@@ -19,7 +18,7 @@ class ExpensesViewModel : ViewModel() {
         _state.value
     )
 
-    private val transactionUseCase = GetTransactionUseCase()
+    private val transactionUseCase = GetTransactionsUseCase()
 
     init {
         viewModelScope.launch {
@@ -31,5 +30,4 @@ class ExpensesViewModel : ViewModel() {
             }
         }
     }
-
 }

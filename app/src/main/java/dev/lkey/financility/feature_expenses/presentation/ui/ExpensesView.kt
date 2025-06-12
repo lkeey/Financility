@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.lkey.financility.R
-import dev.lkey.financility.components.ListItem
+import dev.lkey.financility.components.FinancilityListItem
 import dev.lkey.financility.feature_expenses.presentation.ExpensesState
 
 @Composable
@@ -27,7 +27,7 @@ fun ExpensesView (
             )
     ){
 
-        ListItem(
+        FinancilityListItem(
             title = "Всего",
             description = null,
             backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
@@ -35,7 +35,7 @@ fun ExpensesView (
         )
 
         state.transactions.forEach {
-            ListItem(
+            FinancilityListItem(
                 trailingIcon = R.drawable.ic_light_arrow,
                 emoji = it.categoryModel.emoji,
                 title = it.categoryModel.name,

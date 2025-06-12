@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.lkey.financility.R
 import dev.lkey.financility.components.FinancilityToggleListItem
-import dev.lkey.financility.components.ListItem
+import dev.lkey.financility.components.FinancilityListItem
 
 @Composable
 fun SettingsView (
@@ -29,7 +29,7 @@ fun SettingsView (
         )
 
         options.forEach {
-            ListItem(
+            FinancilityListItem(
                 trailingIcon = R.drawable.ic_dark_arrow,
                 title = it,
                 height = 56.dp

@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import dev.lkey.financility.R
-import dev.lkey.financility.components.ListItem
+import dev.lkey.financility.components.FinancilityListItem
 
 @Composable
 fun BillView (
@@ -17,7 +17,7 @@ fun BillView (
         modifier = modifier
             .fillMaxSize()
     ){
-        ListItem(
+        FinancilityListItem(
             emoji = "\uD83D\uDCB0",
             title = "Баланс",
             description = null,
@@ -27,7 +27,7 @@ fun BillView (
             backgroundEmojiColor = Color.White
         )
 
-        ListItem(
+        FinancilityListItem(
             title = "Валюта",
             description = null,
             backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
