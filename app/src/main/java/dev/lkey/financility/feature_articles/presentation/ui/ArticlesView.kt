@@ -58,7 +58,9 @@ fun ArticlesView (
                 FinancilityListItem(
                     emoji = it.emoji,
                     title = it.name,
-                    height = 70.dp
+                    height = 70.dp,
+                    isClickable = false,
+                    onClick = { }
                 )
         }
     }

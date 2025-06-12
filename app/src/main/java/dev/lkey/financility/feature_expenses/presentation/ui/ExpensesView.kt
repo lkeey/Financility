@@ -31,8 +31,11 @@ fun ExpensesView (
             title = "Всего",
             description = null,
             backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
-            trailingText = "436 558 ₽"
-        )
+            trailingText = "436 558 ₽",
+            isClickable = false,
+        ) {
+            /* TODO */
+        }
 
         state.transactions.forEach {
             FinancilityListItem(
@@ -42,7 +45,9 @@ fun ExpensesView (
                 description = it.comment,
                 trailingText = it.amount,
                 height = 69.dp
-            )
+            ) {
+                /* TODO */
+            }
         }
     }
 }

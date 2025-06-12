@@ -28,7 +28,9 @@ fun BillView (
                 trailingText = "${it.balance} ${it.currency}" /*"-670 000 ₽"*/,
                 trailingIcon = R.drawable.ic_light_arrow,
                 backgroundEmojiColor = Color.White
-            )
+            ) {
+                /* TODO */
+            }
 
             FinancilityListItem(
                 title = "Валюта",
@@ -37,7 +39,9 @@ fun BillView (
                 trailingText = it.currency,
                 trailingIcon = R.drawable.ic_light_arrow,
                 isShowDivider = false,
-            )
+            ) {
+                /* TODO */
+            }
         }
     }
 }

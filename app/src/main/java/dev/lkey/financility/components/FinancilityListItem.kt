@@ -1,6 +1,7 @@
 package dev.lkey.financility.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,6 +40,8 @@ fun FinancilityListItem (
     isShowDivider: Boolean = true,
     backgroundColor: Color = MaterialTheme.colorScheme.onSurface,
     backgroundEmojiColor: Color = MaterialTheme.colorScheme.surfaceContainerLow,
+    isClickable: Boolean = true,
+    onClick: () -> Unit
 ) {
     Column (
         modifier = Modifier
@@ -51,6 +54,13 @@ fun FinancilityListItem (
             modifier = Modifier
                 .height(height)
                 .fillMaxSize()
+                .let {
+                    if (isClickable) {
+                        it.clickable { onClick() }
+                    } else {
+                        it
+                    }
+                }
                 .padding(horizontal = 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {

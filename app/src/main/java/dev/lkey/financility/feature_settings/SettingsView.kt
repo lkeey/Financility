@@ -33,7 +33,9 @@ fun SettingsView (
                 trailingIcon = R.drawable.ic_dark_arrow,
                 title = it,
                 height = 56.dp
-            )
+            ) {
+                /* TODO */
+            }
         }
     }
 }

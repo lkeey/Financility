@@ -24,8 +24,11 @@ fun IncomeView (
             title = "Всего",
             description = null,
             backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
-            trailingText = "600 000 ₽"
-        )
+            trailingText = "600 000 ₽",
+            isClickable = false,
+        ) {
+            /* TODO */
+        }
 
         state.transactions.forEach {
             FinancilityListItem(
@@ -35,7 +38,9 @@ fun IncomeView (
                 description = null,
                 trailingText = it.amount,
                 height = 72.dp
-            )
+            ) {
+                /* TODO */
+            }
         }
     }
 }
