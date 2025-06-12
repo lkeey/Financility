@@ -36,7 +36,9 @@ fun ListItem (
     description: String? = null,
     emoji: String? = null,
     height: Dp = 56.dp,
+    isShowDivider: Boolean = true,
     backgroundColor: Color = MaterialTheme.colorScheme.onSurface,
+    backgroundEmojiColor: Color = MaterialTheme.colorScheme.surfaceContainerLow,
 ) {
     Column (
         modifier = Modifier
@@ -57,12 +59,12 @@ fun ListItem (
                 Box(
                     modifier = Modifier
                         .size(24.dp)
-                        .background(MaterialTheme.colorScheme.surfaceContainerLow, CircleShape)
+                        .background(backgroundEmojiColor, CircleShape)
                 ) {
                     Text(
                         text = it,
                         fontSize =
-                            if (!isUnicodeEscape(it)) 22.sp
+                            if (!isUnicodeEscape(it)) 18.sp
                             else 10.sp,
                         fontWeight = FontWeight(500),
                         lineHeight = 22.sp,
@@ -122,13 +124,14 @@ fun ListItem (
                 )
             }
         }
-
-        HorizontalDivider(
-            modifier = Modifier
-                .height(1.dp)
-                .fillMaxWidth(),
-            color = MaterialTheme.colorScheme.surfaceDim,
-        )
+        if (isShowDivider) {
+            HorizontalDivider(
+                modifier = Modifier
+                    .height(1.dp)
+                    .fillMaxWidth(),
+                color = MaterialTheme.colorScheme.surfaceDim,
+            )
+        }
     }
 }
 

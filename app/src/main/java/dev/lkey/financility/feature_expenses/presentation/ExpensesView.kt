@@ -36,7 +36,7 @@ fun ExpensesView (
             title = "Всего",
             description = null,
             backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
-            trailingText = "436 000 ₽"
+            trailingText = "436 558 ₽"
         )
 
         transactions?.forEach {

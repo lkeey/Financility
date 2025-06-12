@@ -1,23 +1,25 @@
 package dev.lkey.financility.feature_articles
 
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.rememberScrollableState
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Text
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import dev.lkey.financility.R
+import androidx.compose.ui.unit.dp
 import dev.lkey.financility.components.FinancilityEditText
 import dev.lkey.financility.components.ListItem
-import dev.lkey.financility.feature_expenses.data.MockTransactionModel
+import dev.lkey.financility.feature_expenses.data.TransactionResponseModel
+import dev.lkey.financility.feature_expenses.data.network.RemoteTransactionDataSourceImpl
 
 @Composable
 fun ArticlesView (
@@ -26,48 +28,12 @@ fun ArticlesView (
     var searchText by remember { mutableStateOf("") }
     val scrollState = rememberScrollState()
 
-    val mockData = listOf(
-        MockTransactionModel(
-            emoji = "\uD83D\uDC57",
-            title = "Аренда квартиры",
-        ),
-        MockTransactionModel(
-            emoji = "\uD83D\uDC57",
-            title = "Одежда",
-        ),
-        MockTransactionModel(
-            emoji = "\uD83D\uDC57",
-            title = "На собачку",
-        ),
-        MockTransactionModel(
-            emoji = "\uD83D\uDC57",
-            title = "На собачку",
-        ),
-        MockTransactionModel(
-            emoji = "\uD83D\uDC57",
-            title = "Ремонт квартиры",
-        ),
-        MockTransactionModel(
-            emoji = "\uD83D\uDC57",
-            title = "Продукты",
-        ),
-        MockTransactionModel(
-            emoji = "\uD83D\uDC57",
-            title = "Ремонт квартиры",
-        ),
-        MockTransactionModel(
-            emoji = "\uD83D\uDC57",
-            title = "Продукты",
-        ),
-        MockTransactionModel(
-            emoji = "\uD83D\uDC57",
-            title = "Спортзал",
-        ),
-        MockTransactionModel(
-            emoji = "\uD83D\uDC57",
-            title = "Медицина",
-        ),
-    )
+    var transactions by remember { mutableStateOf<List<TransactionResponseModel>?>(null) }
+
+    LaunchedEffect(Unit) {
+        transactions = RemoteTransactionDataSourceImpl().getTodayTransactions()
+    }
+
     Column (
         modifier = modifier
             .fillMaxSize()
@@ -85,14 +51,21 @@ fun ArticlesView (
             searchText = it
         }
 
-        mockData
-            .filter { it.title.contains(searchText) }
-            .forEach {
-                ListItem(
-                    emoji = it.emoji,
-                    title = it.title,
-                    description = it.description,
+        HorizontalDivider(
+            modifier = Modifier
+                .height(1.dp)
+                .fillMaxWidth(),
+            color = MaterialTheme.colorScheme.surfaceDim,
+        )
 
+
+        transactions
+            ?.filter { it.categoryModel.name.contains(searchText) }
+            ?.forEach {
+                ListItem(
+                    emoji = it.categoryModel.emoji,
+                    title = it.categoryModel.name,
+                    height = 70.dp
                 )
         }
     }

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import dev.lkey.financility.R
 import dev.lkey.financility.components.ListItem
 import dev.lkey.financility.feature_expenses.data.MockTransactionModel
@@ -32,7 +33,7 @@ fun IncomeView (
             title = "Всего",
             description = null,
             backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
-            trailingText = "6000 000 ₽"
+            trailingText = "600 000 ₽"
         )
 
         mockData.forEach {
@@ -41,7 +42,8 @@ fun IncomeView (
                 emoji = it.emoji,
                 title = it.title,
                 description = it.description,
-                trailingText = it.cost
+                trailingText = it.cost,
+                height = 72.dp
             )
         }
     }
