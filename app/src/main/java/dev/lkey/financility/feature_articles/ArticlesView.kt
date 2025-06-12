@@ -58,7 +58,6 @@ fun ArticlesView (
             color = MaterialTheme.colorScheme.surfaceDim,
         )
 
-
         transactions
             ?.filter { it.categoryModel.name.contains(searchText) }
             ?.forEach {
