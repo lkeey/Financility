@@ -1,6 +1,5 @@
-package dev.lkey.financility.feature_expenses.presentation
+package dev.lkey.financility.feature_expenses.presentation.ui
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -12,19 +11,26 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import dev.lkey.financility.R
 import dev.lkey.financility.components.FinancilityBottomBar
 import dev.lkey.financility.components.FinancilityTopBar
+import dev.lkey.financility.feature_expenses.presentation.ExpensesViewModel
 
 @Composable
 fun ExpensesScreen (
+    viewModel: ExpensesViewModel = ExpensesViewModel(),
     navController: NavController
 ) {
+
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
     Scaffold (
         bottomBar = {
             FinancilityBottomBar(
@@ -69,7 +75,8 @@ fun ExpensesScreen (
     ) { padding ->
 
         ExpensesView(
-            modifier = Modifier.padding(padding)
+            modifier = Modifier.padding(padding),
+            state = state
         )
 
     }

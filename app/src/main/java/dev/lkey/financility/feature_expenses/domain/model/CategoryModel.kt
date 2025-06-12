@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_expenses.data
+package dev.lkey.financility.feature_expenses.domain.model
 
 data class CategoryModel (
     val id: Int,

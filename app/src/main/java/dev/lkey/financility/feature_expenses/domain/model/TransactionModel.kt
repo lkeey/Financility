@@ -1,6 +1,6 @@
-package dev.lkey.financility.feature_expenses.data
+package dev.lkey.financility.feature_expenses.domain.model
 
-data class TransactionResponseModel (
+data class TransactionModel (
     val id: Int,
     val account: AccountBriefModel,
     val categoryModel: CategoryModel,

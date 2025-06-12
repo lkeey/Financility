@@ -19,7 +19,6 @@ import androidx.navigation.NavController
 import dev.lkey.financility.R
 import dev.lkey.financility.components.FinancilityBottomBar
 import dev.lkey.financility.components.FinancilityTopBar
-import dev.lkey.financility.feature_expenses.presentation.ExpensesView
 
 @Composable
 fun IncomeScreen (

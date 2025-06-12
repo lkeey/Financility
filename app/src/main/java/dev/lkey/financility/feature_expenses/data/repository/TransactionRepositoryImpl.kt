@@ -1,13 +1,17 @@
-package dev.lkey.financility.feature_expenses.data.network
+package dev.lkey.financility.feature_expenses.data.repository
 
-import dev.lkey.financility.feature_expenses.data.AccountBriefModel
-import dev.lkey.financility.feature_expenses.data.CategoryModel
-import dev.lkey.financility.feature_expenses.data.MockTransactionModel
-import dev.lkey.financility.feature_expenses.data.TransactionResponseModel
+import dev.lkey.financility.feature_expenses.domain.model.AccountBriefModel
+import dev.lkey.financility.feature_expenses.domain.model.CategoryModel
+import dev.lkey.financility.feature_expenses.domain.model.TransactionModel
+import dev.lkey.financility.feature_expenses.domain.repository.TransactionRepository
 
-class RemoteTransactionDataSourceImpl : RemoteTransactionDataSource {
+class TransactionRepositoryImpl (
 
-    override suspend fun getTodayTransactions(): List<TransactionResponseModel> {
+) : TransactionRepository {
+
+    override suspend fun getTodayTransactions(): List<TransactionModel> {
+        /* TODO API */
+
         val acc = AccountBriefModel(
             id = 0,
             name = "...",
@@ -16,7 +20,7 @@ class RemoteTransactionDataSourceImpl : RemoteTransactionDataSource {
         )
 
         val mockData = listOf(
-            TransactionResponseModel(
+            TransactionModel(
                 id = 0,
                 account = acc,
                 categoryModel = CategoryModel(
@@ -31,7 +35,7 @@ class RemoteTransactionDataSourceImpl : RemoteTransactionDataSource {
                 createdAt = "...",
                 updatedAt = "...",
             ),
-            TransactionResponseModel(
+            TransactionModel(
                 id = 0,
                 account = acc,
                 categoryModel = CategoryModel(
@@ -46,7 +50,7 @@ class RemoteTransactionDataSourceImpl : RemoteTransactionDataSource {
                 createdAt = "...",
                 updatedAt = "...",
             ),
-            TransactionResponseModel(
+            TransactionModel(
                 id = 0,
                 account = acc,
                 categoryModel = CategoryModel(
@@ -61,7 +65,7 @@ class RemoteTransactionDataSourceImpl : RemoteTransactionDataSource {
                 createdAt = "...",
                 updatedAt = "...",
             ),
-            TransactionResponseModel(
+            TransactionModel(
                 id = 0,
                 account = acc,
                 categoryModel = CategoryModel(
@@ -76,7 +80,7 @@ class RemoteTransactionDataSourceImpl : RemoteTransactionDataSource {
                 createdAt = "...",
                 updatedAt = "...",
             ),
-            TransactionResponseModel(
+            TransactionModel(
                 id = 0,
                 account = acc,
                 categoryModel = CategoryModel(
@@ -91,7 +95,7 @@ class RemoteTransactionDataSourceImpl : RemoteTransactionDataSource {
                 createdAt = "...",
                 updatedAt = "...",
             ),
-            TransactionResponseModel(
+            TransactionModel(
                 id = 0,
                 account = acc,
                 categoryModel = CategoryModel(
@@ -106,7 +110,7 @@ class RemoteTransactionDataSourceImpl : RemoteTransactionDataSource {
                 createdAt = "...",
                 updatedAt = "...",
             ),
-            TransactionResponseModel(
+            TransactionModel(
                 id = 0,
                 account = acc,
                 categoryModel = CategoryModel(
@@ -121,7 +125,7 @@ class RemoteTransactionDataSourceImpl : RemoteTransactionDataSource {
                 createdAt = "...",
                 updatedAt = "...",
             ),
-            TransactionResponseModel(
+            TransactionModel(
                 id = 0,
                 account = acc,
                 categoryModel = CategoryModel(
