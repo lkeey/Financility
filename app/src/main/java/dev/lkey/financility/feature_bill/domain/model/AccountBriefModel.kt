@@ -1,7 +1,7 @@
-package dev.lkey.financility.feature_expenses.domain.model
+package dev.lkey.financility.feature_bill.domain.model
 
 data class AccountBriefModel(
-    val id: Int,
+    val id: String,
     val name: String,
     val balance: String,
     val currency: String,

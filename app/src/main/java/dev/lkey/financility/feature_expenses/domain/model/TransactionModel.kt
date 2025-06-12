@@ -1,5 +1,7 @@
 package dev.lkey.financility.feature_expenses.domain.model
 
+import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
+
 data class TransactionModel (
     val id: Int,
     val account: AccountBriefModel,

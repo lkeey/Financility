@@ -1,6 +1,6 @@
 package dev.lkey.financility.feature_income.data.repository
 
-import dev.lkey.financility.feature_expenses.domain.model.AccountBriefModel
+import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_expenses.domain.model.CategoryModel
 import dev.lkey.financility.feature_expenses.domain.model.TransactionModel
 import dev.lkey.financility.feature_income.domain.repository.IncomeRepository
@@ -10,9 +10,9 @@ class IncomeRepositoryImpl : IncomeRepository {
         /* TODO API */
 
         val acc = AccountBriefModel(
-            id = 0,
+            id = "...",
             name = "...",
-            balance = "0",
+            balance = "...",
             currency = "..."
         )
 
