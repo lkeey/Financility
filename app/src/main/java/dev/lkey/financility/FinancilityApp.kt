@@ -38,10 +38,7 @@ fun FinancilityApp() {
             navigation<Route.Expenses>(
                 startDestination = Route.TodayExpenses
             ) {
-                composable<Route.TodayExpenses>(
-                    exitTransition = { slideOutHorizontally() },
-                    popEnterTransition = { slideInHorizontally() }
-                ) {
+                composable<Route.TodayExpenses> {
                     ExpensesScreen(
                         navController = navController
                     )
@@ -51,10 +48,7 @@ fun FinancilityApp() {
             navigation<Route.Income>(
                 startDestination = Route.TodayIncome
             ) {
-                composable<Route.TodayIncome>(
-                    exitTransition = { slideOutHorizontally() },
-                    popEnterTransition = { slideInHorizontally() }
-                ) {
+                composable<Route.TodayIncome> {
                     IncomeScreen(
                         navController = navController
                     )
@@ -64,10 +58,7 @@ fun FinancilityApp() {
             navigation<Route.Bill>(
                 startDestination = Route.CurrentBill
             ) {
-                composable<Route.CurrentBill>(
-                    exitTransition = { slideOutHorizontally() },
-                    popEnterTransition = { slideInHorizontally() }
-                ) {
+                composable<Route.CurrentBill> {
                     BillScreen(
                         navController = navController
                     )
@@ -77,10 +68,7 @@ fun FinancilityApp() {
             navigation<Route.Articles>(
                 startDestination = Route.MyArticles
             ) {
-                composable<Route.MyArticles>(
-                    exitTransition = { slideOutHorizontally() },
-                    popEnterTransition = { slideInHorizontally() }
-                ) {
+                composable<Route.MyArticles> {
                     ArticlesScreen(
                         navController = navController
                     )
@@ -90,10 +78,7 @@ fun FinancilityApp() {
             navigation<Route.Settings>(
                 startDestination = Route.AllSettings
             ) {
-                composable<Route.AllSettings>(
-                    exitTransition = { slideOutHorizontally() },
-                    popEnterTransition = { slideInHorizontally() }
-                ) {
+                composable<Route.AllSettings> {
                     SettingsScreen(
                         navController = navController
                     )
@@ -101,6 +86,4 @@ fun FinancilityApp() {
             }
         }
     }
-
-
 }

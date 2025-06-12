@@ -16,7 +16,7 @@ sealed class Bar (
 
     data object Income : Bar(
         route = Route.Income,
-        title = "Доходы",
+        title = "Расходы",
         icon = R.drawable.ic_income
     )
 

@@ -8,6 +8,8 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import dev.lkey.financility.navigation.Bar
@@ -16,7 +18,9 @@ import dev.lkey.financility.navigation.Bar
 fun FinancilityBottomBar (
     navController : NavController
 ) {
+
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+
     BottomAppBar(
         containerColor = MaterialTheme.colorScheme.surface
     ) {
@@ -42,6 +46,12 @@ fun FinancilityBottomBar (
                     Text(
                         text = bar.title,
                         color = MaterialTheme.colorScheme.inverseOnSurface,
+                        fontWeight =
+                            if (isSelected) FontWeight(600)
+                            else FontWeight(500),
+                        fontSize = 12.sp,
+                        lineHeight = 16.sp,
+                        letterSpacing = 0.5.sp
                     )
                 }
             )
