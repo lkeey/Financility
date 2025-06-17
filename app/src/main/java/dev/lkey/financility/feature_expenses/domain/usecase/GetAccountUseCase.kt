@@ -2,13 +2,13 @@ package dev.lkey.financility.feature_expenses.domain.usecase
 
 import dev.lkey.financility.core.network.ApiException
 import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
-import dev.lkey.financility.feature_expenses.data.repository.ExpensesRepositoryImpl
-import dev.lkey.financility.feature_expenses.domain.repository.ExpensesRepository
+import dev.lkey.financility.feature_expenses.data.repository.TransactionsRepositoryImpl
+import dev.lkey.financility.feature_expenses.domain.repository.TransactionsRepository
 import io.ktor.client.plugins.ServerResponseException
 import kotlinx.coroutines.delay
 
 class GetAccountUseCase {
-    private val repository: ExpensesRepository = ExpensesRepositoryImpl()
+    private val repository: TransactionsRepository = TransactionsRepositoryImpl()
 
     suspend operator fun invoke(): Result<List<AccountBriefModel>> {
 

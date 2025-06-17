@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dev.lkey.financility.core.network.ErrorHandler
 import dev.lkey.financility.feature_articles.presentation.ArticleAction
 import dev.lkey.financility.feature_expenses.domain.usecase.GetAccountUseCase
-import dev.lkey.financility.feature_expenses.domain.usecase.GetExpensesUseCase
+import dev.lkey.financility.feature_expenses.domain.usecase.GetTransactionsUseCase
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -25,10 +25,10 @@ class ExpensesViewModel : ViewModel() {
         _state.value
     )
 
-    private val _action = MutableSharedFlow<ArticleAction>()
+    private val _action = MutableSharedFlow<ExpensesAction>()
     val action = _action.asSharedFlow()
 
-    private val transactionUseCase = GetExpensesUseCase()
+    private val transactionUseCase = GetTransactionsUseCase()
     private val accountsUseCase = GetAccountUseCase()
 
     init {
@@ -69,7 +69,7 @@ class ExpensesViewModel : ViewModel() {
                     _state.update {
                         it.copy(
                             isLoading = false,
-                            transactions = res
+                            transactions = res.filter { !it.categoryModel.isIncome }
                         )
                     }
                 }
@@ -80,7 +80,7 @@ class ExpensesViewModel : ViewModel() {
                         )
                     }
 
-                    _action.emit(ArticleAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    _action.emit(ExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }
     }
@@ -108,7 +108,7 @@ class ExpensesViewModel : ViewModel() {
                             isLoading = false,
                         )
                     }
-                    _action.emit(ArticleAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    _action.emit(ExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }
     }

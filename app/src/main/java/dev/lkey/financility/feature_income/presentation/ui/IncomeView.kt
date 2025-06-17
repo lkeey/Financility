@@ -20,14 +20,15 @@ fun IncomeView (
         modifier = modifier
             .fillMaxSize()
     ){
-        FinancilityListItem(
-            title = "Всего",
-            description = null,
-            backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
-            trailingText = "600 000 ₽",
-            isClickable = false,
-        ) {
-            /* TODO */
+
+        if (state.accounts.isNotEmpty()) {
+            FinancilityListItem(
+                title = "Всего",
+                description = null,
+                backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
+                trailingText = "${state.transactions.sumOf { it.amount.toDouble() }} ${state.accounts[0].currency}",
+                isClickable = false,
+            ) { }
         }
 
         state.transactions.forEach {

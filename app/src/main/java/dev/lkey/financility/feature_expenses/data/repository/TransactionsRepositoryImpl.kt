@@ -6,13 +6,13 @@ import dev.lkey.financility.core.network.ktorClient
 import dev.lkey.financility.core.network.safeCall
 import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_expenses.domain.model.TransactionModel
-import dev.lkey.financility.feature_expenses.domain.repository.ExpensesRepository
+import dev.lkey.financility.feature_expenses.domain.repository.TransactionsRepository
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
 
-class ExpensesRepositoryImpl : ExpensesRepository {
+class TransactionsRepositoryImpl : TransactionsRepository {
 
     override suspend fun getTodayExpenses(
         accountId: Int,

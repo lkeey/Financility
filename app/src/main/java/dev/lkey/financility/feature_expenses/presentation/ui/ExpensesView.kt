@@ -32,7 +32,7 @@ fun ExpensesView (
                 title = "Всего",
                 description = null,
                 backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
-                trailingText = "${state.accounts[0].balance} ${state.accounts[0].currency}",
+                trailingText = "${state.transactions.sumOf { it.amount.toDouble() }} ${state.accounts[0].currency}",
                 isClickable = false,
             ) { }
         }

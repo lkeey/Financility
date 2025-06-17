@@ -26,6 +26,7 @@ import dev.lkey.financility.components.FinancilityBottomBar
 import dev.lkey.financility.components.FinancilitySnackBar
 import dev.lkey.financility.components.FinancilityTopBar
 import dev.lkey.financility.feature_articles.presentation.ArticleAction
+import dev.lkey.financility.feature_expenses.presentation.ExpensesAction
 import dev.lkey.financility.feature_expenses.presentation.ExpensesViewModel
 import kotlinx.coroutines.flow.collectLatest
 
@@ -41,7 +42,7 @@ fun ExpensesScreen (
     LaunchedEffect(Unit) {
         viewModel.action.collectLatest { event ->
             when (event) {
-                is ArticleAction.ShowSnackBar -> {
+                is ExpensesAction.ShowSnackBar -> {
                     snackBarHostState.showSnackbar(event.message)
                 }
             }
