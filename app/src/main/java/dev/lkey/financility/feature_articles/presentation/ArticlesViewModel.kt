@@ -2,6 +2,7 @@ package dev.lkey.financility.feature_articles.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.lkey.financility.core.ErrorHandler
 import dev.lkey.financility.feature_articles.domain.usecase.GetArticlesUseCase
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -65,7 +66,7 @@ class ArticlesViewModel : ViewModel() {
                         )
                     }
 
-                    _action.emit(ArticleAction.ShowSnackBar(err.message ?: "Ошибка загрузки"))
+                    _action.emit(ArticleAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }
     }

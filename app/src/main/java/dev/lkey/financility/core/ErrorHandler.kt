@@ -8,16 +8,16 @@ import java.io.IOException
 
 class ErrorHandler {
 
-    fun handleException(e: Throwable): FinancilityError {
+    fun handleException(e: Throwable): String {
         return when (e) {
-            is ApiException -> FinancilityError.BusinessError(e.message ?: "Бизнес-ошибка")
+            is ApiException -> "Бизнес-ошибка"
 
-            is IOException -> FinancilityError.NetworkError
+            is IOException -> "Ошибка сети :(\n Попробуйте включить интернет)"
 
-            is ClientRequestException -> mapHttpStatus(e.response.status)
-            is ServerResponseException -> FinancilityError.ServerError
+            is ClientRequestException -> "Ошибка на стороне клиента"
+            is ServerResponseException -> "Ошибка на стороне сервера"
 
-            else -> FinancilityError.UnknownError(e)
+            else -> "Произошла ошибка"
         }
     }
 
