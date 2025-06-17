@@ -4,6 +4,6 @@ import dev.lkey.financility.feature_expenses.domain.model.CategoryModel
 
 interface ArticlesRepository {
 
-    suspend fun getArticles(): List<CategoryModel>
+    suspend fun getArticles(): Result<List<CategoryModel>>
 
 }

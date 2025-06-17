@@ -1,5 +1,8 @@
 package dev.lkey.financility.feature_expenses.domain.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class CategoryModel (
     val id: Int,
     val name: String,

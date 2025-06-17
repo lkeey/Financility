@@ -1,9 +1,18 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 
     alias(libs.plugins.jetbrains.kotlin.serialization)
+}
+
+val localProperties = Properties().apply {
+    val localPropsFile = rootProject.file("local.properties")
+    if (localPropsFile.exists()) {
+        load(localPropsFile.inputStream())
+    }
 }
 
 android {
@@ -16,6 +25,18 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
+
+        buildConfigField(
+            type = "String",
+            name = "BASE_URL",
+            value =  "\"${localProperties["BASE_URL"]}\""
+        )
+
+        buildConfigField(
+            type = "String",
+            name = "API_KEY",
+            value = "\"${localProperties["API_KEY"]}\""
+        )
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -38,6 +59,8 @@ android {
     }
     buildFeatures {
         compose = true
+//        to enable custom BuildConfig fields
+        buildConfig = true
     }
 }
 

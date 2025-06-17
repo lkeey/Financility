@@ -21,14 +21,7 @@ class ArticlesViewModel : ViewModel() {
     private val articlesUseCase = GetArticlesUseCase()
 
     init {
-        viewModelScope.launch {
-            val articles = articlesUseCase.invoke()
-            _state.update {
-                it.copy(
-                    articles = articles
-                )
-            }
-        }
+        loadArticles()
     }
 
     fun onEvent(
@@ -42,6 +35,33 @@ class ArticlesViewModel : ViewModel() {
                     )
                 }
             }
+        }
+    }
+
+    fun loadArticles() {
+        viewModelScope.launch {
+            _state.update { it.copy(isLoading = true) }
+
+            val result = articlesUseCase.invoke()
+
+            result
+                .onSuccess { res ->
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            articles = res
+                        )
+                    }
+                }
+                .onFailure { err ->
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            errorMessage = err.message
+                            /*  handleError(result.exceptionOrNull()) */
+                        )
+                    }
+                }
         }
     }
 }
