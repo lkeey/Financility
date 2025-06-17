@@ -27,14 +27,14 @@ fun ExpensesView (
             )
     ){
 
-        FinancilityListItem(
-            title = "Всего",
-            description = null,
-            backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
-            trailingText = "436 558 ₽",
-            isClickable = false,
-        ) {
-            /* TODO */
+        if (state.accounts.isNotEmpty()) {
+            FinancilityListItem(
+                title = "Всего",
+                description = null,
+                backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
+                trailingText = "${state.accounts[0].balance} ${state.accounts[0].currency}",
+                isClickable = false,
+            ) { }
         }
 
         state.transactions.forEach {

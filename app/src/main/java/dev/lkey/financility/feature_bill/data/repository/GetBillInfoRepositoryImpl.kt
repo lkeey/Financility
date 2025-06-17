@@ -10,7 +10,7 @@ class GetBillInfoRepositoryImpl : GetBillInfoRepository {
 
         return listOf(
             AccountBriefModel(
-                id = "...",
+                id = 0,
                 name = "Основной счет",
                 balance = "-670 000",
                 currency = "₽"

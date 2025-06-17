@@ -1,9 +1,9 @@
 package dev.lkey.financility.feature_articles.data.repository
 
 import dev.lkey.financility.BuildConfig
-import dev.lkey.financility.core.ApiException
-import dev.lkey.financility.core.ktorClient
-import dev.lkey.financility.core.safeCall
+import dev.lkey.financility.core.network.ApiException
+import dev.lkey.financility.core.network.ktorClient
+import dev.lkey.financility.core.network.safeCall
 import dev.lkey.financility.feature_articles.domain.repository.ArticlesRepository
 import dev.lkey.financility.feature_expenses.domain.model.CategoryModel
 import io.ktor.client.call.body

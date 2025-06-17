@@ -1,4 +1,4 @@
-package dev.lkey.financility.core
+package dev.lkey.financility.core.network
 
 import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.ServerResponseException

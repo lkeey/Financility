@@ -10,7 +10,7 @@ class IncomeRepositoryImpl : IncomeRepository {
         /* TODO API */
 
         val acc = AccountBriefModel(
-            id = "...",
+            id = 0,
             name = "...",
             balance = "...",
             currency = "..."

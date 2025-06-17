@@ -1,4 +1,4 @@
-package dev.lkey.financility.core
+package dev.lkey.financility.core.network
 
 sealed class FinancilityError {
     data object NetworkError : FinancilityError()

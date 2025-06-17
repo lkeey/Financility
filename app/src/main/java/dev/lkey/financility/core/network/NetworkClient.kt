@@ -1,4 +1,4 @@
-package dev.lkey.financility.core
+package dev.lkey.financility.core.network
 
 import dev.lkey.financility.BuildConfig
 import io.ktor.client.HttpClient

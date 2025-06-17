@@ -1,4 +1,4 @@
-package dev.lkey.financility.core
+package dev.lkey.financility.core.network
 
 suspend fun <T> safeCall(
     block: suspend () -> T
