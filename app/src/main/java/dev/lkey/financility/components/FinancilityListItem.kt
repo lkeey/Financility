@@ -41,7 +41,7 @@ fun FinancilityListItem (
     backgroundColor: Color = MaterialTheme.colorScheme.onSurface,
     backgroundEmojiColor: Color = MaterialTheme.colorScheme.surfaceContainerLow,
     isClickable: Boolean = true,
-    onClick: () -> Unit
+    onClick: () -> Unit = { }
 ) {
     Column (
         modifier = Modifier

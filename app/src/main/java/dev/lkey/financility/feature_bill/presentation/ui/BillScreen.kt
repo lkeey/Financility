@@ -40,7 +40,7 @@ fun BillScreen (
         topBar = {
             FinancilityTopBar(
                 title = "Мой счет",
-                icon = {
+                actions = {
                     IconButton(
                         onClick = { /* TODO */ }
                     ) {

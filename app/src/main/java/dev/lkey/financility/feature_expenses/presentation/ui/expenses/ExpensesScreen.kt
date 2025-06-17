@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_expenses.presentation.ui
+package dev.lkey.financility.feature_expenses.presentation.ui.expenses
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -25,9 +25,10 @@ import dev.lkey.financility.R
 import dev.lkey.financility.components.FinancilityBottomBar
 import dev.lkey.financility.components.FinancilitySnackBar
 import dev.lkey.financility.components.FinancilityTopBar
-import dev.lkey.financility.feature_articles.presentation.ArticleAction
 import dev.lkey.financility.feature_expenses.presentation.ExpensesAction
+import dev.lkey.financility.feature_expenses.presentation.ExpensesEvent
 import dev.lkey.financility.feature_expenses.presentation.ExpensesViewModel
+import dev.lkey.financility.navigation.Route
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -40,10 +41,12 @@ fun ExpensesScreen (
     val snackBarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(Unit) {
-        viewModel.action.collectLatest { event ->
-            when (event) {
+        viewModel.onEvent(ExpensesEvent.OnLoadTransactions(isToday = true))
+
+        viewModel.action.collectLatest { action ->
+            when (action) {
                 is ExpensesAction.ShowSnackBar -> {
-                    snackBarHostState.showSnackbar(event.message)
+                    snackBarHostState.showSnackbar(action.message)
                 }
             }
         }
@@ -58,9 +61,11 @@ fun ExpensesScreen (
         topBar = {
             FinancilityTopBar(
                 title = "Расходы сегодня",
-                icon = {
+                actions = {
                     IconButton(
-                        onClick = { /* TODO */ }
+                        onClick = {
+                            navController.navigate(Route.HistoryExpenses)
+                        }
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.ic_history),

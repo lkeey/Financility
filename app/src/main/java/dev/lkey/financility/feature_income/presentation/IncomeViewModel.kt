@@ -36,12 +36,10 @@ class IncomeViewModel : ViewModel() {
     }
 
     fun onEvent(
-        event: ExpensesEvent
+        event: IncomeEvent
     ) {
         when (event) {
-            ExpensesEvent.OnOpenCreateScreen -> {
-
-            }
+            else -> {}
         }
     }
 

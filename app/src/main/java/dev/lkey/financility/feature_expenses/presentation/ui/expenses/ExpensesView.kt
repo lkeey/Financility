@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_expenses.presentation.ui
+package dev.lkey.financility.feature_expenses.presentation.ui.expenses
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

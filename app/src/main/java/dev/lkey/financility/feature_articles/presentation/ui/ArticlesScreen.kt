@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -17,9 +16,7 @@ import dev.lkey.financility.components.FinancilityBottomBar
 import dev.lkey.financility.components.FinancilitySnackBar
 import dev.lkey.financility.components.FinancilityTopBar
 import dev.lkey.financility.feature_articles.presentation.ArticleAction
-import dev.lkey.financility.feature_articles.presentation.ArticlesEvent
 import dev.lkey.financility.feature_articles.presentation.ArticlesViewModel
-import dev.lkey.financility.feature_expenses.presentation.ExpensesViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -50,7 +47,7 @@ fun ArticlesScreen (
         topBar = {
             FinancilityTopBar(
                 title = "Мои статьи",
-                icon = { }
+                actions = { }
             )
         },
         modifier = Modifier

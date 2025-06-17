@@ -3,7 +3,6 @@ package dev.lkey.financility.feature_expenses.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.lkey.financility.core.network.ErrorHandler
-import dev.lkey.financility.feature_articles.presentation.ArticleAction
 import dev.lkey.financility.feature_expenses.domain.usecase.GetAccountUseCase
 import dev.lkey.financility.feature_expenses.domain.usecase.GetTransactionsUseCase
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -31,10 +30,6 @@ class ExpensesViewModel : ViewModel() {
     private val transactionUseCase = GetTransactionsUseCase()
     private val accountsUseCase = GetAccountUseCase()
 
-    init {
-        loadData()
-    }
-
     fun onEvent(
         event: ExpensesEvent
     ) {
@@ -42,12 +37,29 @@ class ExpensesViewModel : ViewModel() {
             ExpensesEvent.OnOpenCreateScreen -> {
 
             }
+
+            is ExpensesEvent.OnLoadTransactions -> {
+                _state.update {
+                    it.copy(
+                        startDate =
+                            if (event.isToday) LocalDate.now()
+                                .format(DateTimeFormatter.ISO_DATE)
+                            else LocalDate.now()
+                                .withDayOfMonth(1)
+                                .format(DateTimeFormatter.ISO_DATE)
+                    )
+                }
+
+                loadData()
+            }
         }
     }
 
     private fun loadData() {
         loadAccounts {
-            loadExpenses(it)
+            loadExpenses(
+                id = it
+            )
         }
     }
 
@@ -60,8 +72,8 @@ class ExpensesViewModel : ViewModel() {
 
             val result = transactionUseCase.invoke(
                 id = id,
-                startDate = LocalDate.now().format(DateTimeFormatter.ISO_DATE),
-                endDate = LocalDate.now().format(DateTimeFormatter.ISO_DATE),
+                startDate = state.value.startDate,
+                endDate = state.value.endDate
             )
 
             result

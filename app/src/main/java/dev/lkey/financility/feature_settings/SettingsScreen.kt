@@ -23,7 +23,7 @@ fun SettingsScreen (
         topBar = {
             FinancilityTopBar(
                 title = "Настройки",
-                icon = { }
+                actions = { }
             )
         },
         modifier = Modifier
