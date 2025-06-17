@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_articles.data.api
+package dev.lkey.financility.feature_articles.data.repository
 
 import dev.lkey.financility.BuildConfig
 import dev.lkey.financility.core.ApiException

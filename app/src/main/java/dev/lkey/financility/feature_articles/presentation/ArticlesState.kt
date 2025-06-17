@@ -6,5 +6,4 @@ data class ArticlesState (
     val articles: List<CategoryModel> = listOf(),
     val searchValue: String = "",
     val isLoading: Boolean = false,
-    val errorMessage: String? = null
 )

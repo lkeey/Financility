@@ -4,15 +4,23 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import dev.lkey.financility.components.FinancilityBottomBar
+import dev.lkey.financility.components.FinancilitySnackBar
 import dev.lkey.financility.components.FinancilityTopBar
+import dev.lkey.financility.feature_articles.presentation.ArticleAction
+import dev.lkey.financility.feature_articles.presentation.ArticlesEvent
 import dev.lkey.financility.feature_articles.presentation.ArticlesViewModel
 import dev.lkey.financility.feature_expenses.presentation.ExpensesViewModel
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun ArticlesScreen (
@@ -21,6 +29,17 @@ fun ArticlesScreen (
 ) {
 
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val snackBarHostState = remember { SnackbarHostState() }
+
+    LaunchedEffect(Unit) {
+        viewModel.action.collectLatest { event ->
+            when (event) {
+                is ArticleAction.ShowSnackBar -> {
+                    snackBarHostState.showSnackbar(event.message)
+                }
+            }
+        }
+    }
 
     Scaffold (
         bottomBar = {
@@ -37,6 +56,7 @@ fun ArticlesScreen (
         modifier = Modifier
             .fillMaxSize(),
         containerColor = MaterialTheme.colorScheme.onSurface,
+        snackbarHost = { FinancilitySnackBar(snackBarHostState) }
     ) { padding ->
 
         ArticlesView(
