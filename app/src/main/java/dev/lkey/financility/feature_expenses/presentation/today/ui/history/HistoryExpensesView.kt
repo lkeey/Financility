@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_expenses.presentation.ui.history
+package dev.lkey.financility.feature_expenses.presentation.today.ui.history
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,8 +9,8 @@ import androidx.compose.ui.unit.dp
 import dev.lkey.financility.R
 import dev.lkey.financility.components.FinancilityDayPicker
 import dev.lkey.financility.components.FinancilityListItem
-import dev.lkey.financility.feature_expenses.presentation.ExpensesEvent
-import dev.lkey.financility.feature_expenses.presentation.ExpensesState
+import dev.lkey.financility.feature_expenses.presentation.today.ExpensesEvent
+import dev.lkey.financility.feature_expenses.presentation.today.ExpensesState
 
 @Composable
 fun HistoryExpensesView (

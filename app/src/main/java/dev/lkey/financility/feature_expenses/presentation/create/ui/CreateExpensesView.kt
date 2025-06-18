@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_expenses.presentation.ui.create
+package dev.lkey.financility.feature_expenses.presentation.create.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.lkey.financility.R
 import dev.lkey.financility.components.FinancilityButton
 import dev.lkey.financility.components.FinancilityDayPicker
@@ -17,14 +18,15 @@ import dev.lkey.financility.components.FinancilityEditText
 import dev.lkey.financility.components.FinancilityListItem
 import dev.lkey.financility.components.FinancilityNumTextField
 import dev.lkey.financility.components.FinancilityTimePicker
-import dev.lkey.financility.feature_expenses.presentation.ExpensesEvent
-import dev.lkey.financility.feature_expenses.presentation.ExpensesState
+import dev.lkey.financility.feature_expenses.presentation.create.CreateExpensesEvent
+import dev.lkey.financility.feature_expenses.presentation.create.CreateExpensesState
+import dev.lkey.financility.feature_expenses.presentation.today.ExpensesEvent
 
 @Composable
 fun CreateExpensesView (
     modifier: Modifier = Modifier,
-    state: ExpensesState,
-    onEvent: (ExpensesEvent) -> Unit
+    state: CreateExpensesState,
+    onEvent: (CreateExpensesEvent) -> Unit
 ) {
     Column (
         modifier = modifier
@@ -39,18 +41,22 @@ fun CreateExpensesView (
             )
         }
 
-        FinancilityDropDown(
-            title = "Статья",
-            options = listOf("Еда", "Транспорт", "Развлечения", "Здоровье"),
-            previousData = "Еда",
-            onOptionSelected = {},
-        )
+        if (state.articles.isNotEmpty()) {
+            FinancilityDropDown(
+                title = "Статья",
+                options = state.articles,
+                previousData = state.article?.name ?: "",
+                onOptionSelected = {
+                    onEvent(CreateExpensesEvent.OnChoseArticle(it))
+                },
+            )
+        }
 
         FinancilityNumTextField (
             title = "Сумма",
-            previousData = "0",
+            previousData = state.sum ?: "",
         ) {
-
+            onEvent(CreateExpensesEvent.OnEnterSum(it))
         }
 
         HorizontalDivider(
@@ -62,16 +68,16 @@ fun CreateExpensesView (
 
         FinancilityDayPicker (
             title = "Дата",
-            previousValue = ""
+            previousValue = state.date
         ) {
-
+            onEvent(CreateExpensesEvent.OnEnterDate(it))
         }
 
         FinancilityTimePicker(
             title = "Выбери время",
-            previousValue = "12:00"
+            previousValue = state.time
         ) {
-
+            onEvent(CreateExpensesEvent.OnEnterTime(it))
         }
 
         FinancilityEditText(
@@ -80,7 +86,7 @@ fun CreateExpensesView (
             isShowTrailingIcon = false,
             backgroundColor = MaterialTheme.colorScheme.onSurface
         ) {
-
+            onEvent(CreateExpensesEvent.OnEnterComment(it))
         }
 
         HorizontalDivider(
@@ -92,8 +98,11 @@ fun CreateExpensesView (
 
 
         FinancilityButton(
-            text = "Удалить расход",
-            onClick = {}
+            text = "Добавить расход",
+            backgroundColor = MaterialTheme.colorScheme.primary,
+            onClick = {
+                onEvent(CreateExpensesEvent.OnSave)
+            }
         )
     }
 }

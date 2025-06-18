@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_expenses.presentation.ui.expenses
+package dev.lkey.financility.feature_expenses.presentation.today.ui.expenses
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -25,9 +25,9 @@ import dev.lkey.financility.R
 import dev.lkey.financility.components.FinancilityBottomBar
 import dev.lkey.financility.components.FinancilitySnackBar
 import dev.lkey.financility.components.FinancilityTopBar
-import dev.lkey.financility.feature_expenses.presentation.ExpensesAction
-import dev.lkey.financility.feature_expenses.presentation.ExpensesEvent
-import dev.lkey.financility.feature_expenses.presentation.ExpensesViewModel
+import dev.lkey.financility.feature_expenses.presentation.today.ExpensesAction
+import dev.lkey.financility.feature_expenses.presentation.today.ExpensesEvent
+import dev.lkey.financility.feature_expenses.presentation.today.ExpensesViewModel
 import dev.lkey.financility.navigation.Route
 import kotlinx.coroutines.flow.collectLatest
 

@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_expenses.presentation.ui.expenses
+package dev.lkey.financility.feature_expenses.presentation.today.ui.expenses
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.lkey.financility.R
 import dev.lkey.financility.components.FinancilityListItem
-import dev.lkey.financility.feature_expenses.presentation.ExpensesState
+import dev.lkey.financility.feature_expenses.presentation.today.ExpensesState
 
 @Composable
 fun ExpensesView (

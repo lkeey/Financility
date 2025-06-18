@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_expenses.presentation
+package dev.lkey.financility.feature_expenses.presentation.today
 
 import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_expenses.domain.model.TransactionModel

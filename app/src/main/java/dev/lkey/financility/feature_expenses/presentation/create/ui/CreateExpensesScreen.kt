@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_expenses.presentation.ui.history
+package dev.lkey.financility.feature_expenses.presentation.create.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,27 +19,26 @@ import dev.lkey.financility.R
 import dev.lkey.financility.components.FinancilityBottomBar
 import dev.lkey.financility.components.FinancilitySnackBar
 import dev.lkey.financility.components.FinancilityTopBar
-import dev.lkey.financility.feature_expenses.presentation.ExpensesAction
-import dev.lkey.financility.feature_expenses.presentation.ExpensesEvent
-import dev.lkey.financility.feature_expenses.presentation.ExpensesViewModel
+import dev.lkey.financility.feature_expenses.presentation.create.CreateExpensesEvent
+import dev.lkey.financility.feature_expenses.presentation.create.CreateExpensesViewModel
+import dev.lkey.financility.feature_expenses.presentation.today.ExpensesAction
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun HistoryExpensesScreen (
-    viewModel: ExpensesViewModel = ExpensesViewModel(),
+fun CreateExpensesScreen (
+    viewModel: CreateExpensesViewModel = CreateExpensesViewModel(),
     navController: NavController
 ) {
-
     val state by viewModel.state.collectAsStateWithLifecycle()
     val snackBarHostState = remember { SnackbarHostState() }
 
-    LaunchedEffect(true) {
-        viewModel.onEvent(ExpensesEvent.OnLoadTransactions)
+    LaunchedEffect(Unit) {
+        viewModel.onEvent(CreateExpensesEvent.OnLoadData)
 
-        viewModel.action.collectLatest { event ->
-            when (event) {
+        viewModel.action.collectLatest { action ->
+            when (action) {
                 is ExpensesAction.ShowSnackBar -> {
-                    snackBarHostState.showSnackbar(event.message)
+                    snackBarHostState.showSnackbar(action.message)
                 }
             }
         }
@@ -53,14 +52,16 @@ fun HistoryExpensesScreen (
         },
         topBar = {
             FinancilityTopBar(
-                title = "Моя история",
+                title = "Мои расходы",
                 actions = {
                     IconButton(
-                        onClick = { /* TODO */ }
+                        onClick = {
+//                            /* TODO */
+                        }
                     ) {
                         Icon(
-                            painter = painterResource(R.drawable.ic_statistics),
-                            contentDescription = "Статистика",
+                            painter = painterResource(R.drawable.ic_check),
+                            contentDescription = "Сохранить",
                             tint = MaterialTheme.colorScheme.surfaceContainer
                         )
                     }
@@ -70,7 +71,7 @@ fun HistoryExpensesScreen (
                         onClick = { navController.popBackStack() }
                     ) {
                         Icon(
-                            painter = painterResource(R.drawable.ic_btn_back),
+                            painter = painterResource(R.drawable.ic_cross),
                             contentDescription = "Назад",
                             tint = MaterialTheme.colorScheme.surfaceContainer
                         )
@@ -84,7 +85,7 @@ fun HistoryExpensesScreen (
         snackbarHost = { FinancilitySnackBar(snackBarHostState) }
     ) { padding ->
 
-        HistoryExpensesView(
+        CreateExpensesView (
             modifier = Modifier.padding(padding),
             state = state
         ) {

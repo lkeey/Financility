@@ -80,7 +80,7 @@ fun FinancilityNumTextField (
             OutlinedTextField(
                 value = textValue,
                 onValueChange = {
-                    if (it.all { n -> n.isDigit() }) {
+                    if (it.all { n -> n.isDigit() || n == '.' }) {
                         textValue = it
                         onValueChange(it)
                     }

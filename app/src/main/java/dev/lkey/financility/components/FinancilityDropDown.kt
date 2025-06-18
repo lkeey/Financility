@@ -12,15 +12,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import dev.lkey.financility.R
+import dev.lkey.financility.feature_expenses.domain.model.CategoryModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FinancilityDropDown (
     title: String,
-    options: List<String>,
+    options: List<CategoryModel>,
     previousData: String,
-    onOptionSelected: (String) -> Unit,
+    onOptionSelected: (CategoryModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -59,12 +60,12 @@ fun FinancilityDropDown (
                 DropdownMenuItem(
                     text = {
                         Text(
-                            text = selectionOption,
+                            text = selectionOption.name,
                             color = MaterialTheme.colorScheme.inverseOnSurface
                         )
                     },
                     onClick = {
-                        textValue = selectionOption
+                        textValue = selectionOption.name
                         expanded = false
                         onOptionSelected(selectionOption)
                     },

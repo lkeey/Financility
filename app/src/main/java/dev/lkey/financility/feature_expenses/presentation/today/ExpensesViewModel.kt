@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_expenses.presentation
+package dev.lkey.financility.feature_expenses.presentation.today
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -32,10 +32,6 @@ class ExpensesViewModel : ViewModel() {
         event: ExpensesEvent
     ) {
         when (event) {
-            ExpensesEvent.OnOpenCreateScreen -> {
-
-            }
-
             is ExpensesEvent.OnLoadTransactions -> {
                 loadData()
             }
