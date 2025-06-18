@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import dev.lkey.financility.R
 import dev.lkey.financility.components.FinancilityButton
 import dev.lkey.financility.components.FinancilityDayPicker
+import dev.lkey.financility.components.FinancilityDropDown
 import dev.lkey.financility.components.FinancilityEditText
 import dev.lkey.financility.components.FinancilityListItem
 import dev.lkey.financility.components.FinancilityNumTextField
@@ -31,6 +32,13 @@ fun CreateExpensesView (
                 trailingIcon = R.drawable.ic_light_arrow
             )
         }
+
+        FinancilityDropDown(
+            title = "Статья",
+            options = listOf("Еда", "Транспорт", "Развлечения", "Здоровье"),
+            previousData = "Еда",
+            onOptionSelected = {},
+        )
 
         FinancilityListItem (
             title = "Статья",
@@ -71,6 +79,8 @@ fun CreateExpensesView (
         ) {
 
         }
+
+
 
         FinancilityButton(
             text = "Удалить расход",

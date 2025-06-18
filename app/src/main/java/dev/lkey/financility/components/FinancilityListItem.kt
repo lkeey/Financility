@@ -41,10 +41,11 @@ fun FinancilityListItem (
     backgroundColor: Color = MaterialTheme.colorScheme.onSurface,
     backgroundEmojiColor: Color = MaterialTheme.colorScheme.surfaceContainerLow,
     isClickable: Boolean = true,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit = { }
 ) {
     Column (
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .background(backgroundColor),
         verticalArrangement = Arrangement.Center
