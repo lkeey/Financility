@@ -9,6 +9,7 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import dev.lkey.financility.feature_articles.presentation.ui.ArticlesScreen
 import dev.lkey.financility.feature_bill.presentation.ui.BillScreen
+import dev.lkey.financility.feature_expenses.presentation.ui.create.CreateExpensesScreen
 import dev.lkey.financility.feature_expenses.presentation.ui.expenses.ExpensesScreen
 import dev.lkey.financility.feature_expenses.presentation.ui.history.HistoryExpensesScreen
 import dev.lkey.financility.feature_income.presentation.ui.IncomeScreen
@@ -47,6 +48,12 @@ fun FinancilityApp() {
 
                 composable<Route.HistoryExpenses> {
                     HistoryExpensesScreen(
+                        navController = navController
+                    )
+                }
+
+                composable<Route.CreateExpenses> {
+                    CreateExpensesScreen(
                         navController = navController
                     )
                 }

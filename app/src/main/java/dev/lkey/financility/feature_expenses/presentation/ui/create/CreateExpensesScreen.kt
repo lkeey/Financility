@@ -1,11 +1,7 @@
-package dev.lkey.financility.feature_expenses.presentation.ui.expenses
+package dev.lkey.financility.feature_expenses.presentation.ui.create
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.FabPosition
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -16,9 +12,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import dev.lkey.financility.R
@@ -26,23 +20,18 @@ import dev.lkey.financility.components.FinancilityBottomBar
 import dev.lkey.financility.components.FinancilitySnackBar
 import dev.lkey.financility.components.FinancilityTopBar
 import dev.lkey.financility.feature_expenses.presentation.ExpensesAction
-import dev.lkey.financility.feature_expenses.presentation.ExpensesEvent
 import dev.lkey.financility.feature_expenses.presentation.ExpensesViewModel
-import dev.lkey.financility.navigation.Route
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun ExpensesScreen (
+fun CreateExpensesScreen (
     viewModel: ExpensesViewModel = ExpensesViewModel(),
     navController: NavController
 ) {
-
     val state by viewModel.state.collectAsStateWithLifecycle()
     val snackBarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(Unit) {
-        viewModel.onEvent(ExpensesEvent.OnLoadTransactions)
-
         viewModel.action.collectLatest { action ->
             when (action) {
                 is ExpensesAction.ShowSnackBar -> {
@@ -60,16 +49,27 @@ fun ExpensesScreen (
         },
         topBar = {
             FinancilityTopBar(
-                title = "Расходы сегодня",
+                title = "Мои расходы",
                 actions = {
                     IconButton(
                         onClick = {
-                            navController.navigate(Route.HistoryExpenses)
+//                            /* TODO */
                         }
                     ) {
                         Icon(
-                            painter = painterResource(R.drawable.ic_history),
-                            contentDescription = "История",
+                            painter = painterResource(R.drawable.ic_check),
+                            contentDescription = "Сохранить",
+                            tint = MaterialTheme.colorScheme.surfaceContainer
+                        )
+                    }
+                },
+                navIcon = {
+                    IconButton(
+                        onClick = { navController.popBackStack() }
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_cross),
+                            contentDescription = "Назад",
                             tint = MaterialTheme.colorScheme.surfaceContainer
                         )
                     }
@@ -79,31 +79,15 @@ fun ExpensesScreen (
         modifier = Modifier
             .fillMaxSize(),
         containerColor = MaterialTheme.colorScheme.onSurface,
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    navController.navigate(Route.CreateExpenses)
-                },
-                shape = CircleShape,
-                containerColor = MaterialTheme.colorScheme.primary
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_plus),
-                    contentDescription = "add button",
-                    modifier = Modifier
-                        .size(16.dp),
-                    tint = Color.White
-                )
-            }
-        },
-        floatingActionButtonPosition = FabPosition.End,
         snackbarHost = { FinancilitySnackBar(snackBarHostState) }
     ) { padding ->
 
-        ExpensesView(
+        CreateExpensesView (
             modifier = Modifier.padding(padding),
             state = state
-        )
+        ) {
+            viewModel.onEvent(it)
+        }
 
     }
 }

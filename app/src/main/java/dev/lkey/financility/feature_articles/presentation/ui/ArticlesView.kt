@@ -38,14 +38,13 @@ fun ArticlesView (
         FinancilityEditText(
             label = "Найти статью",
             previousData = "",
-            onTextChanged = {
-                /* TODO */
+            onTrailingIconClick = {
+                onEvent(ArticlesEvent.OnSearchValueChanged(
+                    searchValue = it
+                ))
             }
         ) {
-            onEvent(ArticlesEvent.OnSearchValueChanged(
-                searchValue = it
-            )
-            )
+            /* TODO */
         }
 
         HorizontalDivider(
