@@ -34,7 +34,7 @@ fun ExpensesView (
                 backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
                 trailingText = "${state.transactions.sumOf { it.amount.toDouble() }} ${state.accounts[0].currency}",
                 isClickable = false,
-            ) { }
+            )
         }
 
         state.transactions.forEach {

@@ -41,7 +41,7 @@ fun ExpensesScreen (
     val snackBarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(Unit) {
-        viewModel.onEvent(ExpensesEvent.OnLoadTransactions(isToday = true))
+        viewModel.onEvent(ExpensesEvent.OnLoadTransactions)
 
         viewModel.action.collectLatest { action ->
             when (action) {

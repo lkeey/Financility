@@ -33,8 +33,8 @@ fun HistoryExpensesScreen (
     val state by viewModel.state.collectAsStateWithLifecycle()
     val snackBarHostState = remember { SnackbarHostState() }
 
-    LaunchedEffect(Unit) {
-        viewModel.onEvent(ExpensesEvent.OnLoadTransactions(isToday = false))
+    LaunchedEffect(true) {
+        viewModel.onEvent(ExpensesEvent.OnLoadTransactions)
 
         viewModel.action.collectLatest { event ->
             when (event) {
@@ -87,7 +87,9 @@ fun HistoryExpensesScreen (
         HistoryExpensesView(
             modifier = Modifier.padding(padding),
             state = state
-        )
+        ) {
+            viewModel.onEvent(it)
+        }
 
     }
 }

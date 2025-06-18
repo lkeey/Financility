@@ -12,8 +12,6 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 class ExpensesViewModel : ViewModel() {
 
@@ -39,39 +37,42 @@ class ExpensesViewModel : ViewModel() {
             }
 
             is ExpensesEvent.OnLoadTransactions -> {
-                _state.update {
-                    it.copy(
-                        startDate =
-                            if (event.isToday) LocalDate.now()
-                                .format(DateTimeFormatter.ISO_DATE)
-                            else LocalDate.now()
-                                .withDayOfMonth(1)
-                                .format(DateTimeFormatter.ISO_DATE)
-                    )
-                }
-
                 loadData()
             }
+
+            is ExpensesEvent.OnChangedEndDate -> {
+                _state.update {
+                    it.copy(
+                        endDate = event.end
+                    )
+                }
+                loadData()
+            }
+
+            is ExpensesEvent.OnChangedStartDate -> {
+                _state.update {
+                    it.copy(
+                        startDate = event.start
+                    )
+                }
+                loadExpenses()
+            }
+
         }
     }
 
     private fun loadData() {
         loadAccounts {
-            loadExpenses(
-                id = it
-            )
+            loadExpenses()
         }
     }
 
-    private fun loadExpenses(
-        id : Int
-    ) {
-
+    private fun loadExpenses() {
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true) }
 
             val result = transactionUseCase.invoke(
-                id = id,
+                id = state.value.accounts[0].id,
                 startDate = state.value.startDate,
                 endDate = state.value.endDate
             )
@@ -84,6 +85,9 @@ class ExpensesViewModel : ViewModel() {
                             transactions = res.filter { !it.categoryModel.isIncome }
                         )
                     }
+
+                    _action.emit(ExpensesAction.ShowSnackBar("Было найдено - ${res.size}"))
+
                 }
                 .onFailure { err ->
                     _state.update {
@@ -98,7 +102,7 @@ class ExpensesViewModel : ViewModel() {
     }
 
     private fun loadAccounts(
-        onSuccess : (Int) -> Unit,
+        onSuccess : () -> Unit,
     ) {
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true) }
@@ -107,12 +111,21 @@ class ExpensesViewModel : ViewModel() {
 
             result
                 .onSuccess { res ->
-                    _state.update {
-                        it.copy(
-                            accounts = res
-                        )
+                    if (res.isNotEmpty()) {
+                        _state.update {
+                            it.copy(
+                                accounts = res
+                            )
+                        }
+                        onSuccess.invoke()
+                    } else {
+                        _state.update {
+                            it.copy(
+                                isLoading = false,
+                            )
+                        }
+                        _action.emit(ExpensesAction.ShowSnackBar("Не удалось найти аккаунт"))
                     }
-                   onSuccess.invoke(res[0].id)
                 }
                 .onFailure { err ->
                     _state.update {

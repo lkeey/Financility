@@ -11,50 +11,45 @@ import androidx.compose.ui.unit.dp
 import dev.lkey.financility.R
 import dev.lkey.financility.components.FinancilityDayPicker
 import dev.lkey.financility.components.FinancilityListItem
+import dev.lkey.financility.feature_expenses.presentation.ExpensesEvent
 import dev.lkey.financility.feature_expenses.presentation.ExpensesState
 
 @Composable
 fun HistoryExpensesView (
     modifier: Modifier = Modifier,
-    state: ExpensesState
+    state: ExpensesState,
+    onEvent: (ExpensesEvent) -> Unit
 ) {
-    val selectedDateLabel = remember { mutableStateOf("...") }
 
     Column (
         modifier = modifier
             .fillMaxSize()
     ){
 
-        FinancilityListItem(
+        FinancilityDayPicker (
             title = "Начало",
-            description = null,
-            backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
-            trailingText = selectedDateLabel.value,
-            isClickable = false,
-        )
-
-        FinancilityListItem(
-            title = "Конец",
-            description = null,
-            backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
-            trailingText = "...",
-            isClickable = false,
-        )
-
-        FinancilityListItem(
-            title = "Сумма",
-            description = null,
-            backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
-            trailingText = "...",
-            isClickable = false,
-            isShowDivider = false
-        )
-
-        FinancilityDayPicker {
-            selectedDateLabel.value = it
+            previousValue = state.startDate
+        ) {
+            onEvent(ExpensesEvent.OnChangedStartDate(it))
         }
 
+        FinancilityDayPicker (
+            title = "Конец",
+            previousValue = state.startDate
+        ) {
+            onEvent(ExpensesEvent.OnChangedEndDate(it))
+        }
 
+        if (state.accounts.isNotEmpty()) {
+            FinancilityListItem(
+                title = "Сумма",
+                description = null,
+                backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
+                trailingText = "${state.transactions.sumOf { it.amount.toDouble() }} ${state.accounts[0].currency}",
+                isClickable = false,
+                isShowDivider = false
+            )
+        }
 
         state.transactions.forEach {
             FinancilityListItem(
