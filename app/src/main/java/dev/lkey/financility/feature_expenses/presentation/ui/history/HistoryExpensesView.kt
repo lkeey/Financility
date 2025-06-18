@@ -26,14 +26,16 @@ fun HistoryExpensesView (
 
         FinancilityDayPicker (
             title = "Начало",
-            previousValue = state.startDate
+            previousValue = state.startDate,
+            backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow
         ) {
             onEvent(ExpensesEvent.OnChangedStartDate(it))
         }
 
         FinancilityDayPicker (
             title = "Конец",
-            previousValue = state.startDate
+            previousValue = state.startDate,
+            backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow
         ) {
             onEvent(ExpensesEvent.OnChangedEndDate(it))
         }

@@ -2,8 +2,13 @@ package dev.lkey.financility.feature_expenses.presentation.ui.create
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import dev.lkey.financility.R
 import dev.lkey.financility.components.FinancilityButton
 import dev.lkey.financility.components.FinancilityDayPicker
@@ -11,6 +16,7 @@ import dev.lkey.financility.components.FinancilityDropDown
 import dev.lkey.financility.components.FinancilityEditText
 import dev.lkey.financility.components.FinancilityListItem
 import dev.lkey.financility.components.FinancilityNumTextField
+import dev.lkey.financility.components.FinancilityTimePicker
 import dev.lkey.financility.feature_expenses.presentation.ExpensesEvent
 import dev.lkey.financility.feature_expenses.presentation.ExpensesState
 
@@ -40,15 +46,6 @@ fun CreateExpensesView (
             onOptionSelected = {},
         )
 
-        FinancilityListItem (
-            title = "Статья",
-            trailingText = "...",
-            isClickable = true,
-            trailingIcon = R.drawable.ic_light_arrow
-        ) {
-
-        }
-
         FinancilityNumTextField (
             title = "Сумма",
             previousData = "0",
@@ -56,18 +53,23 @@ fun CreateExpensesView (
 
         }
 
+        HorizontalDivider(
+            modifier = Modifier
+                .height(1.dp)
+                .fillMaxWidth(),
+            color = MaterialTheme.colorScheme.surfaceDim,
+        )
+
         FinancilityDayPicker (
             title = "Дата",
-            previousValue = "..."
+            previousValue = ""
         ) {
 
         }
 
-        FinancilityListItem (
-            title = "Время",
-            trailingText = "...",
-            isClickable = false,
-            trailingIcon = R.drawable.ic_light_arrow
+        FinancilityTimePicker(
+            title = "Выбери время",
+            previousValue = "12:00"
         ) {
 
         }
@@ -76,10 +78,17 @@ fun CreateExpensesView (
             previousData = "",
             label = "Комментарий",
             isShowTrailingIcon = false,
+            backgroundColor = MaterialTheme.colorScheme.onSurface
         ) {
 
         }
 
+        HorizontalDivider(
+            modifier = Modifier
+                .height(1.dp)
+                .fillMaxWidth(),
+            color = MaterialTheme.colorScheme.surfaceDim,
+        )
 
 
         FinancilityButton(

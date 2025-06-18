@@ -1,5 +1,6 @@
 package dev.lkey.financility.components
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
@@ -14,7 +15,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -25,6 +28,7 @@ import java.util.Calendar
 fun FinancilityDayPicker(
     title: String,
     previousValue: String,
+    backgroundColor: Color = MaterialTheme.colorScheme.onSurface,
     onChangeDate: (String) -> Unit
 ) {
     var showDialog by remember { mutableStateOf(false) }
@@ -36,6 +40,8 @@ fun FinancilityDayPicker(
 
     if (showDialog) {
         DatePickerDialog(
+            modifier = Modifier
+                .padding(horizontal = 20.dp),
             onDismissRequest = {
                 showDialog = false
             },
@@ -62,12 +68,22 @@ fun FinancilityDayPicker(
             DatePicker(
                 state = datePickerState,
                 colors = DatePickerDefaults.colors(
-                    selectedDayContainerColor = Color(0xFF722276),
-                    selectedDayContentColor = Color.White,
-                    selectedYearContainerColor = Color(0xFF722276),
-                    selectedYearContentColor = Color.White,
-                    todayContentColor = Color(0xFF722276),
-                    todayDateBorderColor = Color(0xFF722276)
+                    selectedDayContainerColor = MaterialTheme.colorScheme.primary,
+                    selectedYearContainerColor = MaterialTheme.colorScheme.primary,
+                    todayDateBorderColor = MaterialTheme.colorScheme.primary,
+
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+
+                    todayContentColor = MaterialTheme.colorScheme.inverseSurface,
+                    dayContentColor = MaterialTheme.colorScheme.inverseSurface,
+                    selectedYearContentColor = MaterialTheme.colorScheme.inverseSurface,
+                    selectedDayContentColor = MaterialTheme.colorScheme.inverseSurface,
+                    yearContentColor = MaterialTheme.colorScheme.inverseSurface,
+                    weekdayContentColor = MaterialTheme.colorScheme.inverseSurface,
+                    titleContentColor = MaterialTheme.colorScheme.inverseSurface,
+                    headlineContentColor = MaterialTheme.colorScheme.inverseSurface,
+                    subheadContentColor = MaterialTheme.colorScheme.inverseSurface,
+                    dayInSelectionRangeContentColor = MaterialTheme.colorScheme.inverseSurface,
                 )
             )
         }
@@ -76,7 +92,7 @@ fun FinancilityDayPicker(
     FinancilityListItem(
         title = title,
         description = null,
-        backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
+        backgroundColor = backgroundColor,
         trailingText = selectedDateLabel.value,
         isClickable = true,
     ) {

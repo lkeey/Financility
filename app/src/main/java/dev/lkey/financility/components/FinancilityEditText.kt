@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -27,6 +28,7 @@ fun FinancilityEditText (
     previousData: String,
     label: String,
     isShowTrailingIcon: Boolean = true,
+    backgroundColor: Color = MaterialTheme.colorScheme.primaryContainer,
     onTrailingIconClick: (String) -> Unit = { },
     onTextChanged: (String) -> Unit,
 ) {
@@ -62,8 +64,8 @@ fun FinancilityEditText (
         colors = TextFieldDefaults.colors(
             focusedTextColor = MaterialTheme.colorScheme.surfaceContainer,
             unfocusedTextColor = MaterialTheme.colorScheme.surfaceContainer,
-            unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-            focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+            unfocusedContainerColor = backgroundColor,
+            focusedContainerColor = backgroundColor,
         ),
         trailingIcon = {
             if (isShowTrailingIcon) {
