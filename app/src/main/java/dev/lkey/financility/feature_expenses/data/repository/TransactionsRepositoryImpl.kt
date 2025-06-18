@@ -25,8 +25,8 @@ class TransactionsRepositoryImpl : TransactionsRepository {
         return safeCall {
             val response: HttpResponse = ktorClient.get("${BuildConfig.BASE_URL}/transactions/account/${accountId}/period") {
                 url {
-                    parameters.append("startDate", "2025-01-01")
-                    parameters.append("endDate", "2025-12-01")
+                    parameters.append("startDate", startDate)
+                    parameters.append("endDate", endDate)
                 }
             }
 
@@ -56,7 +56,7 @@ class TransactionsRepositoryImpl : TransactionsRepository {
                 setBody(transaction)
             }
 
-            if (response.status != HttpStatusCode.OK) {
+            if (response.status != HttpStatusCode.OK && response.status != HttpStatusCode.Created) {
                 throw ApiException("Ошибка API: ${response.status}")
             }
 

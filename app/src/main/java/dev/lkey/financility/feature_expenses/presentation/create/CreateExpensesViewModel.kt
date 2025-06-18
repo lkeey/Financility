@@ -154,7 +154,7 @@ class CreateExpensesViewModel : ViewModel() {
                         accountId = state.value.accounts[0].id,
                         categoryId = state.value.article?.id ?: throw ApiException("Заполните все поля"),
                         amount = state.value.sum ?: throw ApiException("Заполните все поля"),
-                        transactionDate = "${state.value.date}T${state.value.time}",
+                        transactionDate = "${state.value.date}T${state.value.time}:00.000Z",
                         comment = state.value.comment
                     )
                 )
