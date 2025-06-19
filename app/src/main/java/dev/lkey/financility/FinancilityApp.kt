@@ -9,11 +9,12 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import dev.lkey.financility.feature_articles.presentation.ui.ArticlesScreen
 import dev.lkey.financility.feature_bill.presentation.ui.BillScreen
-import dev.lkey.financility.feature_transactions.presentation.expenses.create.ui.CreateExpensesScreen
-import dev.lkey.financility.feature_transactions.presentation.expenses.today.ui.ExpensesScreen
-import dev.lkey.financility.feature_transactions.presentation.expenses.history.ui.HistoryExpensesScreen
-import dev.lkey.financility.feature_transactions.presentation.income.today.ui.IncomeScreen
 import dev.lkey.financility.feature_settings.SettingsScreen
+import dev.lkey.financility.feature_transactions.presentation.expenses.create.ui.CreateExpensesScreen
+import dev.lkey.financility.feature_transactions.presentation.expenses.history.ui.HistoryExpensesScreen
+import dev.lkey.financility.feature_transactions.presentation.expenses.today.ui.ExpensesScreen
+import dev.lkey.financility.feature_transactions.presentation.income.history.ui.HistoryIncomeScreen
+import dev.lkey.financility.feature_transactions.presentation.income.today.ui.IncomeScreen
 import dev.lkey.financility.navigation.Route
 import dev.lkey.financility.navigation.splash.SplashScreen
 import dev.lkey.financility.ui.theme.FinancilityTheme
@@ -64,6 +65,12 @@ fun FinancilityApp() {
             ) {
                 composable<Route.TodayIncome> {
                     IncomeScreen(
+                        navController = navController
+                    )
+                }
+
+                composable<Route.HistoryIncomes> {
+                    HistoryIncomeScreen(
                         navController = navController
                     )
                 }

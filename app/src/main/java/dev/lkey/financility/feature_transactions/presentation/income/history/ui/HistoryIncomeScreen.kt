@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_transactions.presentation.expenses.history.ui
+package dev.lkey.financility.feature_transactions.presentation.income.history.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,27 +19,27 @@ import dev.lkey.financility.R
 import dev.lkey.financility.components.FinancilityBottomBar
 import dev.lkey.financility.components.FinancilitySnackBar
 import dev.lkey.financility.components.FinancilityTopBar
-import dev.lkey.financility.feature_transactions.presentation.expenses.history.HistoryExpensesAction
-import dev.lkey.financility.feature_transactions.presentation.expenses.history.HistoryExpensesEvent
-import dev.lkey.financility.feature_transactions.presentation.expenses.history.HistoryExpensesViewModel
+import dev.lkey.financility.feature_transactions.presentation.income.history.HistoryIncomeAction
+import dev.lkey.financility.feature_transactions.presentation.income.history.HistoryIncomeEvent
+import dev.lkey.financility.feature_transactions.presentation.income.history.HistoryIncomeViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun HistoryExpensesScreen (
-    viewModel: HistoryExpensesViewModel = HistoryExpensesViewModel(),
+fun HistoryIncomeScreen(
+    viewModel: HistoryIncomeViewModel = HistoryIncomeViewModel(),
     navController: NavController
 ) {
 
     val state by viewModel.state.collectAsStateWithLifecycle()
     val snackBarHostState = remember { SnackbarHostState() }
 
-    LaunchedEffect(true) {
-        viewModel.onEvent(HistoryExpensesEvent.OnLoadExpenses)
+    LaunchedEffect(Unit) {
+        viewModel.onEvent(HistoryIncomeEvent.OnLoadIncomes)
 
-        viewModel.action.collectLatest { event ->
-            when (event) {
-                is HistoryExpensesAction.ShowSnackBar -> {
-                    snackBarHostState.showSnackbar(event.message)
+        viewModel.action.collectLatest { action ->
+            when (action) {
+                is HistoryIncomeAction.ShowSnackBar -> {
+                    snackBarHostState.showSnackbar(action.message)
                 }
             }
         }
@@ -84,7 +84,7 @@ fun HistoryExpensesScreen (
         snackbarHost = { FinancilitySnackBar(snackBarHostState) }
     ) { padding ->
 
-        HistoryExpensesView(
+        HistoryIncomeView(
             modifier = Modifier.padding(padding),
             state = state
         ) {

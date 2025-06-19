@@ -27,6 +27,7 @@ import dev.lkey.financility.components.FinancilitySnackBar
 import dev.lkey.financility.components.FinancilityTopBar
 import dev.lkey.financility.feature_transactions.presentation.income.today.IncomeAction
 import dev.lkey.financility.feature_transactions.presentation.income.today.IncomeViewModel
+import dev.lkey.financility.navigation.Route
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -59,7 +60,9 @@ fun IncomeScreen (
                 title = "Доходы сегодня",
                 actions = {
                     IconButton(
-                        onClick = { /* TODO */ }
+                        onClick = { 
+                            navController.navigate(Route.HistoryIncomes)
+                        }
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.ic_history),

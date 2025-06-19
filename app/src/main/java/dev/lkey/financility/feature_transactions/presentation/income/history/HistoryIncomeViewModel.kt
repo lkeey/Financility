@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_transactions.presentation.expenses.history
+package dev.lkey.financility.feature_transactions.presentation.income.history
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,30 +13,30 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class HistoryExpensesViewModel : ViewModel() {
+class HistoryIncomeViewModel : ViewModel() {
 
-    private val _state = MutableStateFlow(HistoryExpensesState())
+    private val _state = MutableStateFlow(HistoryIncomeState())
     val state = _state.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(5000L),
         _state.value
     )
 
-    private val _action = MutableSharedFlow<HistoryExpensesAction>()
+    private val _action = MutableSharedFlow<HistoryIncomeAction>()
     val action = _action.asSharedFlow()
 
     private val transactionUseCase = GetTransactionsUseCase()
     private val accountsUseCase = GetAccountUseCase()
 
     fun onEvent(
-        event: HistoryExpensesEvent
+        event: HistoryIncomeEvent
     ) {
         when (event) {
-            is HistoryExpensesEvent.OnLoadExpenses -> {
+            is HistoryIncomeEvent.OnLoadIncomes -> {
                 loadData()
             }
 
-            is HistoryExpensesEvent.OnChangedEndDate -> {
+            is HistoryIncomeEvent.OnChangedEndDate -> {
                 _state.update {
                     it.copy(
                         endDate = event.end
@@ -45,7 +45,7 @@ class HistoryExpensesViewModel : ViewModel() {
                 loadExpenses()
             }
 
-            is HistoryExpensesEvent.OnChangedStartDate -> {
+            is HistoryIncomeEvent.OnChangedStartDate -> {
                 _state.update {
                     it.copy(
                         startDate = event.start
@@ -78,12 +78,9 @@ class HistoryExpensesViewModel : ViewModel() {
                     _state.update {
                         it.copy(
                             isLoading = false,
-                            transactions = res.filter { !it.categoryModel.isIncome }
+                            transactions = res.filter { it.categoryModel.isIncome }
                         )
                     }
-
-//                    _action.emit(ExpensesHistoryAction.ShowSnackBar("Было найдено - ${res.size}"))
-
                 }
                 .onFailure { err ->
                     _state.update {
@@ -92,7 +89,7 @@ class HistoryExpensesViewModel : ViewModel() {
                         )
                     }
 
-                    _action.emit(HistoryExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    _action.emit(HistoryIncomeAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }
     }
@@ -120,7 +117,7 @@ class HistoryExpensesViewModel : ViewModel() {
                                 isLoading = false,
                             )
                         }
-                        _action.emit(HistoryExpensesAction.ShowSnackBar("Не удалось найти аккаунт"))
+                        _action.emit(HistoryIncomeAction.ShowSnackBar("Не удалось найти аккаунт"))
                     }
                 }
                 .onFailure { err ->
@@ -129,9 +126,8 @@ class HistoryExpensesViewModel : ViewModel() {
                             isLoading = false,
                         )
                     }
-                    _action.emit(HistoryExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    _action.emit(HistoryIncomeAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }
     }
-
 }
