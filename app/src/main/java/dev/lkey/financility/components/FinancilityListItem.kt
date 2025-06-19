@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.sp
 fun FinancilityListItem (
     title: String,
     trailingText: String? = null,
+    trailingSubText: String? = null,
     trailingIcon: Int? = null,
     description: String? = null,
     emoji: String? = null,
@@ -113,16 +114,33 @@ fun FinancilityListItem (
                 }
             }
 
-            trailingText?.let {
-                Text(
-                    text = trailingText,
-                    color = MaterialTheme.colorScheme.inverseOnSurface,
-                    fontWeight = FontWeight.W400,
-                    fontSize = 16.sp,
-                    lineHeight = 24.sp,
-                    letterSpacing = 0.5.sp,
-                )
+            Column (
+                horizontalAlignment = Alignment.End
+            ) {
+                trailingText?.let {
+                    Text(
+                        text = it,
+                        color = MaterialTheme.colorScheme.inverseOnSurface,
+                        fontWeight = FontWeight.W400,
+                        fontSize = 16.sp,
+                        lineHeight = 24.sp,
+                        letterSpacing = 0.5.sp,
+                    )
+                }
+
+                trailingSubText?.let {
+                    Text(
+                        text = it,
+                        color = MaterialTheme.colorScheme.inverseOnSurface,
+                        fontWeight = FontWeight.W400,
+                        fontSize = 16.sp,
+                        lineHeight = 24.sp,
+                        letterSpacing = 0.5.sp,
+                    )
+                }
             }
+
+
 
             Spacer(modifier = Modifier.width(12.dp))
 

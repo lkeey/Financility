@@ -15,6 +15,6 @@ data class CreateExpensesState (
         .format(DateTimeFormatter.ISO_DATE),
     val time: String = LocalTime.now()
         .format(DateTimeFormatter.ofPattern("HH:mm")),
-    val comment: String = "",
+    val comment: String? = null,
     val isLoading: Boolean = false,
 )

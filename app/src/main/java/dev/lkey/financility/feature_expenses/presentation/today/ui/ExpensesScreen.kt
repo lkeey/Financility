@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_expenses.presentation.today.ui.expenses
+package dev.lkey.financility.feature_expenses.presentation.today.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding

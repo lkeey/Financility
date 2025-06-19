@@ -1,6 +1,7 @@
 package dev.lkey.financility.components
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
@@ -18,6 +19,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.DialogProperties
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -40,8 +42,10 @@ fun FinancilityDayPicker(
 
     if (showDialog) {
         DatePickerDialog(
-            modifier = Modifier
-                .padding(horizontal = 20.dp),
+            properties = DialogProperties(
+                usePlatformDefaultWidth = false,
+                decorFitsSystemWindows = false
+            ),
             onDismissRequest = {
                 showDialog = false
             },
@@ -60,8 +64,12 @@ fun FinancilityDayPicker(
                 }
             },
             dismissButton = {
-                TextButton(onClick = { showDialog = false }) {
-                    Text("Отмена")
+                TextButton(
+                    onClick = {
+                        showDialog = false
+                    }
+                ) {
+                    Text("Cancel")
                 }
             }
         ) {

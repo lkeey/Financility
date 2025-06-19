@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_expenses.presentation.today
+package dev.lkey.financility.feature_expenses.presentation.history
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,29 +13,48 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class ExpensesViewModel : ViewModel() {
+class HistoryExpensesViewModel : ViewModel() {
 
-    private val _state = MutableStateFlow(ExpensesState())
+    private val _state = MutableStateFlow(HistoryExpensesState())
     val state = _state.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(5000L),
         _state.value
     )
 
-    private val _action = MutableSharedFlow<ExpensesAction>()
+    private val _action = MutableSharedFlow<HistoryExpensesAction>()
     val action = _action.asSharedFlow()
 
     private val transactionUseCase = GetTransactionsUseCase()
     private val accountsUseCase = GetAccountUseCase()
 
     fun onEvent(
-        event: ExpensesEvent
+        event: HistoryExpensesEvent
     ) {
         when (event) {
-            is ExpensesEvent.OnLoadTransactions -> {
+            is HistoryExpensesEvent.OnLoadTransactions -> {
                 loadData()
             }
+
+            is HistoryExpensesEvent.OnChangedEndDate -> {
+                _state.update {
+                    it.copy(
+                        endDate = event.end
+                    )
+                }
+                loadExpenses()
+            }
+
+            is HistoryExpensesEvent.OnChangedStartDate -> {
+                _state.update {
+                    it.copy(
+                        startDate = event.start
+                    )
+                }
+                loadExpenses()
+            }
         }
+
     }
 
     private fun loadData() {
@@ -63,7 +82,7 @@ class ExpensesViewModel : ViewModel() {
                         )
                     }
 
-//                    _action.emit(ExpensesAction.ShowSnackBar("Было найдено - ${res.size}"))
+//                    _action.emit(ExpensesHistoryAction.ShowSnackBar("Было найдено - ${res.size}"))
 
                 }
                 .onFailure { err ->
@@ -73,7 +92,7 @@ class ExpensesViewModel : ViewModel() {
                         )
                     }
 
-                    _action.emit(ExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    _action.emit(HistoryExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }
     }
@@ -101,7 +120,7 @@ class ExpensesViewModel : ViewModel() {
                                 isLoading = false,
                             )
                         }
-                        _action.emit(ExpensesAction.ShowSnackBar("Не удалось найти аккаунт"))
+                        _action.emit(HistoryExpensesAction.ShowSnackBar("Не удалось найти аккаунт"))
                     }
                 }
                 .onFailure { err ->
@@ -110,8 +129,9 @@ class ExpensesViewModel : ViewModel() {
                             isLoading = false,
                         )
                     }
-                    _action.emit(ExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    _action.emit(HistoryExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }
     }
+
 }

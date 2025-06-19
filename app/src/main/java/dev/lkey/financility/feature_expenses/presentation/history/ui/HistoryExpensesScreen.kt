@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_expenses.presentation.today.ui.history
+package dev.lkey.financility.feature_expenses.presentation.history.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,14 +19,14 @@ import dev.lkey.financility.R
 import dev.lkey.financility.components.FinancilityBottomBar
 import dev.lkey.financility.components.FinancilitySnackBar
 import dev.lkey.financility.components.FinancilityTopBar
-import dev.lkey.financility.feature_expenses.presentation.today.ExpensesAction
-import dev.lkey.financility.feature_expenses.presentation.today.ExpensesEvent
-import dev.lkey.financility.feature_expenses.presentation.today.ExpensesViewModel
+import dev.lkey.financility.feature_expenses.presentation.history.HistoryExpensesAction
+import dev.lkey.financility.feature_expenses.presentation.history.HistoryExpensesEvent
+import dev.lkey.financility.feature_expenses.presentation.history.HistoryExpensesViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun HistoryExpensesScreen (
-    viewModel: ExpensesViewModel = ExpensesViewModel(),
+    viewModel: HistoryExpensesViewModel = HistoryExpensesViewModel(),
     navController: NavController
 ) {
 
@@ -34,11 +34,11 @@ fun HistoryExpensesScreen (
     val snackBarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(true) {
-        viewModel.onEvent(ExpensesEvent.OnLoadTransactions)
+        viewModel.onEvent(HistoryExpensesEvent.OnLoadTransactions)
 
         viewModel.action.collectLatest { event ->
             when (event) {
-                is ExpensesAction.ShowSnackBar -> {
+                is HistoryExpensesAction.ShowSnackBar -> {
                     snackBarHostState.showSnackbar(event.message)
                 }
             }
