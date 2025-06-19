@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 import dev.lkey.financility.R
 import dev.lkey.financility.components.FinancilityListItem
 import dev.lkey.financility.core.converter.toEmoji
+import dev.lkey.financility.core.converter.toFormat
 import dev.lkey.financility.feature_transactions.presentation.expenses.today.ExpensesState
 
 @Composable
@@ -33,7 +34,7 @@ fun ExpensesView (
                 title = "Всего",
                 description = null,
                 backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
-                trailingText = "${state.transactions.sumOf { it.amount.toDouble() }} ${state.accounts[0].currency.toEmoji()}",
+                trailingText = "${state.transactions.sumOf { it.amount.toDouble() }.toFormat()} ${state.accounts[0].currency.toEmoji()}",
                 isClickable = false,
             )
         }

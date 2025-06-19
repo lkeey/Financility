@@ -86,18 +86,11 @@ fun HistoryIncomeScreen(
         snackbarHost = { FinancilitySnackBar(snackBarHostState) }
     ) { padding ->
 
-        if (state.isLoading) {
-            FinancilityLoadingBar(
-                modifier = Modifier
-                    .padding(padding)
-            )
-        } else {
-            HistoryIncomeView(
-                modifier = Modifier.padding(padding),
-                state = state
-            ) {
-                viewModel.onEvent(it)
-            }
+        HistoryIncomeView(
+            modifier = Modifier.padding(padding),
+            state = state
+        ) {
+            viewModel.onEvent(it)
         }
 
     }
