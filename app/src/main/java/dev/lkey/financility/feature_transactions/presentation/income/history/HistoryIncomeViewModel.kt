@@ -83,11 +83,11 @@ class HistoryIncomeViewModel : ViewModel() {
                     }
                 }
                 .onFailure { err ->
-                    _state.update {
-                        it.copy(
-                            isLoading = false,
-                        )
-                    }
+//                    _state.update {
+//                        it.copy(
+//                            isLoading = false,
+//                        )
+//                    }
 
                     _action.emit(HistoryIncomeAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
@@ -112,20 +112,22 @@ class HistoryIncomeViewModel : ViewModel() {
                         }
                         onSuccess.invoke()
                     } else {
-                        _state.update {
-                            it.copy(
-                                isLoading = false,
-                            )
-                        }
+//                        _state.update {
+//                            it.copy(
+//                                isLoading = false,
+//                            )
+//                        }
+
                         _action.emit(HistoryIncomeAction.ShowSnackBar("Не удалось найти аккаунт"))
                     }
                 }
                 .onFailure { err ->
-                    _state.update {
-                        it.copy(
-                            isLoading = false,
-                        )
-                    }
+//                    _state.update {
+//                        it.copy(
+//                            isLoading = false,
+//                        )
+//                    }
+
                     _action.emit(HistoryIncomeAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }

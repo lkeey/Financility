@@ -60,11 +60,11 @@ class ArticlesViewModel : ViewModel() {
                     }
                 }
                 .onFailure { err ->
-                    _state.update {
-                        it.copy(
-                            isLoading = false,
-                        )
-                    }
+//                    _state.update {
+//                        it.copy(
+//                            isLoading = false,
+//                        )
+//                    }
 
                     _action.emit(ArticleAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }

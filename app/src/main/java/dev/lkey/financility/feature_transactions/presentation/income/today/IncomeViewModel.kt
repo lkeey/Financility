@@ -86,7 +86,11 @@ class IncomeViewModel : ViewModel() {
         onSuccess : (Int) -> Unit,
     ) {
         viewModelScope.launch {
-            _state.update { it.copy(isLoading = true) }
+            _state.update {
+                it.copy(
+                    isLoading = true
+                )
+            }
 
             val result = accountsUseCase.invoke()
 
@@ -105,6 +109,7 @@ class IncomeViewModel : ViewModel() {
                             isLoading = false,
                         )
                     }
+
                     _action.emit(IncomeAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }

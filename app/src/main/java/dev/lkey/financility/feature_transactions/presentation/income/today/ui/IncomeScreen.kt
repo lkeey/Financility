@@ -23,8 +23,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import dev.lkey.financility.R
 import dev.lkey.financility.components.FinancilityBottomBar
+import dev.lkey.financility.components.FinancilityLoadingBar
 import dev.lkey.financility.components.FinancilitySnackBar
 import dev.lkey.financility.components.FinancilityTopBar
+import dev.lkey.financility.feature_transactions.presentation.expenses.today.ui.ExpensesView
 import dev.lkey.financility.feature_transactions.presentation.income.today.IncomeAction
 import dev.lkey.financility.feature_transactions.presentation.income.today.IncomeViewModel
 import dev.lkey.financility.navigation.Route
@@ -60,7 +62,7 @@ fun IncomeScreen (
                 title = "Доходы сегодня",
                 actions = {
                     IconButton(
-                        onClick = { 
+                        onClick = {
                             navController.navigate(Route.HistoryIncomes)
                         }
                     ) {
@@ -96,7 +98,8 @@ fun IncomeScreen (
     ) { padding ->
 
         IncomeView(
-            modifier = Modifier.padding(padding),
+            modifier = Modifier
+                .padding(padding),
             state = state
         )
 

@@ -1,4 +1,4 @@
-package dev.lkey.financility.navigation.splash
+package dev.lkey.financility.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -14,15 +14,17 @@ import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 
 @Composable
-fun SplashView () {
-    val composition by rememberLottieComposition(LottieCompositionSpec.Asset("splash.json"))
+fun FinancilityLoadingBar (
+    modifier: Modifier
+) {
+    val composition by rememberLottieComposition(LottieCompositionSpec.Asset("loading.json"))
     val progress by animateLottieCompositionAsState(
         composition = composition,
         iterations = LottieConstants.IterateForever,
     )
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.onSurfaceVariant)
     ) {
@@ -31,7 +33,7 @@ fun SplashView () {
             progress = {
                 progress
             },
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxSize()
         )
     }

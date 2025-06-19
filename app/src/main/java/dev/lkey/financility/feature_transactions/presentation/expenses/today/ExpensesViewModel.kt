@@ -96,20 +96,20 @@ class ExpensesViewModel : ViewModel() {
                         }
                         onSuccess.invoke()
                     } else {
-                        _state.update {
-                            it.copy(
-                                isLoading = false,
-                            )
-                        }
+//                        _state.update {
+//                            it.copy(
+//                                isLoading = false,
+//                            )
+//                        }
                         _action.emit(ExpensesAction.ShowSnackBar("Не удалось найти аккаунт"))
                     }
                 }
                 .onFailure { err ->
-                    _state.update {
-                        it.copy(
-                            isLoading = false,
-                        )
-                    }
+//                    _state.update {
+//                        it.copy(
+//                            isLoading = false,
+//                        )
+//                    }
                     _action.emit(ExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }

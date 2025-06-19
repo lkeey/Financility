@@ -23,6 +23,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import dev.lkey.financility.R
 import dev.lkey.financility.components.FinancilityBottomBar
+import dev.lkey.financility.components.FinancilityLoadingBar
 import dev.lkey.financility.components.FinancilitySnackBar
 import dev.lkey.financility.components.FinancilityTopBar
 import dev.lkey.financility.feature_transactions.presentation.expenses.today.ExpensesAction
@@ -100,10 +101,18 @@ fun ExpensesScreen (
         snackbarHost = { FinancilitySnackBar(snackBarHostState) }
     ) { padding ->
 
-        ExpensesView(
-            modifier = Modifier.padding(padding),
-            state = state
-        )
+        if (state.isLoading) {
+            FinancilityLoadingBar(
+                modifier = Modifier
+                .padding(padding)
+            )
+        } else {
+            ExpensesView(
+                modifier = Modifier
+                    .padding(padding),
+                state = state
+            )
+        }
 
     }
 }

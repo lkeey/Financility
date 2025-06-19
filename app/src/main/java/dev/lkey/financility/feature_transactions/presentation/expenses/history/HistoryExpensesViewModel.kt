@@ -81,9 +81,6 @@ class HistoryExpensesViewModel : ViewModel() {
                             transactions = res.filter { !it.categoryModel.isIncome }
                         )
                     }
-
-//                    _action.emit(ExpensesHistoryAction.ShowSnackBar("Было найдено - ${res.size}"))
-
                 }
                 .onFailure { err ->
                     _state.update {
@@ -120,6 +117,7 @@ class HistoryExpensesViewModel : ViewModel() {
                                 isLoading = false,
                             )
                         }
+
                         _action.emit(HistoryExpensesAction.ShowSnackBar("Не удалось найти аккаунт"))
                     }
                 }
@@ -129,6 +127,7 @@ class HistoryExpensesViewModel : ViewModel() {
                             isLoading = false,
                         )
                     }
+
                     _action.emit(HistoryExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }
