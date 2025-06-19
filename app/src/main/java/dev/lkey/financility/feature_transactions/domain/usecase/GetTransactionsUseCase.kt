@@ -1,22 +1,28 @@
-package dev.lkey.financility.feature_articles.domain.usecase
+package dev.lkey.financility.feature_transactions.domain.usecase
 
 import dev.lkey.financility.core.network.ApiException
-import dev.lkey.financility.feature_articles.data.repository.ArticleRepositoryImpl
-import dev.lkey.financility.feature_transactions.domain.model.CategoryModel
+import dev.lkey.financility.feature_transactions.data.repository.TransactionsRepositoryImpl
+import dev.lkey.financility.feature_transactions.domain.model.TransactionModel
+import dev.lkey.financility.feature_transactions.domain.repository.TransactionsRepository
 import io.ktor.client.plugins.ServerResponseException
 import kotlinx.coroutines.delay
 
-class GetArticlesUseCase {
+class GetTransactionsUseCase {
 
-    private val repository: ArticleRepositoryImpl = ArticleRepositoryImpl()
+    private val repository: TransactionsRepository = TransactionsRepositoryImpl()
 
-    suspend operator fun invoke(): Result<List<CategoryModel>> {
+    suspend operator fun invoke(
+        id : Int,
+        startDate: String,
+        endDate: String
+    ): Result<List<TransactionModel>> {
+
         var attempt = 0
         val maxRetries = 3
 
         while (attempt < maxRetries) {
             try {
-                return repository.getArticles()
+                return repository.getTodayExpenses(id, startDate, endDate)
             } catch (e: ServerResponseException) {
                 if (e.response.status.value == 500) {
                     attempt++

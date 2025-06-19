@@ -3,7 +3,6 @@ package dev.lkey.financility.feature_bill.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.lkey.financility.feature_bill.domain.usecase.GetBillInfoUseCase
-import dev.lkey.financility.feature_income.presentation.IncomeState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn

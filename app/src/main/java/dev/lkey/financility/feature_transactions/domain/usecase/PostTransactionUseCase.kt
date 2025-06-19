@@ -1,22 +1,24 @@
-package dev.lkey.financility.feature_articles.domain.usecase
+package dev.lkey.financility.feature_transactions.domain.usecase
 
 import dev.lkey.financility.core.network.ApiException
-import dev.lkey.financility.feature_articles.data.repository.ArticleRepositoryImpl
-import dev.lkey.financility.feature_transactions.domain.model.CategoryModel
+import dev.lkey.financility.feature_transactions.data.dto.TransactionDto
+import dev.lkey.financility.feature_transactions.data.repository.TransactionsRepositoryImpl
+import dev.lkey.financility.feature_transactions.domain.repository.TransactionsRepository
 import io.ktor.client.plugins.ServerResponseException
 import kotlinx.coroutines.delay
 
-class GetArticlesUseCase {
+class PostTransactionUseCase {
+    private val repository: TransactionsRepository = TransactionsRepositoryImpl()
 
-    private val repository: ArticleRepositoryImpl = ArticleRepositoryImpl()
-
-    suspend operator fun invoke(): Result<List<CategoryModel>> {
+    suspend fun invoke (
+        transaction: TransactionDto
+    ): Result<Unit> {
         var attempt = 0
         val maxRetries = 3
 
         while (attempt < maxRetries) {
             try {
-                return repository.getArticles()
+                return repository.createExpense(transaction)
             } catch (e: ServerResponseException) {
                 if (e.response.status.value == 500) {
                     attempt++
@@ -32,5 +34,4 @@ class GetArticlesUseCase {
 
         throw ApiException("Не удалось выполнить запрос. Превышено количество попыток")
     }
-
 }
