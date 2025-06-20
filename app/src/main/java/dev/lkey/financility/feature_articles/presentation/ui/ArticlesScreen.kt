@@ -12,10 +12,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import dev.lkey.financility.components.FinancilityBottomBar
-import dev.lkey.financility.components.FinancilityLoadingBar
-import dev.lkey.financility.components.FinancilitySnackBar
-import dev.lkey.financility.components.FinancilityTopBar
+import dev.lkey.financility.components.nav.FinancilityBottomBar
+import dev.lkey.financility.components.item.FinancilityLoadingBar
+import dev.lkey.financility.components.item.FinancilitySnackBar
+import dev.lkey.financility.components.nav.FinancilityTopBar
+import dev.lkey.financility.core.network.FinancilityResult
 import dev.lkey.financility.feature_articles.presentation.ArticleAction
 import dev.lkey.financility.feature_articles.presentation.ArticlesViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -57,7 +58,7 @@ fun ArticlesScreen (
         snackbarHost = { FinancilitySnackBar(snackBarHostState) }
     ) { padding ->
 
-        if (state.isLoading) {
+        if (state.status != FinancilityResult.Success) {
             FinancilityLoadingBar(
                 modifier = Modifier
                     .padding(padding)

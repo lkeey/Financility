@@ -1,4 +1,4 @@
-package dev.lkey.financility.components
+package dev.lkey.financility.components.field
 
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -12,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import dev.lkey.financility.R
+import dev.lkey.financility.components.item.FinancilityListItem
 import dev.lkey.financility.feature_transactions.domain.model.CategoryModel
 
 

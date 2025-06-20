@@ -1,4 +1,4 @@
-package dev.lkey.financility.components
+package dev.lkey.financility.components.nav
 
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon

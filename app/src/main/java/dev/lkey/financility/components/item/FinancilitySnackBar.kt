@@ -1,4 +1,4 @@
-package dev.lkey.financility.components
+package dev.lkey.financility.components.item
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer

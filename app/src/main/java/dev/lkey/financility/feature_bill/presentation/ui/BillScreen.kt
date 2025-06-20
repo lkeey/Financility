@@ -19,8 +19,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import dev.lkey.financility.R
-import dev.lkey.financility.components.FinancilityBottomBar
-import dev.lkey.financility.components.FinancilityTopBar
+import dev.lkey.financility.components.nav.FinancilityBottomBar
+import dev.lkey.financility.components.nav.FinancilityTopBar
 import dev.lkey.financility.feature_bill.presentation.BillViewModel
 
 @Composable

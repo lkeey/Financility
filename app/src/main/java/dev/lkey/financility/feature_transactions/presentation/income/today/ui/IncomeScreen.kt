@@ -22,12 +22,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import dev.lkey.financility.R
-import dev.lkey.financility.components.FinancilityBottomBar
-import dev.lkey.financility.components.FinancilityLoadingBar
-import dev.lkey.financility.components.FinancilitySnackBar
-import dev.lkey.financility.components.FinancilityTopBar
-import dev.lkey.financility.feature_transactions.presentation.expenses.today.ui.ExpensesView
+import dev.lkey.financility.components.nav.FinancilityBottomBar
+import dev.lkey.financility.components.item.FinancilityLoadingBar
+import dev.lkey.financility.components.item.FinancilitySnackBar
+import dev.lkey.financility.components.nav.FinancilityTopBar
+import dev.lkey.financility.core.network.FinancilityResult
 import dev.lkey.financility.feature_transactions.presentation.income.today.IncomeAction
+import dev.lkey.financility.feature_transactions.presentation.income.today.IncomeEvent
 import dev.lkey.financility.feature_transactions.presentation.income.today.IncomeViewModel
 import dev.lkey.financility.navigation.Route
 import kotlinx.coroutines.flow.collectLatest
@@ -42,6 +43,8 @@ fun IncomeScreen (
     val snackBarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(Unit) {
+        viewModel.onEvent(IncomeEvent.OnLoadTodayIncomes)
+
         viewModel.action.collectLatest { event ->
             when (event) {
                 is IncomeAction.ShowSnackBar -> {
@@ -97,11 +100,18 @@ fun IncomeScreen (
         snackbarHost = { FinancilitySnackBar(snackBarHostState) }
     ) { padding ->
 
-        IncomeView(
-            modifier = Modifier
-                .padding(padding),
-            state = state
-        )
+        if (state.status != FinancilityResult.Success) {
+            FinancilityLoadingBar(
+                modifier = Modifier
+                    .padding(padding)
+            )
+        } else {
+            IncomeView(
+                modifier = Modifier
+                    .padding(padding),
+                state = state
+            )
+        }
 
     }
 }

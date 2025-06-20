@@ -3,6 +3,7 @@ package dev.lkey.financility.feature_transactions.presentation.income.today
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.lkey.financility.core.network.ErrorHandler
+import dev.lkey.financility.core.network.FinancilityResult
 import dev.lkey.financility.feature_transactions.domain.usecase.GetAccountUseCase
 import dev.lkey.financility.feature_transactions.domain.usecase.GetTransactionsUseCase
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -30,15 +31,13 @@ class IncomeViewModel : ViewModel() {
     private val transactionUseCase = GetTransactionsUseCase()
     private val accountsUseCase = GetAccountUseCase()
 
-    init {
-        loadData()
-    }
-
     fun onEvent(
         event: IncomeEvent
     ) {
         when (event) {
-            else -> {}
+            IncomeEvent.OnLoadTodayIncomes -> {
+                loadData()
+            }
         }
     }
 
@@ -53,7 +52,11 @@ class IncomeViewModel : ViewModel() {
     ) {
 
         viewModelScope.launch {
-            _state.update { it.copy(isLoading = true) }
+            _state.update {
+                it.copy(
+                    status = FinancilityResult.Loading
+                )
+            }
 
             val result = transactionUseCase.invoke(
                 id = id,
@@ -65,7 +68,7 @@ class IncomeViewModel : ViewModel() {
                 .onSuccess { res ->
                     _state.update {
                         it.copy(
-                            isLoading = false,
+                            status = FinancilityResult.Success,
                             transactions = res.filter { it.categoryModel.isIncome }
                         )
                     }
@@ -73,7 +76,7 @@ class IncomeViewModel : ViewModel() {
                 .onFailure { err ->
                     _state.update {
                         it.copy(
-                            isLoading = false,
+                            status = FinancilityResult.Error
                         )
                     }
 
@@ -88,7 +91,7 @@ class IncomeViewModel : ViewModel() {
         viewModelScope.launch {
             _state.update {
                 it.copy(
-                    isLoading = true
+                    status = FinancilityResult.Loading
                 )
             }
 
@@ -106,7 +109,7 @@ class IncomeViewModel : ViewModel() {
                 .onFailure { err ->
                     _state.update {
                         it.copy(
-                            isLoading = false,
+                            status = FinancilityResult.Error
                         )
                     }
 

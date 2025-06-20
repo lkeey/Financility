@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import dev.lkey.financility.R
-import dev.lkey.financility.components.FinancilityListItem
+import dev.lkey.financility.components.item.FinancilityListItem
 import dev.lkey.financility.feature_bill.presentation.BillState
 
 @Composable

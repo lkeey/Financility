@@ -16,11 +16,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import dev.lkey.financility.R
-import dev.lkey.financility.components.FinancilityBottomBar
-import dev.lkey.financility.components.FinancilityLoadingBar
-import dev.lkey.financility.components.FinancilitySnackBar
-import dev.lkey.financility.components.FinancilityTopBar
-import dev.lkey.financility.feature_transactions.presentation.expenses.today.ui.ExpensesView
+import dev.lkey.financility.components.nav.FinancilityBottomBar
+import dev.lkey.financility.components.item.FinancilitySnackBar
+import dev.lkey.financility.components.nav.FinancilityTopBar
 import dev.lkey.financility.feature_transactions.presentation.income.history.HistoryIncomeAction
 import dev.lkey.financility.feature_transactions.presentation.income.history.HistoryIncomeEvent
 import dev.lkey.financility.feature_transactions.presentation.income.history.HistoryIncomeViewModel

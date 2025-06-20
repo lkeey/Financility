@@ -3,6 +3,7 @@ package dev.lkey.financility.feature_articles.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.lkey.financility.core.network.ErrorHandler
+import dev.lkey.financility.core.network.FinancilityResult
 import dev.lkey.financility.feature_articles.domain.usecase.GetArticlesUseCase
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -46,7 +47,11 @@ class ArticlesViewModel : ViewModel() {
 
     private fun loadArticles() {
         viewModelScope.launch {
-            _state.update { it.copy(isLoading = true) }
+            _state.update {
+                it.copy(
+                    status = FinancilityResult.Loading
+                )
+            }
 
             val result = articlesUseCase.invoke()
 
@@ -54,17 +59,17 @@ class ArticlesViewModel : ViewModel() {
                 .onSuccess { res ->
                     _state.update {
                         it.copy(
-                            isLoading = false,
+                            status = FinancilityResult.Success,
                             articles = res
                         )
                     }
                 }
                 .onFailure { err ->
-//                    _state.update {
-//                        it.copy(
-//                            isLoading = false,
-//                        )
-//                    }
+                    _state.update {
+                        it.copy(
+                            status = FinancilityResult.Error
+                        )
+                    }
 
                     _action.emit(ArticleAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }

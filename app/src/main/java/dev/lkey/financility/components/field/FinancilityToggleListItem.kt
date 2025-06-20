@@ -1,4 +1,4 @@
-package dev.lkey.financility.components
+package dev.lkey.financility.components.field
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

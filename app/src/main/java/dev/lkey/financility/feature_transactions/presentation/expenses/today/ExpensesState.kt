@@ -1,16 +1,13 @@
 package dev.lkey.financility.feature_transactions.presentation.expenses.today
 
+import dev.lkey.financility.core.network.FinancilityResult
 import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_transactions.domain.model.TransactionModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 data class ExpensesState (
-    val transactions: List<TransactionModel> = listOf(),
-    val accounts: List<AccountBriefModel> = listOf(),
-    val isLoading: Boolean = false,
-    val startDate: String = LocalDate.now()
-        .format(DateTimeFormatter.ISO_DATE),
-    val endDate: String = LocalDate.now()
-        .format(DateTimeFormatter.ISO_DATE)
+    val transactions: List<TransactionModel> = emptyList(),
+    val accounts: List<AccountBriefModel> = emptyList(),
+    val status: FinancilityResult = FinancilityResult.Loading,
 )

@@ -3,6 +3,7 @@ package dev.lkey.financility.feature_transactions.presentation.expenses.today
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.lkey.financility.core.network.ErrorHandler
+import dev.lkey.financility.core.network.FinancilityResult
 import dev.lkey.financility.feature_transactions.domain.usecase.GetAccountUseCase
 import dev.lkey.financility.feature_transactions.domain.usecase.GetTransactionsUseCase
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -12,6 +13,8 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class ExpensesViewModel : ViewModel() {
 
@@ -32,7 +35,7 @@ class ExpensesViewModel : ViewModel() {
         event: ExpensesEvent
     ) {
         when (event) {
-            is ExpensesEvent.OnLoadTransactions -> {
+            is ExpensesEvent.OnLoadTodayExpenses -> {
                 loadData()
             }
         }
@@ -46,30 +49,31 @@ class ExpensesViewModel : ViewModel() {
 
     private fun loadExpenses() {
         viewModelScope.launch {
-            _state.update { it.copy(isLoading = true) }
+            _state.update {
+                it.copy(
+                    status = FinancilityResult.Loading
+                )
+            }
 
             val result = transactionUseCase.invoke(
                 id = state.value.accounts[0].id,
-                startDate = state.value.startDate,
-                endDate = state.value.endDate
+                startDate = LocalDate.now().format(DateTimeFormatter.ISO_DATE),
+                endDate = LocalDate.now().format(DateTimeFormatter.ISO_DATE),
             )
 
             result
                 .onSuccess { res ->
                     _state.update {
                         it.copy(
-                            isLoading = false,
+                            status = FinancilityResult.Success,
                             transactions = res.filter { !it.categoryModel.isIncome }
                         )
                     }
-
-//                    _action.emit(ExpensesAction.ShowSnackBar("Было найдено - ${res.size}"))
-
                 }
                 .onFailure { err ->
                     _state.update {
                         it.copy(
-                            isLoading = false,
+                            status = FinancilityResult.Error
                         )
                     }
 
@@ -82,7 +86,11 @@ class ExpensesViewModel : ViewModel() {
         onSuccess : () -> Unit,
     ) {
         viewModelScope.launch {
-            _state.update { it.copy(isLoading = true) }
+            _state.update {
+                it.copy(
+                    status = FinancilityResult.Loading
+                )
+            }
 
             val result = accountsUseCase.invoke()
 
@@ -96,20 +104,22 @@ class ExpensesViewModel : ViewModel() {
                         }
                         onSuccess.invoke()
                     } else {
-//                        _state.update {
-//                            it.copy(
-//                                isLoading = false,
-//                            )
-//                        }
+                        _state.update {
+                            it.copy(
+                                status = FinancilityResult.Error
+                            )
+                        }
+
                         _action.emit(ExpensesAction.ShowSnackBar("Не удалось найти аккаунт"))
                     }
                 }
                 .onFailure { err ->
-//                    _state.update {
-//                        it.copy(
-//                            isLoading = false,
-//                        )
-//                    }
+                    _state.update {
+                        it.copy(
+                            status = FinancilityResult.Error
+                        )
+                    }
+
                     _action.emit(ExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }
