@@ -19,7 +19,7 @@ fun BillView (
         modifier = modifier
             .fillMaxSize()
     ){
-        state.bill.forEach {
+        state.accounts.forEach {
             FinancilityListItem(
                 emoji = "\uD83D\uDCB0",
                 title = "Баланс",

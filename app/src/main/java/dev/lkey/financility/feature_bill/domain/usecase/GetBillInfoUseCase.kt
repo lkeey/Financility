@@ -1,12 +1,19 @@
 package dev.lkey.financility.feature_bill.domain.usecase
 
-import dev.lkey.financility.feature_bill.data.repository.GetBillInfoRepositoryImpl
+import dev.lkey.financility.core.network.retryRequest
 import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
+import dev.lkey.financility.feature_bill.domain.repository.GetBillInfoRepository
 
-class GetBillInfoUseCase {
-    private val repository = GetBillInfoRepositoryImpl()
+class GetBillInfoUseCase (
+    val apiRepository: GetBillInfoRepository
+) {
+    suspend operator fun invoke(): Result<List<AccountBriefModel>> {
 
-    suspend fun invoke() : List<AccountBriefModel> {
-        return repository.getBillInfo()
+        return retryRequest {
+            val accounts = apiRepository.getBillInfo()
+
+            accounts
+        }
+
     }
 }
