@@ -27,9 +27,6 @@ class ArticlesViewModel : ViewModel() {
 
     private val articlesUseCase = GetArticlesUseCase()
 
-    init {
-        loadArticles()
-    }
 
     fun onEvent(
         event: ArticlesEvent
@@ -41,6 +38,10 @@ class ArticlesViewModel : ViewModel() {
                         searchValue = event.searchValue
                     )
                 }
+            }
+
+            ArticlesEvent.OnLoadArticles -> {
+                loadArticles()
             }
         }
     }

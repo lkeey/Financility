@@ -44,7 +44,7 @@ class HistoryIncomeViewModel (
                         endDate = event.end
                     )
                 }
-                loadExpenses()
+                loadExpenses(state.value.accounts[0].id)
             }
 
             is HistoryIncomeEvent.OnChangedStartDate -> {
@@ -53,7 +53,7 @@ class HistoryIncomeViewModel (
                         startDate = event.start
                     )
                 }
-                loadExpenses()
+                loadExpenses(state.value.accounts[0].id)
             }
         }
 
@@ -61,11 +61,13 @@ class HistoryIncomeViewModel (
 
     private fun loadData() {
         loadAccounts {
-            loadExpenses()
+            loadExpenses(it)
         }
     }
 
-    private fun loadExpenses() {
+    private fun loadExpenses(
+        id: Int
+    ) {
         viewModelScope.launch {
             _state.update {
                 it.copy(
@@ -74,7 +76,7 @@ class HistoryIncomeViewModel (
             }
 
             val result = transactionUseCase.invoke(
-                id = state.value.accounts[0].id,
+                id = id,
                 startDate = state.value.startDate,
                 endDate = state.value.endDate
             )
@@ -101,7 +103,7 @@ class HistoryIncomeViewModel (
     }
 
     private fun loadAccounts(
-        onSuccess : () -> Unit,
+        onSuccess : (Int) -> Unit,
     ) {
         viewModelScope.launch {
             _state.update {
@@ -120,7 +122,7 @@ class HistoryIncomeViewModel (
                                 accounts = res
                             )
                         }
-                        onSuccess.invoke()
+                        onSuccess.invoke(res[0].id)
                     } else {
                         _state.update {
                             it.copy(

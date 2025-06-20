@@ -34,7 +34,6 @@ fun CreateExpensesView (
             FinancilityListItem (
                 title = "Счет",
                 trailingText = state.accounts[0].name,
-                isClickable = false,
                 trailingIcon = R.drawable.ic_light_arrow
             )
         }

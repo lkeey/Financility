@@ -88,7 +88,7 @@ class CreateExpensesViewModel (
     }
 
     fun loadAccount(
-        onSuccess: () -> Unit
+        onSuccess: (Int) -> Unit
     ) {
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true) }
@@ -104,7 +104,7 @@ class CreateExpensesViewModel (
                         )
                     }
 
-                    onSuccess()
+                    onSuccess(res[0].id)
                 }
                 .onFailure { err ->
                     _state.update {

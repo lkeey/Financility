@@ -18,6 +18,7 @@ import dev.lkey.financility.components.item.FinancilitySnackBar
 import dev.lkey.financility.components.nav.FinancilityTopBar
 import dev.lkey.financility.core.network.FinancilityResult
 import dev.lkey.financility.feature_articles.presentation.ArticleAction
+import dev.lkey.financility.feature_articles.presentation.ArticlesEvent
 import dev.lkey.financility.feature_articles.presentation.ArticlesViewModel
 import kotlinx.coroutines.flow.collectLatest
 
@@ -31,6 +32,8 @@ fun ArticlesScreen (
     val snackBarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(Unit) {
+        viewModel.onEvent(ArticlesEvent.OnLoadArticles)
+
         viewModel.action.collectLatest { event ->
             when (event) {
                 is ArticleAction.ShowSnackBar -> {
