@@ -16,9 +16,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import dev.lkey.financility.R
-import dev.lkey.financility.components.nav.FinancilityBottomBar
+import dev.lkey.financility.components.item.FinancilityLoadingBar
 import dev.lkey.financility.components.item.FinancilitySnackBar
+import dev.lkey.financility.components.nav.FinancilityBottomBar
 import dev.lkey.financility.components.nav.FinancilityTopBar
+import dev.lkey.financility.core.network.FinancilityResult
 import dev.lkey.financility.feature_transactions.presentation.expenses.history.HistoryExpensesAction
 import dev.lkey.financility.feature_transactions.presentation.expenses.history.HistoryExpensesEvent
 import dev.lkey.financility.feature_transactions.presentation.expenses.history.HistoryExpensesViewModel
@@ -84,11 +86,18 @@ fun HistoryExpensesScreen (
         snackbarHost = { FinancilitySnackBar(snackBarHostState) }
     ) { padding ->
 
-        HistoryExpensesView(
-            modifier = Modifier.padding(padding),
-            state = state
-        ) {
-            viewModel.onEvent(it)
+        if (state.status != FinancilityResult.Success) {
+            FinancilityLoadingBar(
+                modifier = Modifier
+                    .padding(padding)
+            )
+        } else {
+            HistoryExpensesView(
+                modifier = Modifier.padding(padding),
+                state = state
+            ) {
+                viewModel.onEvent(it)
+            }
         }
 
     }

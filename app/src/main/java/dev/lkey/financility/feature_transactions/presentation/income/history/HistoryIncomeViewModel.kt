@@ -3,6 +3,7 @@ package dev.lkey.financility.feature_transactions.presentation.income.history
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.lkey.financility.core.network.ErrorHandler
+import dev.lkey.financility.core.network.FinancilityResult
 import dev.lkey.financility.feature_transactions.domain.usecase.GetAccountUseCase
 import dev.lkey.financility.feature_transactions.domain.usecase.GetTransactionsUseCase
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -65,7 +66,11 @@ class HistoryIncomeViewModel : ViewModel() {
 
     private fun loadExpenses() {
         viewModelScope.launch {
-            _state.update { it.copy(isLoading = true) }
+            _state.update {
+                it.copy(
+                    status = FinancilityResult.Loading
+                )
+            }
 
             val result = transactionUseCase.invoke(
                 id = state.value.accounts[0].id,
@@ -77,17 +82,17 @@ class HistoryIncomeViewModel : ViewModel() {
                 .onSuccess { res ->
                     _state.update {
                         it.copy(
-                            isLoading = false,
+                            status = FinancilityResult.Success,
                             transactions = res.filter { it.categoryModel.isIncome }
                         )
                     }
                 }
                 .onFailure { err ->
-//                    _state.update {
-//                        it.copy(
-//                            isLoading = false,
-//                        )
-//                    }
+                    _state.update {
+                        it.copy(
+                            status = FinancilityResult.Error,
+                        )
+                    }
 
                     _action.emit(HistoryIncomeAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
@@ -98,7 +103,11 @@ class HistoryIncomeViewModel : ViewModel() {
         onSuccess : () -> Unit,
     ) {
         viewModelScope.launch {
-            _state.update { it.copy(isLoading = true) }
+            _state.update {
+                it.copy(
+                    status = FinancilityResult.Loading,
+                )
+            }
 
             val result = accountsUseCase.invoke()
 
@@ -112,21 +121,21 @@ class HistoryIncomeViewModel : ViewModel() {
                         }
                         onSuccess.invoke()
                     } else {
-//                        _state.update {
-//                            it.copy(
-//                                isLoading = false,
-//                            )
-//                        }
+                        _state.update {
+                            it.copy(
+                                status = FinancilityResult.Error,
+                            )
+                        }
 
                         _action.emit(HistoryIncomeAction.ShowSnackBar("Не удалось найти аккаунт"))
                     }
                 }
                 .onFailure { err ->
-//                    _state.update {
-//                        it.copy(
-//                            isLoading = false,
-//                        )
-//                    }
+                    _state.update {
+                        it.copy(
+                            status = FinancilityResult.Error,
+                        )
+                    }
 
                     _action.emit(HistoryIncomeAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }

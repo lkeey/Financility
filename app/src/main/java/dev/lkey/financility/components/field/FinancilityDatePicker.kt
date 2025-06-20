@@ -50,14 +50,14 @@ fun FinancilityDayPicker(
                 TextButton(
                     onClick = {
                         showDialog = false
+
+                        onChangeDate(selectedDateLabel.value)
                     }
                 ) {
                     Text("OK")
 
                     selectedDateLabel.value =
                         convertMillisToDate(datePickerState.selectedDateMillis ?: selectedDateLabel.value.toLong())
-
-                    onChangeDate(selectedDateLabel.value)
                 }
             },
             dismissButton = {
