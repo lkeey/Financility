@@ -17,7 +17,7 @@ import io.ktor.http.HttpStatusCode
 
 class TransactionsRepositoryImpl : TransactionsRepository {
 
-    override suspend fun getTodayExpenses(
+    override suspend fun getTransactions(
         accountId: Int,
         startDate: String,
         endDate: String,

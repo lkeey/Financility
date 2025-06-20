@@ -6,7 +6,7 @@ import dev.lkey.financility.feature_transactions.domain.model.TransactionModel
 
 interface TransactionsRepository {
 
-    suspend fun getTodayExpenses(
+    suspend fun getTransactions(
         accountId : Int,
         startDate: String,
         endDate: String
