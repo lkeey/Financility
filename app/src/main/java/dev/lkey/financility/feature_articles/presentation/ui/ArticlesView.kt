@@ -11,8 +11,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dev.lkey.financility.components.FinancilityEditText
-import dev.lkey.financility.components.FinancilityListItem
+import dev.lkey.financility.components.field.FinancilityEditText
+import dev.lkey.financility.components.item.FinancilityListItem
 import dev.lkey.financility.feature_articles.presentation.ArticlesEvent
 import dev.lkey.financility.feature_articles.presentation.ArticlesState
 
@@ -35,14 +35,13 @@ fun ArticlesView (
         FinancilityEditText(
             label = "Найти статью",
             previousData = "",
-            onTextChanged = {
-                /* TODO */
+            onTrailingIconClick = {
+                onEvent(ArticlesEvent.OnSearchValueChanged(
+                    searchValue = it
+                ))
             }
         ) {
-            onEvent(ArticlesEvent.OnSearchValueChanged(
-                searchValue = it
-            )
-            )
+            /* TODO */
         }
 
         HorizontalDivider(

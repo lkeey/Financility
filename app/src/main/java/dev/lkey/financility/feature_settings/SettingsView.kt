@@ -6,8 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.lkey.financility.R
-import dev.lkey.financility.components.FinancilityToggleListItem
-import dev.lkey.financility.components.FinancilityListItem
+import dev.lkey.financility.components.field.FinancilityToggleListItem
+import dev.lkey.financility.components.item.FinancilityListItem
 
 @Composable
 fun SettingsView (

@@ -7,7 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import dev.lkey.financility.R
-import dev.lkey.financility.components.FinancilityListItem
+import dev.lkey.financility.components.item.FinancilityListItem
+import dev.lkey.financility.core.converter.toEmoji
+import dev.lkey.financility.core.converter.toFormat
 import dev.lkey.financility.feature_bill.presentation.BillState
 
 @Composable
@@ -19,13 +21,13 @@ fun BillView (
         modifier = modifier
             .fillMaxSize()
     ){
-        state.bill.forEach {
+        state.accounts.forEach {
             FinancilityListItem(
                 emoji = "\uD83D\uDCB0",
                 title = "Баланс",
                 description = null,
                 backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
-                trailingText = "${it.balance} ${it.currency}" /*"-670 000 ₽"*/,
+                trailingText = "${it.balance} ${it.currency.toEmoji()}",
                 trailingIcon = R.drawable.ic_light_arrow,
                 backgroundEmojiColor = Color.White
             ) {
@@ -36,7 +38,7 @@ fun BillView (
                 title = "Валюта",
                 description = null,
                 backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
-                trailingText = it.currency,
+                trailingText = it.currency.toEmoji(),
                 trailingIcon = R.drawable.ic_light_arrow,
                 isShowDivider = false,
             ) {

@@ -10,14 +10,14 @@ sealed class Bar (
 ) {
     data object Expenses : Bar(
         route = Route.Expenses,
-        title = "Доходы",
-        icon = R.drawable.ic_expenses
+        title = "Расходы",
+        icon = R.drawable.ic_income
     )
 
     data object Income : Bar(
         route = Route.Income,
-        title = "Расходы",
-        icon = R.drawable.ic_income
+        title = "Доходы",
+        icon = R.drawable.ic_expenses
     )
 
     data object Bill : Bar(

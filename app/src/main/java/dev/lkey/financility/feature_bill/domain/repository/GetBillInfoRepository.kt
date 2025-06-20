@@ -4,6 +4,6 @@ import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 
 interface GetBillInfoRepository {
 
-    suspend fun getBillInfo(): List<AccountBriefModel>
+    suspend fun getBillInfo(): Result<List<AccountBriefModel>>
 
 }
