@@ -44,11 +44,13 @@ class ExpensesViewModel (
 
     private fun loadData() {
         loadAccounts {
-            loadExpenses()
+            loadExpenses(it)
         }
     }
 
-    private fun loadExpenses() {
+    private fun loadExpenses(
+        id : Int
+    ) {
         viewModelScope.launch {
             _state.update {
                 it.copy(
@@ -56,8 +58,10 @@ class ExpensesViewModel (
                 )
             }
 
+            println("FAPP load acc 3 ${state.value.accounts}")
+
             val result = transactionUseCase.invoke(
-                id = state.value.accounts[0].id,
+                id = id,
                 startDate = LocalDate.now().format(DateTimeFormatter.ISO_DATE),
                 endDate = LocalDate.now().format(DateTimeFormatter.ISO_DATE),
             )
@@ -84,7 +88,7 @@ class ExpensesViewModel (
     }
 
     private fun loadAccounts(
-        onSuccess : () -> Unit,
+        onSuccess : (Int) -> Unit,
     ) {
         viewModelScope.launch {
             _state.update {
@@ -95,6 +99,8 @@ class ExpensesViewModel (
 
             val result = accountsUseCase.invoke()
 
+            println("FAPP load acc 2 $result")
+
             result
                 .onSuccess { res ->
                     if (res.isNotEmpty()) {
@@ -103,7 +109,8 @@ class ExpensesViewModel (
                                 accounts = res
                             )
                         }
-                        onSuccess.invoke()
+                        println("FAPP load acc 2.1 ${_state.value.accounts}")
+                        onSuccess(res[0].id)
                     } else {
                         _state.update {
                             it.copy(

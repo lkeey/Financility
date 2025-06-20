@@ -10,19 +10,14 @@ class GetAccountUseCase (
     val apiRepository: TransactionsRepository
 ) {
 
-//    private val apiRepository: TransactionsRepository = TransactionsRepositoryImpl()
-//    private val localRepository: AccountRepositoryImpl = AccountRepositoryImpl(context = context)
-
     suspend operator fun invoke(): Result<List<AccountBriefModel>> {
-        /* TODO */
-//        println("load acc")
-//
-//        localRepository.getAccounts()?.let {
-//            println("load acc $it")
-//            return Result.success(it)
-//        }
-//
-//        println("go to internet")
+
+        localRepository.getAccounts()?.let {
+            println("FAPP load acc $it")
+            return Result.success(it)
+        }
+
+        println("FAPP go to internet")
 
         return retryRequest {
             val accounts = apiRepository.getAccounts()

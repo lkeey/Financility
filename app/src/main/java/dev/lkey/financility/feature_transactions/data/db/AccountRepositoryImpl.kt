@@ -35,4 +35,8 @@ class AccountRepositoryImpl(
         }
     }
 
+    fun clearCache() {
+        preferences.edit { remove(PREF_ACCOUNTS_KEY) }
+    }
+
 }

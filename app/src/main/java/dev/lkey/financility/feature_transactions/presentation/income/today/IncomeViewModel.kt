@@ -100,12 +100,22 @@ class IncomeViewModel (
 
             result
                 .onSuccess { res ->
-                    _state.update {
-                        it.copy(
-                            accounts = res
-                        )
+                    if (res.isNotEmpty()) {
+                        _state.update {
+                            it.copy(
+                                accounts = res
+                            )
+                        }
+                        onSuccess.invoke(res[0].id)
+                    } else {
+                        _state.update {
+                            it.copy(
+                                status = FinancilityResult.Error
+                            )
+                        }
+
+                        _action.emit(IncomeAction.ShowSnackBar("Не удалось найти аккаунт"))
                     }
-                    onSuccess.invoke(res[0].id)
                 }
                 .onFailure { err ->
                     _state.update {
