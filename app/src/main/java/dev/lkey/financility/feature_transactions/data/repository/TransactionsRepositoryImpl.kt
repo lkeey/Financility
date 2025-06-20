@@ -38,7 +38,7 @@ class TransactionsRepositoryImpl : TransactionsRepository {
         }
     }
 
-    override suspend fun getAccount(): Result<List<AccountBriefModel>> {
+    override suspend fun getAccounts(): Result<List<AccountBriefModel>> {
         return safeCall {
             val response: HttpResponse = ktorClient.get("${BuildConfig.BASE_URL}/accounts")
 

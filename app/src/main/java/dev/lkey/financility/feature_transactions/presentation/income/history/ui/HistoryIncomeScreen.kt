@@ -26,10 +26,11 @@ import dev.lkey.financility.feature_transactions.presentation.income.history.His
 import dev.lkey.financility.feature_transactions.presentation.income.history.HistoryIncomeEvent
 import dev.lkey.financility.feature_transactions.presentation.income.history.HistoryIncomeViewModel
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HistoryIncomeScreen(
-    viewModel: HistoryIncomeViewModel = HistoryIncomeViewModel(),
+    viewModel: HistoryIncomeViewModel = koinViewModel<HistoryIncomeViewModel>(),
     navController: NavController
 ) {
 

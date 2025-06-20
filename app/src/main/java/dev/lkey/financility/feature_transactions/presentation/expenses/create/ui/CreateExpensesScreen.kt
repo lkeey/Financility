@@ -23,10 +23,11 @@ import dev.lkey.financility.feature_transactions.presentation.expenses.create.Cr
 import dev.lkey.financility.feature_transactions.presentation.expenses.create.CreateExpensesViewModel
 import dev.lkey.financility.feature_transactions.presentation.expenses.today.ExpensesAction
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CreateExpensesScreen (
-    viewModel: CreateExpensesViewModel = CreateExpensesViewModel(),
+    viewModel: CreateExpensesViewModel = koinViewModel<CreateExpensesViewModel>(),
     navController: NavController
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()

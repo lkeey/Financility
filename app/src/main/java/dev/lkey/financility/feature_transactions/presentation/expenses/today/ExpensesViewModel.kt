@@ -16,7 +16,9 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class ExpensesViewModel : ViewModel() {
+class ExpensesViewModel (
+    private val accountsUseCase : GetAccountUseCase
+) : ViewModel() {
 
     private val _state = MutableStateFlow(ExpensesState())
     val state = _state.stateIn(
@@ -29,7 +31,6 @@ class ExpensesViewModel : ViewModel() {
     val action = _action.asSharedFlow()
 
     private val transactionUseCase = GetTransactionsUseCase()
-    private val accountsUseCase = GetAccountUseCase()
 
     fun onEvent(
         event: ExpensesEvent

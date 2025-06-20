@@ -12,7 +12,7 @@ interface TransactionsRepository {
         endDate: String
     ): Result<List<TransactionModel>>
 
-    suspend fun getAccount(): Result<List<AccountBriefModel>>
+    suspend fun getAccounts(): Result<List<AccountBriefModel>>
 
     suspend fun createExpense(
         transaction: TransactionDto

@@ -19,9 +19,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import dev.lkey.financility.R
+import dev.lkey.financility.components.item.FinancilityLoadingBar
 import dev.lkey.financility.components.nav.FinancilityBottomBar
 import dev.lkey.financility.components.nav.FinancilityTopBar
+import dev.lkey.financility.core.network.FinancilityResult
 import dev.lkey.financility.feature_bill.presentation.BillViewModel
+import dev.lkey.financility.feature_transactions.presentation.expenses.today.ui.ExpensesView
 
 @Composable
 fun BillScreen (
@@ -74,10 +77,17 @@ fun BillScreen (
         floatingActionButtonPosition = FabPosition.End
     ) { padding ->
 
-        BillView(
-            modifier = Modifier.padding(padding),
-            state = state
-        )
+        if (state.status != FinancilityResult.Success) {
+            FinancilityLoadingBar(
+                modifier = Modifier
+                    .padding(padding)
+            )
+        } else {
+            BillView(
+                modifier = Modifier.padding(padding),
+                state = state
+            )
+        }
 
     }
 }

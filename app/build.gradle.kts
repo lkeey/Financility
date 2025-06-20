@@ -94,4 +94,7 @@ dependencies {
     implementation(libs.ktor.json)
     implementation(libs.ktor.client.logging)
 
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+
 }

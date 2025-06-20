@@ -4,6 +4,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -44,7 +45,7 @@ fun FinancilityDropDown (
             title = title,
             trailingText = textValue,
             modifier = modifier
-                .menuAnchor(),
+                .menuAnchor(MenuAnchorType.PrimaryEditable, true),
             trailingIcon = R.drawable.ic_light_arrow
         ) {
 

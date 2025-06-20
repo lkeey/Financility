@@ -17,7 +17,9 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class CreateExpensesViewModel : ViewModel() {
+class CreateExpensesViewModel (
+    private val accountUseCase : GetAccountUseCase
+) : ViewModel() {
     private val _state = MutableStateFlow(CreateExpensesState())
     val state = _state.stateIn(
         viewModelScope,
@@ -30,7 +32,7 @@ class CreateExpensesViewModel : ViewModel() {
 
     private val articlesUseCase = GetArticlesUseCase()
     private val createTransactionUseCase = PostTransactionUseCase()
-    private val accountUseCase = GetAccountUseCase()
+
 
     fun onEvent(
         event: CreateExpensesEvent

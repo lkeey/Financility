@@ -32,11 +32,12 @@ import dev.lkey.financility.feature_transactions.presentation.income.today.Incom
 import dev.lkey.financility.feature_transactions.presentation.income.today.IncomeViewModel
 import dev.lkey.financility.navigation.Route
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun IncomeScreen (
     navController: NavController,
-    viewModel: IncomeViewModel = IncomeViewModel()
+    viewModel: IncomeViewModel = koinViewModel<IncomeViewModel>()
 ) {
 
     val state by viewModel.state.collectAsState()

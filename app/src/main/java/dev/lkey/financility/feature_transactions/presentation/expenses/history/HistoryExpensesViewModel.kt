@@ -14,7 +14,9 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class HistoryExpensesViewModel : ViewModel() {
+class HistoryExpensesViewModel (
+    private val accountsUseCase : GetAccountUseCase
+) : ViewModel() {
 
     private val _state = MutableStateFlow(HistoryExpensesState())
     val state = _state.stateIn(
@@ -27,7 +29,6 @@ class HistoryExpensesViewModel : ViewModel() {
     val action = _action.asSharedFlow()
 
     private val transactionUseCase = GetTransactionsUseCase()
-    private val accountsUseCase = GetAccountUseCase()
 
     fun onEvent(
         event: HistoryExpensesEvent

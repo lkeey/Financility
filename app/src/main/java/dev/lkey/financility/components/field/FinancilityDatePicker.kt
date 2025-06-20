@@ -89,6 +89,7 @@ fun FinancilityDayPicker(
                     headlineContentColor = MaterialTheme.colorScheme.inverseSurface,
                     subheadContentColor = MaterialTheme.colorScheme.inverseSurface,
                     dayInSelectionRangeContentColor = MaterialTheme.colorScheme.inverseSurface,
+
                 )
             )
         }

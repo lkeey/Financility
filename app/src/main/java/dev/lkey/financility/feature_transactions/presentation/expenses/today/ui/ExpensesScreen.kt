@@ -22,9 +22,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import dev.lkey.financility.R
-import dev.lkey.financility.components.nav.FinancilityBottomBar
 import dev.lkey.financility.components.item.FinancilityLoadingBar
 import dev.lkey.financility.components.item.FinancilitySnackBar
+import dev.lkey.financility.components.nav.FinancilityBottomBar
 import dev.lkey.financility.components.nav.FinancilityTopBar
 import dev.lkey.financility.core.network.FinancilityResult
 import dev.lkey.financility.feature_transactions.presentation.expenses.today.ExpensesAction
@@ -32,10 +32,11 @@ import dev.lkey.financility.feature_transactions.presentation.expenses.today.Exp
 import dev.lkey.financility.feature_transactions.presentation.expenses.today.ExpensesViewModel
 import dev.lkey.financility.navigation.Route
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ExpensesScreen (
-    viewModel: ExpensesViewModel = ExpensesViewModel(),
+    viewModel: ExpensesViewModel = koinViewModel<ExpensesViewModel>(),
     navController: NavController
 ) {
 
