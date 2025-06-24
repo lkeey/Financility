@@ -70,7 +70,7 @@ fun HistoryExpensesView (
                     emoji = it.categoryModel.emoji,
                     title = it.categoryModel.name,
                     description = it.comment,
-                    trailingSubText = it.createdAt.split("T")[1].substring(0, 5),
+                    trailingSubText = it.createdAt.substring(0, endIndex = 16).replace("T", " "),
                     trailingText = "${it.amount} ${state.accounts[0].currency.toEmoji()}",
                     height = 70.dp
                 ) {

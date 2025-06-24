@@ -12,6 +12,7 @@ import dev.lkey.financility.feature_transactions.data.repository.TransactionsRep
 import dev.lkey.financility.feature_transactions.domain.repository.TransactionsRepository
 import dev.lkey.financility.feature_transactions.domain.usecase.GetAccountUseCase
 import dev.lkey.financility.feature_transactions.domain.usecase.GetTransactionsUseCase
+import dev.lkey.financility.feature_transactions.domain.usecase.PostTransactionUseCase
 import dev.lkey.financility.feature_transactions.presentation.expenses.create.CreateExpensesViewModel
 import dev.lkey.financility.feature_transactions.presentation.expenses.history.HistoryExpensesViewModel
 import dev.lkey.financility.feature_transactions.presentation.expenses.today.ExpensesViewModel
@@ -32,6 +33,7 @@ val appModule = module {
     single<TransactionsRepository> { TransactionsRepositoryImpl() }
 
     factory { GetTransactionsUseCase(get()) }
+    factory { PostTransactionUseCase(get()) }
     factory { GetAccountUseCase(get(), get()) }
 
     single<GetBillInfoRepository> { GetBillInfoRepositoryImpl() }

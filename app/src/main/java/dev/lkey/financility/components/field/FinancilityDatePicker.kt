@@ -21,10 +21,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import dev.lkey.financility.components.item.FinancilityListItem
-import java.time.Instant
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
-import java.util.Calendar
+import dev.lkey.financility.core.converter.convertDateToMillis
+import dev.lkey.financility.core.converter.convertMillisToDate
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,7 +39,7 @@ fun FinancilityDayPicker(
     val selectedDateLabel = remember { mutableStateOf(previousValue) }
     val datePickerState = rememberDatePickerState(
         initialDisplayMode = DisplayMode.Picker,
-        initialSelectedDateMillis = Calendar.getInstance().timeInMillis
+        initialSelectedDateMillis = convertDateToMillis(previousValue)
     )
 
     val pickerColors = DatePickerDefaults.colors(
@@ -154,12 +152,3 @@ fun FinancilityDayPicker(
     }
 }
 
-fun convertMillisToDate(
-    millis : Long
-): String {
-    val localDate = Instant.ofEpochMilli(millis)
-        .atZone(ZoneId.systemDefault()) // Использует часовой пояс устройства
-        .toLocalDate()
-
-    return localDate.format(DateTimeFormatter.ISO_DATE)
-}

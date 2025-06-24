@@ -19,7 +19,8 @@ import kotlinx.coroutines.launch
 
 class CreateExpensesViewModel (
     private val accountUseCase : GetAccountUseCase,
-    private val articlesUseCase : GetArticlesUseCase
+    private val articlesUseCase : GetArticlesUseCase,
+    private val createTransactionUseCase : PostTransactionUseCase
 ) : ViewModel() {
     private val _state = MutableStateFlow(CreateExpensesState())
     val state = _state.stateIn(
@@ -30,9 +31,6 @@ class CreateExpensesViewModel (
 
     private val _action = MutableSharedFlow<ExpensesAction>()
     val action = _action.asSharedFlow()
-
-    private val createTransactionUseCase = PostTransactionUseCase()
-
 
     fun onEvent(
         event: CreateExpensesEvent
