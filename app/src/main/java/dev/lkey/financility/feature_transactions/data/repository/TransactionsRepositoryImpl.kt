@@ -23,7 +23,7 @@ class TransactionsRepositoryImpl : TransactionsRepository {
         endDate: String,
     ): Result<List<TransactionModel>> {
         return safeCall {
-            val response: HttpResponse = ktorClient.get("${BuildConfig.BASE_URL}/transactions/account/${accountId}/period") {
+            val response = ktorClient.get("${BuildConfig.BASE_URL}/transactions/account/${accountId}/period") {
                 url {
                     parameters.append("startDate", startDate)
                     parameters.append("endDate", endDate)

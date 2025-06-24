@@ -21,7 +21,7 @@ class BillViewModel (
     private val _state = MutableStateFlow(BillState())
     val state = _state.stateIn(
         viewModelScope,
-        SharingStarted.WhileSubscribed(5000L),
+        SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000L),
         _state.value
     )
 
