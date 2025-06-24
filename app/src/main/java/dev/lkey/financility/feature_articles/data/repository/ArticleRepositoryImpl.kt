@@ -4,6 +4,7 @@ import dev.lkey.financility.BuildConfig
 import dev.lkey.financility.core.network.ApiException
 import dev.lkey.financility.core.network.ktorClient
 import dev.lkey.financility.core.network.safeCall
+import dev.lkey.financility.feature_articles.data.api.ArticlesApi
 import dev.lkey.financility.feature_articles.domain.repository.ArticlesRepository
 import dev.lkey.financility.feature_transactions.domain.model.CategoryModel
 import io.ktor.client.call.body
@@ -11,7 +12,7 @@ import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
 
-class ArticleRepositoryImpl : ArticlesRepository {
+class ArticleRepositoryImpl : ArticlesApi {
 
     override suspend fun getArticles(): Result<List<CategoryModel>> {
 

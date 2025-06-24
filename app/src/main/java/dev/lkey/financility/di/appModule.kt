@@ -1,5 +1,7 @@
 package dev.lkey.financility.di
 
+import dev.lkey.financility.feature_articles.data.repository.ArticleRepositoryImpl
+import dev.lkey.financility.feature_articles.domain.usecase.GetArticlesUseCase
 import dev.lkey.financility.feature_articles.presentation.ArticlesViewModel
 import dev.lkey.financility.feature_bill.data.repository.GetBillInfoRepositoryImpl
 import dev.lkey.financility.feature_bill.domain.repository.GetBillInfoRepository
@@ -20,6 +22,9 @@ import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
+
+    single { ArticleRepositoryImpl() }
+    factory { GetArticlesUseCase(get()) }
 
     single { AccountRepositoryImpl(androidContext()) }
     single<TransactionsRepository> { TransactionsRepositoryImpl() }

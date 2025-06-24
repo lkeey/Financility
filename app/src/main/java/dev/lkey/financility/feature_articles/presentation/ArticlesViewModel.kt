@@ -13,20 +13,19 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class ArticlesViewModel : ViewModel() {
+class ArticlesViewModel (
+    private val articlesUseCase : GetArticlesUseCase
+) : ViewModel() {
 
     private val _state = MutableStateFlow(ArticlesState())
     val state = _state.stateIn(
         viewModelScope,
-        SharingStarted.WhileSubscribed(5000L),
+        SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000L),
         _state.value
     )
 
     private val _action = MutableSharedFlow<ArticleAction>()
     val action = _action.asSharedFlow()
-
-    private val articlesUseCase = GetArticlesUseCase()
-
 
     fun onEvent(
         event: ArticlesEvent

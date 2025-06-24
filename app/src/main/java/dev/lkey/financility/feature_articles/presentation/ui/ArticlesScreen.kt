@@ -21,10 +21,11 @@ import dev.lkey.financility.feature_articles.presentation.ArticleAction
 import dev.lkey.financility.feature_articles.presentation.ArticlesEvent
 import dev.lkey.financility.feature_articles.presentation.ArticlesViewModel
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ArticlesScreen (
-    viewModel: ArticlesViewModel = ArticlesViewModel(),
+    viewModel: ArticlesViewModel = koinViewModel<ArticlesViewModel>(),
     navController: NavController
 ) {
 
