@@ -1,4 +1,4 @@
-package dev.lkey.financility.core.network
+package dev.lkey.financility.core.error
 
 /**
  * Кастомный класс ошибок

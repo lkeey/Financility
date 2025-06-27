@@ -12,7 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import dev.lkey.financility.navigation.Bar
+import dev.lkey.financility.navigation.util.Bar
 
 @Composable
 fun FinancilityBottomBar (

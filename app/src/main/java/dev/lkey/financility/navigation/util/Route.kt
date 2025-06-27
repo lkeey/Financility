@@ -1,4 +1,4 @@
-package dev.lkey.financility.navigation
+package dev.lkey.financility.navigation.util
 
 import kotlinx.serialization.Serializable
 

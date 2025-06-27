@@ -1,11 +1,11 @@
-package dev.lkey.financility.core.network
+package dev.lkey.financility.core.error
 
 import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.ServerResponseException
 import java.io.IOException
 
 /**
- * Класс, который определяет тип ошибки, чтобы пользователь понял, в чем проблема
+ * Класс, который конвертирует код ошибки в понятный для юзера вид
  */
 
 class ErrorHandler {

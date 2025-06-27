@@ -30,7 +30,7 @@ import dev.lkey.financility.core.network.FinancilityResult
 import dev.lkey.financility.feature_transactions.presentation.expenses.today.viewmodel.ExpensesAction
 import dev.lkey.financility.feature_transactions.presentation.expenses.today.viewmodel.ExpensesEvent
 import dev.lkey.financility.feature_transactions.presentation.expenses.today.viewmodel.ExpensesViewModel
-import dev.lkey.financility.navigation.Route
+import dev.lkey.financility.navigation.util.Route
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 

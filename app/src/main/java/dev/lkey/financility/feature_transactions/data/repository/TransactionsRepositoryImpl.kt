@@ -1,7 +1,7 @@
 package dev.lkey.financility.feature_transactions.data.repository
 
 import dev.lkey.financility.BuildConfig
-import dev.lkey.financility.core.network.ApiException
+import dev.lkey.financility.core.error.ApiException
 import dev.lkey.financility.core.network.ktorClient
 import dev.lkey.financility.core.network.safeCall
 import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel

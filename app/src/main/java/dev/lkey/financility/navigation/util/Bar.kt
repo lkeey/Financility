@@ -1,4 +1,4 @@
-package dev.lkey.financility.navigation
+package dev.lkey.financility.navigation.util
 
 import androidx.annotation.DrawableRes
 import dev.lkey.financility.R

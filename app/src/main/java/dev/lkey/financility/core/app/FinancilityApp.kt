@@ -1,4 +1,4 @@
-package dev.lkey.financility
+package dev.lkey.financility.core.app
 
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
@@ -15,7 +15,7 @@ import dev.lkey.financility.feature_transactions.presentation.expenses.history.u
 import dev.lkey.financility.feature_transactions.presentation.expenses.today.ui.ExpensesScreen
 import dev.lkey.financility.feature_transactions.presentation.income.history.ui.HistoryIncomeScreen
 import dev.lkey.financility.feature_transactions.presentation.income.today.ui.IncomeScreen
-import dev.lkey.financility.navigation.Route
+import dev.lkey.financility.navigation.util.Route
 import dev.lkey.financility.navigation.splash.SplashScreen
 import dev.lkey.financility.ui.theme.FinancilityTheme
 

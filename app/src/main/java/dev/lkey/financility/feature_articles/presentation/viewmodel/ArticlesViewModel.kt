@@ -2,7 +2,7 @@ package dev.lkey.financility.feature_articles.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.lkey.financility.core.network.ErrorHandler
+import dev.lkey.financility.core.error.ErrorHandler
 import dev.lkey.financility.core.network.FinancilityResult
 import dev.lkey.financility.feature_articles.domain.usecase.GetArticlesUseCase
 import kotlinx.coroutines.flow.MutableSharedFlow

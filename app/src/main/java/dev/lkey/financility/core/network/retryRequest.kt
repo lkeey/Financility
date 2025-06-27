@@ -4,7 +4,7 @@ import io.ktor.client.plugins.ResponseException
 import kotlinx.coroutines.delay
 
 /**
- * Перезапрашивает в случае 500-ой ошибки
+ * Выполняет перезапрос в случае 500-ой ошибки
  */
 
 suspend fun <T> retryRequest(
