@@ -13,11 +13,8 @@ class GetAccountUseCase (
     suspend operator fun invoke(): Result<List<AccountBriefModel>> {
 
         localRepository.getAccounts()?.let {
-            println("FAPP load acc $it")
             return Result.success(it)
         }
-
-        println("FAPP go to internet")
 
         return retryRequest {
             val accounts = apiRepository.getAccounts()

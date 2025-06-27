@@ -19,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import dev.lkey.financility.R
@@ -29,9 +30,6 @@ import dev.lkey.financility.core.network.FinancilityResult
 import dev.lkey.financility.feature_bill.presentation.BillAction
 import dev.lkey.financility.feature_bill.presentation.BillEvent
 import dev.lkey.financility.feature_bill.presentation.BillViewModel
-import dev.lkey.financility.feature_transactions.presentation.expenses.today.ExpensesAction
-import dev.lkey.financility.feature_transactions.presentation.expenses.today.ExpensesEvent
-import dev.lkey.financility.feature_transactions.presentation.expenses.today.ui.ExpensesView
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 
@@ -65,7 +63,7 @@ fun BillScreen (
         },
         topBar = {
             FinancilityTopBar(
-                title = "Мой счет",
+                title = stringResource(R.string.my_bill),
                 actions = {
                     IconButton(
                         onClick = { /* TODO */ }

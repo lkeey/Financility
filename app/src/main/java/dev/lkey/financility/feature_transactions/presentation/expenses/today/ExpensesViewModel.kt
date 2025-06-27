@@ -17,20 +17,19 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class ExpensesViewModel (
-    private val accountsUseCase : GetAccountUseCase
+    private val accountsUseCase : GetAccountUseCase,
+    private val transactionUseCase : GetTransactionsUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(ExpensesState())
     val state = _state.stateIn(
         viewModelScope,
-        SharingStarted.WhileSubscribed(5000L),
+        SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000L),
         _state.value
     )
 
     private val _action = MutableSharedFlow<ExpensesAction>()
     val action = _action.asSharedFlow()
-
-    private val transactionUseCase = GetTransactionsUseCase()
 
     fun onEvent(
         event: ExpensesEvent

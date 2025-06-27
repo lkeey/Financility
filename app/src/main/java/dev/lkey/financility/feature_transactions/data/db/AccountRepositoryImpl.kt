@@ -1,13 +1,14 @@
 package dev.lkey.financility.feature_transactions.data.db
 
 import android.content.Context
-import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
-import kotlinx.serialization.json.Json
 import androidx.core.content.edit
+import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
+import dev.lkey.financility.feature_transactions.domain.repository.AccountRepository
+import kotlinx.serialization.json.Json
 
 class AccountRepositoryImpl(
     context: Context
-) {
+) : AccountRepository {
     companion object {
         private const val PREF_ACCOUNTS_KEY = "cached_account"
     }
@@ -15,17 +16,17 @@ class AccountRepositoryImpl(
     private val preferences = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
     private val json = Json { ignoreUnknownKeys = true }
 
-    fun getAccounts() : List<AccountBriefModel>? {
+    override fun getAccounts() : List<AccountBriefModel>? {
         val cachedJson = preferences.getString(PREF_ACCOUNTS_KEY, null) ?: return null
 
         return try {
             json.decodeFromString(cachedJson)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             null
         }
     }
 
-    fun saveAccounts(
+    override fun saveAccounts(
         accounts: List<AccountBriefModel>
     ) {
         val encoded = json.encodeToString(accounts)
@@ -35,7 +36,7 @@ class AccountRepositoryImpl(
         }
     }
 
-    fun clearCache() {
+    override fun clearCache() {
         preferences.edit { remove(PREF_ACCOUNTS_KEY) }
     }
 

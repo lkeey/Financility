@@ -4,9 +4,9 @@ import dev.lkey.financility.core.network.retryRequest
 import dev.lkey.financility.feature_articles.data.repository.ArticleRepositoryImpl
 import dev.lkey.financility.feature_transactions.domain.model.CategoryModel
 
-class GetArticlesUseCase {
-
-    private val repository: ArticleRepositoryImpl = ArticleRepositoryImpl()
+class GetArticlesUseCase (
+    private val repository: ArticleRepositoryImpl
+) {
 
     suspend operator fun invoke(): Result<List<CategoryModel>> {
 

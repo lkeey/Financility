@@ -10,7 +10,9 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import dev.lkey.financility.R
 import dev.lkey.financility.components.field.FinancilityEditText
 import dev.lkey.financility.components.item.FinancilityListItem
 import dev.lkey.financility.feature_articles.presentation.ArticlesEvent
@@ -33,7 +35,7 @@ fun ArticlesView (
             )
     ){
         FinancilityEditText(
-            label = "Найти статью",
+            label = stringResource(R.string.find_article),
             previousData = "",
             onTrailingIconClick = {
                 onEvent(ArticlesEvent.OnSearchValueChanged(

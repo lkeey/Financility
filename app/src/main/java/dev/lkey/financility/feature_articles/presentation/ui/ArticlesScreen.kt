@@ -10,8 +10,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import dev.lkey.financility.R
 import dev.lkey.financility.components.nav.FinancilityBottomBar
 import dev.lkey.financility.components.item.FinancilityLoadingBar
 import dev.lkey.financility.components.item.FinancilitySnackBar
@@ -21,10 +23,11 @@ import dev.lkey.financility.feature_articles.presentation.ArticleAction
 import dev.lkey.financility.feature_articles.presentation.ArticlesEvent
 import dev.lkey.financility.feature_articles.presentation.ArticlesViewModel
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ArticlesScreen (
-    viewModel: ArticlesViewModel = ArticlesViewModel(),
+    viewModel: ArticlesViewModel = koinViewModel<ArticlesViewModel>(),
     navController: NavController
 ) {
 
@@ -51,7 +54,7 @@ fun ArticlesScreen (
         },
         topBar = {
             FinancilityTopBar(
-                title = "Мои статьи",
+                title = stringResource(R.string.my_articles),
                 actions = { }
             )
         },

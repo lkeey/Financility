@@ -6,6 +6,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import dev.lkey.financility.R
 import dev.lkey.financility.components.item.FinancilityListItem
 import dev.lkey.financility.core.converter.toEmoji
@@ -24,7 +25,7 @@ fun BillView (
         state.accounts.forEach {
             FinancilityListItem(
                 emoji = "\uD83D\uDCB0",
-                title = "Баланс",
+                title = stringResource(R.string.current_bill),
                 description = null,
                 backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
                 trailingText = "${it.balance} ${it.currency.toEmoji()}",
@@ -35,7 +36,7 @@ fun BillView (
             }
 
             FinancilityListItem(
-                title = "Валюта",
+                title = stringResource(R.string.finance),
                 description = null,
                 backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
                 trailingText = it.currency.toEmoji(),

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Financility</string>
+    <string name="my_articles">Мои статьи</string>
+    <string name="find_article">Найти статью</string>
+    <string name="my_bill">Мой счет</string>
+    <string name="current_bill">Баланс</string>
+    <string name="finance">Валюта</string>
 </resources>

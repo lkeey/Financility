@@ -5,9 +5,9 @@ import dev.lkey.financility.feature_transactions.data.repository.TransactionsRep
 import dev.lkey.financility.feature_transactions.domain.model.TransactionModel
 import dev.lkey.financility.feature_transactions.domain.repository.TransactionsRepository
 
-class GetTransactionsUseCase {
-
-    private val repository: TransactionsRepository = TransactionsRepositoryImpl()
+class GetTransactionsUseCase (
+    private val repository: TransactionsRepository
+) {
 
     suspend operator fun invoke(
         id : Int,
