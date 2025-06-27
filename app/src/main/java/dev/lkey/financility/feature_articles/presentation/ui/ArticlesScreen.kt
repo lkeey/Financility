@@ -19,9 +19,9 @@ import dev.lkey.financility.components.item.FinancilityLoadingBar
 import dev.lkey.financility.components.item.FinancilitySnackBar
 import dev.lkey.financility.components.nav.FinancilityTopBar
 import dev.lkey.financility.core.network.FinancilityResult
-import dev.lkey.financility.feature_articles.presentation.ArticleAction
-import dev.lkey.financility.feature_articles.presentation.ArticlesEvent
-import dev.lkey.financility.feature_articles.presentation.ArticlesViewModel
+import dev.lkey.financility.feature_articles.presentation.viewmodel.ArticleAction
+import dev.lkey.financility.feature_articles.presentation.viewmodel.ArticlesEvent
+import dev.lkey.financility.feature_articles.presentation.viewmodel.ArticlesViewModel
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 

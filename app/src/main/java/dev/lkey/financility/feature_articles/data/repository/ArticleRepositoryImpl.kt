@@ -11,6 +11,10 @@ import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
 
+/**
+ * Репозиторий для получения статей
+ * */
+
 class ArticleRepositoryImpl : ArticlesRepository {
 
     override suspend fun getArticles(): Result<List<CategoryModel>> {

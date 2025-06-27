@@ -1,7 +1,11 @@
-package dev.lkey.financility.feature_articles.presentation
+package dev.lkey.financility.feature_articles.presentation.viewmodel
 
 import dev.lkey.financility.core.network.FinancilityResult
 import dev.lkey.financility.feature_transactions.domain.model.CategoryModel
+
+/**
+ * Состояние экрана статей
+ * */
 
 data class ArticlesState (
     val articles: List<CategoryModel> = emptyList(),

@@ -15,8 +15,8 @@ import androidx.compose.ui.unit.dp
 import dev.lkey.financility.R
 import dev.lkey.financility.components.field.FinancilityEditText
 import dev.lkey.financility.components.item.FinancilityListItem
-import dev.lkey.financility.feature_articles.presentation.ArticlesEvent
-import dev.lkey.financility.feature_articles.presentation.ArticlesState
+import dev.lkey.financility.feature_articles.presentation.viewmodel.ArticlesEvent
+import dev.lkey.financility.feature_articles.presentation.viewmodel.ArticlesState
 
 @Composable
 fun ArticlesView (
