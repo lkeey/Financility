@@ -6,6 +6,13 @@ import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_transactions.domain.repository.AccountRepository
 import kotlinx.serialization.json.Json
 
+/**
+ * Репозиторий для локальной работы:
+ * - с получением счетов
+ * - с сохранением счетов
+ * - с удалением счетов
+ * */
+
 class AccountRepositoryImpl(
     context: Context
 ) : AccountRepository {

@@ -13,11 +13,11 @@ import dev.lkey.financility.feature_transactions.domain.repository.TransactionsR
 import dev.lkey.financility.feature_transactions.domain.usecase.GetAccountUseCase
 import dev.lkey.financility.feature_transactions.domain.usecase.GetTransactionsUseCase
 import dev.lkey.financility.feature_transactions.domain.usecase.PostTransactionUseCase
-import dev.lkey.financility.feature_transactions.presentation.expenses.create.CreateExpensesViewModel
-import dev.lkey.financility.feature_transactions.presentation.expenses.history.HistoryExpensesViewModel
-import dev.lkey.financility.feature_transactions.presentation.expenses.today.ExpensesViewModel
-import dev.lkey.financility.feature_transactions.presentation.income.history.HistoryIncomeViewModel
-import dev.lkey.financility.feature_transactions.presentation.income.today.IncomeViewModel
+import dev.lkey.financility.feature_transactions.presentation.expenses.create.viewmodel.CreateExpensesViewModel
+import dev.lkey.financility.feature_transactions.presentation.expenses.history.viewmodel.HistoryExpensesViewModel
+import dev.lkey.financility.feature_transactions.presentation.expenses.today.viewmodel.ExpensesViewModel
+import dev.lkey.financility.feature_transactions.presentation.income.history.viewmodel.HistoryIncomeViewModel
+import dev.lkey.financility.feature_transactions.presentation.income.today.viewmodel.IncomeViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.viewModel

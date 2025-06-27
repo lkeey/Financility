@@ -15,6 +15,13 @@ import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
 
+/**
+ * Репозиторий, который выолняет функции
+ * - получения транзакций
+ * - получения счетов
+ * - добавления транзакции
+ * */
+
 class TransactionsRepositoryImpl : TransactionsRepository {
 
     override suspend fun getTransactions(

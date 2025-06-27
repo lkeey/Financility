@@ -10,7 +10,7 @@ import dev.lkey.financility.R
 import dev.lkey.financility.components.item.FinancilityListItem
 import dev.lkey.financility.core.converter.toEmoji
 import dev.lkey.financility.core.converter.toFormat
-import dev.lkey.financility.feature_transactions.presentation.income.today.IncomeState
+import dev.lkey.financility.feature_transactions.presentation.income.today.viewmodel.IncomeState
 
 @Composable
 fun IncomeView (

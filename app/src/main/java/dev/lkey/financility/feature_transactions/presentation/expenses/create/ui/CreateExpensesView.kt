@@ -17,8 +17,8 @@ import dev.lkey.financility.components.field.FinancilityEditText
 import dev.lkey.financility.components.item.FinancilityListItem
 import dev.lkey.financility.components.field.FinancilityNumTextField
 import dev.lkey.financility.components.field.FinancilityTimePicker
-import dev.lkey.financility.feature_transactions.presentation.expenses.create.CreateExpensesEvent
-import dev.lkey.financility.feature_transactions.presentation.expenses.create.CreateExpensesState
+import dev.lkey.financility.feature_transactions.presentation.expenses.create.viewmodel.CreateExpensesEvent
+import dev.lkey.financility.feature_transactions.presentation.expenses.create.viewmodel.CreateExpensesState
 
 @Composable
 fun CreateExpensesView (

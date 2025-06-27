@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_transactions.presentation.expenses.today
+package dev.lkey.financility.feature_transactions.presentation.income.history.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,32 +13,54 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
-class ExpensesViewModel (
+/**
+ * VM экрана истории доходов
+ * */
+
+class HistoryIncomeViewModel (
     private val accountsUseCase : GetAccountUseCase,
     private val transactionUseCase : GetTransactionsUseCase
+
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(ExpensesState())
+    private val _state = MutableStateFlow(HistoryIncomeState())
     val state = _state.stateIn(
         viewModelScope,
-        SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000L),
+        SharingStarted.WhileSubscribed(5000L),
         _state.value
     )
 
-    private val _action = MutableSharedFlow<ExpensesAction>()
+    private val _action = MutableSharedFlow<HistoryIncomeAction>()
     val action = _action.asSharedFlow()
 
     fun onEvent(
-        event: ExpensesEvent
+        event: HistoryIncomeEvent
     ) {
         when (event) {
-            is ExpensesEvent.OnLoadTodayExpenses -> {
+            is HistoryIncomeEvent.OnLoadIncomes -> {
                 loadData()
             }
+
+            is HistoryIncomeEvent.OnChangedEndDate -> {
+                _state.update {
+                    it.copy(
+                        endDate = event.end
+                    )
+                }
+                loadExpenses(state.value.accounts[0].id)
+            }
+
+            is HistoryIncomeEvent.OnChangedStartDate -> {
+                _state.update {
+                    it.copy(
+                        startDate = event.start
+                    )
+                }
+                loadExpenses(state.value.accounts[0].id)
+            }
         }
+
     }
 
     private fun loadData() {
@@ -48,7 +70,7 @@ class ExpensesViewModel (
     }
 
     private fun loadExpenses(
-        id : Int
+        id: Int
     ) {
         viewModelScope.launch {
             _state.update {
@@ -57,12 +79,10 @@ class ExpensesViewModel (
                 )
             }
 
-            println("FAPP load acc 3 ${state.value.accounts}")
-
             val result = transactionUseCase.invoke(
                 id = id,
-                startDate = LocalDate.now().format(DateTimeFormatter.ISO_DATE),
-                endDate = LocalDate.now().format(DateTimeFormatter.ISO_DATE),
+                startDate = state.value.startDate,
+                endDate = state.value.endDate
             )
 
             result
@@ -70,18 +90,18 @@ class ExpensesViewModel (
                     _state.update {
                         it.copy(
                             status = FinancilityResult.Success,
-                            transactions = res.filter { !it.categoryModel.isIncome }
+                            transactions = res.filter { it.categoryModel.isIncome }
                         )
                     }
                 }
                 .onFailure { err ->
                     _state.update {
                         it.copy(
-                            status = FinancilityResult.Error
+                            status = FinancilityResult.Error,
                         )
                     }
 
-                    _action.emit(ExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    _action.emit(HistoryIncomeAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }
     }
@@ -92,13 +112,11 @@ class ExpensesViewModel (
         viewModelScope.launch {
             _state.update {
                 it.copy(
-                    status = FinancilityResult.Loading
+                    status = FinancilityResult.Loading,
                 )
             }
 
             val result = accountsUseCase.invoke()
-
-            println("FAPP load acc 2 $result")
 
             result
                 .onSuccess { res ->
@@ -108,26 +126,25 @@ class ExpensesViewModel (
                                 accounts = res
                             )
                         }
-                        println("FAPP load acc 2.1 ${_state.value.accounts}")
-                        onSuccess(res[0].id)
+                        onSuccess.invoke(res[0].id)
                     } else {
                         _state.update {
                             it.copy(
-                                status = FinancilityResult.Error
+                                status = FinancilityResult.Error,
                             )
                         }
 
-                        _action.emit(ExpensesAction.ShowSnackBar("Не удалось найти аккаунт"))
+                        _action.emit(HistoryIncomeAction.ShowSnackBar("Не удалось найти аккаунт"))
                     }
                 }
                 .onFailure { err ->
                     _state.update {
                         it.copy(
-                            status = FinancilityResult.Error
+                            status = FinancilityResult.Error,
                         )
                     }
 
-                    _action.emit(ExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    _action.emit(HistoryIncomeAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }
     }

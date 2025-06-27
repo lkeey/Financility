@@ -19,9 +19,9 @@ import dev.lkey.financility.R
 import dev.lkey.financility.components.nav.FinancilityBottomBar
 import dev.lkey.financility.components.item.FinancilitySnackBar
 import dev.lkey.financility.components.nav.FinancilityTopBar
-import dev.lkey.financility.feature_transactions.presentation.expenses.create.CreateExpensesEvent
-import dev.lkey.financility.feature_transactions.presentation.expenses.create.CreateExpensesViewModel
-import dev.lkey.financility.feature_transactions.presentation.expenses.today.ExpensesAction
+import dev.lkey.financility.feature_transactions.presentation.expenses.create.viewmodel.CreateExpensesEvent
+import dev.lkey.financility.feature_transactions.presentation.expenses.create.viewmodel.CreateExpensesViewModel
+import dev.lkey.financility.feature_transactions.presentation.expenses.today.viewmodel.ExpensesAction
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 

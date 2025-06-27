@@ -3,6 +3,9 @@ package dev.lkey.financility.navigation
 import androidx.annotation.DrawableRes
 import dev.lkey.financility.R
 
+/**
+ Все табы приложения
+ */
 sealed class Bar (
     val route: Route,
     val title: String,

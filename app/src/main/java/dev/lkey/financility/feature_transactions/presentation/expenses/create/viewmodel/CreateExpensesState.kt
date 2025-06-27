@@ -1,10 +1,14 @@
-package dev.lkey.financility.feature_transactions.presentation.expenses.create
+package dev.lkey.financility.feature_transactions.presentation.expenses.create.viewmodel
 
 import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_transactions.domain.model.CategoryModel
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+
+/**
+ * Состояние экрана добавления расходов
+ * */
 
 data class CreateExpensesState (
     val accounts : List<AccountBriefModel> = emptyList(),

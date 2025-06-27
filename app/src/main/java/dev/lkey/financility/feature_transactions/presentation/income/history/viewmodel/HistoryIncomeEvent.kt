@@ -1,4 +1,8 @@
-package dev.lkey.financility.feature_transactions.presentation.income.history
+package dev.lkey.financility.feature_transactions.presentation.income.history.viewmodel
+
+/**
+ * События экрана истории доходов
+ * */
 
 sealed class HistoryIncomeEvent {
     data object OnLoadIncomes : HistoryIncomeEvent()

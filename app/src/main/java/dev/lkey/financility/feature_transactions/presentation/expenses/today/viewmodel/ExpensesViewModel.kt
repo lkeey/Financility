@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_transactions.presentation.income.today
+package dev.lkey.financility.feature_transactions.presentation.expenses.today.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,26 +16,30 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class IncomeViewModel (
+/**
+ * VM экрана расходов
+ * */
+
+class ExpensesViewModel (
     private val accountsUseCase : GetAccountUseCase,
     private val transactionUseCase : GetTransactionsUseCase
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(IncomeState())
+    private val _state = MutableStateFlow(ExpensesState())
     val state = _state.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000L),
         _state.value
     )
 
-    private val _action = MutableSharedFlow<IncomeAction>()
+    private val _action = MutableSharedFlow<ExpensesAction>()
     val action = _action.asSharedFlow()
 
     fun onEvent(
-        event: IncomeEvent
+        event: ExpensesEvent
     ) {
         when (event) {
-            IncomeEvent.OnLoadTodayIncomes -> {
+            is ExpensesEvent.OnLoadTodayExpenses -> {
                 loadData()
             }
         }
@@ -50,13 +54,14 @@ class IncomeViewModel (
     private fun loadExpenses(
         id : Int
     ) {
-
         viewModelScope.launch {
             _state.update {
                 it.copy(
                     status = FinancilityResult.Loading
                 )
             }
+
+            println("FAPP load acc 3 ${state.value.accounts}")
 
             val result = transactionUseCase.invoke(
                 id = id,
@@ -69,7 +74,7 @@ class IncomeViewModel (
                     _state.update {
                         it.copy(
                             status = FinancilityResult.Success,
-                            transactions = res.filter { it.categoryModel.isIncome }
+                            transactions = res.filter { !it.categoryModel.isIncome }
                         )
                     }
                 }
@@ -80,7 +85,7 @@ class IncomeViewModel (
                         )
                     }
 
-                    _action.emit(IncomeAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    _action.emit(ExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }
     }
@@ -97,6 +102,8 @@ class IncomeViewModel (
 
             val result = accountsUseCase.invoke()
 
+            println("FAPP load acc 2 $result")
+
             result
                 .onSuccess { res ->
                     if (res.isNotEmpty()) {
@@ -105,7 +112,8 @@ class IncomeViewModel (
                                 accounts = res
                             )
                         }
-                        onSuccess.invoke(res[0].id)
+                        println("FAPP load acc 2.1 ${_state.value.accounts}")
+                        onSuccess(res[0].id)
                     } else {
                         _state.update {
                             it.copy(
@@ -113,7 +121,7 @@ class IncomeViewModel (
                             )
                         }
 
-                        _action.emit(IncomeAction.ShowSnackBar("Не удалось найти аккаунт"))
+                        _action.emit(ExpensesAction.ShowSnackBar("Не удалось найти аккаунт"))
                     }
                 }
                 .onFailure { err ->
@@ -123,7 +131,7 @@ class IncomeViewModel (
                         )
                     }
 
-                    _action.emit(IncomeAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    _action.emit(ExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }
     }

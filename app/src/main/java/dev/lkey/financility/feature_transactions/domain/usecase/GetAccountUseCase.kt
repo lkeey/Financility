@@ -5,6 +5,10 @@ import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_transactions.data.db.AccountRepositoryImpl
 import dev.lkey.financility.feature_transactions.domain.repository.TransactionsRepository
 
+/**
+ * Use Case для получения счетов пользователя
+ * */
+
 class GetAccountUseCase (
     val localRepository: AccountRepositoryImpl,
     val apiRepository: TransactionsRepository

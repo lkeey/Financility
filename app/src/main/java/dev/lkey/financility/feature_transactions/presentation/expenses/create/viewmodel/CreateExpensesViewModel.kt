@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_transactions.presentation.expenses.create
+package dev.lkey.financility.feature_transactions.presentation.expenses.create.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,7 +8,6 @@ import dev.lkey.financility.feature_articles.domain.usecase.GetArticlesUseCase
 import dev.lkey.financility.feature_transactions.data.dto.TransactionDto
 import dev.lkey.financility.feature_transactions.domain.usecase.GetAccountUseCase
 import dev.lkey.financility.feature_transactions.domain.usecase.PostTransactionUseCase
-import dev.lkey.financility.feature_transactions.presentation.expenses.today.ExpensesAction
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -17,11 +16,16 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+/**
+ * VM экрана добавления расходов
+ * */
+
 class CreateExpensesViewModel (
     private val accountUseCase : GetAccountUseCase,
     private val articlesUseCase : GetArticlesUseCase,
     private val createTransactionUseCase : PostTransactionUseCase
 ) : ViewModel() {
+
     private val _state = MutableStateFlow(CreateExpensesState())
     val state = _state.stateIn(
         viewModelScope,
@@ -29,7 +33,7 @@ class CreateExpensesViewModel (
         _state.value
     )
 
-    private val _action = MutableSharedFlow<ExpensesAction>()
+    private val _action = MutableSharedFlow<CreateExpensesAction>()
     val action = _action.asSharedFlow()
 
     fun onEvent(
@@ -111,7 +115,7 @@ class CreateExpensesViewModel (
                         )
                     }
 
-                    _action.emit(ExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    _action.emit(CreateExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
 
         }
@@ -139,7 +143,7 @@ class CreateExpensesViewModel (
                         )
                     }
 
-                    _action.emit(ExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    _action.emit(CreateExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }
     }
@@ -167,7 +171,7 @@ class CreateExpensesViewModel (
                             )
                         }
 
-                        _action.emit(ExpensesAction.ShowSnackBar("Расход был добавлен"))
+                        _action.emit(CreateExpensesAction.ShowSnackBar("Расход был добавлен"))
                     }
                     .onFailure { err ->
                         _state.update {
@@ -176,11 +180,11 @@ class CreateExpensesViewModel (
                             )
                         }
 
-                        _action.emit(ExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                        _action.emit(CreateExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
                     }
 
             } catch (e : Exception) {
-                _action.emit(ExpensesAction.ShowSnackBar(ErrorHandler().handleException(e)))
+                _action.emit(CreateExpensesAction.ShowSnackBar(ErrorHandler().handleException(e)))
             }
 
         }

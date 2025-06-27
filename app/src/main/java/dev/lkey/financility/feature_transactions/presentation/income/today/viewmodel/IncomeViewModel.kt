@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_transactions.presentation.income.history
+package dev.lkey.financility.feature_transactions.presentation.income.today.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,50 +13,36 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
-class HistoryIncomeViewModel (
+/**
+ * VM экрана доходов
+ * */
+
+class IncomeViewModel (
     private val accountsUseCase : GetAccountUseCase,
     private val transactionUseCase : GetTransactionsUseCase
-
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(HistoryIncomeState())
+    private val _state = MutableStateFlow(IncomeState())
     val state = _state.stateIn(
         viewModelScope,
-        SharingStarted.WhileSubscribed(5000L),
+        SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000L),
         _state.value
     )
 
-    private val _action = MutableSharedFlow<HistoryIncomeAction>()
+    private val _action = MutableSharedFlow<IncomeAction>()
     val action = _action.asSharedFlow()
 
     fun onEvent(
-        event: HistoryIncomeEvent
+        event: IncomeEvent
     ) {
         when (event) {
-            is HistoryIncomeEvent.OnLoadIncomes -> {
+            IncomeEvent.OnLoadTodayIncomes -> {
                 loadData()
             }
-
-            is HistoryIncomeEvent.OnChangedEndDate -> {
-                _state.update {
-                    it.copy(
-                        endDate = event.end
-                    )
-                }
-                loadExpenses(state.value.accounts[0].id)
-            }
-
-            is HistoryIncomeEvent.OnChangedStartDate -> {
-                _state.update {
-                    it.copy(
-                        startDate = event.start
-                    )
-                }
-                loadExpenses(state.value.accounts[0].id)
-            }
         }
-
     }
 
     private fun loadData() {
@@ -66,8 +52,9 @@ class HistoryIncomeViewModel (
     }
 
     private fun loadExpenses(
-        id: Int
+        id : Int
     ) {
+
         viewModelScope.launch {
             _state.update {
                 it.copy(
@@ -77,8 +64,8 @@ class HistoryIncomeViewModel (
 
             val result = transactionUseCase.invoke(
                 id = id,
-                startDate = state.value.startDate,
-                endDate = state.value.endDate
+                startDate = LocalDate.now().format(DateTimeFormatter.ISO_DATE),
+                endDate = LocalDate.now().format(DateTimeFormatter.ISO_DATE),
             )
 
             result
@@ -93,11 +80,11 @@ class HistoryIncomeViewModel (
                 .onFailure { err ->
                     _state.update {
                         it.copy(
-                            status = FinancilityResult.Error,
+                            status = FinancilityResult.Error
                         )
                     }
 
-                    _action.emit(HistoryIncomeAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    _action.emit(IncomeAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }
     }
@@ -108,7 +95,7 @@ class HistoryIncomeViewModel (
         viewModelScope.launch {
             _state.update {
                 it.copy(
-                    status = FinancilityResult.Loading,
+                    status = FinancilityResult.Loading
                 )
             }
 
@@ -126,21 +113,21 @@ class HistoryIncomeViewModel (
                     } else {
                         _state.update {
                             it.copy(
-                                status = FinancilityResult.Error,
+                                status = FinancilityResult.Error
                             )
                         }
 
-                        _action.emit(HistoryIncomeAction.ShowSnackBar("Не удалось найти аккаунт"))
+                        _action.emit(IncomeAction.ShowSnackBar("Не удалось найти аккаунт"))
                     }
                 }
                 .onFailure { err ->
                     _state.update {
                         it.copy(
-                            status = FinancilityResult.Error,
+                            status = FinancilityResult.Error
                         )
                     }
 
-                    _action.emit(HistoryIncomeAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    _action.emit(IncomeAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }
     }

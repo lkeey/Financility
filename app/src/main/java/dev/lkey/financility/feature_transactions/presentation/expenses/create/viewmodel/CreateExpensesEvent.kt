@@ -1,6 +1,10 @@
-package dev.lkey.financility.feature_transactions.presentation.expenses.create
+package dev.lkey.financility.feature_transactions.presentation.expenses.create.viewmodel
 
 import dev.lkey.financility.feature_transactions.domain.model.CategoryModel
+
+/**
+ * События экрана добавления расходов
+ * */
 
 sealed class CreateExpensesEvent {
     data class OnChoseArticle(val article: CategoryModel) : CreateExpensesEvent()

@@ -5,6 +5,10 @@ import dev.lkey.financility.feature_transactions.data.dto.TransactionDto
 import dev.lkey.financility.feature_transactions.data.repository.TransactionsRepositoryImpl
 import dev.lkey.financility.feature_transactions.domain.repository.TransactionsRepository
 
+/**
+ * Use Case для добавления транзакций
+ * */
+
 class PostTransactionUseCase (
     private val repository: TransactionsRepository
 ) {

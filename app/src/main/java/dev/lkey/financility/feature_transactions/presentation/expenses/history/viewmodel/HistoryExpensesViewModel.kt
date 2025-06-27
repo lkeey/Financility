@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_transactions.presentation.expenses.history
+package dev.lkey.financility.feature_transactions.presentation.expenses.history.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,6 +13,10 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+
+/**
+ * VM экрана истории расходов
+ * */
 
 class HistoryExpensesViewModel (
     private val accountsUseCase : GetAccountUseCase,

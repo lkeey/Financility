@@ -13,8 +13,8 @@ import dev.lkey.financility.components.field.FinancilityDayPicker
 import dev.lkey.financility.components.item.FinancilityListItem
 import dev.lkey.financility.core.converter.toEmoji
 import dev.lkey.financility.core.converter.toFormat
-import dev.lkey.financility.feature_transactions.presentation.expenses.history.HistoryExpensesEvent
-import dev.lkey.financility.feature_transactions.presentation.expenses.history.HistoryExpensesState
+import dev.lkey.financility.feature_transactions.presentation.expenses.history.viewmodel.HistoryExpensesEvent
+import dev.lkey.financility.feature_transactions.presentation.expenses.history.viewmodel.HistoryExpensesState
 
 @Composable
 fun HistoryExpensesView (

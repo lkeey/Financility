@@ -5,6 +5,10 @@ import dev.lkey.financility.feature_transactions.data.repository.TransactionsRep
 import dev.lkey.financility.feature_transactions.domain.model.TransactionModel
 import dev.lkey.financility.feature_transactions.domain.repository.TransactionsRepository
 
+/**
+ * Use Case для получения транзакций пользователя
+ * */
+
 class GetTransactionsUseCase (
     private val repository: TransactionsRepository
 ) {

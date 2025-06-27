@@ -1,8 +1,12 @@
-package dev.lkey.financility.feature_transactions.presentation.income.today
+package dev.lkey.financility.feature_transactions.presentation.income.today.viewmodel
 
 import dev.lkey.financility.core.network.FinancilityResult
 import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_transactions.domain.model.TransactionModel
+
+/**
+ * Состояние экрана доходов
+ * */
 
 data class IncomeState (
     val transactions: List<TransactionModel> = emptyList(),

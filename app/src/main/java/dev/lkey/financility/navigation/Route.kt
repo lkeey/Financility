@@ -2,6 +2,10 @@ package dev.lkey.financility.navigation
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Интерфейс для всех вложенных навигаций
+ * */
+
 sealed interface Route {
 
     @Serializable

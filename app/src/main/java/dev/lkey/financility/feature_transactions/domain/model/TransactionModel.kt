@@ -4,6 +4,10 @@ import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Модель транзакций
+ * */
+
 @Serializable
 data class TransactionModel (
     val id: Int,

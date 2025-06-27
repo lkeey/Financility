@@ -12,7 +12,7 @@ import dev.lkey.financility.R
 import dev.lkey.financility.components.item.FinancilityListItem
 import dev.lkey.financility.core.converter.toEmoji
 import dev.lkey.financility.core.converter.toFormat
-import dev.lkey.financility.feature_transactions.presentation.expenses.today.ExpensesState
+import dev.lkey.financility.feature_transactions.presentation.expenses.today.viewmodel.ExpensesState
 
 @Composable
 fun ExpensesView (

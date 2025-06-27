@@ -21,9 +21,9 @@ import dev.lkey.financility.components.item.FinancilitySnackBar
 import dev.lkey.financility.components.nav.FinancilityBottomBar
 import dev.lkey.financility.components.nav.FinancilityTopBar
 import dev.lkey.financility.core.network.FinancilityResult
-import dev.lkey.financility.feature_transactions.presentation.expenses.history.HistoryExpensesAction
-import dev.lkey.financility.feature_transactions.presentation.expenses.history.HistoryExpensesEvent
-import dev.lkey.financility.feature_transactions.presentation.expenses.history.HistoryExpensesViewModel
+import dev.lkey.financility.feature_transactions.presentation.expenses.history.viewmodel.HistoryExpensesAction
+import dev.lkey.financility.feature_transactions.presentation.expenses.history.viewmodel.HistoryExpensesEvent
+import dev.lkey.financility.feature_transactions.presentation.expenses.history.viewmodel.HistoryExpensesViewModel
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 
