@@ -10,8 +10,7 @@ import androidx.compose.ui.res.stringResource
 import dev.lkey.financility.R
 import dev.lkey.financility.components.item.FinancilityListItem
 import dev.lkey.financility.core.converter.toEmoji
-import dev.lkey.financility.core.converter.toFormat
-import dev.lkey.financility.feature_bill.presentation.BillState
+import dev.lkey.financility.feature_bill.presentation.viewmodel.BillState
 
 @Composable
 fun BillView (

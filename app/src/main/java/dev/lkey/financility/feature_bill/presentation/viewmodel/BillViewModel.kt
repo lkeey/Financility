@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_bill.presentation
+package dev.lkey.financility.feature_bill.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,6 +12,10 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+
+/**
+ * VM для экрана счетов
+ * */
 
 class BillViewModel (
     private val billUseCase : GetBillInfoUseCase

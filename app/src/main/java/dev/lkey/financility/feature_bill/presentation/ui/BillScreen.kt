@@ -27,9 +27,9 @@ import dev.lkey.financility.components.item.FinancilityLoadingBar
 import dev.lkey.financility.components.nav.FinancilityBottomBar
 import dev.lkey.financility.components.nav.FinancilityTopBar
 import dev.lkey.financility.core.network.FinancilityResult
-import dev.lkey.financility.feature_bill.presentation.BillAction
-import dev.lkey.financility.feature_bill.presentation.BillEvent
-import dev.lkey.financility.feature_bill.presentation.BillViewModel
+import dev.lkey.financility.feature_bill.presentation.viewmodel.BillAction
+import dev.lkey.financility.feature_bill.presentation.viewmodel.BillEvent
+import dev.lkey.financility.feature_bill.presentation.viewmodel.BillViewModel
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 

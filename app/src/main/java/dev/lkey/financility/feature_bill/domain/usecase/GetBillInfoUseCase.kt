@@ -4,6 +4,10 @@ import dev.lkey.financility.core.network.retryRequest
 import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_bill.domain.repository.GetBillInfoRepository
 
+/**
+ * Use Case получения счетов
+ * */
+
 class GetBillInfoUseCase (
     val apiRepository: GetBillInfoRepository
 ) {

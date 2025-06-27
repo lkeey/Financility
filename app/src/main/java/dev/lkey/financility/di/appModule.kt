@@ -6,7 +6,7 @@ import dev.lkey.financility.feature_articles.presentation.ArticlesViewModel
 import dev.lkey.financility.feature_bill.data.repository.GetBillInfoRepositoryImpl
 import dev.lkey.financility.feature_bill.domain.repository.GetBillInfoRepository
 import dev.lkey.financility.feature_bill.domain.usecase.GetBillInfoUseCase
-import dev.lkey.financility.feature_bill.presentation.BillViewModel
+import dev.lkey.financility.feature_bill.presentation.viewmodel.BillViewModel
 import dev.lkey.financility.feature_transactions.data.db.AccountRepositoryImpl
 import dev.lkey.financility.feature_transactions.data.repository.TransactionsRepositoryImpl
 import dev.lkey.financility.feature_transactions.domain.repository.TransactionsRepository
