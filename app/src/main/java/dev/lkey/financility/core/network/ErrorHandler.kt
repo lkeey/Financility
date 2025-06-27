@@ -4,6 +4,10 @@ import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.ServerResponseException
 import java.io.IOException
 
+/**
+ * Класс, который определяет тип ошибки, чтобы пользователь понял, в чем проблема
+ */
+
 class ErrorHandler {
     fun handleException(e: Throwable): String {
         return when (e) {

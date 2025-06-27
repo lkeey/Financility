@@ -3,6 +3,10 @@ package dev.lkey.financility.core.network
 import io.ktor.client.plugins.ResponseException
 import kotlinx.coroutines.delay
 
+/**
+ * Перезапрашивает в случае 500-ой ошибки
+ */
+
 suspend fun <T> retryRequest(
     maxRetries: Int = 3,
     initialDelay: Long = 2000,

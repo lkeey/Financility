@@ -23,6 +23,10 @@ import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
+/**
+ * Зависимости, инициализируемые Koin-ом
+ * */
+
 val appModule = module {
 
 

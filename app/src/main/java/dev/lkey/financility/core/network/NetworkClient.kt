@@ -15,6 +15,10 @@ import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
+/**
+ * Объект Ktor - клиента
+ */
+
 val ktorClient = HttpClient(OkHttp) {
     install(ContentNegotiation) {
         json(Json {

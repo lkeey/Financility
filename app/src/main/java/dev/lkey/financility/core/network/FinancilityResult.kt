@@ -1,5 +1,9 @@
 package dev.lkey.financility.core.network
 
+/**
+ Используется для отображения состояния загрузки, успеха или ошибки при асинхронных действиях
+ */
+
 sealed class FinancilityResult {
     data object Loading : FinancilityResult()
     data object Success : FinancilityResult()
