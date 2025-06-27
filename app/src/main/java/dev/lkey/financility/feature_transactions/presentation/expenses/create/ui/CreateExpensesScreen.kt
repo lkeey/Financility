@@ -16,12 +16,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import dev.lkey.financility.R
-import dev.lkey.financility.components.nav.FinancilityBottomBar
 import dev.lkey.financility.components.item.FinancilitySnackBar
+import dev.lkey.financility.components.nav.FinancilityBottomBar
 import dev.lkey.financility.components.nav.FinancilityTopBar
+import dev.lkey.financility.feature_transactions.presentation.expenses.create.viewmodel.CreateExpensesAction
 import dev.lkey.financility.feature_transactions.presentation.expenses.create.viewmodel.CreateExpensesEvent
 import dev.lkey.financility.feature_transactions.presentation.expenses.create.viewmodel.CreateExpensesViewModel
-import dev.lkey.financility.feature_transactions.presentation.expenses.today.viewmodel.ExpensesAction
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 
@@ -38,7 +38,7 @@ fun CreateExpensesScreen (
 
         viewModel.action.collectLatest { action ->
             when (action) {
-                is ExpensesAction.ShowSnackBar -> {
+                is CreateExpensesAction.ShowSnackBar -> {
                     snackBarHostState.showSnackbar(action.message)
                 }
             }
