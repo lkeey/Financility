@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
@@ -17,9 +19,13 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.lkey.financility.R
 import dev.lkey.financility.components.item.FinancilityListItem
 import dev.lkey.financility.feature_bill.domain.model.CurrencyOption
 
@@ -45,6 +51,7 @@ fun FinancilityCurrencySheet (
                 title = currency.label,
                 emoji = currency.symbol,
                 backgroundEmojiColor = White,
+                backgroundColor = White,
                 onClick = {
                     onCurrencyClicked(currency)
                 }
@@ -61,12 +68,24 @@ fun FinancilityCurrencySheet (
                 .padding(vertical = 16.dp, horizontal = 16.dp)
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-//                Icon(Icons.Default.Close, contentDescription = "Отмена", tint = Color.White)
+                Icon(
+                    painter = painterResource(R.drawable.ic_cross),
+                    contentDescription = "Отмена",
+                    tint = White
+                )
 
-//                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(12.dp))
 
-                Text("Отмена", color = White, fontSize = 16.sp)
+                Text(
+                    text = "Отмена",
+                    fontWeight = FontWeight.W400,
+                    fontSize = 16.sp,
+                    lineHeight = 24.sp,
+                    letterSpacing = 0.5.sp,
+                    color = White
+                )
             }
+
         }
 
     }
