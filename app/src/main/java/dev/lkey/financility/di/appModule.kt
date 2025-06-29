@@ -3,8 +3,8 @@ package dev.lkey.financility.di
 import dev.lkey.financility.feature_articles.data.repository.ArticleRepositoryImpl
 import dev.lkey.financility.feature_articles.domain.usecase.GetArticlesUseCase
 import dev.lkey.financility.feature_articles.presentation.viewmodel.ArticlesViewModel
-import dev.lkey.financility.feature_bill.data.repository.GetBillInfoRepositoryImpl
-import dev.lkey.financility.feature_bill.domain.repository.GetBillInfoRepository
+import dev.lkey.financility.feature_bill.data.repository.BillRepositoryImpl
+import dev.lkey.financility.feature_bill.domain.repository.BillRepository
 import dev.lkey.financility.feature_bill.domain.usecase.GetBillInfoUseCase
 import dev.lkey.financility.feature_bill.presentation.viewmodel.BillViewModel
 import dev.lkey.financility.feature_transactions.data.db.AccountRepositoryImpl
@@ -40,7 +40,7 @@ val appModule = module {
     factory { PostTransactionUseCase(get()) }
     factory { GetAccountUseCase(get(), get()) }
 
-    single<GetBillInfoRepository> { GetBillInfoRepositoryImpl() }
+    single<BillRepository> { BillRepositoryImpl() }
     factory { GetBillInfoUseCase(get()) }
 
     viewModelOf(::ExpensesViewModel)
