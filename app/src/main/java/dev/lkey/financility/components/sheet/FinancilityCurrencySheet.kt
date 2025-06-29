@@ -68,7 +68,7 @@ fun FinancilityCurrencySheet (
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
-                    painter = painterResource(R.drawable.ic_cross),
+                    painter = painterResource(R.drawable.ic_cross_with_circle),
                     contentDescription = "Отмена",
                     tint = White
                 )

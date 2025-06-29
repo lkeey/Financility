@@ -5,6 +5,7 @@ import dev.lkey.financility.feature_bill.domain.repository.BillRepository
 import dev.lkey.financility.feature_bill.domain.usecase.GetBillInfoUseCase
 import dev.lkey.financility.feature_bill.domain.usecase.UpdateBillUseCase
 import dev.lkey.financility.feature_bill.presentation.current.viewmodel.BillViewModel
+import dev.lkey.financility.feature_bill.presentation.edit.viewmodel.EditBillViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
@@ -19,5 +20,6 @@ val billModule = module {
 
     // ViewModel
     viewModel { BillViewModel(get(), get()) }
+    viewModel { EditBillViewModel(get(), get()) }
 
 }

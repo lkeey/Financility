@@ -5,4 +5,5 @@
     <string name="my_bill">Мой счет</string>
     <string name="current_bill">Баланс</string>
     <string name="finance">Валюта</string>
+    <string name="comm">Комментарий</string>
 </resources>
