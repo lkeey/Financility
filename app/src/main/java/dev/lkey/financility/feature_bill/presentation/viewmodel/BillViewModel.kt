@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlin.collections.isNotEmpty
 
 /**
  * VM для экрана счетов
@@ -42,6 +41,16 @@ class BillViewModel (
         when (event) {
             is BillEvent.OnLoadBill -> {
                 loadData()
+            }
+
+            is BillEvent.OnChoseCurrency -> {
+                _state.update {
+                    it.copy(
+                        chosenCurrency = event.currency
+                    )
+                }
+
+                updateBillCurrency(chosenCurrency = event.currency.code)
             }
         }
     }
@@ -85,7 +94,9 @@ class BillViewModel (
         }
     }
 
-    private fun updateBillCurrency() {
+    private fun updateBillCurrency(
+        chosenCurrency : String
+    ) {
         viewModelScope.launch {
             _state.update {
                 it.copy(
@@ -98,7 +109,7 @@ class BillViewModel (
                 newBill = UpdateAccountDto(
                     name = state.value.accounts[0].name,
                     balance = state.value.accounts[0].balance,
-                    currency = state.value.chosenCurrency
+                    currency = chosenCurrency
                 )
             )
 
@@ -108,19 +119,20 @@ class BillViewModel (
                         accounts = listOf<AccountBriefModel>(res),
                         status = FinancilityResult.Success
                     )
-
                 }
-                }.onFailure { err ->
-                    _state.update {
-                        it.copy(
-                            status = FinancilityResult.Error
-                        )
-                    }
 
-                    _action.emit(BillAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                _action.emit(BillAction.ShowSnackBar("Валюта успешно обновлена"))
+
+            }.onFailure { err ->
+                _state.update {
+                    it.copy(
+                        status = FinancilityResult.Error
+                    )
                 }
+
+                _action.emit(BillAction.ShowSnackBar(ErrorHandler().handleException(err)))
+            }
 
         }
     }
-
 }

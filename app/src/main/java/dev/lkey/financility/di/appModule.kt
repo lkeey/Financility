@@ -45,13 +45,12 @@ val appModule = module {
     single<BillRepository> { BillRepositoryImpl() }
     factory { GetBillInfoUseCase(get()) }
 
-    viewModel { BillViewModel(get()) }
+    viewModel { BillViewModel(get(), get()) }
     viewModel { ExpensesViewModel(get(), get()) }
     viewModel { IncomeViewModel(get(), get()) }
     viewModel { ArticlesViewModel(get()) }
     viewModel { HistoryExpensesViewModel(get(), get()) }
     viewModel { HistoryIncomeViewModel(get(), get()) }
     viewModel { CreateExpensesViewModel(get(), get(), get()) }
-    viewModel { BillViewModel(get()) }
 
 }

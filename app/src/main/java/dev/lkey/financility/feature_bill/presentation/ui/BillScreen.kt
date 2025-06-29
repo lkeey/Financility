@@ -107,7 +107,9 @@ fun BillScreen (
             BillView(
                 modifier = Modifier.padding(padding),
                 state = state
-            )
+            ) {
+                viewModel.onEvent(it)
+            }
         }
 
     }

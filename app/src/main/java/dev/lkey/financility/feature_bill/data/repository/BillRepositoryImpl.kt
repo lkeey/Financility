@@ -9,6 +9,7 @@ import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_bill.domain.repository.BillRepository
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import io.ktor.client.request.put
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
@@ -21,6 +22,7 @@ class BillRepositoryImpl : BillRepository {
 
     override suspend fun getBillInfo(): Result<List<AccountBriefModel>> {
         return safeCall {
+
             val response: HttpResponse = ktorClient.get("${BuildConfig.BASE_URL}/accounts")
 
             if (response.status != HttpStatusCode.OK) {
@@ -36,7 +38,8 @@ class BillRepositoryImpl : BillRepository {
         newBill: UpdateAccountDto
     ): Result<AccountBriefModel> {
         return safeCall {
-            val response: HttpResponse = ktorClient.get("${BuildConfig.BASE_URL}/accounts/$id") {
+
+            val response: HttpResponse = ktorClient.put("${BuildConfig.BASE_URL}/accounts/$id") {
                 setBody(newBill)
             }
 
@@ -45,6 +48,7 @@ class BillRepositoryImpl : BillRepository {
             }
 
             response.body()
+
         }
     }
 

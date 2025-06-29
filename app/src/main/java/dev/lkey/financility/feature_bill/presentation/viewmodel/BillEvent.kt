@@ -1,5 +1,7 @@
 package dev.lkey.financility.feature_bill.presentation.viewmodel
 
+import dev.lkey.financility.feature_bill.domain.model.CurrencyOption
+
 /**
  * События экрана счетов
  * */
@@ -7,5 +9,5 @@ package dev.lkey.financility.feature_bill.presentation.viewmodel
 
 sealed class BillEvent {
     data object OnLoadBill : BillEvent()
-    data object OnChoseCurrency : BillEvent()
+    data class OnChoseCurrency(val currency: CurrencyOption) : BillEvent()
 }
