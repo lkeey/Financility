@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_bill.presentation.viewmodel
+package dev.lkey.financility.feature_bill.presentation.current.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -50,7 +50,12 @@ class BillViewModel (
                     )
                 }
 
-                updateBillCurrency(chosenCurrency = event.currency.code)
+                updateBill(accDto =  UpdateAccountDto(
+                    name = state.value.accounts[0].name,
+                    balance = state.value.accounts[0].balance,
+                    currency = event.currency.code
+                ))
+
             }
         }
     }
@@ -94,8 +99,8 @@ class BillViewModel (
         }
     }
 
-    private fun updateBillCurrency(
-        chosenCurrency : String
+    private fun updateBill(
+        accDto : UpdateAccountDto
     ) {
         viewModelScope.launch {
             _state.update {
@@ -106,11 +111,7 @@ class BillViewModel (
 
             val result = updateBillUseCase.invoke(
                 id = state.value.accounts[0].id,
-                newBill = UpdateAccountDto(
-                    name = state.value.accounts[0].name,
-                    balance = state.value.accounts[0].balance,
-                    currency = chosenCurrency
-                )
+                newBill = accDto
             )
 
             result.onSuccess { res ->
@@ -132,7 +133,7 @@ class BillViewModel (
 
                 _action.emit(BillAction.ShowSnackBar(ErrorHandler().handleException(err)))
             }
-
         }
     }
+
 }

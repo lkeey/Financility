@@ -4,7 +4,7 @@ import dev.lkey.financility.feature_bill.data.repository.BillRepositoryImpl
 import dev.lkey.financility.feature_bill.domain.repository.BillRepository
 import dev.lkey.financility.feature_bill.domain.usecase.GetBillInfoUseCase
 import dev.lkey.financility.feature_bill.domain.usecase.UpdateBillUseCase
-import dev.lkey.financility.feature_bill.presentation.viewmodel.BillViewModel
+import dev.lkey.financility.feature_bill.presentation.current.viewmodel.BillViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 

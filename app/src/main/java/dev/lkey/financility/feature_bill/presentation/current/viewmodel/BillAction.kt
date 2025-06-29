@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_bill.presentation.viewmodel
+package dev.lkey.financility.feature_bill.presentation.current.viewmodel
 
 /**
  * Действия со стороны VM на экран счетов

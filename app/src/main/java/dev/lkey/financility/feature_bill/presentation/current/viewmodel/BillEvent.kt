@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_bill.presentation.viewmodel
+package dev.lkey.financility.feature_bill.presentation.current.viewmodel
 
 import dev.lkey.financility.feature_bill.domain.model.CurrencyOption
 
