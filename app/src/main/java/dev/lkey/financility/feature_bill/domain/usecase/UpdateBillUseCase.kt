@@ -11,8 +11,8 @@ import dev.lkey.financility.feature_bill.domain.repository.BillRepository
 
 class UpdateBillUseCase (
     val apiRepository: BillRepository
-
 ) {
+
     suspend operator fun invoke(
         id: Int,
         newBill: UpdateAccountDto
@@ -26,6 +26,6 @@ class UpdateBillUseCase (
 
             account
         }
-
     }
+
 }

@@ -10,4 +10,5 @@ import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 data class BillState (
     val accounts : List<AccountBriefModel> = emptyList(),
     val status: FinancilityResult = FinancilityResult.Loading,
+    val chosenCurrency: String = "",
 )

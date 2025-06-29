@@ -6,6 +6,7 @@ import dev.lkey.financility.feature_articles.presentation.viewmodel.ArticlesView
 import dev.lkey.financility.feature_bill.data.repository.BillRepositoryImpl
 import dev.lkey.financility.feature_bill.domain.repository.BillRepository
 import dev.lkey.financility.feature_bill.domain.usecase.GetBillInfoUseCase
+import dev.lkey.financility.feature_bill.domain.usecase.UpdateBillUseCase
 import dev.lkey.financility.feature_bill.presentation.viewmodel.BillViewModel
 import dev.lkey.financility.feature_transactions.data.db.AccountRepositoryImpl
 import dev.lkey.financility.feature_transactions.data.repository.TransactionsRepositoryImpl
@@ -19,7 +20,6 @@ import dev.lkey.financility.feature_transactions.presentation.expenses.today.vie
 import dev.lkey.financility.feature_transactions.presentation.income.history.viewmodel.HistoryIncomeViewModel
 import dev.lkey.financility.feature_transactions.presentation.income.today.viewmodel.IncomeViewModel
 import org.koin.android.ext.koin.androidContext
-import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
@@ -38,20 +38,20 @@ val appModule = module {
 
     factory { GetTransactionsUseCase(get()) }
     factory { PostTransactionUseCase(get()) }
+
     factory { GetAccountUseCase(get(), get()) }
+    factory { UpdateBillUseCase(get()) }
 
     single<BillRepository> { BillRepositoryImpl() }
     factory { GetBillInfoUseCase(get()) }
 
-    viewModelOf(::ExpensesViewModel)
-    viewModelOf(::IncomeViewModel)
-    viewModelOf(::ArticlesViewModel)
-    viewModelOf(::HistoryExpensesViewModel)
-    viewModelOf(::HistoryIncomeViewModel)
-    viewModelOf(::CreateExpensesViewModel)
-    viewModelOf(::BillViewModel)
-
     viewModel { BillViewModel(get()) }
-
+    viewModel { ExpensesViewModel(get(), get()) }
+    viewModel { IncomeViewModel(get(), get()) }
+    viewModel { ArticlesViewModel(get()) }
+    viewModel { HistoryExpensesViewModel(get(), get()) }
+    viewModel { HistoryIncomeViewModel(get(), get()) }
+    viewModel { CreateExpensesViewModel(get(), get(), get()) }
+    viewModel { BillViewModel(get()) }
 
 }
