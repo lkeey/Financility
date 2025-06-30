@@ -28,23 +28,6 @@ fun BillView (
     onEvent: (BillEvent) -> Unit
 ) {
 
-    var isSheetOpen by remember { mutableStateOf(false) }
-
-    if (isSheetOpen) {
-        FinancilityCurrencySheet(
-            currencies = listOf(
-                CurrencyOption("RUB", "₽", "Российский рубль ₽"),
-                CurrencyOption("USD", "$", "Американский доллар $"),
-                CurrencyOption("EUR", "€", "Евро")
-            ),
-            onCurrencyClicked = {
-                onEvent(BillEvent.OnChoseCurrency(it))
-            },
-        ) {
-            isSheetOpen = false
-        }
-    }
-
     Column (
         modifier = modifier
             .fillMaxSize()
@@ -70,7 +53,7 @@ fun BillView (
                 trailingIcon = R.drawable.ic_light_arrow,
                 isShowDivider = false,
             ) {
-                isSheetOpen = true
+                /* TODO */
             }
         }
     }

@@ -2,6 +2,7 @@ package dev.lkey.financility.feature_bill.presentation.edit.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.lkey.financility.core.converter.toCurrency
 import dev.lkey.financility.core.error.ErrorHandler
 import dev.lkey.financility.core.network.FinancilityResult
 import dev.lkey.financility.feature_bill.data.model.UpdateAccountDto
@@ -18,6 +19,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.code
 
 /**
  * VM для редактирование счетов
@@ -56,10 +58,26 @@ class EditBillViewModel (
                 updateBill(
                     accDto = UpdateAccountDto(
                         name = state.value.enteredName,
-                        balance = state.value.accounts[0].balance,
-                        currency = state.value.accounts[0].currency,
+                        balance = state.value.enteredAmount,
+                        currency = state.value.chosenCurrency.code,
                     )
                 )
+            }
+
+            is EditBillEvent.OnChoseCurrency -> {
+                _state.update {
+                    it.copy(
+                        chosenCurrency = event.currency
+                    )
+                }
+            }
+
+            is EditBillEvent.OnEnteredAmount -> {
+                _state.update {
+                    it.copy(
+                        enteredAmount = event.amount
+                    )
+                }
             }
         }
 
@@ -80,7 +98,10 @@ class EditBillViewModel (
                     _state.update {
                         it.copy(
                             accounts = res,
-                            status = FinancilityResult.Success
+                            status = FinancilityResult.Success,
+                            enteredName = res[0].name,
+                            chosenCurrency = res[0].currency.toCurrency(),
+                            enteredAmount = res[0].balance
                         )
                     }
                 } else {

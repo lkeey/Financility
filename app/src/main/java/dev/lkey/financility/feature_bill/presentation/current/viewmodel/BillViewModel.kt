@@ -43,20 +43,6 @@ class BillViewModel (
                 loadData()
             }
 
-            is BillEvent.OnChoseCurrency -> {
-                _state.update {
-                    it.copy(
-                        chosenCurrency = event.currency
-                    )
-                }
-
-                updateBill(accDto =  UpdateAccountDto(
-                    name = state.value.accounts[0].name,
-                    balance = state.value.accounts[0].balance,
-                    currency = event.currency.code
-                ))
-
-            }
         }
     }
 

@@ -53,6 +53,7 @@ fun FinancilityCurrencySheet (
                 backgroundColor = White,
                 onClick = {
                     onCurrencyClicked(currency)
+                    onCloseSheet.invoke()
                 }
             )
         }
@@ -88,5 +89,4 @@ fun FinancilityCurrencySheet (
         }
 
     }
-
 }

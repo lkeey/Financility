@@ -1,5 +1,6 @@
 package dev.lkey.financility.feature_bill.presentation.edit.viewmodel
 
+import dev.lkey.financility.feature_bill.domain.model.CurrencyOption
 import dev.lkey.financility.feature_bill.presentation.current.viewmodel.BillEvent
 
 /**
@@ -8,6 +9,8 @@ import dev.lkey.financility.feature_bill.presentation.current.viewmodel.BillEven
 
 sealed class EditBillEvent {
     data object OnLoadBill : EditBillEvent()
+    data class OnChoseCurrency(val currency: CurrencyOption) : EditBillEvent()
     data class OnEnteredBillName(val name: String) : EditBillEvent()
+    data class OnEnteredAmount(val amount: String) : EditBillEvent()
     data object OnSaveBill : EditBillEvent()
 }

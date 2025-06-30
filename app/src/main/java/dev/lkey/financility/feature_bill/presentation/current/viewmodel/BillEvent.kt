@@ -9,5 +9,4 @@ import dev.lkey.financility.feature_bill.domain.model.CurrencyOption
 
 sealed class BillEvent {
     data object OnLoadBill : BillEvent()
-    data class OnChoseCurrency(val currency: CurrencyOption) : BillEvent()
 }
