@@ -28,7 +28,9 @@ fun FinancilityEditText (
     previousData: String,
     label: String,
     isShowTrailingIcon: Boolean = true,
+    isShowLeadingIcon: Boolean = false,
     backgroundColor: Color = MaterialTheme.colorScheme.primaryContainer,
+    leadingIcon: Int = R.drawable.ic_account,
     onTrailingIconClick: (String) -> Unit = { },
     onTextChanged: (String) -> Unit,
 ) {
@@ -57,10 +59,8 @@ fun FinancilityEditText (
         shape = RectangleShape,
         singleLine = true,
         modifier = Modifier
-//                .fillMaxSize()
             .fillMaxWidth()
-            .height(56.dp)
-            /*.padding(4.dp)*/,
+            .height(56.dp),
         colors = TextFieldDefaults.colors(
             focusedTextColor = MaterialTheme.colorScheme.surfaceContainer,
             unfocusedTextColor = MaterialTheme.colorScheme.surfaceContainer,
@@ -79,8 +79,15 @@ fun FinancilityEditText (
                         }
                 )
             }
+        },
+        leadingIcon = {
+            if (isShowLeadingIcon) {
+                Icon(
+                    painter = painterResource(id = leadingIcon),
+                    contentDescription = "Leading Icon",
+                    tint = MaterialTheme.colorScheme.inverseSurface
+                )
+            }
         }
     )
-
-
 }

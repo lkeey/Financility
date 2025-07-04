@@ -35,13 +35,13 @@ fun ArticlesView (
             )
     ){
         FinancilityEditText(
-            label = stringResource(R.string.find_article),
             previousData = "",
+            label = stringResource(R.string.find_article),
             onTrailingIconClick = {
                 onEvent(ArticlesEvent.OnSearchValueChanged(
                     searchValue = it
                 ))
-            }
+            },
         ) {
             /* TODO */
         }

@@ -39,6 +39,9 @@ sealed interface Route {
     data object CurrentBill : Route
 
     @Serializable
+    data object EditBill : Route
+
+    @Serializable
     data object Articles : Route
 
     @Serializable

@@ -8,6 +8,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.lkey.financility.R
 import dev.lkey.financility.components.btn.FinancilityButton
@@ -78,8 +79,8 @@ fun CreateExpensesView (
         }
 
         FinancilityEditText(
-            previousData = "",
-            label = "Комментарий",
+            previousData = state.comment ?: "",
+            label = stringResource(R.string.comm),
             isShowTrailingIcon = false,
             backgroundColor = MaterialTheme.colorScheme.onSurface
         ) {
@@ -92,7 +93,6 @@ fun CreateExpensesView (
                 .fillMaxWidth(),
             color = MaterialTheme.colorScheme.surfaceDim,
         )
-
 
         FinancilityButton(
             text = "Добавить расход",

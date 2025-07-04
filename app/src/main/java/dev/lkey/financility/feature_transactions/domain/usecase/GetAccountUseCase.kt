@@ -16,9 +16,13 @@ class GetAccountUseCase (
 
     suspend operator fun invoke(): Result<List<AccountBriefModel>> {
 
-        localRepository.getAccounts()?.let {
-            return Result.success(it)
-        }
+        /**
+         * нельзя использоваться, так как счет в таком случае будет всегда браться из кеша
+        * */
+
+//        localRepository.getAccounts()?.let {
+//            return Result.success(it)
+//        }
 
         return retryRequest {
             val accounts = apiRepository.getAccounts()
