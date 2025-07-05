@@ -13,6 +13,11 @@ import dev.lkey.financility.feature_articles.presentation.ui.ArticlesScreen
 import dev.lkey.financility.feature_bill.presentation.current.ui.BillScreen
 import dev.lkey.financility.feature_bill.presentation.edit.ui.EditBillScreen
 import dev.lkey.financility.feature_settings.SettingsScreen
+import dev.lkey.financility.feature_transactions.presentation.expenses.create.ui.CreateExpensesScreen
+import dev.lkey.financility.feature_transactions.presentation.expenses.history.ui.HistoryExpensesScreen
+import dev.lkey.financility.feature_transactions.presentation.expenses.today.ui.ExpensesScreen
+import dev.lkey.financility.feature_transactions.presentation.income.history.ui.HistoryIncomeScreen
+import dev.lkey.financility.feature_transactions.presentation.income.today.ui.IncomeScreen
 import dev.lkey.financility.navigation.splash.SplashScreen
 import dev.lkey.financility.navigation.util.Route
 import dev.lkey.financility.ui.theme.FinancilityTheme
@@ -42,21 +47,24 @@ fun FinancilityApp(
                 startDestination = Route.TodayExpenses
             ) {
                 composable<Route.TodayExpenses> {
-//                    ExpensesScreen(
-//                        navController = navController
-//                    )
+                    ExpensesScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = viewModelFactory),
+                    )
                 }
 
                 composable<Route.HistoryExpenses> {
-//                    HistoryExpensesScreen(
-//                        navController = navController
-//                    )
+                    HistoryExpensesScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = viewModelFactory),
+                    )
                 }
 
                 composable<Route.CreateExpenses> {
-//                    CreateExpensesScreen(
-//                        navController = navController
-//                    )
+                    CreateExpensesScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = viewModelFactory),
+                    )
                 }
             }
 
@@ -64,15 +72,17 @@ fun FinancilityApp(
                 startDestination = Route.TodayIncome
             ) {
                 composable<Route.TodayIncome> {
-//                    IncomeScreen(
-//                        navController = navController
-//                    )
+                    IncomeScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = viewModelFactory),
+                    )
                 }
 
                 composable<Route.HistoryIncomes> {
-//                    HistoryIncomeScreen(
-//                        navController = navController
-//                    )
+                    HistoryIncomeScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = viewModelFactory),
+                    )
                 }
             }
 

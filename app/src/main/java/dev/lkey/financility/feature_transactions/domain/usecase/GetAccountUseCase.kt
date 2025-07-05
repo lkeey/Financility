@@ -2,15 +2,16 @@ package dev.lkey.financility.feature_transactions.domain.usecase
 
 import dev.lkey.financility.core.network.retryRequest
 import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
-import dev.lkey.financility.feature_transactions.data.db.AccountRepositoryImpl
 import dev.lkey.financility.feature_transactions.domain.repository.TransactionsRepository
 
 /**
  * Use Case для получения счетов пользователя
+ *
+ * TODO: доработать локальное сохранение
  * */
 
 class GetAccountUseCase (
-    val localRepository: AccountRepositoryImpl,
+//    val localRepository: AccountRepositoryImpl,
     val apiRepository: TransactionsRepository
 ) {
 
@@ -27,9 +28,9 @@ class GetAccountUseCase (
         return retryRequest {
             val accounts = apiRepository.getAccounts()
 
-            accounts.onSuccess {
-                localRepository.saveAccounts(it)
-            }
+//            accounts.onSuccess {
+//                localRepository.saveAccounts(it)
+//            }
 
             accounts
         }

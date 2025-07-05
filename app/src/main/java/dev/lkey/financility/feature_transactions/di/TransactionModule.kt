@@ -14,7 +14,7 @@ package dev.lkey.financility.feature_transactions.di
 ////
 //
 //    // ViewModel
-//    viewModel { ArticlesViewModel(get()) }
+
 //    viewModel { ExpensesViewModel(get(), get()) }
 //    viewModel { IncomeViewModel(get(), get()) }
 //    viewModel { HistoryExpensesViewModel(get(), get()) }

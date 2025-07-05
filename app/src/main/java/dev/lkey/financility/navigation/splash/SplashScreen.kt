@@ -13,7 +13,7 @@ fun SplashScreen (
     LaunchedEffect(Unit) {
         delay(2000)
 
-        navController.navigate(Route.Articles) {
+        navController.navigate(Route.Expenses) {
             popUpTo(Route.Splash) {
                 inclusive = true
             }

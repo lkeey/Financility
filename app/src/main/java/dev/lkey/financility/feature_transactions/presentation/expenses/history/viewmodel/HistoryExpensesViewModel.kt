@@ -6,6 +6,7 @@ import dev.lkey.financility.core.error.ErrorHandler
 import dev.lkey.financility.core.network.FinancilityResult
 import dev.lkey.financility.feature_transactions.domain.usecase.GetAccountUseCase
 import dev.lkey.financility.feature_transactions.domain.usecase.GetTransactionsUseCase
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -18,7 +19,7 @@ import kotlinx.coroutines.launch
  * VM экрана истории расходов
  * */
 
-class HistoryExpensesViewModel (
+class HistoryExpensesViewModel @Inject constructor(
     private val accountsUseCase : GetAccountUseCase,
     private val transactionUseCase: GetTransactionsUseCase
 ) : ViewModel() {

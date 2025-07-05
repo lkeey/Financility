@@ -36,7 +36,7 @@ import kotlinx.coroutines.flow.collectLatest
 @Composable
 fun IncomeScreen (
     navController: NavController,
-    viewModel: IncomeViewModel /*= koinViewModel<IncomeViewModel>()*/
+    viewModel: IncomeViewModel
 ) {
 
     val state by viewModel.state.collectAsState()

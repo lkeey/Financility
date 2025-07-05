@@ -8,6 +8,7 @@ import dev.lkey.financility.feature_articles.domain.usecase.GetArticlesUseCase
 import dev.lkey.financility.feature_transactions.data.dto.TransactionDto
 import dev.lkey.financility.feature_transactions.domain.usecase.GetAccountUseCase
 import dev.lkey.financility.feature_transactions.domain.usecase.PostTransactionUseCase
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -20,7 +21,7 @@ import kotlinx.coroutines.launch
  * VM экрана добавления расходов
  * */
 
-class CreateExpensesViewModel (
+class CreateExpensesViewModel @Inject constructor (
     private val accountUseCase : GetAccountUseCase,
     private val articlesUseCase : GetArticlesUseCase,
     private val createTransactionUseCase : PostTransactionUseCase

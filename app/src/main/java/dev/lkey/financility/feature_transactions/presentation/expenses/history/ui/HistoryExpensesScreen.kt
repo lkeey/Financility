@@ -28,7 +28,7 @@ import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun HistoryExpensesScreen (
-    viewModel: HistoryExpensesViewModel /*= koinViewModel<HistoryExpensesViewModel>()*/,
+    viewModel: HistoryExpensesViewModel,
     navController: NavController
 ) {
 

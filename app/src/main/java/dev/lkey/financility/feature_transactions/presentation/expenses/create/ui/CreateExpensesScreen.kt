@@ -26,7 +26,7 @@ import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun CreateExpensesScreen (
-    viewModel: CreateExpensesViewModel /*= koinViewModel<CreateExpensesViewModel>()*/,
+    viewModel: CreateExpensesViewModel,
     navController: NavController
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()

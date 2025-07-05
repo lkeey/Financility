@@ -5,6 +5,7 @@ import androidx.core.content.edit
 import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_transactions.domain.repository.AccountRepository
 import kotlinx.serialization.json.Json
+import javax.inject.Inject
 
 /**
  * Репозиторий для локальной работы:
@@ -13,7 +14,7 @@ import kotlinx.serialization.json.Json
  * - с удалением счетов
  * */
 
-class AccountRepositoryImpl(
+class AccountRepositoryImpl @Inject constructor(
     context: Context
 ) : AccountRepository {
     companion object {
