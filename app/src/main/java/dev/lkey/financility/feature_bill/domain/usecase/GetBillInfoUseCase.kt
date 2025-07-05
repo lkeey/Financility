@@ -9,12 +9,12 @@ import dev.lkey.financility.feature_bill.domain.repository.BillRepository
  * */
 
 class GetBillInfoUseCase (
-    val apiRepository: BillRepository
+    val billRepository: BillRepository
 ) {
     suspend operator fun invoke(): Result<List<AccountBriefModel>> {
 
         return retryRequest {
-            val accounts = apiRepository.getBillInfo()
+            val accounts = billRepository.getBillInfo()
 
             accounts
         }

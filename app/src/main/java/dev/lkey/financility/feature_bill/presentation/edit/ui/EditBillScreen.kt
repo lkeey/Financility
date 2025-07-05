@@ -29,7 +29,7 @@ import kotlinx.coroutines.flow.collectLatest
 @Composable
 fun EditBillScreen (
     navController: NavController,
-    viewModel: EditBillViewModel /*= koinViewModel<EditBillViewModel>()*/
+    viewModel: EditBillViewModel
 ) {
     val state by viewModel.state.collectAsState()
     val snackBarHostState = remember { SnackbarHostState() }

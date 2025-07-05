@@ -4,11 +4,15 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import dev.lkey.financility.feature_articles.presentation.ui.ArticlesScreen
+import dev.lkey.financility.feature_bill.presentation.current.ui.BillScreen
+import dev.lkey.financility.feature_bill.presentation.edit.ui.EditBillScreen
+import dev.lkey.financility.feature_settings.SettingsScreen
 import dev.lkey.financility.navigation.splash.SplashScreen
 import dev.lkey.financility.navigation.util.Route
 import dev.lkey.financility.ui.theme.FinancilityTheme
@@ -76,18 +80,18 @@ fun FinancilityApp(
                 startDestination = Route.CurrentBill
             ) {
                 composable<Route.CurrentBill> {
-//                    BillScreen(
-//                        navController = navController
-//                    )
+                    BillScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = viewModelFactory),
+                    )
                 }
 
                 composable<Route.EditBill> {
-//                    EditBillScreen(
-//                        navController = navController
-//                    )
+                    EditBillScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = viewModelFactory),
+                    )
                 }
-
-
             }
 
             navigation<Route.Articles>(
@@ -95,7 +99,7 @@ fun FinancilityApp(
             ) {
                 composable<Route.MyArticles> {
                     ArticlesScreen(
-                        viewModelFactory = viewModelFactory,
+                        viewModel = viewModel(factory = viewModelFactory),
                         navController = navController
                     )
                 }
@@ -105,9 +109,9 @@ fun FinancilityApp(
                 startDestination = Route.AllSettings
             ) {
                 composable<Route.AllSettings> {
-//                    SettingsScreen(
-//                        navController = navController
-//                    )
+                    SettingsScreen(
+                        navController = navController
+                    )
                 }
             }
         }

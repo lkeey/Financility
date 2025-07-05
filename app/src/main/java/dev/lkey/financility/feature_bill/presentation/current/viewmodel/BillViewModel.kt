@@ -8,6 +8,7 @@ import dev.lkey.financility.feature_bill.data.model.UpdateAccountDto
 import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_bill.domain.usecase.GetBillInfoUseCase
 import dev.lkey.financility.feature_bill.domain.usecase.UpdateBillUseCase
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -20,7 +21,7 @@ import kotlinx.coroutines.launch
  * VM для экрана счетов
  * */
 
-class BillViewModel (
+class BillViewModel @Inject constructor(
     private val billInfoUseCase : GetBillInfoUseCase,
     private val updateBillUseCase : UpdateBillUseCase
 ): ViewModel() {
