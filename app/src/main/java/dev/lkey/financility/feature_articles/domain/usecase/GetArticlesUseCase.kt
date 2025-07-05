@@ -3,12 +3,13 @@ package dev.lkey.financility.feature_articles.domain.usecase
 import dev.lkey.financility.core.network.retryRequest
 import dev.lkey.financility.feature_articles.domain.repository.ArticlesRepository
 import dev.lkey.financility.feature_transactions.domain.model.CategoryModel
+import jakarta.inject.Inject
 
 /**
  * Use Case для получения статей
  * */
 
-class GetArticlesUseCase (
+class GetArticlesUseCase @Inject constructor(
     private val repository: ArticlesRepository
 ) {
 

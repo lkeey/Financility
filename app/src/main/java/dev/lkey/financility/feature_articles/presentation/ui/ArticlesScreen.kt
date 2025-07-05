@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -27,9 +28,11 @@ import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun ArticlesScreen (
-    viewModel: ArticlesViewModel = viewModel(),
+    viewModelFactory: ViewModelProvider.Factory,
     navController: NavController
 ) {
+
+    val viewModel: ArticlesViewModel = viewModel(factory = viewModelFactory)
 
     val state by viewModel.state.collectAsStateWithLifecycle()
     val snackBarHostState = remember { SnackbarHostState() }

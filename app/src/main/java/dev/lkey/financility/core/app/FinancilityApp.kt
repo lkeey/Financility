@@ -3,16 +3,20 @@ package dev.lkey.financility.core.app
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import dev.lkey.financility.feature_articles.presentation.ui.ArticlesScreen
 import dev.lkey.financility.navigation.splash.SplashScreen
 import dev.lkey.financility.navigation.util.Route
 import dev.lkey.financility.ui.theme.FinancilityTheme
 
 @Composable
-fun FinancilityApp() {
+fun FinancilityApp(
+    viewModelFactory: ViewModelProvider.Factory
+) {
     FinancilityTheme {
 
         val navController = rememberNavController()
@@ -90,9 +94,10 @@ fun FinancilityApp() {
                 startDestination = Route.MyArticles
             ) {
                 composable<Route.MyArticles> {
-//                    ArticlesScreen(
-//                        navController = navController
-//                    )
+                    ArticlesScreen(
+                        viewModelFactory = viewModelFactory,
+                        navController = navController
+                    )
                 }
             }
 

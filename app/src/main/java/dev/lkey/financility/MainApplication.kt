@@ -2,7 +2,6 @@ package dev.lkey.financility
 
 import android.app.Application
 import dev.lkey.financility.di.AppComponent
-import dev.lkey.financility.di.AppModule
 import dev.lkey.financility.di.DaggerAppComponent
 
 /**
@@ -12,15 +11,13 @@ import dev.lkey.financility.di.DaggerAppComponent
  */
 
 class MainApplication : Application() {
+
     lateinit var appComponent: AppComponent
 
     override fun onCreate() {
         super.onCreate()
 
-        appComponent = DaggerAppComponent.builder()
-            .appModule(AppModule())
-            .build()
+        appComponent =  DaggerAppComponent.factory().create(this)
 
-        appComponent.inject(this)
     }
 }

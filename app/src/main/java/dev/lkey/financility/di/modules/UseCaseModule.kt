@@ -1,22 +1,16 @@
-package dev.lkey.financility.di
+package dev.lkey.financility.di.modules
 
 import dagger.Module
 import dagger.Provides
-import dev.lkey.financility.feature_articles.data.repository.ArticlesRepositoryImpl
 import dev.lkey.financility.feature_articles.domain.repository.ArticlesRepository
 import dev.lkey.financility.feature_articles.domain.usecase.GetArticlesUseCase
 
 /**
- * Зависимости, инициализируемые Koin-ом
+ * UseCase зависимости, инициализируемые Dagger-ом
  * */
 
 @Module
-class AppModule {
-
-    @Provides
-    fun provideArticlesRepository(): ArticlesRepository {
-        return ArticlesRepositoryImpl()
-    }
+class UseCaseModule {
 
     @Provides
     fun provideArticlesUseCase(
@@ -24,5 +18,4 @@ class AppModule {
     ): GetArticlesUseCase {
         return GetArticlesUseCase(articlesRepository)
     }
-
 }
