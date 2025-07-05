@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dev.lkey.financility.core.error.ErrorHandler
 import dev.lkey.financility.core.network.FinancilityResult
 import dev.lkey.financility.feature_articles.domain.usecase.GetArticlesUseCase
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -17,7 +18,7 @@ import kotlinx.coroutines.launch
  * VM для экрана статей
  * */
 
-class ArticlesViewModel (
+class ArticlesViewModel @Inject constructor(
     private val articlesUseCase : GetArticlesUseCase
 ) : ViewModel() {
 

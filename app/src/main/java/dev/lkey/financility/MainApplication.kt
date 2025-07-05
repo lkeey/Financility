@@ -1,6 +1,9 @@
-package dev.lkey.financility.di
+package dev.lkey.financility
 
 import android.app.Application
+import dev.lkey.financility.di.AppComponent
+import dev.lkey.financility.di.AppModule
+import dev.lkey.financility.di.DaggerAppComponent
 
 /**
  * Класс приложения, инициализирующий зависимостями через Koin
@@ -8,13 +11,16 @@ import android.app.Application
  * При запуске приложения запускает Koin и передаёт контекст приложения и модуль зависимостей [appModule]
  */
 
-class FApp : Application() {
+class MainApplication : Application() {
+    lateinit var appComponent: AppComponent
+
     override fun onCreate() {
         super.onCreate()
 
-//        GlobalContext.startKoin {
-//            androidContext(this@FApp)
-//            modules(appModule)
-//        }
+        appComponent = DaggerAppComponent.builder()
+            .appModule(AppModule())
+            .build()
+
+        appComponent.inject(this)
     }
 }

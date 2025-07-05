@@ -12,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import dev.lkey.financility.R
 import dev.lkey.financility.components.item.FinancilityLoadingBar
@@ -26,7 +27,7 @@ import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun ArticlesScreen (
-    viewModel: ArticlesViewModel /*= koinViewModel<ArticlesViewModel>()*/,
+    viewModel: ArticlesViewModel = viewModel(),
     navController: NavController
 ) {
 

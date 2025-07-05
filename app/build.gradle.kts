@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 
     alias(libs.plugins.jetbrains.kotlin.serialization)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 val localProperties = Properties().apply {
@@ -93,6 +94,10 @@ dependencies {
     implementation(libs.ktor.client.negotiation)
     implementation(libs.ktor.json)
     implementation(libs.ktor.client.logging)
+
+    // Dagger 2
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
 
 //    implementation(libs.koin.android)
 //    implementation(libs.koin.androidx.compose)
