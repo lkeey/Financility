@@ -7,17 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import dev.lkey.financility.feature_articles.presentation.ui.ArticlesScreen
-import dev.lkey.financility.feature_bill.presentation.current.ui.BillScreen
-import dev.lkey.financility.feature_bill.presentation.edit.ui.EditBillScreen
-import dev.lkey.financility.feature_settings.SettingsScreen
-import dev.lkey.financility.feature_transactions.presentation.expenses.create.ui.CreateExpensesScreen
-import dev.lkey.financility.feature_transactions.presentation.expenses.history.ui.HistoryExpensesScreen
-import dev.lkey.financility.feature_transactions.presentation.expenses.today.ui.ExpensesScreen
-import dev.lkey.financility.feature_transactions.presentation.income.history.ui.HistoryIncomeScreen
-import dev.lkey.financility.feature_transactions.presentation.income.today.ui.IncomeScreen
-import dev.lkey.financility.navigation.util.Route
 import dev.lkey.financility.navigation.splash.SplashScreen
+import dev.lkey.financility.navigation.util.Route
 import dev.lkey.financility.ui.theme.FinancilityTheme
 
 @Composable
@@ -43,21 +34,21 @@ fun FinancilityApp() {
                 startDestination = Route.TodayExpenses
             ) {
                 composable<Route.TodayExpenses> {
-                    ExpensesScreen(
-                        navController = navController
-                    )
+//                    ExpensesScreen(
+//                        navController = navController
+//                    )
                 }
 
                 composable<Route.HistoryExpenses> {
-                    HistoryExpensesScreen(
-                        navController = navController
-                    )
+//                    HistoryExpensesScreen(
+//                        navController = navController
+//                    )
                 }
 
                 composable<Route.CreateExpenses> {
-                    CreateExpensesScreen(
-                        navController = navController
-                    )
+//                    CreateExpensesScreen(
+//                        navController = navController
+//                    )
                 }
             }
 
@@ -65,15 +56,15 @@ fun FinancilityApp() {
                 startDestination = Route.TodayIncome
             ) {
                 composable<Route.TodayIncome> {
-                    IncomeScreen(
-                        navController = navController
-                    )
+//                    IncomeScreen(
+//                        navController = navController
+//                    )
                 }
 
                 composable<Route.HistoryIncomes> {
-                    HistoryIncomeScreen(
-                        navController = navController
-                    )
+//                    HistoryIncomeScreen(
+//                        navController = navController
+//                    )
                 }
             }
 
@@ -81,15 +72,15 @@ fun FinancilityApp() {
                 startDestination = Route.CurrentBill
             ) {
                 composable<Route.CurrentBill> {
-                    BillScreen(
-                        navController = navController
-                    )
+//                    BillScreen(
+//                        navController = navController
+//                    )
                 }
 
                 composable<Route.EditBill> {
-                    EditBillScreen(
-                        navController = navController
-                    )
+//                    EditBillScreen(
+//                        navController = navController
+//                    )
                 }
 
 
@@ -99,9 +90,9 @@ fun FinancilityApp() {
                 startDestination = Route.MyArticles
             ) {
                 composable<Route.MyArticles> {
-                    ArticlesScreen(
-                        navController = navController
-                    )
+//                    ArticlesScreen(
+//                        navController = navController
+//                    )
                 }
             }
 
@@ -109,9 +100,9 @@ fun FinancilityApp() {
                 startDestination = Route.AllSettings
             ) {
                 composable<Route.AllSettings> {
-                    SettingsScreen(
-                        navController = navController
-                    )
+//                    SettingsScreen(
+//                        navController = navController
+//                    )
                 }
             }
         }

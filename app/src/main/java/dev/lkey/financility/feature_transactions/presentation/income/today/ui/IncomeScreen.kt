@@ -22,9 +22,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import dev.lkey.financility.R
-import dev.lkey.financility.components.nav.FinancilityBottomBar
 import dev.lkey.financility.components.item.FinancilityLoadingBar
 import dev.lkey.financility.components.item.FinancilitySnackBar
+import dev.lkey.financility.components.nav.FinancilityBottomBar
 import dev.lkey.financility.components.nav.FinancilityTopBar
 import dev.lkey.financility.core.network.FinancilityResult
 import dev.lkey.financility.feature_transactions.presentation.income.today.viewmodel.IncomeAction
@@ -32,12 +32,11 @@ import dev.lkey.financility.feature_transactions.presentation.income.today.viewm
 import dev.lkey.financility.feature_transactions.presentation.income.today.viewmodel.IncomeViewModel
 import dev.lkey.financility.navigation.util.Route
 import kotlinx.coroutines.flow.collectLatest
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun IncomeScreen (
     navController: NavController,
-    viewModel: IncomeViewModel = koinViewModel<IncomeViewModel>()
+    viewModel: IncomeViewModel /*= koinViewModel<IncomeViewModel>()*/
 ) {
 
     val state by viewModel.state.collectAsState()

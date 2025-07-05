@@ -32,12 +32,11 @@ import dev.lkey.financility.feature_bill.presentation.current.viewmodel.BillEven
 import dev.lkey.financility.feature_bill.presentation.current.viewmodel.BillViewModel
 import dev.lkey.financility.navigation.util.Route
 import kotlinx.coroutines.flow.collectLatest
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun BillScreen (
     navController: NavController,
-    viewModel: BillViewModel = koinViewModel<BillViewModel>()
+    viewModel: BillViewModel /*= koinViewModel<BillViewModel>()*/
 ) {
 
     val state by viewModel.state.collectAsState()

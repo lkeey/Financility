@@ -32,11 +32,10 @@ import dev.lkey.financility.feature_transactions.presentation.expenses.today.vie
 import dev.lkey.financility.feature_transactions.presentation.expenses.today.viewmodel.ExpensesViewModel
 import dev.lkey.financility.navigation.util.Route
 import kotlinx.coroutines.flow.collectLatest
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ExpensesScreen (
-    viewModel: ExpensesViewModel = koinViewModel<ExpensesViewModel>(),
+    viewModel: ExpensesViewModel /*= koinViewModel<ExpensesViewModel>()*/,
     navController: NavController
 ) {
 

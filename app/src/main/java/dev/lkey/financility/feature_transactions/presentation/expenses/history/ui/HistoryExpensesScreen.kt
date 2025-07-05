@@ -25,11 +25,10 @@ import dev.lkey.financility.feature_transactions.presentation.expenses.history.v
 import dev.lkey.financility.feature_transactions.presentation.expenses.history.viewmodel.HistoryExpensesEvent
 import dev.lkey.financility.feature_transactions.presentation.expenses.history.viewmodel.HistoryExpensesViewModel
 import kotlinx.coroutines.flow.collectLatest
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HistoryExpensesScreen (
-    viewModel: HistoryExpensesViewModel = koinViewModel<HistoryExpensesViewModel>(),
+    viewModel: HistoryExpensesViewModel /*= koinViewModel<HistoryExpensesViewModel>()*/,
     navController: NavController
 ) {
 
