@@ -1,16 +1,15 @@
 package dev.lkey.bill.di
 
-//val billModule = module {
-//
-//    // Репозиторий
-//    single<BillRepository> { BillRepositoryImpl() }
-//
-//    // Use-case
-//    single { GetBillInfoUseCase(get()) }
-//    factory { UpdateBillUseCase(get()) }
-//
-//    // ViewModel
-//    viewModel { BillViewModel(get(), get()) }
-//    viewModel { EditBillViewModel(get(), get()) }
-//
-//}
+import dagger.Module
+import dev.lkey.bill.di.modules.BillRepositoryModule
+import dev.lkey.bill.di.modules.BillUseCaseModule
+import dev.lkey.bill.di.modules.BillViewModelModule
+
+@Module(
+    includes = [
+        BillRepositoryModule::class,
+        BillUseCaseModule::class,
+        BillViewModelModule::class
+    ]
+)
+class BillModules

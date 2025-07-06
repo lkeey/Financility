@@ -2,8 +2,6 @@ package dev.lkey.financility.di.modules
 
 import dagger.Module
 import dagger.Provides
-import dev.lkey.bill.data.repository.BillRepositoryImpl
-import dev.lkey.bill.domain.repository.BillRepository
 import dev.lkey.transations.data.repository.TransactionsRepositoryImpl
 import dev.lkey.transations.domain.repository.TransactionsRepository
 
@@ -14,17 +12,6 @@ import dev.lkey.transations.domain.repository.TransactionsRepository
 @Module
 class RepositoryModule {
 
-    // feature articles
-//    @Provides
-//    fun provideArticlesRepository(): ArticlesRepository {
-//        return ArticlesRepositoryImpl()
-//    }
-
-    // feature bill
-    @Provides
-    fun provideBillRepository(): BillRepository {
-        return BillRepositoryImpl()
-    }
 
     // feature transactions
 
