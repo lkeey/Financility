@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
 
+    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.kotlin.kapt)
 }
@@ -53,7 +53,6 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.ktx)
 
-    implementation(libs.kotlinx.serialization.json)
     implementation(libs.jetbrains.compose.navigation)
 
     implementation(libs.lottie.compose)
@@ -77,8 +76,12 @@ dependencies {
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
 
+    // serialization
+    implementation(libs.kotlinx.serialization.json)
+
     // modules
     implementation(project(":articles"))
+    implementation(project(":bill"))
     implementation(project(":settings"))
 
     implementation(project(":core"))

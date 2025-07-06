@@ -6,10 +6,10 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import dev.lkey.articles.presentation.viewmodel.ArticlesViewModel
+import dev.lkey.bill.presentation.current.viewmodel.BillViewModel
+import dev.lkey.bill.presentation.edit.viewmodel.EditBillViewModel
 import dev.lkey.core.di.ViewModelKey
 import dev.lkey.financility.di.ViewModelFactory
-import dev.lkey.financility.feature_bill.presentation.current.viewmodel.BillViewModel
-import dev.lkey.financility.feature_bill.presentation.edit.viewmodel.EditBillViewModel
 import dev.lkey.financility.feature_transactions.presentation.expenses.create.viewmodel.CreateExpensesViewModel
 import dev.lkey.financility.feature_transactions.presentation.expenses.history.viewmodel.HistoryExpensesViewModel
 import dev.lkey.financility.feature_transactions.presentation.expenses.today.viewmodel.ExpensesViewModel

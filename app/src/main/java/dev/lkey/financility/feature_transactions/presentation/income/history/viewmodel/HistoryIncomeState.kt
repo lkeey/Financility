@@ -1,7 +1,7 @@
 package dev.lkey.financility.feature_transactions.presentation.income.history.viewmodel
 
+import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.core.network.FinancilityResult
-import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_transactions.domain.model.TransactionModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter

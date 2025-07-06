@@ -2,7 +2,7 @@ package dev.lkey.financility.feature_transactions.data.db
 
 import android.content.Context
 import androidx.core.content.edit
-import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
+import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.financility.feature_transactions.domain.repository.AccountRepository
 import kotlinx.serialization.json.Json
 import javax.inject.Inject

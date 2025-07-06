@@ -1,7 +1,7 @@
 package dev.lkey.financility.feature_transactions.domain.model
 
+import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.common.core.model.CategoryModel
-import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

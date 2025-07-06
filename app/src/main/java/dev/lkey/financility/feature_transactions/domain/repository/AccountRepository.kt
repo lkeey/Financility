@@ -1,6 +1,6 @@
 package dev.lkey.financility.feature_transactions.domain.repository
 
-import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
+import dev.lkey.common.core.model.AccountBriefModel
 
 interface AccountRepository {
 

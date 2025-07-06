@@ -1,7 +1,7 @@
 package dev.lkey.financility.feature_transactions.presentation.expenses.create.viewmodel
 
+import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.common.core.model.CategoryModel
-import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter

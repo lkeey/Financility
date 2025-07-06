@@ -1,7 +1,7 @@
 package dev.lkey.financility.feature_transactions.presentation.expenses.today.viewmodel
 
+import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.core.network.FinancilityResult
-import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_transactions.domain.model.TransactionModel
 
 /**

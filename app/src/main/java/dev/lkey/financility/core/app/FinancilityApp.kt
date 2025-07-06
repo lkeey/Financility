@@ -10,9 +10,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import dev.lkey.articles.presentation.ui.ArticlesScreen
+import dev.lkey.bill.presentation.current.ui.BillScreen
+import dev.lkey.bill.presentation.edit.ui.EditBillScreen
 import dev.lkey.common.navigation.Route
-import dev.lkey.financility.feature_bill.presentation.current.ui.BillScreen
-import dev.lkey.financility.feature_bill.presentation.edit.ui.EditBillScreen
 import dev.lkey.financility.feature_transactions.presentation.expenses.create.ui.CreateExpensesScreen
 import dev.lkey.financility.feature_transactions.presentation.expenses.history.ui.HistoryExpensesScreen
 import dev.lkey.financility.feature_transactions.presentation.expenses.today.ui.ExpensesScreen

@@ -1,10 +1,10 @@
 package dev.lkey.financility.feature_transactions.data.repository
 
+import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.common.core.model.CategoryModel
 import dev.lkey.core.error.ApiException
 import dev.lkey.core.network.ktorClient
 import dev.lkey.core.network.safeCall
-import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_transactions.data.dto.TransactionDto
 import dev.lkey.financility.feature_transactions.domain.model.TransactionModel
 import dev.lkey.financility.feature_transactions.domain.repository.TransactionsRepository
