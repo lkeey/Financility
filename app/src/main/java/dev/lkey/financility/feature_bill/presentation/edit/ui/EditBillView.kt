@@ -20,7 +20,6 @@ import dev.lkey.financility.components.field.FinancilityEditText
 import dev.lkey.financility.components.field.FinancilityNumTextField
 import dev.lkey.financility.components.item.FinancilityListItem
 import dev.lkey.financility.components.sheet.FinancilityCurrencySheet
-import dev.lkey.financility.core.converter.toEmoji
 import dev.lkey.financility.feature_bill.domain.model.CurrencyOption
 import dev.lkey.financility.feature_bill.presentation.edit.viewmodel.EditBillEvent
 import dev.lkey.financility.feature_bill.presentation.edit.viewmodel.EditBillState

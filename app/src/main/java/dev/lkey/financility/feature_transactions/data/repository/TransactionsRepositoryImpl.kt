@@ -6,6 +6,7 @@ import dev.lkey.financility.core.network.ktorClient
 import dev.lkey.financility.core.network.safeCall
 import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_transactions.data.dto.TransactionDto
+import dev.lkey.financility.feature_transactions.domain.model.CategoryModel
 import dev.lkey.financility.feature_transactions.domain.model.TransactionModel
 import dev.lkey.financility.feature_transactions.domain.repository.TransactionsRepository
 import io.ktor.client.call.body
@@ -69,5 +70,9 @@ class TransactionsRepositoryImpl : TransactionsRepository {
 
             response.body()
         }
+    }
+
+    override suspend fun getArticles(): Result<List<CategoryModel>> {
+        TODO("Not yet implemented")
     }
 }

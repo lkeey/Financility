@@ -2,6 +2,7 @@ package dev.lkey.financility.feature_transactions.domain.repository
 
 import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_transactions.data.dto.TransactionDto
+import dev.lkey.financility.feature_transactions.domain.model.CategoryModel
 import dev.lkey.financility.feature_transactions.domain.model.TransactionModel
 
 interface TransactionsRepository {
@@ -17,5 +18,7 @@ interface TransactionsRepository {
     suspend fun createExpense(
         transaction: TransactionDto
     ): Result<Unit>
+
+    suspend fun getArticles(): Result<List<CategoryModel>>
 
 }

@@ -1,5 +1,3 @@
-import java.util.Properties
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -7,13 +5,6 @@ plugins {
 
     alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.kotlin.kapt)
-}
-
-val localProperties = Properties().apply {
-    val localPropsFile = rootProject.file("local.properties")
-    if (localPropsFile.exists()) {
-        load(localPropsFile.inputStream())
-    }
 }
 
 android {
@@ -26,18 +17,6 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-
-        buildConfigField(
-            type = "String",
-            name = "BASE_URL",
-            value =  "\"${localProperties["BASE_URL"]}\""
-        )
-
-        buildConfigField(
-            type = "String",
-            name = "API_KEY",
-            value = "\"${localProperties["API_KEY"]}\""
-        )
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -89,6 +68,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    // network
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.okhttp)
     implementation(libs.ktor.client.negotiation)
@@ -99,7 +79,5 @@ dependencies {
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
 
-//    implementation(libs.koin.android)
-//    implementation(libs.koin.androidx.compose)
 
 }

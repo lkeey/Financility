@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Financility"
 include(":app")
+include(":articles")
 include(":core")
