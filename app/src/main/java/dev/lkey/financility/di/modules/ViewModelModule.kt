@@ -10,11 +10,11 @@ import dev.lkey.bill.presentation.current.viewmodel.BillViewModel
 import dev.lkey.bill.presentation.edit.viewmodel.EditBillViewModel
 import dev.lkey.core.di.ViewModelKey
 import dev.lkey.financility.di.ViewModelFactory
-import dev.lkey.financility.feature_transactions.presentation.expenses.create.viewmodel.CreateExpensesViewModel
-import dev.lkey.financility.feature_transactions.presentation.expenses.history.viewmodel.HistoryExpensesViewModel
-import dev.lkey.financility.feature_transactions.presentation.expenses.today.viewmodel.ExpensesViewModel
-import dev.lkey.financility.feature_transactions.presentation.income.history.viewmodel.HistoryIncomeViewModel
-import dev.lkey.financility.feature_transactions.presentation.income.today.viewmodel.IncomeViewModel
+import dev.lkey.transations.presentation.expenses.create.viewmodel.CreateExpensesViewModel
+import dev.lkey.transations.presentation.expenses.history.viewmodel.HistoryExpensesViewModel
+import dev.lkey.transations.presentation.expenses.today.viewmodel.ExpensesViewModel
+import dev.lkey.transations.presentation.income.history.viewmodel.HistoryIncomeViewModel
+import dev.lkey.transations.presentation.income.today.viewmodel.IncomeViewModel
 
 /**
  * VM зависимости, инициализируемые Dagger-ом

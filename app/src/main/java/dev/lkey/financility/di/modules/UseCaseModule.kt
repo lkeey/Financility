@@ -7,10 +7,10 @@ import dev.lkey.articles.domain.usecase.GetArticlesUseCase
 import dev.lkey.bill.domain.repository.BillRepository
 import dev.lkey.bill.domain.usecase.GetBillInfoUseCase
 import dev.lkey.bill.domain.usecase.UpdateBillUseCase
-import dev.lkey.financility.feature_transactions.domain.repository.TransactionsRepository
-import dev.lkey.financility.feature_transactions.domain.usecase.GetAccountUseCase
-import dev.lkey.financility.feature_transactions.domain.usecase.GetTransactionsUseCase
-import dev.lkey.financility.feature_transactions.domain.usecase.PostTransactionUseCase
+import dev.lkey.transations.domain.repository.TransactionsRepository
+import dev.lkey.transations.domain.usecase.GetAccountUseCase
+import dev.lkey.transations.domain.usecase.GetTransactionsUseCase
+import dev.lkey.transations.domain.usecase.PostTransactionUseCase
 
 /**
  * UseCase зависимости, инициализируемые Dagger-ом
