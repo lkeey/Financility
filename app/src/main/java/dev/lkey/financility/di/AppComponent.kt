@@ -12,10 +12,6 @@ import jakarta.inject.Singleton
 @Singleton
 @Component(
     modules = [
-//        ArticlesRepositoryModule::class,
-//        ArticlesUseCaseModule::class,
-//        ArticlesViewModelModule::class,
-
         RepositoryModule::class,
         UseCaseModule::class,
         ViewModelModule::class]

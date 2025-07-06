@@ -14,7 +14,7 @@ import dev.lkey.bill.presentation.current.ui.BillScreen
 import dev.lkey.bill.presentation.edit.ui.EditBillScreen
 import dev.lkey.common.navigation.Route
 import dev.lkey.financility.navigation.splash.SplashScreen
-import dev.lkey.financility.ui.theme.FinancilityTheme
+import dev.lkey.common.theme.FinancilityTheme
 import dev.lkey.settings.SettingsScreen
 import dev.lkey.transations.presentation.expenses.create.ui.CreateExpensesScreen
 import dev.lkey.transations.presentation.expenses.history.ui.HistoryExpensesScreen

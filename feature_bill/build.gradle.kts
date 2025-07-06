@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "dev.lkey.transations"
+    namespace = "dev.lkey.bill"
     compileSdk = 35
 
     defaultConfig {
-        minSdk = 26
+        minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -73,8 +73,8 @@ dependencies {
 
     // ktor-client
     implementation(project(":core"))
+    implementation(project(":common_ui"))
 
     // ui-components
-    implementation(project(":common"))
 
 }

@@ -1,4 +1,4 @@
-package dev.lkey.financility.ui.theme
+package dev.lkey.common.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

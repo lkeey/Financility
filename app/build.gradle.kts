@@ -78,15 +78,15 @@ dependencies {
 
     // serialization
     implementation(libs.kotlinx.serialization.json)
+    implementation(project(":feature_articles"))
 
     // modules
-    implementation(project(":articles"))
-    implementation(project(":bill"))
-    implementation(project(":transations"))
-    implementation(project(":settings"))
+    implementation(project(":feature_bill"))
+    implementation(project(":feature_transations"))
+    implementation(project(":feature_settings"))
 
     implementation(project(":core"))
-    implementation(project(":common"))
+    implementation(project(":common_ui"))
 
 
 }

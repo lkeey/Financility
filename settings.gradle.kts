@@ -16,9 +16,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "Financility"
 include(":app")
-include(":articles")
+include(":feature_articles")
 include(":core")
-include(":common")
-include(":settings")
-include(":bill")
-include(":transations")
+include(":common_ui")
+include(":feature_settings")
+include(":feature_bill")
+include(":feature_transations")

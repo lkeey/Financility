@@ -1,4 +1,4 @@
-package dev.lkey.financility.ui.theme
+package dev.lkey.common.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

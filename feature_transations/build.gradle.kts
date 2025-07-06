@@ -3,15 +3,16 @@ plugins {
     alias(libs.plugins.kotlin.android)
 
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.jetbrains.kotlin.serialization)
 
 }
 
 android {
-    namespace = "dev.lkey.settings"
+    namespace = "dev.lkey.transations"
     compileSdk = 35
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -57,12 +58,23 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
 
+
+    // network
+    implementation(libs.ktor.client.okhttp)
+
+    // Dagger 2
+    implementation(libs.dagger)
+
     // Navigation
     implementation(libs.jetbrains.compose.navigation)
 
+    // serialization
+    implementation(libs.kotlinx.serialization.json)
+
     // ktor-client
     implementation(project(":core"))
+    implementation(project(":common_ui"))
 
     // ui-components
-    implementation(project(":common"))
+
 }
