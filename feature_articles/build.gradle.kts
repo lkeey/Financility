@@ -76,7 +76,6 @@ dependencies {
     // ktor-client
     implementation(project(":core"))
 
-
     // ui-components
     implementation(project(":common_ui"))
 

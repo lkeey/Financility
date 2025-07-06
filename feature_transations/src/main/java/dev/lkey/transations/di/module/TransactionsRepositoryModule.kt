@@ -1,4 +1,4 @@
-package dev.lkey.financility.di.modules
+package dev.lkey.transations.di.module
 
 import dagger.Module
 import dagger.Provides
@@ -10,15 +10,11 @@ import dev.lkey.transations.domain.repository.TransactionsRepository
  * */
 
 @Module
-class RepositoryModule {
-
-
-    // feature transactions
+class TransactionsRepositoryModule {
 
     @Provides
     fun provideTransactionsRepository(): TransactionsRepository {
         return TransactionsRepositoryImpl()
     }
-
 
 }

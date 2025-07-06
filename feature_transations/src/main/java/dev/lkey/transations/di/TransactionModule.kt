@@ -1,25 +1,16 @@
 package dev.lkey.transations.di
 
-//val transactionModule = module {
-//
-//    // Репозиторий
-//    single { AccountRepositoryImpl(androidContext()) }
-//    single<TransactionsRepository> { TransactionsRepositoryImpl() }
-//
-//
-//    // Use-case
-//    factory { GetTransactionsUseCase(get()) }
-//    factory { PostTransactionUseCase(get()) }
-//    factory { GetAccountUseCase(get(), get()) }
-////
-//
-//    // ViewModel
+import dagger.Module
+import dev.lkey.transations.di.module.TransactionsRepositoryModule
+import dev.lkey.transations.di.module.TransactionsUseCaseModule
+import dev.lkey.transations.di.module.TransactionsViewModelModule
 
-//    viewModel { ExpensesViewModel(get(), get()) }
-//    viewModel { IncomeViewModel(get(), get()) }
-//    viewModel { HistoryExpensesViewModel(get(), get()) }
-//    viewModel { HistoryIncomeViewModel(get(), get()) }
-//    viewModel { CreateExpensesViewModel(get(), get(), get()) }
-//
-//}
+@Module(
+    includes = [
+        TransactionsRepositoryModule::class,
+        TransactionsUseCaseModule::class,
+        TransactionsViewModelModule::class
+    ]
+)
+class TransactionModules
 

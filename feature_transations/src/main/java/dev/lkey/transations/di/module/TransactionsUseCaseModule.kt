@@ -1,4 +1,4 @@
-package dev.lkey.financility.di.modules
+package dev.lkey.transations.di.module
 
 import dagger.Module
 import dagger.Provides
@@ -12,14 +12,7 @@ import dev.lkey.transations.domain.usecase.PostTransactionUseCase
  * */
 
 @Module
-class UseCaseModule {
-
-
-    // feature bill
-
-
-
-    // feature transactions
+class TransactionsUseCaseModule {
     @Provides
     fun provideGetTransactionsUseCase(
         transactionsRepository: TransactionsRepository
@@ -40,5 +33,4 @@ class UseCaseModule {
     ): GetAccountUseCase {
         return GetAccountUseCase(transactionsRepository)
     }
-
 }

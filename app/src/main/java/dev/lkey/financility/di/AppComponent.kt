@@ -6,19 +6,17 @@ import dagger.Component
 import dev.lkey.articles.di.ArticlesModules
 import dev.lkey.bill.di.BillModules
 import dev.lkey.financility.MainActivity
-import dev.lkey.financility.di.modules.RepositoryModule
-import dev.lkey.financility.di.modules.UseCaseModule
 import dev.lkey.financility.di.modules.ViewModelModule
+import dev.lkey.transations.di.TransactionModules
 import jakarta.inject.Singleton
 
 @Singleton
 @Component(
     modules = [
-        RepositoryModule::class,
-        UseCaseModule::class,
         ViewModelModule::class,
         ArticlesModules::class,
-        BillModules::class
+        BillModules::class,
+        TransactionModules::class
     ]
 )
 interface AppComponent {
