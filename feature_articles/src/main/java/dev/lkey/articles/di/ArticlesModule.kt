@@ -13,4 +13,4 @@ import dev.lkey.articles.di.modules.ArticlesViewModelModule
         ArticlesViewModelModule::class
     ]
 )
-class ArticleModule
+class ArticlesModules

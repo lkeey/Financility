@@ -13,8 +13,8 @@ import dev.lkey.articles.presentation.ui.ArticlesScreen
 import dev.lkey.bill.presentation.current.ui.BillScreen
 import dev.lkey.bill.presentation.edit.ui.EditBillScreen
 import dev.lkey.common.navigation.Route
-import dev.lkey.financility.navigation.splash.SplashScreen
 import dev.lkey.common.theme.FinancilityTheme
+import dev.lkey.financility.navigation.splash.SplashScreen
 import dev.lkey.settings.SettingsScreen
 import dev.lkey.transations.presentation.expenses.create.ui.CreateExpensesScreen
 import dev.lkey.transations.presentation.expenses.history.ui.HistoryExpensesScreen
@@ -24,7 +24,7 @@ import dev.lkey.transations.presentation.income.today.ui.IncomeScreen
 
 @Composable
 fun FinancilityApp(
-    viewModelFactory: ViewModelProvider.Factory
+    viewModelFactory: ViewModelProvider.Factory,
 ) {
     FinancilityTheme {
 
@@ -107,6 +107,7 @@ fun FinancilityApp(
             navigation<Route.Articles>(
                 startDestination = Route.MyArticles
             ) {
+
                 composable<Route.MyArticles> {
                     ArticlesScreen(
                         viewModel = viewModel(factory = viewModelFactory),

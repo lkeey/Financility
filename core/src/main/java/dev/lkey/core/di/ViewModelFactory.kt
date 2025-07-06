@@ -1,4 +1,4 @@
-package dev.lkey.financility.di
+package dev.lkey.core.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -17,7 +17,10 @@ class ViewModelFactory @Inject constructor(
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return viewModelProviders[modelClass]?.get() as T
+        val provider = viewModelProviders[modelClass]
+            ?: throw IllegalArgumentException("Unknown ViewModel class: $modelClass")
+
+        return provider.get() as T
     }
 
 }

@@ -5,9 +5,9 @@ import dev.lkey.financility.di.AppComponent
 import dev.lkey.financility.di.DaggerAppComponent
 
 /**
- * Класс приложения, инициализирующий зависимостями через Koin
+ * Класс приложения, инициализирующий зависимостями через Dagger
  *
- * При запуске приложения запускает Koin и передаёт контекст приложения и модуль зависимостей [appModule]
+ * При запуске приложения запускает Dagger и передаёт контекст приложения и модуль зависимостей [appModule]
  */
 
 class MainApplication : Application() {
@@ -17,7 +17,7 @@ class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        appComponent =  DaggerAppComponent.factory().create(this)
-
+        appComponent = DaggerAppComponent.factory()
+            .create(this)
     }
 }

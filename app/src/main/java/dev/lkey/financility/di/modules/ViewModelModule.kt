@@ -5,11 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import dev.lkey.articles.presentation.viewmodel.ArticlesViewModel
 import dev.lkey.bill.presentation.current.viewmodel.BillViewModel
 import dev.lkey.bill.presentation.edit.viewmodel.EditBillViewModel
+import dev.lkey.core.di.ViewModelFactory
 import dev.lkey.core.di.ViewModelKey
-import dev.lkey.financility.di.ViewModelFactory
 import dev.lkey.transations.presentation.expenses.create.viewmodel.CreateExpensesViewModel
 import dev.lkey.transations.presentation.expenses.history.viewmodel.HistoryExpensesViewModel
 import dev.lkey.transations.presentation.expenses.today.viewmodel.ExpensesViewModel
@@ -30,10 +29,10 @@ abstract class ViewModelModule {
 
     // feature articles
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(ArticlesViewModel::class)
-    abstract fun bindArticlesViewModel(viewModel: ArticlesViewModel): ViewModel
+//    @Binds
+//    @IntoMap
+//    @ViewModelKey(ArticlesViewModel::class)
+//    abstract fun bindArticlesViewModel(viewModel: ArticlesViewModel): ViewModel
 
     // feature bill
     @Binds

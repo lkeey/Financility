@@ -2,8 +2,6 @@ package dev.lkey.financility.di.modules
 
 import dagger.Module
 import dagger.Provides
-import dev.lkey.articles.domain.repository.ArticlesRepository
-import dev.lkey.articles.domain.usecase.GetArticlesUseCase
 import dev.lkey.bill.domain.repository.BillRepository
 import dev.lkey.bill.domain.usecase.GetBillInfoUseCase
 import dev.lkey.bill.domain.usecase.UpdateBillUseCase
@@ -20,12 +18,12 @@ import dev.lkey.transations.domain.usecase.PostTransactionUseCase
 class UseCaseModule {
 
     // feature articles
-    @Provides
-    fun provideArticlesUseCase(
-        articlesRepository: ArticlesRepository
-    ): GetArticlesUseCase {
-        return GetArticlesUseCase(articlesRepository)
-    }
+//    @Provides
+//    fun provideArticlesUseCase(
+//        articlesRepository: ArticlesRepository
+//    ): GetArticlesUseCase {
+//        return GetArticlesUseCase(articlesRepository)
+//    }
 
     // feature bill
     @Provides

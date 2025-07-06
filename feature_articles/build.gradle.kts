@@ -4,6 +4,7 @@ plugins {
 
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.jetbrains.kotlin.serialization)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -67,14 +68,16 @@ dependencies {
 
     // Dagger 2
     implementation(libs.dagger)
-//    kapt(libs.dagger.compiler)
+    kapt(libs.dagger.compiler)
 
     // Navigation
     implementation(libs.jetbrains.compose.navigation)
 
     // ktor-client
     implementation(project(":core"))
-    implementation(project(":common_ui"))
+
 
     // ui-components
+    implementation(project(":common_ui"))
+
 }
