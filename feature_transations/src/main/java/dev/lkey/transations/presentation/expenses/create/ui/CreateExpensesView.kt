@@ -80,6 +80,7 @@ fun CreateExpensesView (
         FinancilityEditText(
             previousData = state.comment ?: "",
             label = "Комментарий",
+            isShowLeadingIcon = false,
             isShowTrailingIcon = false,
             backgroundColor = MaterialTheme.colorScheme.onSurface
         ) {

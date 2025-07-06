@@ -67,8 +67,8 @@ fun FinancilityEditText (
             unfocusedContainerColor = backgroundColor,
             focusedContainerColor = backgroundColor,
         ),
-        trailingIcon = {
-            if (isShowTrailingIcon) {
+        trailingIcon = if (isShowTrailingIcon) {
+            {
                 Icon(
                     painter = painterResource(R.drawable.ic_search),
                     contentDescription = "Search",
@@ -79,15 +79,15 @@ fun FinancilityEditText (
                         }
                 )
             }
-        },
-        leadingIcon = {
-            if (isShowLeadingIcon) {
+        } else null,
+        leadingIcon = if (isShowLeadingIcon) {
+            {
                 Icon(
                     painter = painterResource(id = leadingIcon),
                     contentDescription = "Leading Icon",
                     tint = MaterialTheme.colorScheme.inverseSurface
                 )
             }
-        }
+        } else null
     )
 }

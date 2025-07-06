@@ -35,6 +35,7 @@ fun ArticlesView (
         FinancilityEditText(
             previousData = "",
             label = "Найти статью",
+            isShowLeadingIcon = false,
             onTrailingIconClick = {
                 onEvent(ArticlesEvent.OnSearchValueChanged(
                     searchValue = it
