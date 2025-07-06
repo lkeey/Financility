@@ -1,4 +1,4 @@
-package dev.lkey.financility.di.modules
+package dev.lkey.core.di.modules
 
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
@@ -10,11 +10,9 @@ import dev.lkey.core.di.ViewModelFactory
  * */
 
 @Module
-abstract class ViewModelModule {
+abstract class CommonViewModelModule {
 
-    // common
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
-
 
 }

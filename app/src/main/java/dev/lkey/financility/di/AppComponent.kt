@@ -5,15 +5,15 @@ import dagger.BindsInstance
 import dagger.Component
 import dev.lkey.articles.di.ArticlesModules
 import dev.lkey.bill.di.BillModules
+import dev.lkey.core.di.modules.CommonViewModelModule
 import dev.lkey.financility.MainActivity
-import dev.lkey.financility.di.modules.ViewModelModule
 import dev.lkey.transations.di.TransactionModules
 import jakarta.inject.Singleton
 
 @Singleton
 @Component(
     modules = [
-        ViewModelModule::class,
+        CommonViewModelModule::class,
         ArticlesModules::class,
         BillModules::class,
         TransactionModules::class

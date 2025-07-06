@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.lifecycle.ViewModelProvider
 import dev.lkey.financility.core.app.FinancilityApp
+import dev.lkey.financility.core.app.MainApplication
 import jakarta.inject.Inject
 
 /**

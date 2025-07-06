@@ -1,4 +1,4 @@
-package dev.lkey.financility
+package dev.lkey.financility.core.app
 
 import android.app.Application
 import dev.lkey.financility.di.AppComponent
