@@ -1,7 +1,8 @@
 package dev.lkey.articles.presentation.viewmodel
 
-import dev.lkey.financility.core.network.FinancilityResult
-import dev.lkey.financility.feature_transactions.domain.model.CategoryModel
+import dev.lkey.articles.data.model.CategoryModel
+import dev.lkey.core.network.FinancilityResult
+
 
 /**
  * Состояние экрана статей

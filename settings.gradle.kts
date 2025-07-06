@@ -23,3 +23,4 @@ rootProject.name = "Financility"
 include(":app")
 include(":articles")
 include(":core")
+include(":common")

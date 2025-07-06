@@ -1,18 +1,16 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
 
-    alias(libs.plugins.jetbrains.kotlin.serialization)
-    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
-    namespace = "dev.lkey.articles"
+    namespace = "dev.lkey.common"
     compileSdk = 35
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -34,14 +32,16 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        compose = true
+    }
 }
 
 dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-
-    // testing
+    implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -54,25 +54,13 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+    //??? androidTestImplementation(platform(libs.androidx.compose.bom))
 
 
-    // network
-//    implementation(libs.ktor.client.core)
-//    implementation(libs.ktor.client.negotiation)
-//    implementation(libs.ktor.json)
-//    implementation(libs.ktor.client.logging)
-    implementation(libs.ktor.client.okhttp)
+    // animation
+    implementation(libs.lottie.compose)
 
-    // Dagger 2
-    implementation(libs.dagger)
-//    kapt(libs.dagger.compiler)
-
-    // Navigation
+    // navigation
     implementation(libs.jetbrains.compose.navigation)
 
-    // ktor-client
-    implementation(project(":core"))
-
-    // ui-components
-    implementation(project(":common"))
 }
