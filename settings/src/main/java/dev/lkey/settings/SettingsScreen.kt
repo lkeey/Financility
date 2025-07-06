@@ -1,4 +1,4 @@
-package dev.lkey.financility.feature_settings
+package dev.lkey.settings
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding

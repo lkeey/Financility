@@ -79,6 +79,8 @@ dependencies {
 
     // modules
     implementation(project(":articles"))
+    implementation(project(":settings"))
+
     implementation(project(":core"))
     implementation(project(":common"))
 

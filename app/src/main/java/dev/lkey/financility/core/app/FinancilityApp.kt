@@ -13,7 +13,6 @@ import dev.lkey.articles.presentation.ui.ArticlesScreen
 import dev.lkey.common.navigation.Route
 import dev.lkey.financility.feature_bill.presentation.current.ui.BillScreen
 import dev.lkey.financility.feature_bill.presentation.edit.ui.EditBillScreen
-import dev.lkey.financility.feature_settings.SettingsScreen
 import dev.lkey.financility.feature_transactions.presentation.expenses.create.ui.CreateExpensesScreen
 import dev.lkey.financility.feature_transactions.presentation.expenses.history.ui.HistoryExpensesScreen
 import dev.lkey.financility.feature_transactions.presentation.expenses.today.ui.ExpensesScreen
@@ -21,6 +20,7 @@ import dev.lkey.financility.feature_transactions.presentation.income.history.ui.
 import dev.lkey.financility.feature_transactions.presentation.income.today.ui.IncomeScreen
 import dev.lkey.financility.navigation.splash.SplashScreen
 import dev.lkey.financility.ui.theme.FinancilityTheme
+import dev.lkey.settings.SettingsScreen
 
 @Composable
 fun FinancilityApp(

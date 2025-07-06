@@ -3,11 +3,11 @@ plugins {
     alias(libs.plugins.kotlin.android)
 
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.jetbrains.kotlin.serialization)
+
 }
 
 android {
-    namespace = "dev.lkey.articles"
+    namespace = "dev.lkey.settings"
     compileSdk = 35
 
     defaultConfig {
@@ -56,18 +56,6 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
-
-
-    // network
-//    implementation(libs.ktor.client.core)
-//    implementation(libs.ktor.client.negotiation)
-//    implementation(libs.ktor.json)
-//    implementation(libs.ktor.client.logging)
-    implementation(libs.ktor.client.okhttp)
-
-    // Dagger 2
-    implementation(libs.dagger)
-//    kapt(libs.dagger.compiler)
 
     // Navigation
     implementation(libs.jetbrains.compose.navigation)
