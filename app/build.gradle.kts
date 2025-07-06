@@ -39,8 +39,6 @@ android {
     }
     buildFeatures {
         compose = true
-//        to enable custom BuildConfig fields
-        buildConfig = true
     }
 }
 
@@ -79,5 +77,7 @@ dependencies {
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
 
+    implementation(project(":articles"))
+    implementation(project(":core"))
 
 }

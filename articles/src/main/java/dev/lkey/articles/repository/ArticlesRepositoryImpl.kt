@@ -5,7 +5,6 @@ import dev.lkey.articles.domain.repository.ArticlesRepository
 import dev.lkey.core.error.ApiException
 import dev.lkey.core.network.ktorClient
 import dev.lkey.core.network.safeCall
-import dev.lkey.financility.BuildConfig
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
@@ -20,7 +19,7 @@ class ArticlesRepositoryImpl : ArticlesRepository {
     override suspend fun getArticles(): Result<List<CategoryModel>> {
 
         return safeCall {
-            val response: HttpResponse = ktorClient.get("${BuildConfig.BASE_URL}/categories")
+            val response: HttpResponse = ktorClient.get("categories")
 
             if (response.status != HttpStatusCode.OK) {
                 throw ApiException("Ошибка API: ${response.status}")

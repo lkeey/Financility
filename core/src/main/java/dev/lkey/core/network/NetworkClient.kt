@@ -1,6 +1,6 @@
 package dev.lkey.core.network
 
-import dev.lkey.financility.BuildConfig
+import dev.lkey.core.BuildConfig
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.HttpTimeout
@@ -44,7 +44,7 @@ val ktorClient = HttpClient(OkHttp) {
 
         url {
             protocol = URLProtocol.HTTPS
-            host = "shmr-finance.ru/api/v1"
+            host = "shmr-finance.ru/api/v1/"
         }
 
         contentType(ContentType.Application.Json)
