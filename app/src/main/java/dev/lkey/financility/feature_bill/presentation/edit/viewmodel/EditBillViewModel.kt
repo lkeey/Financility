@@ -2,11 +2,11 @@ package dev.lkey.financility.feature_bill.presentation.edit.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.lkey.common.core.model.CurrencyOption
 import dev.lkey.core.error.ErrorHandler
 import dev.lkey.core.network.FinancilityResult
 import dev.lkey.financility.feature_bill.data.model.UpdateAccountDto
 import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
-import dev.lkey.financility.feature_bill.domain.model.CurrencyOption
 import dev.lkey.financility.feature_bill.domain.usecase.GetBillInfoUseCase
 import dev.lkey.financility.feature_bill.domain.usecase.UpdateBillUseCase
 import jakarta.inject.Inject

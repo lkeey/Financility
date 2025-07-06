@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
 
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.jetbrains.kotlin.serialization)
 }
 
 android {
@@ -54,13 +55,14 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
-    //??? androidTestImplementation(platform(libs.androidx.compose.bom))
-
 
     // animation
     implementation(libs.lottie.compose)
 
     // navigation
     implementation(libs.jetbrains.compose.navigation)
+
+    // для сериализации
+    implementation(libs.kotlinx.serialization.json)
 
 }

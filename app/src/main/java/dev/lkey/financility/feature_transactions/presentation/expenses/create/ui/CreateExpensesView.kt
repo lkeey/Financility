@@ -8,16 +8,15 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import dev.lkey.financility.R
-import dev.lkey.financility.components.btn.FinancilityButton
-import dev.lkey.financility.components.field.FinancilityDayPicker
-import dev.lkey.financility.components.field.FinancilityDropDown
-import dev.lkey.financility.components.field.FinancilityEditText
-import dev.lkey.financility.components.item.FinancilityListItem
-import dev.lkey.financility.components.field.FinancilityNumTextField
-import dev.lkey.financility.components.field.FinancilityTimePicker
+import dev.lkey.common.R
+import dev.lkey.common.ui.btn.FinancilityButton
+import dev.lkey.common.ui.field.FinancilityDayPicker
+import dev.lkey.common.ui.field.FinancilityDropDown
+import dev.lkey.common.ui.field.FinancilityEditText
+import dev.lkey.common.ui.field.FinancilityNumTextField
+import dev.lkey.common.ui.field.FinancilityTimePicker
+import dev.lkey.common.ui.item.FinancilityListItem
 import dev.lkey.financility.feature_transactions.presentation.expenses.create.viewmodel.CreateExpensesEvent
 import dev.lkey.financility.feature_transactions.presentation.expenses.create.viewmodel.CreateExpensesState
 
@@ -80,7 +79,7 @@ fun CreateExpensesView (
 
         FinancilityEditText(
             previousData = state.comment ?: "",
-            label = stringResource(R.string.comm),
+            label = "Комментарий",
             isShowTrailingIcon = false,
             backgroundColor = MaterialTheme.colorScheme.onSurface
         ) {

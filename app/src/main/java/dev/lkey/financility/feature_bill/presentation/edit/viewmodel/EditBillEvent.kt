@@ -1,7 +1,6 @@
 package dev.lkey.financility.feature_bill.presentation.edit.viewmodel
 
-import dev.lkey.financility.feature_bill.domain.model.CurrencyOption
-import dev.lkey.financility.feature_bill.presentation.current.viewmodel.BillEvent
+import dev.lkey.common.core.model.CurrencyOption
 
 /**
  * События экрана редактирования счетов

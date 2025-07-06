@@ -13,14 +13,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import dev.lkey.financility.R
-import dev.lkey.financility.components.field.FinancilityEditText
-import dev.lkey.financility.components.field.FinancilityNumTextField
-import dev.lkey.financility.components.item.FinancilityListItem
-import dev.lkey.financility.components.sheet.FinancilityCurrencySheet
-import dev.lkey.financility.feature_bill.domain.model.CurrencyOption
+import dev.lkey.common.R
+import dev.lkey.common.core.model.CurrencyOption
+import dev.lkey.common.ui.field.FinancilityEditText
+import dev.lkey.common.ui.field.FinancilityNumTextField
+import dev.lkey.common.ui.item.FinancilityListItem
+import dev.lkey.common.ui.sheet.FinancilityCurrencySheet
 import dev.lkey.financility.feature_bill.presentation.edit.viewmodel.EditBillEvent
 import dev.lkey.financility.feature_bill.presentation.edit.viewmodel.EditBillState
 
@@ -85,7 +84,7 @@ fun EditBillView (
             )
 
             FinancilityListItem(
-                title = stringResource(R.string.finance),
+                title = "Валюта",
                 description = null,
                 backgroundColor = White,
                 trailingText = state.chosenCurrency.symbol,

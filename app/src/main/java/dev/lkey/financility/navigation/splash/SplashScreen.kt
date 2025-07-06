@@ -3,7 +3,7 @@ package dev.lkey.financility.navigation.splash
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavController
-import dev.lkey.financility.navigation.util.Route
+import dev.lkey.common.navigation.Route
 import kotlinx.coroutines.delay
 
 @Composable

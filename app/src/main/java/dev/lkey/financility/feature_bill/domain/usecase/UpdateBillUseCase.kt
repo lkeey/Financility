@@ -1,6 +1,6 @@
 package dev.lkey.financility.feature_bill.domain.usecase
 
-import dev.lkey.financility.core.network.retryRequest
+import dev.lkey.core.network.retryRequest
 import dev.lkey.financility.feature_bill.data.model.UpdateAccountDto
 import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_bill.domain.repository.BillRepository

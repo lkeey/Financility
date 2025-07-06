@@ -2,8 +2,8 @@ package dev.lkey.financility.feature_transactions.presentation.expenses.history.
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.lkey.financility.core.error.ErrorHandler
-import dev.lkey.financility.core.network.FinancilityResult
+import dev.lkey.core.error.ErrorHandler
+import dev.lkey.core.network.FinancilityResult
 import dev.lkey.financility.feature_transactions.domain.usecase.GetAccountUseCase
 import dev.lkey.financility.feature_transactions.domain.usecase.GetTransactionsUseCase
 import jakarta.inject.Inject

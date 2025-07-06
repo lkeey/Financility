@@ -1,4 +1,4 @@
-package dev.lkey.articles.di
+package dev.lkey.core.di
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

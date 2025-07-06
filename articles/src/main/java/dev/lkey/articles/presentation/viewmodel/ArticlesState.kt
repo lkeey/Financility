@@ -1,6 +1,6 @@
 package dev.lkey.articles.presentation.viewmodel
 
-import dev.lkey.articles.data.model.CategoryModel
+import dev.lkey.common.core.model.CategoryModel
 import dev.lkey.core.network.FinancilityResult
 
 

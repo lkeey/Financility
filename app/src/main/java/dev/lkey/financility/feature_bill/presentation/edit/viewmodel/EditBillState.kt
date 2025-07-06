@@ -1,8 +1,8 @@
 package dev.lkey.financility.feature_bill.presentation.edit.viewmodel
 
-import dev.lkey.financility.core.network.FinancilityResult
+import dev.lkey.common.core.model.CurrencyOption
+import dev.lkey.core.network.FinancilityResult
 import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
-import dev.lkey.financility.feature_bill.domain.model.CurrencyOption
 
 /**
  * Состояние экрана счетов

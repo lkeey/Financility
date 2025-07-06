@@ -1,6 +1,6 @@
 package dev.lkey.financility.feature_transactions.domain.usecase
 
-import dev.lkey.financility.feature_transactions.domain.model.CategoryModel
+import dev.lkey.common.core.model.CategoryModel
 import dev.lkey.financility.feature_transactions.domain.repository.TransactionsRepository
 import jakarta.inject.Inject
 

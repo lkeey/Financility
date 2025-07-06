@@ -5,9 +5,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dev.lkey.financility.R
-import dev.lkey.financility.components.field.FinancilityToggleListItem
-import dev.lkey.financility.components.item.FinancilityListItem
+import dev.lkey.common.ui.field.FinancilityToggleListItem
+import dev.lkey.common.ui.item.FinancilityListItem
+import dev.lkey.common.R
 
 @Composable
 fun SettingsView (

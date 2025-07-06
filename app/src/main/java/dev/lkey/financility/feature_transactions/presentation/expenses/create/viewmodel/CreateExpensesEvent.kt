@@ -1,6 +1,6 @@
 package dev.lkey.financility.feature_transactions.presentation.expenses.create.viewmodel
 
-import dev.lkey.financility.feature_transactions.domain.model.CategoryModel
+import dev.lkey.common.core.model.CategoryModel
 
 /**
  * События экрана добавления расходов

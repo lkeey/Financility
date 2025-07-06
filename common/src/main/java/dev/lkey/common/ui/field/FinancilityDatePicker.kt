@@ -34,8 +34,6 @@ fun FinancilityDayPicker(
     onChangeDate: (String) -> Unit
 ) {
     
-//    TODO ставить выбранную дату
-    
     var showDialog by remember { mutableStateOf(false) }
     val selectedDateLabel = remember { mutableStateOf(previousValue) }
     val datePickerState = rememberDatePickerState(
@@ -113,11 +111,13 @@ fun FinancilityDayPicker(
 
                         onChangeDate(selectedDateLabel.value)
 
-                        selectedDateLabel.value =
-                            convertMillisToDate(datePickerState.selectedDateMillis ?: selectedDateLabel.value.toLong())
+
                     }
                 ) {
                     Text("OK")
+
+                    selectedDateLabel.value =
+                        convertMillisToDate(datePickerState.selectedDateMillis ?: selectedDateLabel.value.toLong())
                 }
             },
             dismissButton = {

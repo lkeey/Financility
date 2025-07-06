@@ -15,10 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import dev.lkey.financility.R
-import dev.lkey.financility.components.item.FinancilitySnackBar
-import dev.lkey.financility.components.nav.FinancilityBottomBar
-import dev.lkey.financility.components.nav.FinancilityTopBar
+import dev.lkey.common.R
+import dev.lkey.common.ui.item.FinancilitySnackBar
+import dev.lkey.common.ui.nav.FinancilityBottomBar
+import dev.lkey.common.ui.nav.FinancilityTopBar
 import dev.lkey.financility.feature_transactions.presentation.expenses.create.viewmodel.CreateExpensesAction
 import dev.lkey.financility.feature_transactions.presentation.expenses.create.viewmodel.CreateExpensesEvent
 import dev.lkey.financility.feature_transactions.presentation.expenses.create.viewmodel.CreateExpensesViewModel

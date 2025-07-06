@@ -73,11 +73,14 @@ dependencies {
     implementation(libs.ktor.json)
     implementation(libs.ktor.client.logging)
 
-    // Dagger 2
+    // DI
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
 
+    // modules
     implementation(project(":articles"))
     implementation(project(":core"))
+    implementation(project(":common"))
+
 
 }

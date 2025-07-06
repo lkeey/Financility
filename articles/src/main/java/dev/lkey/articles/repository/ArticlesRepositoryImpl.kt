@@ -1,7 +1,7 @@
 package dev.lkey.articles.repository
 
-import dev.lkey.articles.data.model.CategoryModel
 import dev.lkey.articles.domain.repository.ArticlesRepository
+import dev.lkey.common.core.model.CategoryModel
 import dev.lkey.core.error.ApiException
 import dev.lkey.core.network.ktorClient
 import dev.lkey.core.network.safeCall

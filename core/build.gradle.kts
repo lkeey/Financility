@@ -3,6 +3,8 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+
+    alias(libs.plugins.jetbrains.kotlin.serialization)
 }
 
 val localProperties = Properties().apply {
@@ -68,4 +70,7 @@ dependencies {
     implementation(libs.ktor.client.negotiation)
     implementation(libs.ktor.json)
     implementation(libs.ktor.client.logging)
+
+    // DI
+    implementation(libs.dagger)
 }

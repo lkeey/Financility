@@ -1,6 +1,6 @@
 package dev.lkey.financility.feature_transactions.presentation.expenses.history.viewmodel
 
-import dev.lkey.financility.core.network.FinancilityResult
+import dev.lkey.core.network.FinancilityResult
 import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_transactions.domain.model.TransactionModel
 import java.time.LocalDate

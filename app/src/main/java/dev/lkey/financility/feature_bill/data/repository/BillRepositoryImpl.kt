@@ -1,9 +1,9 @@
 package dev.lkey.financility.feature_bill.data.repository
 
-import dev.lkey.financility.BuildConfig
-import dev.lkey.financility.core.error.ApiException
-import dev.lkey.financility.core.network.ktorClient
-import dev.lkey.financility.core.network.safeCall
+
+import dev.lkey.core.error.ApiException
+import dev.lkey.core.network.ktorClient
+import dev.lkey.core.network.safeCall
 import dev.lkey.financility.feature_bill.data.model.UpdateAccountDto
 import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_bill.domain.repository.BillRepository
@@ -23,7 +23,7 @@ class BillRepositoryImpl : BillRepository {
     override suspend fun getBillInfo(): Result<List<AccountBriefModel>> {
         return safeCall {
 
-            val response: HttpResponse = ktorClient.get("${BuildConfig.BASE_URL}/accounts")
+            val response: HttpResponse = ktorClient.get("accounts")
 
             if (response.status != HttpStatusCode.OK) {
                 throw ApiException("Ошибка API: ${response.status}")
@@ -39,7 +39,7 @@ class BillRepositoryImpl : BillRepository {
     ): Result<AccountBriefModel> {
         return safeCall {
 
-            val response: HttpResponse = ktorClient.put("${BuildConfig.BASE_URL}/accounts/$id") {
+            val response: HttpResponse = ktorClient.put("accounts/$id") {
                 setBody(newBill)
             }
 

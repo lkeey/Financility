@@ -1,6 +1,6 @@
 package dev.lkey.articles.domain.repository
 
-import dev.lkey.articles.data.model.CategoryModel
+import dev.lkey.common.core.model.CategoryModel
 
 interface ArticlesRepository {
 

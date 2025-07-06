@@ -2,8 +2,8 @@ package dev.lkey.financility.feature_transactions.presentation.expenses.create.v
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.lkey.financility.core.error.ApiException
-import dev.lkey.financility.core.error.ErrorHandler
+import dev.lkey.core.error.ApiException
+import dev.lkey.core.error.ErrorHandler
 import dev.lkey.financility.feature_transactions.data.dto.TransactionDto
 import dev.lkey.financility.feature_transactions.domain.usecase.GetAccountUseCase
 import dev.lkey.financility.feature_transactions.domain.usecase.GetArticlesUseCase

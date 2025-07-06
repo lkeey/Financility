@@ -1,12 +1,11 @@
 package dev.lkey.financility.feature_transactions.data.repository
 
-import dev.lkey.financility.BuildConfig
-import dev.lkey.financility.core.error.ApiException
-import dev.lkey.financility.core.network.ktorClient
-import dev.lkey.financility.core.network.safeCall
+import dev.lkey.common.core.model.CategoryModel
+import dev.lkey.core.error.ApiException
+import dev.lkey.core.network.ktorClient
+import dev.lkey.core.network.safeCall
 import dev.lkey.financility.feature_bill.domain.model.AccountBriefModel
 import dev.lkey.financility.feature_transactions.data.dto.TransactionDto
-import dev.lkey.financility.feature_transactions.domain.model.CategoryModel
 import dev.lkey.financility.feature_transactions.domain.model.TransactionModel
 import dev.lkey.financility.feature_transactions.domain.repository.TransactionsRepository
 import io.ktor.client.call.body
@@ -31,7 +30,7 @@ class TransactionsRepositoryImpl : TransactionsRepository {
         endDate: String,
     ): Result<List<TransactionModel>> {
         return safeCall {
-            val response = ktorClient.get("${BuildConfig.BASE_URL}/transactions/account/${accountId}/period") {
+            val response = ktorClient.get("transactions/account/${accountId}/period") {
                 url {
                     parameters.append("startDate", startDate)
                     parameters.append("endDate", endDate)
@@ -48,7 +47,7 @@ class TransactionsRepositoryImpl : TransactionsRepository {
 
     override suspend fun getAccounts(): Result<List<AccountBriefModel>> {
         return safeCall {
-            val response: HttpResponse = ktorClient.get("${BuildConfig.BASE_URL}/accounts")
+            val response: HttpResponse = ktorClient.get("accounts")
 
             if (response.status != HttpStatusCode.OK) {
                 throw ApiException("Ошибка API: ${response.status}")
@@ -60,7 +59,7 @@ class TransactionsRepositoryImpl : TransactionsRepository {
 
     override suspend fun createExpense(transaction: TransactionDto): Result<Unit> {
         return safeCall {
-            val response: HttpResponse = ktorClient.post("${BuildConfig.BASE_URL}/transactions") {
+            val response: HttpResponse = ktorClient.post("transactions") {
                 setBody(transaction)
             }
 

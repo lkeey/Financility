@@ -8,11 +8,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dev.lkey.financility.R
-import dev.lkey.financility.components.field.FinancilityDayPicker
-import dev.lkey.financility.components.item.FinancilityListItem
-import dev.lkey.financility.core.converter.toEmoji
-import dev.lkey.financility.core.converter.toFormat
+import dev.lkey.common.R
+import dev.lkey.common.ui.field.FinancilityDayPicker
+import dev.lkey.common.ui.item.FinancilityListItem
+import dev.lkey.core.converter.toEmoji
+import dev.lkey.core.converter.toFormat
 import dev.lkey.financility.feature_transactions.presentation.expenses.history.viewmodel.HistoryExpensesEvent
 import dev.lkey.financility.feature_transactions.presentation.expenses.history.viewmodel.HistoryExpensesState
 
