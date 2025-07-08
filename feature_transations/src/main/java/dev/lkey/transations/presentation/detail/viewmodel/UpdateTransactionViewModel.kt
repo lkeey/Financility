@@ -1,4 +1,4 @@
-package dev.lkey.transations.presentation.detail
+package dev.lkey.transations.presentation.detail.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

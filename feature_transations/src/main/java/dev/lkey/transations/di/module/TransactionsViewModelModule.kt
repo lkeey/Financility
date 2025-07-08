@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 import dev.lkey.core.di.ViewModelKey
 import dev.lkey.transations.presentation.create.viewmodel.CreateTransactionViewModel
-import dev.lkey.transations.presentation.detail.UpdateTransactionViewModel
+import dev.lkey.transations.presentation.detail.viewmodel.UpdateTransactionViewModel
 import dev.lkey.transations.presentation.expenses.history.viewmodel.HistoryExpensesViewModel
 import dev.lkey.transations.presentation.expenses.today.viewmodel.ExpensesViewModel
 import dev.lkey.transations.presentation.income.history.viewmodel.HistoryIncomeViewModel

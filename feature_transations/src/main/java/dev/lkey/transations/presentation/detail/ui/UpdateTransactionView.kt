@@ -17,8 +17,8 @@ import dev.lkey.common.ui.field.FinancilityEditText
 import dev.lkey.common.ui.field.FinancilityNumTextField
 import dev.lkey.common.ui.field.FinancilityTimePicker
 import dev.lkey.common.ui.item.FinancilityListItem
-import dev.lkey.transations.presentation.detail.UpdateTransactionEvent
-import dev.lkey.transations.presentation.detail.UpdateTransactionState
+import dev.lkey.transations.presentation.detail.viewmodel.UpdateTransactionEvent
+import dev.lkey.transations.presentation.detail.viewmodel.UpdateTransactionState
 
 @Composable
 fun UpdateTransactionView (

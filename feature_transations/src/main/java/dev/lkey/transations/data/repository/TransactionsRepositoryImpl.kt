@@ -98,7 +98,7 @@ class TransactionsRepositoryImpl : TransactionsRepository {
         return safeCall {
             val response: HttpResponse = ktorClient.delete("transactions/${id}")
 
-            if (response.status != HttpStatusCode.OK && response.status != HttpStatusCode.Created) {
+            if (response.status != HttpStatusCode.NoContent) {
                 throw ApiException("Ошибка API: ${response.status}")
             }
 

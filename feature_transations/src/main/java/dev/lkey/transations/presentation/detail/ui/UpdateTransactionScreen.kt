@@ -22,9 +22,9 @@ import dev.lkey.common.ui.nav.FinancilityBottomBar
 import dev.lkey.common.ui.nav.FinancilityTopBar
 import dev.lkey.core.network.FinancilityResult
 import dev.lkey.transations.domain.model.TransactionModel
-import dev.lkey.transations.presentation.detail.UpdateTransactionAction
-import dev.lkey.transations.presentation.detail.UpdateTransactionEvent
-import dev.lkey.transations.presentation.detail.UpdateTransactionViewModel
+import dev.lkey.transations.presentation.detail.viewmodel.UpdateTransactionAction
+import dev.lkey.transations.presentation.detail.viewmodel.UpdateTransactionEvent
+import dev.lkey.transations.presentation.detail.viewmodel.UpdateTransactionViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable

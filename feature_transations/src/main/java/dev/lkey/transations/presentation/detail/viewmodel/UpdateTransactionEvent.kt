@@ -1,4 +1,4 @@
-package dev.lkey.transations.presentation.detail
+package dev.lkey.transations.presentation.detail.viewmodel
 
 import dev.lkey.common.core.model.CategoryModel
 import dev.lkey.transations.domain.model.TransactionModel
