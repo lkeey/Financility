@@ -53,7 +53,6 @@ fun UpdateTransactionScreen (
 
                 UpdateTransactionAction.OnOpenScreen -> {
                     navController.popBackStack()
-//                    navController.navigate(if (isIncome) Route.Income else Route.Expense)
                 }
             }
         }

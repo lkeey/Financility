@@ -16,7 +16,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import dev.lkey.common.R
-import dev.lkey.common.navigation.Route
 import dev.lkey.common.ui.item.FinancilityLoadingBar
 import dev.lkey.common.ui.item.FinancilitySnackBar
 import dev.lkey.common.ui.nav.FinancilityBottomBar
@@ -50,7 +49,7 @@ fun CreateTransactionScreen (
                 }
 
                 CreateTransactionAction.OnOpenScreen -> {
-                    navController.navigate(if (isIncome) Route.Income else Route.Expense)
+                    navController.popBackStack()
                 }
             }
         }
