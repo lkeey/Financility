@@ -44,7 +44,7 @@ val ktorClient = HttpClient(OkHttp) {
 
         url {
             protocol = URLProtocol.HTTPS
-            host = "shmr-finance.ru/api/v1/"
+            host = "shmr-finance.ru/api/v1"
         }
 
         contentType(ContentType.Application.Json)

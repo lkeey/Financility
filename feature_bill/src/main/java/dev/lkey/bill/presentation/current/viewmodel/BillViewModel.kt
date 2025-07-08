@@ -2,10 +2,7 @@ package dev.lkey.bill.presentation.current.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.lkey.bill.data.model.UpdateAccountDto
 import dev.lkey.bill.domain.usecase.GetBillInfoUseCase
-import dev.lkey.bill.domain.usecase.UpdateBillUseCase
-import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.core.error.ErrorHandler
 import dev.lkey.core.network.FinancilityResult
 import jakarta.inject.Inject
@@ -23,7 +20,6 @@ import kotlinx.coroutines.launch
 
 class BillViewModel @Inject constructor(
     private val billInfoUseCase : GetBillInfoUseCase,
-    private val updateBillUseCase : UpdateBillUseCase
 ): ViewModel() {
 
     private val _state = MutableStateFlow(BillState())
@@ -43,12 +39,13 @@ class BillViewModel @Inject constructor(
             is BillEvent.OnLoadBill -> {
                 loadData()
             }
-
         }
     }
 
     private fun loadData() {
         viewModelScope.launch {
+            _action.emit(BillAction.ShowSnackBar("..."))
+
             _state.update {
                 it.copy(
                     status = FinancilityResult.Loading
@@ -74,43 +71,6 @@ class BillViewModel @Inject constructor(
 
                     _action.emit(BillAction.ShowSnackBar("Не удалось найти аккаунт"))
                 }
-            }.onFailure { err ->
-                _state.update {
-                    it.copy(
-                        status = FinancilityResult.Error
-                    )
-                }
-
-                _action.emit(BillAction.ShowSnackBar(ErrorHandler().handleException(err)))
-            }
-        }
-    }
-
-    private fun updateBill(
-        accDto : UpdateAccountDto
-    ) {
-        viewModelScope.launch {
-            _state.update {
-                it.copy(
-                    status = FinancilityResult.Loading
-                )
-            }
-
-            val result = updateBillUseCase.invoke(
-                id = state.value.accounts[0].id,
-                newBill = accDto
-            )
-
-            result.onSuccess { res ->
-                _state.update {
-                    it.copy(
-                        accounts = listOf<AccountBriefModel>(res),
-                        status = FinancilityResult.Success
-                    )
-                }
-
-                _action.emit(BillAction.ShowSnackBar("Валюта успешно обновлена"))
-
             }.onFailure { err ->
                 _state.update {
                     it.copy(

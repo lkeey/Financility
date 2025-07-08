@@ -27,6 +27,7 @@ import dev.lkey.bill.presentation.current.viewmodel.BillViewModel
 import dev.lkey.common.R
 import dev.lkey.common.navigation.Route
 import dev.lkey.common.ui.item.FinancilityLoadingBar
+import dev.lkey.common.ui.item.FinancilitySnackBar
 import dev.lkey.common.ui.nav.FinancilityBottomBar
 import dev.lkey.common.ui.nav.FinancilityTopBar
 import dev.lkey.core.network.FinancilityResult
@@ -95,7 +96,8 @@ fun BillScreen (
                 )
             }
         },
-        floatingActionButtonPosition = FabPosition.End
+        floatingActionButtonPosition = FabPosition.End,
+        snackbarHost = { FinancilitySnackBar(snackBarHostState) }
     ) { padding ->
 
         if (state.status != FinancilityResult.Success) {
