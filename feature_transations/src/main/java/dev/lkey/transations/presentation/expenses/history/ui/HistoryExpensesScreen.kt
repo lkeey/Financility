@@ -16,6 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import dev.lkey.common.R
+import dev.lkey.common.navigation.Route
 import dev.lkey.common.ui.item.FinancilityLoadingBar
 import dev.lkey.common.ui.item.FinancilitySnackBar
 import dev.lkey.common.ui.nav.FinancilityBottomBar
@@ -25,6 +26,9 @@ import dev.lkey.transations.presentation.expenses.history.viewmodel.HistoryExpen
 import dev.lkey.transations.presentation.expenses.history.viewmodel.HistoryExpensesEvent
 import dev.lkey.transations.presentation.expenses.history.viewmodel.HistoryExpensesViewModel
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.serialization.json.Json
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @Composable
 fun HistoryExpensesScreen (
@@ -94,9 +98,17 @@ fun HistoryExpensesScreen (
         } else {
             HistoryExpensesView(
                 modifier = Modifier.padding(padding),
-                state = state
+                state = state,
+                onEvent = {
+                    viewModel.onEvent(it)
+                }
             ) {
-                viewModel.onEvent(it)
+                val json = Json.encodeToString(it)
+                val encoded = URLEncoder.encode(json, StandardCharsets.UTF_8.toString())
+
+                navController.navigate(
+                    "${Route.UpdateExpense}/${encoded}"
+                )
             }
         }
 

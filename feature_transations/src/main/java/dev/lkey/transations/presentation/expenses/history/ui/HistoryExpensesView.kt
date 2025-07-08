@@ -13,6 +13,7 @@ import dev.lkey.common.ui.field.FinancilityDayPicker
 import dev.lkey.common.ui.item.FinancilityListItem
 import dev.lkey.core.converter.toEmoji
 import dev.lkey.core.converter.toFormat
+import dev.lkey.transations.domain.model.TransactionModel
 import dev.lkey.transations.presentation.expenses.history.viewmodel.HistoryExpensesEvent
 import dev.lkey.transations.presentation.expenses.history.viewmodel.HistoryExpensesState
 
@@ -20,7 +21,8 @@ import dev.lkey.transations.presentation.expenses.history.viewmodel.HistoryExpen
 fun HistoryExpensesView (
     modifier: Modifier = Modifier,
     state: HistoryExpensesState,
-    onEvent: (HistoryExpensesEvent) -> Unit
+    onEvent: (HistoryExpensesEvent) -> Unit,
+    onItemClick: (TransactionModel) -> Unit,
 ) {
 
     val scrollState = rememberScrollState()
@@ -70,11 +72,11 @@ fun HistoryExpensesView (
                     emoji = it.categoryModel.emoji,
                     title = it.categoryModel.name,
                     description = it.comment,
-                    trailingSubText = it.createdAt.substring(0, endIndex = 16).replace("T", " "),
+                    trailingSubText = it.transactionDate.substring(0, endIndex = 16).replace("T", " "),
                     trailingText = "${it.amount} ${state.accounts[0].currency.toEmoji()}",
                     height = 70.dp
                 ) {
-                    /* TODO */
+                    onItemClick(it)
                 }
         }
     }

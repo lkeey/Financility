@@ -10,12 +10,14 @@ import dev.lkey.common.R
 import dev.lkey.common.ui.item.FinancilityListItem
 import dev.lkey.core.converter.toEmoji
 import dev.lkey.core.converter.toFormat
+import dev.lkey.transations.domain.model.TransactionModel
 import dev.lkey.transations.presentation.income.today.viewmodel.IncomeState
 
 @Composable
 fun IncomeView (
     modifier: Modifier = Modifier,
-    state: IncomeState
+    state: IncomeState,
+    onItemClick: (TransactionModel) -> Unit,
 ) {
 
     Column (
@@ -42,7 +44,7 @@ fun IncomeView (
                 trailingText = "${it.amount} ${state.accounts[0].currency.toEmoji()}",
                 height = 72.dp
             ) {
-                /* TODO */
+                onItemClick(it)
             }
         }
     }

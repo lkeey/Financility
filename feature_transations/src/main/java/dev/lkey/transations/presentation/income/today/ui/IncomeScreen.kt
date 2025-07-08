@@ -32,6 +32,9 @@ import dev.lkey.transations.presentation.income.today.viewmodel.IncomeAction
 import dev.lkey.transations.presentation.income.today.viewmodel.IncomeEvent
 import dev.lkey.transations.presentation.income.today.viewmodel.IncomeViewModel
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.serialization.json.Json
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @Composable
 fun IncomeScreen (
@@ -112,7 +115,14 @@ fun IncomeScreen (
                 modifier = Modifier
                     .padding(padding),
                 state = state
-            )
+            ) {
+                val json = Json.encodeToString(it)
+                val encoded = URLEncoder.encode(json, StandardCharsets.UTF_8.toString())
+
+                navController.navigate(
+                    "${Route.UpdateIncome}/${encoded}"
+                )
+            }
         }
 
     }

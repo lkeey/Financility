@@ -16,6 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import dev.lkey.common.R
+import dev.lkey.common.navigation.Route
 import dev.lkey.common.ui.item.FinancilityLoadingBar
 import dev.lkey.common.ui.item.FinancilitySnackBar
 import dev.lkey.common.ui.nav.FinancilityBottomBar
@@ -25,6 +26,9 @@ import dev.lkey.transations.presentation.income.history.viewmodel.HistoryIncomeA
 import dev.lkey.transations.presentation.income.history.viewmodel.HistoryIncomeEvent
 import dev.lkey.transations.presentation.income.history.viewmodel.HistoryIncomeViewModel
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.serialization.json.Json
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @Composable
 fun HistoryIncomeScreen(
@@ -95,9 +99,17 @@ fun HistoryIncomeScreen(
             HistoryIncomeView(
                 modifier = Modifier
                     .padding(padding),
-                state = state
+                state = state,
+                onEvent = {
+                    viewModel.onEvent(it)
+                }
             ) {
-                viewModel.onEvent(it)
+                val json = Json.encodeToString(it)
+                val encoded = URLEncoder.encode(json, StandardCharsets.UTF_8.toString())
+
+                navController.navigate(
+                    "${Route.UpdateIncome}/${encoded}"
+                )
             }
         }
 
