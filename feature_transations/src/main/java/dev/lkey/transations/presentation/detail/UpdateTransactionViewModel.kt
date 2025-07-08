@@ -82,8 +82,8 @@ class UpdateTransactionViewModel @Inject constructor (
                         accounts = listOf(event.transaction.account),
                         article = event.transaction.categoryModel,
                         sum = event.transaction.amount,
-                        date = event.transaction.createdAt.split("T")[0],
-                        time = event.transaction.createdAt.split("T")[1].substring(0, 5),
+                        date = event.transaction.transactionDate.split("T")[0],
+                        time = event.transaction.transactionDate.split("T")[1].substring(0, 5),
                         comment = event.transaction.comment
                     )
                 }
