@@ -147,7 +147,7 @@ fun FinancilityListItem (
             trailingIcon?.let {
                 Icon(
                     painter = painterResource(it),
-                    contentDescription = "awdawd",
+                    contentDescription = "trailing",
                     modifier = Modifier
                         .size(24.dp)
                 )

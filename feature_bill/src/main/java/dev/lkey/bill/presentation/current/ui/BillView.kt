@@ -9,7 +9,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import dev.lkey.bill.presentation.current.viewmodel.BillEvent
 import dev.lkey.bill.presentation.current.viewmodel.BillState
-import dev.lkey.common.R
 import dev.lkey.common.ui.item.FinancilityListItem
 import dev.lkey.core.converter.toEmoji
 
@@ -27,27 +26,33 @@ fun BillView (
     ){
         state.accounts.forEach {
             FinancilityListItem(
+                emoji = "\uD83D\uDC7B",
+                title = "Счет",
+                description = null,
+                backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
+                trailingText = it.name,
+                backgroundEmojiColor = Color.White,
+                isClickable = false,
+            )
+
+            FinancilityListItem(
                 emoji = "\uD83D\uDCB0",
                 title = "Баланс",
                 description = null,
                 backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
                 trailingText = "${it.balance} ${it.currency.toEmoji()}",
-                trailingIcon = R.drawable.ic_light_arrow,
+                isClickable = false,
                 backgroundEmojiColor = Color.White
-            ) {
-                /* TODO */
-            }
+            )
 
             FinancilityListItem(
                 title = "Валюта",
                 description = null,
                 backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
                 trailingText = it.currency.toEmoji(),
-                trailingIcon = R.drawable.ic_light_arrow,
+                isClickable = false,
                 isShowDivider = false,
-            ) {
-                /* TODO */
-            }
+            )
         }
     }
 }
