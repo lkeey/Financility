@@ -10,6 +10,7 @@ import dev.lkey.transations.presentation.expenses.history.viewmodel.HistoryExpen
 import dev.lkey.transations.presentation.expenses.today.viewmodel.ExpensesViewModel
 import dev.lkey.transations.presentation.income.history.viewmodel.HistoryIncomeViewModel
 import dev.lkey.transations.presentation.income.today.viewmodel.IncomeViewModel
+import dev.lkey.transations.presentation.update.UpdateTransactionViewModel
 
 @Module
 abstract class TransactionsViewModelModule {
@@ -38,5 +39,10 @@ abstract class TransactionsViewModelModule {
     @IntoMap
     @ViewModelKey(CreateTransactionViewModel::class)
     abstract fun bindCreateExpensesViewModel(viewModel: CreateTransactionViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UpdateTransactionViewModel::class)
+    abstract fun bindUpdateTransactionViewModel(viewModel: UpdateTransactionViewModel): ViewModel
 
 }

@@ -6,6 +6,7 @@ import dev.lkey.transations.domain.repository.TransactionsRepository
 import dev.lkey.transations.domain.usecase.GetAccountUseCase
 import dev.lkey.transations.domain.usecase.GetTransactionsUseCase
 import dev.lkey.transations.domain.usecase.PostTransactionUseCase
+import dev.lkey.transations.domain.usecase.UpdateTransactionUseCase
 
 /**
  * UseCase зависимости, инициализируемые Dagger-ом
@@ -32,5 +33,12 @@ class TransactionsUseCaseModule {
         transactionsRepository: TransactionsRepository
     ): GetAccountUseCase {
         return GetAccountUseCase(transactionsRepository)
+    }
+
+    @Provides
+    fun provideUpdateTransactionUseCase(
+        transactionsRepository: TransactionsRepository
+    ): UpdateTransactionUseCase {
+        return UpdateTransactionUseCase(transactionsRepository)
     }
 }

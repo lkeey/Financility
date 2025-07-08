@@ -3,7 +3,7 @@ package dev.lkey.transations.data.dto
 import kotlinx.serialization.Serializable
 
 /**
- * Модель для создания транзакции
+ * Модель для создания и обновления транзакции
  * */
 
 @Serializable
