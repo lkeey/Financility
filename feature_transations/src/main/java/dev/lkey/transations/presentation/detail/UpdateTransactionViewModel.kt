@@ -1,10 +1,14 @@
-package dev.lkey.transations.presentation.update
+package dev.lkey.transations.presentation.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.lkey.core.error.ApiException
 import dev.lkey.core.error.ErrorHandler
 import dev.lkey.core.network.FinancilityResult
+import dev.lkey.transations.data.dto.TransactionDto
 import dev.lkey.transations.domain.usecase.GetArticlesUseCase
+import dev.lkey.transations.domain.usecase.UpdateTransactionUseCase
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -17,8 +21,9 @@ import kotlinx.coroutines.launch
  * Действия со стороны VM на экран редактирования транзакций
  * */
 
-class UpdateTransactionViewModel (
+class UpdateTransactionViewModel @Inject constructor (
     private val articlesUseCase : GetArticlesUseCase,
+    private val updateUseCase : UpdateTransactionUseCase,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(UpdateTransactionState())
@@ -73,11 +78,12 @@ class UpdateTransactionViewModel (
             is UpdateTransactionEvent.OnLoadData -> {
                 _state.update {
                     it.copy(
+                        id = event.transaction.id,
                         accounts = listOf(event.transaction.account),
                         article = event.transaction.categoryModel,
                         sum = event.transaction.amount,
                         date = event.transaction.createdAt.split("T")[0],
-                        time = event.transaction.createdAt.split("T")[1],
+                        time = event.transaction.createdAt.split("T")[1].substring(0, 5),
                         comment = event.transaction.comment
                     )
                 }
@@ -101,6 +107,36 @@ class UpdateTransactionViewModel (
                 )
             }
 
+            val result = updateUseCase.invoke(
+                id = state.value.id,
+                transaction = TransactionDto(
+                    accountId = state.value.accounts[0].id,
+                    categoryId = state.value.article?.id ?: throw ApiException("Заполните все поля"),
+                    amount = state.value.sum ?: throw ApiException("Заполните все поля"),
+                    transactionDate = "${state.value.date}T${state.value.time}:00.000Z",
+                    comment = state.value.comment
+                )
+            )
+
+            result
+                .onSuccess { res ->
+                    _state.update {
+                        it.copy(
+                            status = FinancilityResult.Success
+                        )
+                    }
+
+                    _action.emit(UpdateTransactionAction.OnOpenScreen)
+                }
+                .onFailure { err ->
+                    _state.update {
+                        it.copy(
+                            status = FinancilityResult.Error
+                        )
+                    }
+
+                    _action.emit(UpdateTransactionAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                }
 
         }
     }

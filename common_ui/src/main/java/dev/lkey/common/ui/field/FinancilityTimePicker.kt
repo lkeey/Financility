@@ -19,12 +19,16 @@ fun FinancilityTimePicker (
     backgroundColor: Color = MaterialTheme.colorScheme.onSurface,
     onChangeTime: (String) -> Unit
 ) {
-    var selectedTime by remember { mutableStateOf(previousValue) }
-    val context = LocalContext.current
+    var selectedTime by remember {
+        mutableStateOf(previousValue)
+    }
 
+    val context = LocalContext.current
     val calendar = Calendar.getInstance()
-    val hour = calendar.get(Calendar.HOUR_OF_DAY)
-    val minute = calendar.get(Calendar.MINUTE)
+
+    val data = previousValue.split(":")
+    val hour = if (data.size > 1) data[0].toIntOrNull() ?: calendar.get(Calendar.HOUR_OF_DAY) else calendar.get(Calendar.HOUR_OF_DAY)
+    val minute = if (data.size > 1) data[1].toIntOrNull() ?: calendar.get(Calendar.MINUTE) else calendar.get(Calendar.MINUTE)
 
     val timePickerDialog = remember {
         TimePickerDialog(

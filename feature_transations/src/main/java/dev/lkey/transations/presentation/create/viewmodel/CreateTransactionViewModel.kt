@@ -169,46 +169,35 @@ class CreateTransactionViewModel @Inject constructor (
                 )
             }
 
-            try {
-                val result = createTransactionUseCase.invoke(
-                    TransactionDto(
-                        accountId = state.value.accounts[0].id,
-                        categoryId = state.value.article?.id ?: throw ApiException("Заполните все поля"),
-                        amount = state.value.sum ?: throw ApiException("Заполните все поля"),
-                        transactionDate = "${state.value.date}T${state.value.time}:00.000Z",
-                        comment = state.value.comment
-                    )
+            val result = createTransactionUseCase.invoke(
+                TransactionDto(
+                    accountId = state.value.accounts[0].id,
+                    categoryId = state.value.article?.id ?: throw ApiException("Заполните все поля"),
+                    amount = state.value.sum ?: throw ApiException("Заполните все поля"),
+                    transactionDate = "${state.value.date}T${state.value.time}:00.000Z",
+                    comment = state.value.comment
                 )
+            )
 
-                result
-                    .onSuccess { res ->
-                        _state.update {
-                            it.copy(
-                                status = FinancilityResult.Success
-                            )
-                        }
-
-                        _action.emit(CreateTransactionAction.OnOpenScreen)
-                    }
-                    .onFailure { err ->
-                        _state.update {
-                            it.copy(
-                                status = FinancilityResult.Error
-                            )
-                        }
-
-                        _action.emit(CreateTransactionAction.ShowSnackBar(ErrorHandler().handleException(err)))
+            result
+                .onSuccess { res ->
+                    _state.update {
+                        it.copy(
+                            status = FinancilityResult.Success
+                        )
                     }
 
-            } catch (e : Exception) {
-                _state.update {
-                    it.copy(
-                        status = FinancilityResult.Error
-                    )
+                    _action.emit(CreateTransactionAction.OnOpenScreen)
                 }
+                .onFailure { err ->
+                    _state.update {
+                        it.copy(
+                            status = FinancilityResult.Error
+                        )
+                    }
 
-                _action.emit(CreateTransactionAction.ShowSnackBar(ErrorHandler().handleException(e)))
-            }
+                    _action.emit(CreateTransactionAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                }
         }
     }
 }

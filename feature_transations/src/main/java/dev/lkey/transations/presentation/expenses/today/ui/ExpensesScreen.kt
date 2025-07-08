@@ -32,6 +32,9 @@ import dev.lkey.transations.presentation.expenses.today.viewmodel.ExpensesAction
 import dev.lkey.transations.presentation.expenses.today.viewmodel.ExpensesEvent
 import dev.lkey.transations.presentation.expenses.today.viewmodel.ExpensesViewModel
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.serialization.json.Json
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @Composable
 fun ExpensesScreen (
@@ -112,7 +115,14 @@ fun ExpensesScreen (
                 modifier = Modifier
                     .padding(padding),
                 state = state
-            )
+            ) {
+                val json = Json.encodeToString(it)
+                val encoded = URLEncoder.encode(json, StandardCharsets.UTF_8.toString())
+
+                navController.navigate(
+                    "${Route.UpdateExpense}/${encoded}"
+                )
+            }
         }
 
     }

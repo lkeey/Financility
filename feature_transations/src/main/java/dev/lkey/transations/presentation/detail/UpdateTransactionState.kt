@@ -1,4 +1,4 @@
-package dev.lkey.transations.presentation.update
+package dev.lkey.transations.presentation.detail
 
 import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.common.core.model.CategoryModel
@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter
  * */
 
 data class UpdateTransactionState(
+    val id : Int = 0,
     val accounts : List<AccountBriefModel> = emptyList(),
     val article: CategoryModel? = null,
     val sum: String? = null,

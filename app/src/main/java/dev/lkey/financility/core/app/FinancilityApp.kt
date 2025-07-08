@@ -21,11 +21,11 @@ import dev.lkey.financility.navigation.splash.SplashScreen
 import dev.lkey.settings.SettingsScreen
 import dev.lkey.transations.domain.model.TransactionModel
 import dev.lkey.transations.presentation.create.ui.CreateTransactionScreen
+import dev.lkey.transations.presentation.detail.ui.UpdateTransactionScreen
 import dev.lkey.transations.presentation.expenses.history.ui.HistoryExpensesScreen
 import dev.lkey.transations.presentation.expenses.today.ui.ExpensesScreen
 import dev.lkey.transations.presentation.income.history.ui.HistoryIncomeScreen
 import dev.lkey.transations.presentation.income.today.ui.IncomeScreen
-import dev.lkey.transations.presentation.update.ui.UpdateTransactionScreen
 import kotlinx.serialization.json.Json
 
 @Composable

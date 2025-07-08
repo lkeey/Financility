@@ -1,4 +1,4 @@
-package dev.lkey.transations.presentation.create.ui
+package dev.lkey.transations.presentation.detail.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -22,15 +22,20 @@ import dev.lkey.common.ui.item.FinancilitySnackBar
 import dev.lkey.common.ui.nav.FinancilityBottomBar
 import dev.lkey.common.ui.nav.FinancilityTopBar
 import dev.lkey.core.network.FinancilityResult
+import dev.lkey.transations.domain.model.TransactionModel
+import dev.lkey.transations.presentation.create.ui.CreateTransactionView
 import dev.lkey.transations.presentation.create.viewmodel.CreateTransactionAction
 import dev.lkey.transations.presentation.create.viewmodel.CreateTransactionEvent
-import dev.lkey.transations.presentation.create.viewmodel.CreateTransactionViewModel
+import dev.lkey.transations.presentation.detail.UpdateTransactionAction
+import dev.lkey.transations.presentation.detail.UpdateTransactionEvent
+import dev.lkey.transations.presentation.detail.UpdateTransactionViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun CreateTransactionScreen (
-    viewModel: CreateTransactionViewModel,
+fun UpdateTransactionScreen (
+    viewModel: UpdateTransactionViewModel,
     navController: NavController,
+    transaction: TransactionModel,
     isIncome : Boolean,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -38,18 +43,19 @@ fun CreateTransactionScreen (
 
     LaunchedEffect(Unit) {
         viewModel.onEvent(
-            CreateTransactionEvent.OnLoadData(
-                isIncome = isIncome
+            UpdateTransactionEvent.OnLoadData(
+                isIncome = isIncome,
+                transaction = transaction
             )
         )
 
         viewModel.action.collectLatest { action ->
             when (action) {
-                is CreateTransactionAction.ShowSnackBar -> {
+                is UpdateTransactionAction.ShowSnackBar -> {
                     snackBarHostState.showSnackbar(action.message)
                 }
 
-                CreateTransactionAction.OnOpenScreen -> {
+                UpdateTransactionAction.OnOpenScreen -> {
                     navController.navigate(if (isIncome) Route.Income else Route.Expense)
                 }
             }
@@ -64,11 +70,11 @@ fun CreateTransactionScreen (
         },
         topBar = {
             FinancilityTopBar(
-                title = "Мои ${if (isIncome) "доходы" else "расходы"}",
+                title = "Детали ${if (isIncome) "дохода" else "расхода"}",
                 actions = {
                     IconButton(
                         onClick = {
-                            viewModel.onEvent(CreateTransactionEvent.OnSave)
+                            viewModel.onEvent(UpdateTransactionEvent.OnUpdate)
                         }
                     ) {
                         Icon(
@@ -103,7 +109,7 @@ fun CreateTransactionScreen (
                     .padding(padding)
             )
         } else {
-            CreateTransactionView (
+            UpdateTransactionView (
                 modifier = Modifier.padding(padding),
                 state = state,
                 isIncome = isIncome

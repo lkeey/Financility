@@ -10,7 +10,7 @@ import dev.lkey.transations.presentation.expenses.history.viewmodel.HistoryExpen
 import dev.lkey.transations.presentation.expenses.today.viewmodel.ExpensesViewModel
 import dev.lkey.transations.presentation.income.history.viewmodel.HistoryIncomeViewModel
 import dev.lkey.transations.presentation.income.today.viewmodel.IncomeViewModel
-import dev.lkey.transations.presentation.update.UpdateTransactionViewModel
+import dev.lkey.transations.presentation.detail.UpdateTransactionViewModel
 
 @Module
 abstract class TransactionsViewModelModule {

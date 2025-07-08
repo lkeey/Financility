@@ -12,12 +12,14 @@ import dev.lkey.common.R
 import dev.lkey.common.ui.item.FinancilityListItem
 import dev.lkey.core.converter.toEmoji
 import dev.lkey.core.converter.toFormat
+import dev.lkey.transations.domain.model.TransactionModel
 import dev.lkey.transations.presentation.expenses.today.viewmodel.ExpensesState
 
 @Composable
 fun ExpensesView (
     modifier: Modifier = Modifier,
     state: ExpensesState,
+    onItemClick: (TransactionModel) -> Unit,
 ) {
     val scrollState = rememberScrollState()
 
@@ -48,7 +50,7 @@ fun ExpensesView (
                 trailingText = "${it.amount} ${state.accounts[0].currency.toEmoji()}",
                 height = 69.dp
             ) {
-                /* TODO */
+                onItemClick(it)
             }
         }
     }
