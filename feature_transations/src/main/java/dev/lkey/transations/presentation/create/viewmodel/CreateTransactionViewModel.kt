@@ -77,7 +77,6 @@ class CreateTransactionViewModel @Inject constructor (
                     )
                 }
             }
-
             is CreateTransactionEvent.OnLoadData -> {
                 loadAccount {
                     loadArticles(

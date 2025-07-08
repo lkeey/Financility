@@ -51,7 +51,7 @@ fun CreateTransactionScreen (
 
                 CreateTransactionAction.OnOpenScreen -> {
                     if (isIncome) "доход" else "расход"
-                    navController.navigate(if (isIncome) Route.Income else Route.Expenses)
+                    navController.navigate(if (isIncome) Route.Income else Route.Expense)
                 }
             }
         }

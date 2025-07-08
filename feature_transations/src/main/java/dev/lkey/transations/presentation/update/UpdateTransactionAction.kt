@@ -1,4 +1,6 @@
 package dev.lkey.transations.presentation.update
 
-class UpdateTransactionAction {
+sealed class UpdateTransactionAction {
+    data class ShowSnackBar(val message: String) : UpdateTransactionAction()
+    data object OnOpenScreen : UpdateTransactionAction()
 }

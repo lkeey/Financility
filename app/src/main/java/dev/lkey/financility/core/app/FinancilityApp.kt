@@ -1,14 +1,17 @@
 package dev.lkey.financility.core.app
 
+import android.net.Uri
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import dev.lkey.articles.presentation.ui.ArticlesScreen
 import dev.lkey.bill.presentation.current.ui.BillScreen
 import dev.lkey.bill.presentation.edit.ui.EditBillScreen
@@ -16,11 +19,14 @@ import dev.lkey.common.navigation.Route
 import dev.lkey.common.theme.FinancilityTheme
 import dev.lkey.financility.navigation.splash.SplashScreen
 import dev.lkey.settings.SettingsScreen
+import dev.lkey.transations.domain.model.TransactionModel
 import dev.lkey.transations.presentation.create.ui.CreateTransactionScreen
 import dev.lkey.transations.presentation.expenses.history.ui.HistoryExpensesScreen
 import dev.lkey.transations.presentation.expenses.today.ui.ExpensesScreen
 import dev.lkey.transations.presentation.income.history.ui.HistoryIncomeScreen
 import dev.lkey.transations.presentation.income.today.ui.IncomeScreen
+import dev.lkey.transations.presentation.update.ui.UpdateTransactionScreen
+import kotlinx.serialization.json.Json
 
 @Composable
 fun FinancilityApp(
@@ -43,29 +49,49 @@ fun FinancilityApp(
                 )
             }
 
-            navigation<Route.Expenses>(
-                startDestination = Route.TodayExpenses
+            navigation<Route.Expense>(
+                startDestination = Route.TodayExpense
             ) {
-                composable<Route.TodayExpenses> {
+                composable<Route.TodayExpense> {
                     ExpensesScreen(
                         navController = navController,
                         viewModel = viewModel(factory = viewModelFactory),
                     )
                 }
 
-                composable<Route.HistoryExpenses> {
+                composable<Route.HistoryExpense> {
                     HistoryExpensesScreen(
                         navController = navController,
                         viewModel = viewModel(factory = viewModelFactory),
                     )
                 }
 
-                composable<Route.CreateExpenses> {
+                composable<Route.CreateExpense> {
                     CreateTransactionScreen(
                         navController = navController,
                         viewModel = viewModel(factory = viewModelFactory),
                         isIncome = false
                     )
+                }
+
+                composable(
+                    route = "${Route.UpdateExpense}/{transaction}",
+                    arguments = listOf(navArgument("transaction") { type = NavType.StringType })
+                ) { backStackEntry ->
+
+                    val json = backStackEntry.arguments?.getString("transaction")
+                    val transaction = json?.let {
+                        Json.decodeFromString<TransactionModel>(Uri.decode(it))
+                    }
+
+                    if (transaction != null) {
+                        UpdateTransactionScreen(
+                            navController = navController,
+                            viewModel = viewModel(factory = viewModelFactory),
+                            transaction = transaction,
+                            isIncome = false
+                        )
+                    }
                 }
             }
 
@@ -93,6 +119,27 @@ fun FinancilityApp(
                         isIncome = true
                     )
                 }
+
+                composable(
+                    route = "${Route.UpdateIncome}/{transaction}",
+                    arguments = listOf(navArgument("transaction") { type = NavType.StringType })
+                ) { backStackEntry ->
+
+                    val json = backStackEntry.arguments?.getString("transaction")
+                    val transaction = json?.let {
+                        Json.decodeFromString<TransactionModel>(Uri.decode(it))
+                    }
+
+                    if (transaction != null) {
+                        UpdateTransactionScreen(
+                            navController = navController,
+                            viewModel = viewModel(factory = viewModelFactory),
+                            transaction = transaction,
+                            isIncome = true
+                        )
+                    }
+                }
+
             }
 
             navigation<Route.Bill>(

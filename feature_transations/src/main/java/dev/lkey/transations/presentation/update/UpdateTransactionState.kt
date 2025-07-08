@@ -1,4 +1,4 @@
-package dev.lkey.transations.presentation.create.viewmodel
+package dev.lkey.transations.presentation.update
 
 import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.common.core.model.CategoryModel
@@ -8,10 +8,10 @@ import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 /**
- * Состояние экрана добавления транзакции
+ * Состояние экрана обновления транзакции
  * */
 
-data class CreateTransactionState (
+data class UpdateTransactionState(
     val accounts : List<AccountBriefModel> = emptyList(),
     val article: CategoryModel? = null,
     val sum: String? = null,

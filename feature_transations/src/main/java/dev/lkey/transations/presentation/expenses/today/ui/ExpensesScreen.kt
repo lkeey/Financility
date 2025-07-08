@@ -66,7 +66,7 @@ fun ExpensesScreen (
                 actions = {
                     IconButton(
                         onClick = {
-                            navController.navigate(Route.HistoryExpenses)
+                            navController.navigate(Route.HistoryExpense)
                         }
                     ) {
                         Icon(
@@ -84,7 +84,7 @@ fun ExpensesScreen (
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    navController.navigate(Route.CreateExpenses)
+                    navController.navigate(Route.CreateExpense)
                 },
                 shape = CircleShape,
                 containerColor = MaterialTheme.colorScheme.primary

@@ -1,7 +1,7 @@
 package dev.lkey.transations.presentation.create.viewmodel
 
 /**
- * Действия со стороны VM на экран добавления расходов
+ * Действия со стороны VM на экран добавления транзакций
  * */
 
 sealed class CreateTransactionAction {

@@ -3,7 +3,7 @@ package dev.lkey.transations.presentation.create.viewmodel
 import dev.lkey.common.core.model.CategoryModel
 
 /**
- * События экрана добавления расходов
+ * События экрана добавления транзакций
  * */
 
 sealed class CreateTransactionEvent {

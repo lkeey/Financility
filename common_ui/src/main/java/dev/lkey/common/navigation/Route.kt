@@ -12,16 +12,19 @@ sealed interface Route {
     data object Splash : Route
 
     @Serializable
-    data object Expenses : Route
+    data object Expense : Route
 
     @Serializable
-    data object TodayExpenses : Route
+    data object TodayExpense : Route
 
     @Serializable
-    data object CreateExpenses : Route
+    data object CreateExpense : Route
 
     @Serializable
-    data object HistoryExpenses : Route
+    data object HistoryExpense : Route
+
+    @Serializable
+    data object UpdateExpense : Route
 
     @Serializable
     data object Income : Route
@@ -34,6 +37,9 @@ sealed interface Route {
 
     @Serializable
     data object CreateIncome : Route
+
+    @Serializable
+    data object UpdateIncome : Route
 
     @Serializable
     data object Bill : Route

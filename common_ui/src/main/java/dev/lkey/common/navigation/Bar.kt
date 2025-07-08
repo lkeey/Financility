@@ -12,7 +12,7 @@ sealed class Bar (
     @DrawableRes val icon: Int
 ) {
     data object Expenses : Bar(
-        route = Route.Expenses,
+        route = Route.Expense,
         title = "Расходы",
         icon = R.drawable.ic_income
     )
