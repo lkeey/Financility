@@ -24,6 +24,10 @@ interface TransactionsRepository {
         transaction: TransactionDto
     ): Result<Unit>
 
+    suspend fun deleteTransaction(
+        id: Int
+    ): Result<Unit>
+
     suspend fun getArticles(): Result<List<CategoryModel>>
 
 }

@@ -1,24 +1,21 @@
 package dev.lkey.transations.domain.usecase
 
 import dev.lkey.core.network.retryRequest
-import dev.lkey.transations.data.dto.TransactionDto
 import dev.lkey.transations.domain.repository.TransactionsRepository
 
 /**
- * Use Case для обновления транзакций
+ * Use Case для удаления транзакций
  * */
 
-class UpdateTransactionUseCase (
+class DeleteTransactionUseCase (
     private val repository: TransactionsRepository
 ) {
     suspend fun invoke (
         id: Int,
-        transaction: TransactionDto
     ): Result<Unit> {
         return retryRequest {
-            repository.updateTransaction(
+            repository.deleteTransaction(
                 id = id,
-                transaction = transaction
             )
         }
     }

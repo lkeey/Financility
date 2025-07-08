@@ -6,6 +6,7 @@ import dev.lkey.core.error.ApiException
 import dev.lkey.core.error.ErrorHandler
 import dev.lkey.core.network.FinancilityResult
 import dev.lkey.transations.data.dto.TransactionDto
+import dev.lkey.transations.domain.usecase.DeleteTransactionUseCase
 import dev.lkey.transations.domain.usecase.GetArticlesUseCase
 import dev.lkey.transations.domain.usecase.UpdateTransactionUseCase
 import jakarta.inject.Inject
@@ -24,6 +25,7 @@ import kotlinx.coroutines.launch
 class UpdateTransactionViewModel @Inject constructor (
     private val articlesUseCase : GetArticlesUseCase,
     private val updateUseCase : UpdateTransactionUseCase,
+    private val deleteUseCase : DeleteTransactionUseCase,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(UpdateTransactionState())
@@ -92,9 +94,11 @@ class UpdateTransactionViewModel @Inject constructor (
                     isIncome = event.isIncome
                 )
             }
-
             UpdateTransactionEvent.OnUpdate -> {
                 updateTransaction()
+            }
+            UpdateTransactionEvent.OnDelete -> {
+                deleteTransaction()
             }
         }
     }
@@ -171,6 +175,41 @@ class UpdateTransactionViewModel @Inject constructor (
 
                     _action.emit(UpdateTransactionAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
+        }
+    }
+
+    private fun deleteTransaction() {
+        viewModelScope.launch {
+            _state.update {
+                it.copy(
+                    status = FinancilityResult.Loading
+                )
+            }
+
+            val result = deleteUseCase.invoke(
+                id = state.value.id,
+            )
+
+            result
+                .onSuccess { res ->
+                    _state.update {
+                        it.copy(
+                            status = FinancilityResult.Success
+                        )
+                    }
+
+                    _action.emit(UpdateTransactionAction.OnOpenScreen)
+                }
+                .onFailure { err ->
+                    _state.update {
+                        it.copy(
+                            status = FinancilityResult.Error
+                        )
+                    }
+
+                    _action.emit(UpdateTransactionAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                }
+
         }
     }
 

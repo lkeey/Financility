@@ -16,16 +16,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import dev.lkey.common.R
-import dev.lkey.common.navigation.Route
 import dev.lkey.common.ui.item.FinancilityLoadingBar
 import dev.lkey.common.ui.item.FinancilitySnackBar
 import dev.lkey.common.ui.nav.FinancilityBottomBar
 import dev.lkey.common.ui.nav.FinancilityTopBar
 import dev.lkey.core.network.FinancilityResult
 import dev.lkey.transations.domain.model.TransactionModel
-import dev.lkey.transations.presentation.create.ui.CreateTransactionView
-import dev.lkey.transations.presentation.create.viewmodel.CreateTransactionAction
-import dev.lkey.transations.presentation.create.viewmodel.CreateTransactionEvent
 import dev.lkey.transations.presentation.detail.UpdateTransactionAction
 import dev.lkey.transations.presentation.detail.UpdateTransactionEvent
 import dev.lkey.transations.presentation.detail.UpdateTransactionViewModel
@@ -56,7 +52,8 @@ fun UpdateTransactionScreen (
                 }
 
                 UpdateTransactionAction.OnOpenScreen -> {
-                    navController.navigate(if (isIncome) Route.Income else Route.Expense)
+                    navController.popBackStack()
+//                    navController.navigate(if (isIncome) Route.Income else Route.Expense)
                 }
             }
         }

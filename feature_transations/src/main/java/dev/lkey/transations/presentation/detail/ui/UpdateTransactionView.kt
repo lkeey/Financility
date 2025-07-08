@@ -98,8 +98,7 @@ fun UpdateTransactionView (
         FinancilityButton(
             text = "Удалить ${if (isIncome) "доход" else "расход"}",
             onClick = {
-//                /* TODO */
-//                onEvent(CreateTransactionEvent.OnSave)
+                onEvent(UpdateTransactionEvent.OnDelete)
             }
         )
     }

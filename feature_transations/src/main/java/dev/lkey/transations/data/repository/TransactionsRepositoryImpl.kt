@@ -9,6 +9,7 @@ import dev.lkey.transations.data.dto.TransactionDto
 import dev.lkey.transations.domain.model.TransactionModel
 import dev.lkey.transations.domain.repository.TransactionsRepository
 import io.ktor.client.call.body
+import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.request.put
@@ -21,6 +22,8 @@ import io.ktor.http.HttpStatusCode
  * - получения транзакций
  * - получения счетов
  * - добавления транзакции
+ * - обновления транзакций
+ * - удаления транзакций
  * */
 
 class TransactionsRepositoryImpl : TransactionsRepository {
@@ -80,6 +83,20 @@ class TransactionsRepositoryImpl : TransactionsRepository {
             val response: HttpResponse = ktorClient.put("transactions/${id}") {
                 setBody(transaction)
             }
+
+            if (response.status != HttpStatusCode.OK && response.status != HttpStatusCode.Created) {
+                throw ApiException("Ошибка API: ${response.status}")
+            }
+
+            response.body()
+        }
+    }
+
+    override suspend fun deleteTransaction(
+        id: Int
+    ): Result<Unit> {
+        return safeCall {
+            val response: HttpResponse = ktorClient.delete("transactions/${id}")
 
             if (response.status != HttpStatusCode.OK && response.status != HttpStatusCode.Created) {
                 throw ApiException("Ошибка API: ${response.status}")

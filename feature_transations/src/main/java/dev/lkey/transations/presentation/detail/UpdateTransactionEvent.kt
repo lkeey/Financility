@@ -18,4 +18,5 @@ sealed class UpdateTransactionEvent {
         val isIncome: Boolean
     ) : UpdateTransactionEvent()
     data object OnUpdate : UpdateTransactionEvent()
+    data object OnDelete : UpdateTransactionEvent()
 }
