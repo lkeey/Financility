@@ -6,4 +6,5 @@ package dev.lkey.bill.presentation.edit.viewmodel
 
 sealed class EditBillAction {
     data class ShowSnackBar(val message: String) : EditBillAction()
+    data object OnOpenBill : EditBillAction()
 }

@@ -145,7 +145,7 @@ class EditBillViewModel @Inject constructor(
                     )
                 }
 
-                _action.emit(EditBillAction.ShowSnackBar("Счет успешно обновлен"))
+                _action.emit(EditBillAction.OnOpenBill)
 
             }.onFailure { err ->
                 _state.update {

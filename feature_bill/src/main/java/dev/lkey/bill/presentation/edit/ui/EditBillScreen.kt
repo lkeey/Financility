@@ -19,6 +19,7 @@ import dev.lkey.bill.presentation.edit.viewmodel.EditBillAction
 import dev.lkey.bill.presentation.edit.viewmodel.EditBillEvent
 import dev.lkey.bill.presentation.edit.viewmodel.EditBillViewModel
 import dev.lkey.common.R
+import dev.lkey.common.navigation.Route
 import dev.lkey.common.ui.item.FinancilityLoadingBar
 import dev.lkey.common.ui.item.FinancilitySnackBar
 import dev.lkey.common.ui.nav.FinancilityBottomBar
@@ -42,6 +43,10 @@ fun EditBillScreen (
                 is EditBillAction.ShowSnackBar -> {
                     snackBarHostState.showSnackbar(action.message)
                 }
+
+                EditBillAction.OnOpenBill -> {
+                    navController.navigate(Route.Bill)
+                }
             }
         }
     }
@@ -58,7 +63,9 @@ fun EditBillScreen (
                 actions = {
                     IconButton(
                         onClick = {
-                            viewModel.onEvent(EditBillEvent.OnSaveBill)
+                            if (state.status == FinancilityResult.Success) {
+                                viewModel.onEvent(EditBillEvent.OnSaveBill)
+                            }
                         }
                     ) {
                         Icon(

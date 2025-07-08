@@ -36,7 +36,7 @@ fun EditBillView (
             currencies = listOf(
                 CurrencyOption("RUB", "₽", "Российский рубль ₽"),
                 CurrencyOption("USD", "$", "Американский доллар $"),
-                CurrencyOption("EUR", "€", "Евро")
+                CurrencyOption("EUR", "€", "Евро €")
             ),
             onCurrencyClicked = {
                 onEvent(EditBillEvent.OnChoseCurrency(it))
