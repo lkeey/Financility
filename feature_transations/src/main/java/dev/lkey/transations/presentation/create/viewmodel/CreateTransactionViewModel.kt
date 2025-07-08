@@ -1,9 +1,10 @@
-package dev.lkey.transations.presentation.expenses.create.viewmodel
+package dev.lkey.transations.presentation.create.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.lkey.core.error.ApiException
 import dev.lkey.core.error.ErrorHandler
+import dev.lkey.core.network.FinancilityResult
 import dev.lkey.transations.data.dto.TransactionDto
 import dev.lkey.transations.domain.usecase.GetAccountUseCase
 import dev.lkey.transations.domain.usecase.GetArticlesUseCase
@@ -21,55 +22,55 @@ import kotlinx.coroutines.launch
  * VM экрана добавления расходов
  * */
 
-class CreateExpensesViewModel @Inject constructor (
+class CreateTransactionViewModel @Inject constructor (
     private val accountUseCase : GetAccountUseCase,
     private val articlesUseCase : GetArticlesUseCase,
     private val createTransactionUseCase : PostTransactionUseCase
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(CreateExpensesState())
+    private val _state = MutableStateFlow(CreateTransactionState())
     val state = _state.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000L),
         _state.value
     )
 
-    private val _action = MutableSharedFlow<CreateExpensesAction>()
+    private val _action = MutableSharedFlow<CreateTransactionAction>()
     val action = _action.asSharedFlow()
 
     fun onEvent(
-        event: CreateExpensesEvent
+        event: CreateTransactionEvent
     ) {
         when (event) {
-            is CreateExpensesEvent.OnChoseArticle -> {
+            is CreateTransactionEvent.OnChoseArticle -> {
                 _state.update {
                     it.copy(
                         article = event.article
                     )
                 }
             }
-            is CreateExpensesEvent.OnEnterComment -> {
+            is CreateTransactionEvent.OnEnterComment -> {
                 _state.update {
                     it.copy(
                         comment = event.comment
                     )
                 }
             }
-            is CreateExpensesEvent.OnEnterDate -> {
+            is CreateTransactionEvent.OnEnterDate -> {
                 _state.update {
                     it.copy(
                         date = event.date
                     )
                 }
             }
-            is CreateExpensesEvent.OnEnterSum -> {
+            is CreateTransactionEvent.OnEnterSum -> {
                 _state.update {
                     it.copy(
                         sum = event.sum
                     )
                 }
             }
-            is CreateExpensesEvent.OnEnterTime -> {
+            is CreateTransactionEvent.OnEnterTime -> {
                 _state.update {
                     it.copy(
                         time = event.time
@@ -77,14 +78,16 @@ class CreateExpensesViewModel @Inject constructor (
                 }
             }
 
-            CreateExpensesEvent.OnLoadData -> {
+            is CreateTransactionEvent.OnLoadData -> {
                 loadAccount {
-                    loadArticles()
+                    loadArticles(
+                        isIncome = event.isIncome
+                    )
                 }
             }
 
-            CreateExpensesEvent.OnSave -> {
-                saveExpenses()
+            CreateTransactionEvent.OnSave -> {
+                saveTransaction()
             }
 
         }
@@ -94,7 +97,11 @@ class CreateExpensesViewModel @Inject constructor (
         onSuccess: (Int) -> Unit
     ) {
         viewModelScope.launch {
-            _state.update { it.copy(isLoading = true) }
+            _state.update {
+                it.copy(
+                    status = FinancilityResult.Loading
+                )
+            }
 
             val result = accountUseCase.invoke()
 
@@ -102,8 +109,8 @@ class CreateExpensesViewModel @Inject constructor (
                 .onSuccess { res ->
                     _state.update {
                         it.copy(
-                            isLoading = false,
-                            accounts = res
+                            accounts = res,
+                            status = FinancilityResult.Success
                         )
                     }
 
@@ -112,19 +119,25 @@ class CreateExpensesViewModel @Inject constructor (
                 .onFailure { err ->
                     _state.update {
                         it.copy(
-                            isLoading = false,
+                            status = FinancilityResult.Error
                         )
                     }
 
-                    _action.emit(CreateExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    _action.emit(CreateTransactionAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
 
         }
     }
 
-    fun loadArticles() {
+    fun loadArticles(
+        isIncome : Boolean
+    ) {
         viewModelScope.launch {
-            _state.update { it.copy(isLoading = true) }
+            _state.update {
+                it.copy(
+                    status = FinancilityResult.Loading
+                )
+            }
 
             val result = articlesUseCase.invoke()
 
@@ -132,26 +145,30 @@ class CreateExpensesViewModel @Inject constructor (
                 .onSuccess { res ->
                     _state.update {
                         it.copy(
-                            isLoading = false,
-                            articles = res.filter { !it.isIncome }
+                            articles = res.filter { it.isIncome == isIncome },
+                            status = FinancilityResult.Success
                         )
                     }
                 }
                 .onFailure { err ->
                     _state.update {
                         it.copy(
-                            isLoading = false,
+                            status = FinancilityResult.Error
                         )
                     }
 
-                    _action.emit(CreateExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    _action.emit(CreateTransactionAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }
     }
 
-    fun saveExpenses () {
+    fun saveTransaction() {
         viewModelScope.launch {
-            _state.update { it.copy(isLoading = true) }
+            _state.update {
+                it.copy(
+                    status = FinancilityResult.Loading
+                )
+            }
 
             try {
                 val result = createTransactionUseCase.invoke(
@@ -168,26 +185,31 @@ class CreateExpensesViewModel @Inject constructor (
                     .onSuccess { res ->
                         _state.update {
                             it.copy(
-                                isLoading = false,
+                                status = FinancilityResult.Success
                             )
                         }
 
-                        _action.emit(CreateExpensesAction.ShowSnackBar("Расход был добавлен"))
+                        _action.emit(CreateTransactionAction.OnOpenScreen)
                     }
                     .onFailure { err ->
                         _state.update {
                             it.copy(
-                                isLoading = false,
+                                status = FinancilityResult.Error
                             )
                         }
 
-                        _action.emit(CreateExpensesAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                        _action.emit(CreateTransactionAction.ShowSnackBar(ErrorHandler().handleException(err)))
                     }
 
             } catch (e : Exception) {
-                _action.emit(CreateExpensesAction.ShowSnackBar(ErrorHandler().handleException(e)))
-            }
+                _state.update {
+                    it.copy(
+                        status = FinancilityResult.Error
+                    )
+                }
 
+                _action.emit(CreateTransactionAction.ShowSnackBar(ErrorHandler().handleException(e)))
+            }
         }
     }
 }

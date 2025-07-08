@@ -1,4 +1,4 @@
-package dev.lkey.transations.presentation.expenses.create.ui
+package dev.lkey.transations.presentation.create.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,14 +17,15 @@ import dev.lkey.common.ui.field.FinancilityEditText
 import dev.lkey.common.ui.field.FinancilityNumTextField
 import dev.lkey.common.ui.field.FinancilityTimePicker
 import dev.lkey.common.ui.item.FinancilityListItem
-import dev.lkey.transations.presentation.expenses.create.viewmodel.CreateExpensesEvent
-import dev.lkey.transations.presentation.expenses.create.viewmodel.CreateExpensesState
+import dev.lkey.transations.presentation.create.viewmodel.CreateTransactionEvent
+import dev.lkey.transations.presentation.create.viewmodel.CreateTransactionState
 
 @Composable
-fun CreateExpensesView (
+fun CreateTransactionView (
     modifier: Modifier = Modifier,
-    state: CreateExpensesState,
-    onEvent: (CreateExpensesEvent) -> Unit
+    state: CreateTransactionState,
+    isIncome: Boolean,
+    onEvent: (CreateTransactionEvent) -> Unit
 ) {
     Column (
         modifier = modifier
@@ -44,7 +45,7 @@ fun CreateExpensesView (
                 options = state.articles,
                 previousData = state.article?.name ?: "",
                 onOptionSelected = {
-                    onEvent(CreateExpensesEvent.OnChoseArticle(it))
+                    onEvent(CreateTransactionEvent.OnChoseArticle(it))
                 },
             )
         }
@@ -53,7 +54,7 @@ fun CreateExpensesView (
             title = "Сумма",
             previousData = state.sum ?: "",
         ) {
-            onEvent(CreateExpensesEvent.OnEnterSum(it))
+            onEvent(CreateTransactionEvent.OnEnterSum(it))
         }
 
         HorizontalDivider(
@@ -67,14 +68,14 @@ fun CreateExpensesView (
             title = "Дата",
             previousValue = state.date
         ) {
-            onEvent(CreateExpensesEvent.OnEnterDate(it))
+            onEvent(CreateTransactionEvent.OnEnterDate(it))
         }
 
         FinancilityTimePicker(
             title = "Выбери время",
             previousValue = state.time
         ) {
-            onEvent(CreateExpensesEvent.OnEnterTime(it))
+            onEvent(CreateTransactionEvent.OnEnterTime(it))
         }
 
         FinancilityEditText(
@@ -84,7 +85,7 @@ fun CreateExpensesView (
             isShowTrailingIcon = false,
             backgroundColor = MaterialTheme.colorScheme.onSurface
         ) {
-            onEvent(CreateExpensesEvent.OnEnterComment(it))
+            onEvent(CreateTransactionEvent.OnEnterComment(it))
         }
 
         HorizontalDivider(
@@ -95,10 +96,10 @@ fun CreateExpensesView (
         )
 
         FinancilityButton(
-            text = "Добавить расход",
+            text = "Добавить ${if (isIncome) "доход" else "расход"}",
             backgroundColor = MaterialTheme.colorScheme.primary,
             onClick = {
-                onEvent(CreateExpensesEvent.OnSave)
+                onEvent(CreateTransactionEvent.OnSave)
             }
         )
     }

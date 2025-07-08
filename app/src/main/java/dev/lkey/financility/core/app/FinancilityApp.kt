@@ -16,7 +16,7 @@ import dev.lkey.common.navigation.Route
 import dev.lkey.common.theme.FinancilityTheme
 import dev.lkey.financility.navigation.splash.SplashScreen
 import dev.lkey.settings.SettingsScreen
-import dev.lkey.transations.presentation.expenses.create.ui.CreateExpensesScreen
+import dev.lkey.transations.presentation.create.ui.CreateTransactionScreen
 import dev.lkey.transations.presentation.expenses.history.ui.HistoryExpensesScreen
 import dev.lkey.transations.presentation.expenses.today.ui.ExpensesScreen
 import dev.lkey.transations.presentation.income.history.ui.HistoryIncomeScreen
@@ -61,9 +61,10 @@ fun FinancilityApp(
                 }
 
                 composable<Route.CreateExpenses> {
-                    CreateExpensesScreen(
+                    CreateTransactionScreen(
                         navController = navController,
                         viewModel = viewModel(factory = viewModelFactory),
+                        isIncome = false
                     )
                 }
             }
@@ -78,10 +79,18 @@ fun FinancilityApp(
                     )
                 }
 
-                composable<Route.HistoryIncomes> {
+                composable<Route.HistoryIncome> {
                     HistoryIncomeScreen(
                         navController = navController,
                         viewModel = viewModel(factory = viewModelFactory),
+                    )
+                }
+
+                composable<Route.CreateIncome> {
+                    CreateTransactionScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = viewModelFactory),
+                        isIncome = true
                     )
                 }
             }

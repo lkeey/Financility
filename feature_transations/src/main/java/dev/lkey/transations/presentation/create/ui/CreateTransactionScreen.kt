@@ -1,4 +1,4 @@
-package dev.lkey.transations.presentation.expenses.create.ui
+package dev.lkey.transations.presentation.create.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -16,29 +16,42 @@ import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import dev.lkey.common.R
+import dev.lkey.common.navigation.Route
+import dev.lkey.common.ui.item.FinancilityLoadingBar
 import dev.lkey.common.ui.item.FinancilitySnackBar
 import dev.lkey.common.ui.nav.FinancilityBottomBar
 import dev.lkey.common.ui.nav.FinancilityTopBar
-import dev.lkey.transations.presentation.expenses.create.viewmodel.CreateExpensesAction
-import dev.lkey.transations.presentation.expenses.create.viewmodel.CreateExpensesEvent
-import dev.lkey.transations.presentation.expenses.create.viewmodel.CreateExpensesViewModel
+import dev.lkey.core.network.FinancilityResult
+import dev.lkey.transations.presentation.create.viewmodel.CreateTransactionAction
+import dev.lkey.transations.presentation.create.viewmodel.CreateTransactionEvent
+import dev.lkey.transations.presentation.create.viewmodel.CreateTransactionViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun CreateExpensesScreen (
-    viewModel: CreateExpensesViewModel,
-    navController: NavController
+fun CreateTransactionScreen (
+    viewModel: CreateTransactionViewModel,
+    navController: NavController,
+    isIncome : Boolean,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val snackBarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(Unit) {
-        viewModel.onEvent(CreateExpensesEvent.OnLoadData)
+        viewModel.onEvent(
+            CreateTransactionEvent.OnLoadData(
+                isIncome = isIncome
+            )
+        )
 
         viewModel.action.collectLatest { action ->
             when (action) {
-                is CreateExpensesAction.ShowSnackBar -> {
+                is CreateTransactionAction.ShowSnackBar -> {
                     snackBarHostState.showSnackbar(action.message)
+                }
+
+                CreateTransactionAction.OnOpenScreen -> {
+                    if (isIncome) "доход" else "расход"
+                    navController.navigate(if (isIncome) Route.Income else Route.Expenses)
                 }
             }
         }
@@ -52,11 +65,11 @@ fun CreateExpensesScreen (
         },
         topBar = {
             FinancilityTopBar(
-                title = "Мои расходы",
+                title = "Мои ${if (isIncome) "доходы" else "расходы"}",
                 actions = {
                     IconButton(
                         onClick = {
-//                            /* TODO */
+                            viewModel.onEvent(CreateTransactionEvent.OnSave)
                         }
                     ) {
                         Icon(
@@ -85,11 +98,19 @@ fun CreateExpensesScreen (
         snackbarHost = { FinancilitySnackBar(snackBarHostState) }
     ) { padding ->
 
-        CreateExpensesView (
-            modifier = Modifier.padding(padding),
-            state = state
-        ) {
-            viewModel.onEvent(it)
+        if (state.status == FinancilityResult.Loading) {
+            FinancilityLoadingBar(
+                modifier = Modifier
+                    .padding(padding)
+            )
+        } else {
+            CreateTransactionView (
+                modifier = Modifier.padding(padding),
+                state = state,
+                isIncome = isIncome
+            ) {
+                viewModel.onEvent(it)
+            }
         }
 
     }

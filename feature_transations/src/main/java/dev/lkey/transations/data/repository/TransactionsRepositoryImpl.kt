@@ -57,7 +57,7 @@ class TransactionsRepositoryImpl : TransactionsRepository {
         }
     }
 
-    override suspend fun createExpense(transaction: TransactionDto): Result<Unit> {
+    override suspend fun createTransaction(transaction: TransactionDto): Result<Unit> {
         return safeCall {
             val response: HttpResponse = ktorClient.post("transactions") {
                 setBody(transaction)

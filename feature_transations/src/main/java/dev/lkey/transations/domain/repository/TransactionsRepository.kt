@@ -15,7 +15,7 @@ interface TransactionsRepository {
 
     suspend fun getAccounts(): Result<List<AccountBriefModel>>
 
-    suspend fun createExpense(
+    suspend fun createTransaction(
         transaction: TransactionDto
     ): Result<Unit>
 

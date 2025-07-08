@@ -16,7 +16,7 @@ class PostTransactionUseCase (
     ): Result<Unit> {
 
         return retryRequest {
-            repository.createExpense(transaction)
+            repository.createTransaction(transaction)
         }
 
     }

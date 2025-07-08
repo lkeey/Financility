@@ -5,7 +5,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import dev.lkey.core.di.ViewModelKey
-import dev.lkey.transations.presentation.expenses.create.viewmodel.CreateExpensesViewModel
+import dev.lkey.transations.presentation.create.viewmodel.CreateTransactionViewModel
 import dev.lkey.transations.presentation.expenses.history.viewmodel.HistoryExpensesViewModel
 import dev.lkey.transations.presentation.expenses.today.viewmodel.ExpensesViewModel
 import dev.lkey.transations.presentation.income.history.viewmodel.HistoryIncomeViewModel
@@ -36,7 +36,7 @@ abstract class TransactionsViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(CreateExpensesViewModel::class)
-    abstract fun bindCreateExpensesViewModel(viewModel: CreateExpensesViewModel): ViewModel
+    @ViewModelKey(CreateTransactionViewModel::class)
+    abstract fun bindCreateExpensesViewModel(viewModel: CreateTransactionViewModel): ViewModel
 
 }

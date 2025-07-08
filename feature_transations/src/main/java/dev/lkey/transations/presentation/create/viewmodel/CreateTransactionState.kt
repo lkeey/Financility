@@ -1,7 +1,8 @@
-package dev.lkey.transations.presentation.expenses.create.viewmodel
+package dev.lkey.transations.presentation.create.viewmodel
 
 import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.common.core.model.CategoryModel
+import dev.lkey.core.network.FinancilityResult
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -10,7 +11,7 @@ import java.time.format.DateTimeFormatter
  * Состояние экрана добавления расходов
  * */
 
-data class CreateExpensesState (
+data class CreateTransactionState (
     val accounts : List<AccountBriefModel> = emptyList(),
     val article: CategoryModel? = null,
     val sum: String? = null,
@@ -20,5 +21,5 @@ data class CreateExpensesState (
     val time: String = LocalTime.now()
         .format(DateTimeFormatter.ofPattern("HH:mm")),
     val comment: String? = null,
-    val isLoading: Boolean = false,
+    val status: FinancilityResult = FinancilityResult.Loading,
 )

@@ -66,7 +66,7 @@ fun IncomeScreen (
                 actions = {
                     IconButton(
                         onClick = {
-                            navController.navigate(Route.HistoryIncomes)
+                            navController.navigate(Route.HistoryIncome)
                         }
                     ) {
                         Icon(
@@ -83,7 +83,9 @@ fun IncomeScreen (
         containerColor = MaterialTheme.colorScheme.onSurface,
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { /* TODO */ },
+                onClick = {
+                    navController.navigate(Route.CreateIncome)
+                },
                 shape = CircleShape,
                 containerColor = MaterialTheme.colorScheme.primary
             ) {
