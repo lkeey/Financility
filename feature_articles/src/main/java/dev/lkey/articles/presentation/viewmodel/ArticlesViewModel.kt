@@ -2,8 +2,11 @@ package dev.lkey.articles.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.lkey.articles.data.sync.ArticlesSyncStorage
 import dev.lkey.articles.domain.usecase.GetArticlesUseCase
+import dev.lkey.common.core.model.CategoryModel
 import dev.lkey.core.error.ErrorHandler
+import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.FinancilityResult
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -19,7 +22,8 @@ import kotlinx.coroutines.launch
  * */
 
 class ArticlesViewModel @Inject constructor(
-    private val articlesUseCase : GetArticlesUseCase
+    private val articlesUseCase : GetArticlesUseCase,
+    private val articlesSyncStorage: ArticlesSyncStorage
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(ArticlesState())
@@ -70,14 +74,24 @@ class ArticlesViewModel @Inject constructor(
                     }
                 }
                 .onFailure { err ->
-                    _state.update {
-                        it.copy(
-                            status = FinancilityResult.Error
-                        )
-                    }
 
-                    _action.emit(ArticleAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    if (err is OfflineDataException) {
+                        _state.update {
+                            it.copy(
+                                status = FinancilityResult.Success,
+                                articles = err.data as List<CategoryModel>,
+                                lastSync = articlesSyncStorage.getArticlesSyncTime()
+                            )
+                        }
+                    } else {
+                        _state.update {
+                            it.copy(status = FinancilityResult.Error)
+                        }
+
+                        _action.emit(ArticleAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    }
                 }
         }
     }
+
 }

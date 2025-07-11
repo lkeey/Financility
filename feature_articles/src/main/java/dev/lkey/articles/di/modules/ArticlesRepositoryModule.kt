@@ -3,6 +3,7 @@ package dev.lkey.articles.di.modules
 import dagger.Module
 import dagger.Provides
 import dev.lkey.articles.data.dao.CategoryDao
+import dev.lkey.articles.data.sync.ArticlesSyncStorage
 import dev.lkey.articles.domain.repository.ArticlesRepository
 import dev.lkey.articles.domain.repository.ArticlesRepositoryImpl
 
@@ -15,10 +16,12 @@ class ArticlesRepositoryModule {
 
     @Provides
     fun provideArticlesRepository(
-        categoryDao: CategoryDao
+        categoryDao: CategoryDao,
+        syncStorage: ArticlesSyncStorage
     ): ArticlesRepository {
         return ArticlesRepositoryImpl(
-            categoryDao = categoryDao
+            categoryDao = categoryDao,
+            articlesSyncStorage = syncStorage
         )
     }
 

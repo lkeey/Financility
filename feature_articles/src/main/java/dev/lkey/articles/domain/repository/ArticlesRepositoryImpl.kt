@@ -3,8 +3,10 @@ package dev.lkey.articles.domain.repository
 import dev.lkey.articles.data.dao.CategoryDao
 import dev.lkey.articles.data.mapper.toCategoryEntity
 import dev.lkey.articles.data.mapper.toCategoryModel
+import dev.lkey.articles.data.sync.ArticlesSyncStorage
 import dev.lkey.common.core.model.CategoryModel
 import dev.lkey.core.error.ApiException
+import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.ktorClient
 import dev.lkey.core.network.safeCall
 import io.ktor.client.call.body
@@ -18,7 +20,8 @@ import jakarta.inject.Inject
  * */
 
 class ArticlesRepositoryImpl @Inject constructor(
-    private val categoryDao: CategoryDao
+    private val categoryDao: CategoryDao,
+    private val articlesSyncStorage: ArticlesSyncStorage
 ): ArticlesRepository {
 
     override suspend fun getArticles(): Result<List<CategoryModel>> {
@@ -39,6 +42,9 @@ class ArticlesRepositoryImpl @Inject constructor(
                     it.toCategoryEntity()
                 })
 
+                /* save last sync */
+                articlesSyncStorage.saveArticlesSyncTime(System.currentTimeMillis())
+
                 return@safeCall articles
 
             } catch (e : Exception) {
@@ -49,7 +55,9 @@ class ArticlesRepositoryImpl @Inject constructor(
                 }
 
                 /* if not cashed data */
-                if (cached.isNotEmpty()) return@safeCall cached
+                if (cached.isNotEmpty()) {
+                    throw OfflineDataException(cached)
+                }
 
                 throw e
             }
