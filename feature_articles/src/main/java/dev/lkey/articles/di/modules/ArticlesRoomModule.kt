@@ -5,7 +5,7 @@ import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dev.lkey.articles.data.ArticlesDatabase
-import dev.lkey.articles.data.CategoryDao
+import dev.lkey.articles.data.dao.CategoryDao
 
 @Module
 class RoomModule {

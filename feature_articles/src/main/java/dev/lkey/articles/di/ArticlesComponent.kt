@@ -5,6 +5,7 @@ import dagger.Component
 import dev.lkey.articles.di.modules.ArticlesRepositoryModule
 import dev.lkey.articles.di.modules.ArticlesUseCaseModule
 import dev.lkey.articles.di.modules.ArticlesViewModelModule
+import dev.lkey.articles.di.modules.RoomModule
 import dev.lkey.core.di.CoreComponent
 import dev.lkey.core.di.modules.SharedViewModelModule
 
@@ -19,6 +20,7 @@ import dev.lkey.core.di.modules.SharedViewModelModule
         ArticlesRepositoryModule::class,
         ArticlesUseCaseModule::class,
         ArticlesViewModelModule::class,
+        RoomModule::class,
         SharedViewModelModule::class
     ]
 )
