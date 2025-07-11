@@ -1,16 +1,11 @@
 pluginManagement {
     repositories {
-        google {
-            content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
-            }
-        }
+        google()
         mavenCentral()
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -21,4 +16,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "Financility"
 include(":app")
- 
+include(":feature_articles")
+include(":core")
+include(":common_ui")
+include(":feature_settings")
+include(":feature_bill")
+include(":feature_transations")
