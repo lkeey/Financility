@@ -1,8 +1,9 @@
 package dev.lkey.financility.core.app
 
 import android.app.Application
-import dev.lkey.financility.di.AppComponent
-import dev.lkey.financility.di.DaggerAppComponent
+import dev.lkey.core.di.CoreComponent
+import dev.lkey.core.di.DaggerCoreComponent
+import dev.lkey.core.di.utils.CoreProvider
 
 /**
  * Класс приложения, инициализирующий зависимостями через Dagger
@@ -10,14 +11,13 @@ import dev.lkey.financility.di.DaggerAppComponent
  * При запуске приложения запускает Dagger и передаёт контекст приложения и модуль зависимостей [appModule]
  */
 
-class MainApplication : Application() {
+class MainApplication : Application(), CoreProvider {
 
-    lateinit var appComponent: AppComponent
+    override val coreComponent: CoreComponent by lazy {
+        DaggerCoreComponent.factory().create(this)
+    }
 
     override fun onCreate() {
         super.onCreate()
-
-        appComponent = DaggerAppComponent.factory()
-            .create(this)
     }
 }

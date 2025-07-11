@@ -5,25 +5,26 @@ import dagger.Component
 import dev.lkey.articles.di.modules.ArticlesRepositoryModule
 import dev.lkey.articles.di.modules.ArticlesUseCaseModule
 import dev.lkey.articles.di.modules.ArticlesViewModelModule
-import dev.lkey.core.di.modules.CommonViewModelModule
+import dev.lkey.core.di.CoreComponent
+import dev.lkey.core.di.modules.SharedViewModelModule
 
+@ArticlesScope
 @Component(
+    dependencies = [CoreComponent::class],
     modules = [
         ArticlesRepositoryModule::class,
         ArticlesUseCaseModule::class,
         ArticlesViewModelModule::class,
-
-        CommonViewModelModule::class
+        SharedViewModelModule::class
     ]
 )
-@ArticlesScope
 interface ArticlesComponent {
 
     fun viewModelFactory(): ViewModelProvider.Factory
 
     @Component.Factory
     interface Factory {
-        fun create(): ArticlesComponent
+        fun create(core: CoreComponent): ArticlesComponent
     }
 
 }

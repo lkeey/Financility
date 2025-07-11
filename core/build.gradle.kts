@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
 
     alias(libs.plugins.jetbrains.kotlin.serialization)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 val localProperties = Properties().apply {
@@ -73,4 +74,6 @@ dependencies {
 
     // DI
     implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
+
 }

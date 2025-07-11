@@ -5,7 +5,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import dev.lkey.articles.presentation.viewmodel.ArticlesViewModel
-import dev.lkey.core.di.ViewModelKey
+import dev.lkey.core.di.utils.ViewModelKey
 
 /**
  * Модуль VM статей расходов, инициализируемая Dagger-ом
@@ -13,11 +13,11 @@ import dev.lkey.core.di.ViewModelKey
 
 
 @Module
-abstract class ArticlesViewModelModule {
+interface ArticlesViewModelModule {
 
     @Binds
     @IntoMap
     @ViewModelKey(ArticlesViewModel::class)
-    abstract fun bindArticlesViewModel(viewModel: ArticlesViewModel): ViewModel
+    fun bindArticlesViewModel(viewModel: ArticlesViewModel): ViewModel
 
 }

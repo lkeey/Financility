@@ -6,20 +6,23 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 import dev.lkey.bill.presentation.current.viewmodel.BillViewModel
 import dev.lkey.bill.presentation.edit.viewmodel.EditBillViewModel
-import dev.lkey.core.di.ViewModelKey
+import dev.lkey.core.di.utils.ViewModelKey
+
+/**
+ * Модуль VM счетов, инициализируемых Dagger-ом
+ * */
 
 @Module
-abstract class BillViewModelModule {
+interface BillViewModelModule {
 
     @Binds
     @IntoMap
     @ViewModelKey(BillViewModel::class)
-    abstract fun bindBillViewModel(viewModel: BillViewModel): ViewModel
+    fun bindBillViewModel(viewModel: BillViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(EditBillViewModel::class)
-    abstract fun bindEditBillViewModel(viewModel: EditBillViewModel): ViewModel
-
+    fun bindEditBillViewModel(viewModel: EditBillViewModel): ViewModel
 
 }

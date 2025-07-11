@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import dev.lkey.core.di.ViewModelKey
+import dev.lkey.core.di.utils.ViewModelKey
 import dev.lkey.transations.presentation.create.viewmodel.CreateTransactionViewModel
 import dev.lkey.transations.presentation.detail.viewmodel.UpdateTransactionViewModel
 import dev.lkey.transations.presentation.expenses.history.viewmodel.HistoryExpensesViewModel
@@ -13,36 +13,36 @@ import dev.lkey.transations.presentation.income.history.viewmodel.HistoryIncomeV
 import dev.lkey.transations.presentation.income.today.viewmodel.IncomeViewModel
 
 @Module
-abstract class TransactionsViewModelModule {
+interface TransactionsViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(ExpensesViewModel::class)
-    abstract fun bindExpensesViewModel(viewModel: ExpensesViewModel): ViewModel
+    fun bindExpensesViewModel(viewModel: ExpensesViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(IncomeViewModel::class)
-    abstract fun bindIncomeViewModel(viewModel: IncomeViewModel): ViewModel
+    fun bindIncomeViewModel(viewModel: IncomeViewModel): ViewModel
 
 
     @Binds
     @IntoMap
     @ViewModelKey(HistoryExpensesViewModel::class)
-    abstract fun bindHistoryExpensesViewModel(viewModel: HistoryExpensesViewModel): ViewModel
+    fun bindHistoryExpensesViewModel(viewModel: HistoryExpensesViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(HistoryIncomeViewModel::class)
-    abstract fun bindHistoryIncomeViewModel(viewModel: HistoryIncomeViewModel): ViewModel
+    fun bindHistoryIncomeViewModel(viewModel: HistoryIncomeViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(CreateTransactionViewModel::class)
-    abstract fun bindCreateExpensesViewModel(viewModel: CreateTransactionViewModel): ViewModel
+    fun bindCreateExpensesViewModel(viewModel: CreateTransactionViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(UpdateTransactionViewModel::class)
-    abstract fun bindUpdateTransactionViewModel(viewModel: UpdateTransactionViewModel): ViewModel
+    fun bindUpdateTransactionViewModel(viewModel: UpdateTransactionViewModel): ViewModel
 
 }

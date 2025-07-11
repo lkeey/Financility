@@ -3,16 +3,16 @@ package dev.lkey.core.di.modules
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
-import dev.lkey.core.di.ViewModelFactory
+import dev.lkey.core.di.utils.ViewModelFactory
 
 /**
  * Модуль фабрики VM, инициализируемая Dagger-ом
  * */
 
 @Module
-abstract class CommonViewModelModule {
+interface SharedViewModelModule {
 
     @Binds
-    abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+    fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 
 }

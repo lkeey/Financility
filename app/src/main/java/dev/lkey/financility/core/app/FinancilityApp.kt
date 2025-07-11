@@ -4,7 +4,7 @@ import android.net.Uri
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.ViewModelProvider
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -14,12 +14,15 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import dev.lkey.articles.di.DaggerArticlesComponent
 import dev.lkey.articles.presentation.ui.ArticlesScreen
+import dev.lkey.bill.di.DaggerBillComponent
 import dev.lkey.bill.presentation.current.ui.BillScreen
 import dev.lkey.bill.presentation.edit.ui.EditBillScreen
 import dev.lkey.common.navigation.Route
 import dev.lkey.common.theme.FinancilityTheme
+import dev.lkey.core.di.utils.CoreProvider
 import dev.lkey.financility.navigation.splash.SplashScreen
 import dev.lkey.settings.SettingsScreen
+import dev.lkey.transations.di.DaggerTransactionComponent
 import dev.lkey.transations.domain.model.TransactionModel
 import dev.lkey.transations.presentation.create.ui.CreateTransactionScreen
 import dev.lkey.transations.presentation.detail.ui.UpdateTransactionScreen
@@ -30,10 +33,12 @@ import dev.lkey.transations.presentation.income.today.ui.IncomeScreen
 import kotlinx.serialization.json.Json
 
 @Composable
-fun FinancilityApp(
-    viewModelFactory: ViewModelProvider.Factory,
-) {
-    val articlesComponent = DaggerArticlesComponent.factory().create()
+fun FinancilityApp() {
+
+    val provider = LocalContext.current.applicationContext as CoreProvider
+    val billComponent = DaggerBillComponent.factory().create(provider.coreComponent)
+    val articlesComponent = DaggerArticlesComponent.factory().create(provider.coreComponent)
+    val transactionsComponent = DaggerTransactionComponent.factory().create(provider.coreComponent)
 
 
     FinancilityTheme {
@@ -59,21 +64,21 @@ fun FinancilityApp(
                 composable<Route.TodayExpense> {
                     ExpensesScreen(
                         navController = navController,
-                        viewModel = viewModel(factory = viewModelFactory),
+                        viewModel = viewModel(factory = transactionsComponent.viewModelFactory()),
                     )
                 }
 
                 composable<Route.HistoryExpense> {
                     HistoryExpensesScreen(
                         navController = navController,
-                        viewModel = viewModel(factory = viewModelFactory),
+                        viewModel = viewModel(factory = transactionsComponent.viewModelFactory()),
                     )
                 }
 
                 composable<Route.CreateExpense> {
                     CreateTransactionScreen(
                         navController = navController,
-                        viewModel = viewModel(factory = viewModelFactory),
+                        viewModel = viewModel(factory = transactionsComponent.viewModelFactory()),
                         isIncome = false
                     )
                 }
@@ -91,7 +96,7 @@ fun FinancilityApp(
                     if (transaction != null) {
                         UpdateTransactionScreen(
                             navController = navController,
-                            viewModel = viewModel(factory = viewModelFactory),
+                            viewModel = viewModel(factory = transactionsComponent.viewModelFactory()),
                             transaction = transaction,
                             isIncome = false
                         )
@@ -105,21 +110,21 @@ fun FinancilityApp(
                 composable<Route.TodayIncome> {
                     IncomeScreen(
                         navController = navController,
-                        viewModel = viewModel(factory = viewModelFactory),
+                        viewModel = viewModel(factory = transactionsComponent.viewModelFactory()),
                     )
                 }
 
                 composable<Route.HistoryIncome> {
                     HistoryIncomeScreen(
                         navController = navController,
-                        viewModel = viewModel(factory = viewModelFactory),
+                        viewModel = viewModel(factory = transactionsComponent.viewModelFactory()),
                     )
                 }
 
                 composable<Route.CreateIncome> {
                     CreateTransactionScreen(
                         navController = navController,
-                        viewModel = viewModel(factory = viewModelFactory),
+                        viewModel = viewModel(factory = transactionsComponent.viewModelFactory()),
                         isIncome = true
                     )
                 }
@@ -137,7 +142,7 @@ fun FinancilityApp(
                     if (transaction != null) {
                         UpdateTransactionScreen(
                             navController = navController,
-                            viewModel = viewModel(factory = viewModelFactory),
+                            viewModel = viewModel(factory = transactionsComponent.viewModelFactory()),
                             transaction = transaction,
                             isIncome = true
                         )
@@ -152,14 +157,14 @@ fun FinancilityApp(
                 composable<Route.CurrentBill> {
                     BillScreen(
                         navController = navController,
-                        viewModel = viewModel(factory = viewModelFactory),
+                        viewModel = viewModel(factory = billComponent.viewModelFactory()),
                     )
                 }
 
                 composable<Route.EditBill> {
                     EditBillScreen(
                         navController = navController,
-                        viewModel = viewModel(factory = viewModelFactory),
+                        viewModel = viewModel(factory = billComponent.viewModelFactory()),
                     )
                 }
             }
