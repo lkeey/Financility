@@ -8,6 +8,10 @@ import dev.lkey.transations.di.module.TransactionsRepositoryModule
 import dev.lkey.transations.di.module.TransactionsUseCaseModule
 import dev.lkey.transations.di.module.TransactionsViewModelModule
 
+/**
+ * Компонент, который хранит в себе VM, репозитории и use-case фичи транзакций
+ */
+
 @TransactionScope
 @Component(
     dependencies = [CoreComponent::class],

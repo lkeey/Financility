@@ -6,7 +6,7 @@ import dev.lkey.bill.data.repository.BillRepositoryImpl
 import dev.lkey.bill.domain.repository.BillRepository
 
 /**
- * Модуль репозиториев счетов, инициализируемая Dagger-ом
+ * Модуль репозиториев счета
  * */
 
 @Module

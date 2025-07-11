@@ -6,7 +6,7 @@ import dev.lkey.transations.data.repository.TransactionsRepositoryImpl
 import dev.lkey.transations.domain.repository.TransactionsRepository
 
 /**
- * Repository зависимости, инициализируемые Dagger-ом
+ * Модуль репозиториев траназакций
  * */
 
 @Module

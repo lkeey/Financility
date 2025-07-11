@@ -12,6 +12,10 @@ import dev.lkey.transations.presentation.expenses.today.viewmodel.ExpensesViewMo
 import dev.lkey.transations.presentation.income.history.viewmodel.HistoryIncomeViewModel
 import dev.lkey.transations.presentation.income.today.viewmodel.IncomeViewModel
 
+/**
+ * Модуль VM траназакций
+ * */
+
 @Module
 interface TransactionsViewModelModule {
     @Binds

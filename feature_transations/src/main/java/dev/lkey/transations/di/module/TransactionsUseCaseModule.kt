@@ -10,7 +10,7 @@ import dev.lkey.transations.domain.usecase.PostTransactionUseCase
 import dev.lkey.transations.domain.usecase.UpdateTransactionUseCase
 
 /**
- * UseCase зависимости, инициализируемые Dagger-ом
+ * Модуль use-case траназакций
  * */
 
 @Module

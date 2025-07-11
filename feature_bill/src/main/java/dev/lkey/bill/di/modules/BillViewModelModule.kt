@@ -9,7 +9,7 @@ import dev.lkey.bill.presentation.edit.viewmodel.EditBillViewModel
 import dev.lkey.core.di.utils.ViewModelKey
 
 /**
- * Модуль VM счетов, инициализируемых Dagger-ом
+ * Модуль VM счета
  * */
 
 @Module

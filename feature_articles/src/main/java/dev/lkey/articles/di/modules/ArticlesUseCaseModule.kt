@@ -6,9 +6,8 @@ import dev.lkey.articles.domain.repository.ArticlesRepository
 import dev.lkey.articles.domain.usecase.GetArticlesUseCase
 
 /**
- * Модуль use-case статей расходов, инициализируемая Dagger-ом
+ * Модуль use-case статей
  * */
-
 
 @Module
 class ArticlesUseCaseModule {

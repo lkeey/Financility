@@ -8,6 +8,10 @@ import dev.lkey.bill.di.modules.BillViewModelModule
 import dev.lkey.core.di.CoreComponent
 import dev.lkey.core.di.modules.SharedViewModelModule
 
+/**
+ * Компонент, который хранит в себе VM, репозитории и use-case фичи счета
+ */
+
 @BillScope
 @Component(
     dependencies = [CoreComponent::class],

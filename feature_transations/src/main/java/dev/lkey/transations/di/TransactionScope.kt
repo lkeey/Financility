@@ -3,7 +3,7 @@ package dev.lkey.transations.di
 import jakarta.inject.Scope
 
 /**
- * Scope nраназакций
+ * Scope траназакций
  * указывает на жизненный цикл компонента
  */
 

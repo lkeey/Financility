@@ -7,7 +7,6 @@ import jakarta.inject.Scope
  * указывает на жизненный цикл компонента
  */
 
-
 @Scope
 @Retention(AnnotationRetention.RUNTIME)
 annotation class BillScope

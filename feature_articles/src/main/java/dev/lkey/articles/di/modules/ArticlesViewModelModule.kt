@@ -8,9 +8,8 @@ import dev.lkey.articles.presentation.viewmodel.ArticlesViewModel
 import dev.lkey.core.di.utils.ViewModelKey
 
 /**
- * Модуль VM статей расходов, инициализируемая Dagger-ом
+ * Модуль VM статей
  * */
-
 
 @Module
 interface ArticlesViewModelModule {

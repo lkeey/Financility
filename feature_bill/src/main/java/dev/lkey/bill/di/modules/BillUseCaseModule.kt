@@ -7,7 +7,7 @@ import dev.lkey.bill.domain.usecase.GetBillInfoUseCase
 import dev.lkey.bill.domain.usecase.UpdateBillUseCase
 
 /**
- * Модуль use-case счетов, инициализируемая Dagger-ом
+ * Модуль use-case счета
  * */
 
 @Module
