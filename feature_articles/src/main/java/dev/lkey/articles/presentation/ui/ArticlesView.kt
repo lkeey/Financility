@@ -10,7 +10,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -18,10 +17,7 @@ import dev.lkey.articles.presentation.viewmodel.ArticlesEvent
 import dev.lkey.articles.presentation.viewmodel.ArticlesState
 import dev.lkey.common.ui.field.FinancilityEditText
 import dev.lkey.common.ui.item.FinancilityListItem
-import java.time.Instant
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
-import java.util.Locale
+import dev.lkey.common.ui.message.SyncMessage
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -42,13 +38,7 @@ fun ArticlesView (
     ){
 
         state.lastSync?.let {
-            val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
-                .withLocale(Locale.getDefault())
-                .withZone(ZoneId.systemDefault())
-
-            val formatted = formatter.format(Instant.ofEpochMilli(it))
-
-            Text("Показаны оффлайн-данные. Последняя синхронизация: $formatted")
+            SyncMessage(it)
         }
 
         FinancilityEditText(
