@@ -73,6 +73,13 @@ dependencies {
     // Navigation
     implementation(libs.jetbrains.compose.navigation)
 
+    // Room
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
+
+//    coroutines
+//    implementation "androidx.room:room-ktx:2.6.1"
+
     // ktor-client
     implementation(project(":core"))
 

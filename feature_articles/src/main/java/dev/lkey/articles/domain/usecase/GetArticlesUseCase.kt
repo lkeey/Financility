@@ -14,11 +14,9 @@ class GetArticlesUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(): Result<List<CategoryModel>> {
-
         return retryRequest {
             repository.getArticles()
         }
-
     }
 
 }
