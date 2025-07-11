@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import dev.lkey.articles.di.DaggerArticlesComponent
 import dev.lkey.articles.presentation.ui.ArticlesScreen
 import dev.lkey.bill.presentation.current.ui.BillScreen
 import dev.lkey.bill.presentation.edit.ui.EditBillScreen
@@ -32,6 +33,9 @@ import kotlinx.serialization.json.Json
 fun FinancilityApp(
     viewModelFactory: ViewModelProvider.Factory,
 ) {
+    val articlesComponent = DaggerArticlesComponent.factory().create()
+
+
     FinancilityTheme {
 
         val navController = rememberNavController()
@@ -166,7 +170,7 @@ fun FinancilityApp(
 
                 composable<Route.MyArticles> {
                     ArticlesScreen(
-                        viewModel = viewModel(factory = viewModelFactory),
+                        viewModel = viewModel(factory = articlesComponent.viewModelFactory()),
                         navController = navController
                     )
                 }

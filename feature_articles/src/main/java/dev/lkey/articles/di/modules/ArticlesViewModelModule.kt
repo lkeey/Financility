@@ -7,6 +7,11 @@ import dagger.multibindings.IntoMap
 import dev.lkey.articles.presentation.viewmodel.ArticlesViewModel
 import dev.lkey.core.di.ViewModelKey
 
+/**
+ * Модуль VM статей расходов, инициализируемая Dagger-ом
+ * */
+
+
 @Module
 abstract class ArticlesViewModelModule {
 

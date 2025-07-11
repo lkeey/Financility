@@ -6,7 +6,7 @@ import dagger.Module
 import dev.lkey.core.di.ViewModelFactory
 
 /**
- * VM зависимости, инициализируемые Dagger-ом
+ * Модуль фабрики VM, инициализируемая Dagger-ом
  * */
 
 @Module

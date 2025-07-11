@@ -3,7 +3,6 @@ package dev.lkey.financility.di
 import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
-import dev.lkey.articles.di.ArticlesModules
 import dev.lkey.bill.di.BillModules
 import dev.lkey.core.di.modules.CommonViewModelModule
 import dev.lkey.financility.MainActivity
@@ -14,7 +13,7 @@ import jakarta.inject.Singleton
 @Component(
     modules = [
         CommonViewModelModule::class,
-        ArticlesModules::class,
+//        ArticlesComponent::class,
         BillModules::class,
         TransactionModules::class
     ]
