@@ -4,6 +4,10 @@ import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 
+/**
+ * Компонент, которых хранит в себе зависимости, нужны для инициализации других компонентов
+ */
+
 @CoreScope
 @Component
 interface CoreComponent {

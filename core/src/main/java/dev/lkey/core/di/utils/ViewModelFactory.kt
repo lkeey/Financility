@@ -9,7 +9,6 @@ import javax.inject.Provider
  * Универсальная фабрика для ViewModel
  */
 
-
 class ViewModelFactory @Inject constructor(
     private val viewModelProviders: @JvmSuppressWildcards Map<Class<out ViewModel>, Provider<ViewModel>>
 ) : ViewModelProvider.Factory {

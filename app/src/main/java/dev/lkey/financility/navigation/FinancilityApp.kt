@@ -1,4 +1,4 @@
-package dev.lkey.financility.core.app
+package dev.lkey.financility.navigation
 
 import android.net.Uri
 import androidx.compose.animation.slideInHorizontally
@@ -20,7 +20,7 @@ import dev.lkey.bill.presentation.edit.ui.EditBillScreen
 import dev.lkey.common.navigation.Route
 import dev.lkey.common.theme.FinancilityTheme
 import dev.lkey.core.di.utils.CoreProvider
-import dev.lkey.financility.navigation.splash.SplashScreen
+import dev.lkey.financility.splash.SplashScreen
 import dev.lkey.settings.SettingsScreen
 import dev.lkey.transations.di.DaggerTransactionComponent
 import dev.lkey.transations.domain.model.TransactionModel
@@ -32,6 +32,10 @@ import dev.lkey.transations.presentation.income.history.ui.HistoryIncomeScreen
 import dev.lkey.transations.presentation.income.today.ui.IncomeScreen
 import kotlinx.serialization.json.Json
 
+/**
+ * получает [coreComponent] и создает компоненты фичей для получения VM
+ */
+
 @Composable
 fun FinancilityApp() {
 
@@ -39,7 +43,6 @@ fun FinancilityApp() {
     val billComponent = DaggerBillComponent.factory().create(provider.coreComponent)
     val articlesComponent = DaggerArticlesComponent.factory().create(provider.coreComponent)
     val transactionsComponent = DaggerTransactionComponent.factory().create(provider.coreComponent)
-
 
     FinancilityTheme {
 

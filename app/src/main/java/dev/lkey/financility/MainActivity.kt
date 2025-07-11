@@ -4,10 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import dev.lkey.financility.core.app.FinancilityApp
+import dev.lkey.financility.navigation.FinancilityApp
 
 /**
  * Главный Actitivy приложения
+ * устанавливает навигацию и ui
  * */
 
 class MainActivity : ComponentActivity() {

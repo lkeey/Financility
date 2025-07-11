@@ -1,4 +1,4 @@
-package dev.lkey.financility.core.app
+package dev.lkey.financility
 
 import android.app.Application
 import dev.lkey.core.di.CoreComponent
@@ -6,9 +6,8 @@ import dev.lkey.core.di.DaggerCoreComponent
 import dev.lkey.core.di.utils.CoreProvider
 
 /**
- * Класс приложения, инициализирующий зависимостями через Dagger
- *
- * При запуске приложения запускает Dagger и передаёт контекст приложения и модуль зависимостей [appModule]
+ * При запуске приложения запускает Dagger и инициазизирует [coreComponent]
+ * [coreComponent] - нужен для инъекции VM фабрики
  */
 
 class MainApplication : Application(), CoreProvider {

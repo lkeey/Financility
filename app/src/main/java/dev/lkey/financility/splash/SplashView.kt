@@ -1,4 +1,4 @@
-package dev.lkey.financility.navigation.splash
+package dev.lkey.financility.splash
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
