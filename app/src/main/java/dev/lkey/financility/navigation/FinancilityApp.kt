@@ -33,7 +33,8 @@ import dev.lkey.transations.presentation.income.today.ui.IncomeScreen
 import kotlinx.serialization.json.Json
 
 /**
- * получает [coreComponent] и создает компоненты фичей для получения VM
+ * - Навигарует на нужный Route
+ * - Создает компоненты фичей для получения VM экрана
  */
 
 @Composable
