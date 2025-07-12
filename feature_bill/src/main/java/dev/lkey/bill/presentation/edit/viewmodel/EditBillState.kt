@@ -15,4 +15,5 @@ data class EditBillState (
     val enteredName: String = "",
     val enteredAmount: String = "",
     val chosenCurrency: CurrencyOption = CurrencyOption("NONE", "-", "NONE"),
+    val lastSync: Long? = null,
 )
