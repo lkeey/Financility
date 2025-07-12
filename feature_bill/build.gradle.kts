@@ -76,4 +76,8 @@ dependencies {
 
     // ui-components
     implementation(project(":common_ui"))
+
+    // room-module
+    implementation(project(":storage"))
+    
 }

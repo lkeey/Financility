@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 
 class ArticlesViewModel @Inject constructor(
     private val articlesUseCase : GetArticlesUseCase,
-    private val articlesSyncStorage: AppSyncStorage
+    private val appSyncStorage: AppSyncStorage
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(ArticlesState())
@@ -81,7 +81,7 @@ class ArticlesViewModel @Inject constructor(
                             it.copy(
                                 status = FinancilityResult.Success,
                                 articles = err.data as List<CategoryModel>,
-                                lastSync = articlesSyncStorage.getSyncTime(
+                                lastSync = appSyncStorage.getSyncTime(
                                     feature = ARTICLES_SYNC,
                                 )
                             )

@@ -1,8 +1,9 @@
-package dev.lkey.articles.domain.repository
+package dev.lkey.articles.data.repository
 
-import dev.lkey.articles.data.constants.Constants.ARTICLES_SYNC
+import dev.lkey.articles.data.constants.Constants
 import dev.lkey.articles.data.mappers.toCategoryEntity
 import dev.lkey.articles.data.mappers.toCategoryModel
+import dev.lkey.articles.domain.repository.ArticlesRepository
 import dev.lkey.common.core.model.CategoryModel
 import dev.lkey.core.error.ApiException
 import dev.lkey.core.error.OfflineDataException
@@ -22,7 +23,7 @@ import jakarta.inject.Inject
 
 class ArticlesRepositoryImpl @Inject constructor(
     private val categoryDao: CategoryDao,
-    private val articlesSyncStorage: AppSyncStorage
+    private val appSyncStorage: AppSyncStorage
 ): ArticlesRepository {
 
     override suspend fun getArticles(): Result<List<CategoryModel>> {
@@ -32,7 +33,7 @@ class ArticlesRepositoryImpl @Inject constructor(
 
                 val response: HttpResponse = ktorClient.get("categories")
 
-                if (response.status != HttpStatusCode.OK) {
+                if (response.status != HttpStatusCode.Companion.OK) {
                     throw ApiException("Ошибка API: ${response.status}")
                 }
 
@@ -44,14 +45,14 @@ class ArticlesRepositoryImpl @Inject constructor(
                 })
 
                 /* save last sync */
-                articlesSyncStorage.saveSyncTime(
-                    feature = ARTICLES_SYNC,
+                appSyncStorage.saveSyncTime(
+                    feature = Constants.ARTICLES_SYNC,
                     timestamp = System.currentTimeMillis()
                 )
 
                 return@safeCall articles
 
-            } catch (e : Exception) {
+            } catch (e: Exception) {
 
                 /* get cashed articles */
                 val cached = categoryDao.getAll().map {

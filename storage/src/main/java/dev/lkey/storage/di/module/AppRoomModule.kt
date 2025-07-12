@@ -4,8 +4,9 @@ import android.content.Context
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
-import dev.lkey.storage.AppDatabase
+import dev.lkey.storage.data.dao.AccountDao
 import dev.lkey.storage.data.dao.CategoryDao
+import dev.lkey.storage.data.database.AppDatabase
 
 @Module
 class AppRoomModule {
@@ -21,5 +22,8 @@ class AppRoomModule {
 
     @Provides
     fun provideCategoryDao(db: AppDatabase): CategoryDao = db.categoryDao()
+
+    @Provides
+    fun provideAccountDao(db: AppDatabase): AccountDao = db.accountDao()
 
 }

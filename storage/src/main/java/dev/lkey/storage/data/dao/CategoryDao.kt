@@ -8,9 +8,11 @@ import dev.lkey.storage.data.model.CategoryEntity
 
 @Dao
 interface CategoryDao {
+
     @Query("SELECT * FROM categories")
     suspend fun getAll(): List<CategoryEntity>
 
-    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(categories: List<CategoryEntity>)
+
 }
