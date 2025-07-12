@@ -93,6 +93,7 @@ class ArticlesViewModel @Inject constructor(
 
                         _action.emit(ArticleAction.ShowSnackBar(ErrorHandler().handleException(err)))
                     }
+
                 }
         }
     }

@@ -12,4 +12,5 @@ data class BillState (
     val accounts : List<AccountBriefModel> = emptyList(),
     val status: FinancilityResult = FinancilityResult.Loading,
     val chosenCurrency: CurrencyOption? = null,
+    val lastSync: Long? = null,
 )

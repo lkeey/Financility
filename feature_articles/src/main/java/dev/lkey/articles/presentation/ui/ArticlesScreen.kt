@@ -1,7 +1,5 @@
 package dev.lkey.articles.presentation.ui
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -27,7 +25,6 @@ import dev.lkey.common.ui.nav.FinancilityTopBar
 import dev.lkey.core.network.FinancilityResult
 import kotlinx.coroutines.flow.collectLatest
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ArticlesScreen (
     viewModel: ArticlesViewModel,
@@ -44,11 +41,11 @@ fun ArticlesScreen (
     LaunchedEffect(Unit) {
         viewModel.onEvent(ArticlesEvent.OnLoadArticles)
 
-        viewModel.action.collectLatest { event ->
-            when (event) {
+        viewModel.action.collectLatest { action ->
+            when (action) {
                 is ArticleAction.ShowSnackBar -> {
-                    error = event.message
-                    snackBarHostState.showSnackbar(event.message)
+                    error = action.message
+                    snackBarHostState.showSnackbar(action.message)
                 }
             }
         }
