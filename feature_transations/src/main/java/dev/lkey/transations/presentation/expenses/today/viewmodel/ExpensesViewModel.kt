@@ -84,10 +84,12 @@ class ExpensesViewModel @Inject constructor(
                 }
                 .onFailure { err ->
                     if (err is OfflineDataException) {
+                        val transactions = err.data as List<TransactionModel>
+
                         _state.update {
                             it.copy(
                                 status = FinancilityResult.Success,
-                                transactions = err.data as List<TransactionModel>,
+                                transactions = transactions.filter { !it.categoryModel.isIncome  },
                                 lastSync = appSyncStorage.getSyncTime(
                                     feature = TRANSACTION_SYNC,
                                 )

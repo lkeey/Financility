@@ -11,6 +11,7 @@ import dev.lkey.common.ui.item.FinancilityListItem
 import dev.lkey.core.converter.toEmoji
 import dev.lkey.core.converter.toFormat
 import dev.lkey.common.core.model.TransactionModel
+import dev.lkey.common.ui.item.FinancilitySyncMessage
 import dev.lkey.transations.presentation.income.today.viewmodel.IncomeState
 
 @Composable
@@ -24,6 +25,10 @@ fun IncomeView (
         modifier = modifier
             .fillMaxSize()
     ){
+
+        state.lastSync?.let {
+            FinancilitySyncMessage(it)
+        }
 
         if (state.accounts.isNotEmpty()) {
             FinancilityListItem(
