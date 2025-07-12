@@ -2,7 +2,7 @@ package dev.lkey.transations.presentation.expenses.history.viewmodel
 
 import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.core.network.FinancilityResult
-import dev.lkey.transations.domain.model.TransactionModel
+import dev.lkey.common.core.model.TransactionModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 

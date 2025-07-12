@@ -24,7 +24,7 @@ import dev.lkey.financility.splash.SplashScreen
 import dev.lkey.settings.SettingsScreen
 import dev.lkey.storage.di.DaggerDatabaseComponent
 import dev.lkey.transations.di.DaggerTransactionComponent
-import dev.lkey.transations.domain.model.TransactionModel
+import dev.lkey.common.core.model.TransactionModel
 import dev.lkey.transations.presentation.create.ui.CreateTransactionScreen
 import dev.lkey.transations.presentation.detail.ui.UpdateTransactionScreen
 import dev.lkey.transations.presentation.expenses.history.ui.HistoryExpensesScreen

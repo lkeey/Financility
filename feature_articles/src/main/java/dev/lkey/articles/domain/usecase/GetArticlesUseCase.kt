@@ -1,6 +1,6 @@
 package dev.lkey.articles.domain.usecase
 
-import dev.lkey.articles.domain.repository.ArticlesRepository
+import dev.lkey.articles.domain.ArticlesRepository
 import dev.lkey.common.core.model.CategoryModel
 import dev.lkey.core.network.retryRequest
 import jakarta.inject.Inject

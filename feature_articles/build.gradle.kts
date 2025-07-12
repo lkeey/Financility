@@ -60,10 +60,6 @@ dependencies {
 
 
     // network
-//    implementation(libs.ktor.client.core)
-//    implementation(libs.ktor.client.negotiation)
-//    implementation(libs.ktor.json)
-//    implementation(libs.ktor.client.logging)
     implementation(libs.ktor.client.okhttp)
 
     // Dagger 2
@@ -73,17 +69,16 @@ dependencies {
     // Navigation
     implementation(libs.jetbrains.compose.navigation)
 
-//    coroutines for room
-//    implementation "androidx.room:room-ktx:2.6.1"
-
     // ktor-client
     implementation(project(":core"))
 
-    // ui-components
-    implementation(project(":common_ui"))
+    // common-components
+    implementation(project(":common"))
 
     // room-module
     implementation(project(":storage"))
 
+    // to get articles
+    implementation(project(":articles"))
 
 }

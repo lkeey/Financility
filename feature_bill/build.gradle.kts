@@ -73,11 +73,11 @@ dependencies {
 
     // ktor-client
     implementation(project(":core"))
+    implementation(project(":common"))
 
     // ui-components
-    implementation(project(":common_ui"))
 
     // room-module
     implementation(project(":storage"))
-    
+
 }

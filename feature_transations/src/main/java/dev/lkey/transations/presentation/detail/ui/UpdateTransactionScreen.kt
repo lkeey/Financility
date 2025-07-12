@@ -21,7 +21,7 @@ import dev.lkey.common.ui.item.FinancilitySnackBar
 import dev.lkey.common.ui.nav.FinancilityBottomBar
 import dev.lkey.common.ui.nav.FinancilityTopBar
 import dev.lkey.core.network.FinancilityResult
-import dev.lkey.transations.domain.model.TransactionModel
+import dev.lkey.common.core.model.TransactionModel
 import dev.lkey.transations.presentation.detail.viewmodel.UpdateTransactionAction
 import dev.lkey.transations.presentation.detail.viewmodel.UpdateTransactionEvent
 import dev.lkey.transations.presentation.detail.viewmodel.UpdateTransactionViewModel

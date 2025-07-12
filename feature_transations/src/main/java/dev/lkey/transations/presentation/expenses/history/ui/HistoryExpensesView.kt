@@ -13,7 +13,7 @@ import dev.lkey.common.ui.field.FinancilityDayPicker
 import dev.lkey.common.ui.item.FinancilityListItem
 import dev.lkey.core.converter.toEmoji
 import dev.lkey.core.converter.toFormat
-import dev.lkey.transations.domain.model.TransactionModel
+import dev.lkey.common.core.model.TransactionModel
 import dev.lkey.transations.presentation.expenses.history.viewmodel.HistoryExpensesEvent
 import dev.lkey.transations.presentation.expenses.history.viewmodel.HistoryExpensesState
 

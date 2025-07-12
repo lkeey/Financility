@@ -89,7 +89,7 @@ dependencies {
     implementation(project(":storage"))
 
     implementation(project(":core"))
-    implementation(project(":common_ui"))
+    implementation(project(":common"))
 
 
 }

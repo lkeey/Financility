@@ -3,7 +3,7 @@ package dev.lkey.transations.domain.repository
 import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.common.core.model.CategoryModel
 import dev.lkey.transations.data.dto.TransactionDto
-import dev.lkey.transations.domain.model.TransactionModel
+import dev.lkey.common.core.model.TransactionModel
 
 interface TransactionsRepository {
 

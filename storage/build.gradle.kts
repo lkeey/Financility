@@ -54,4 +54,7 @@ dependencies {
 
     // Core-Component
     implementation(project(":core"))
+
+    // common-components
+    implementation(project(":common"))
 }
