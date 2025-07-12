@@ -2,10 +2,10 @@ package dev.lkey.bill.presentation.edit.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.lkey.bill.data.constants.Constants.BILL_SYNC
 import dev.lkey.bill.data.model.UpdateAccountDto
 import dev.lkey.bill.domain.usecase.GetBillInfoUseCase
 import dev.lkey.bill.domain.usecase.UpdateBillUseCase
+import dev.lkey.common.constants.Constants.BILL_SYNC
 import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.common.core.model.CurrencyOption
 import dev.lkey.core.error.ErrorHandler

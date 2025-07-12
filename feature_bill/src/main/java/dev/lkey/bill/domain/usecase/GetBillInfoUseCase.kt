@@ -1,6 +1,6 @@
 package dev.lkey.bill.domain.usecase
 
-import dev.lkey.bill.domain.repository.BillRepository
+import dev.lkey.account.domain.AccountRepository
 import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.core.network.retryRequest
 import jakarta.inject.Inject
@@ -10,12 +10,12 @@ import jakarta.inject.Inject
  * */
 
 class GetBillInfoUseCase @Inject constructor(
-    val billRepository: BillRepository
+    val accountRepository: AccountRepository
 ) {
     suspend operator fun invoke(): Result<List<AccountBriefModel>> {
 
         return retryRequest {
-            val accounts = billRepository.getBillInfo()
+            val accounts = accountRepository.getBillInfo()
 
             accounts
         }

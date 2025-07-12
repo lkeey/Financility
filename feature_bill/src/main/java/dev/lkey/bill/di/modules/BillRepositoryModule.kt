@@ -2,6 +2,8 @@ package dev.lkey.bill.di.modules
 
 import dagger.Module
 import dagger.Provides
+import dev.lkey.account.data.AccountRepositoryImpl
+import dev.lkey.account.domain.AccountRepository
 import dev.lkey.bill.data.repository.BillRepositoryImpl
 import dev.lkey.bill.domain.repository.BillRepository
 import dev.lkey.storage.data.dao.AccountDao
@@ -15,14 +17,19 @@ import dev.lkey.storage.data.sync.AppSyncStorage
 class BillRepositoryModule {
 
     @Provides
-    fun provideBillRepository(
+    fun provideAccountRepository(
         accountDao: AccountDao,
         appSyncStorage: AppSyncStorage
-    ): BillRepository {
-        return BillRepositoryImpl(
+    ): AccountRepository {
+        return AccountRepositoryImpl(
             accountDao = accountDao,
             appSyncStorage = appSyncStorage
         )
+    }
+
+    @Provides
+    fun provideBillRepository(): BillRepository {
+        return BillRepositoryImpl()
     }
 
 }

@@ -8,8 +8,8 @@ import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.ktorClient
 import dev.lkey.core.network.safeCall
 import dev.lkey.storage.data.dao.TransactionDao
-import dev.lkey.storage.data.mappers.toTransactionEntity
-import dev.lkey.storage.data.mappers.toTransactionModel
+import dev.lkey.storage.data.mappers.transaction.toTransactionEntity
+import dev.lkey.storage.data.mappers.transaction.toTransactionModel
 import dev.lkey.storage.data.sync.AppSyncStorage
 import dev.lkey.transations.data.dto.TransactionDto
 import dev.lkey.transations.domain.repository.TransactionsRepository

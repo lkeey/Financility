@@ -1,10 +1,10 @@
-package dev.lkey.bill.data.mappers
+package dev.lkey.storage.data.mappers.account
 
 import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.storage.data.model.AccountEntity
 
-fun AccountBriefModel.toAccountEntity(): AccountEntity
-        = AccountEntity(
+fun AccountEntity.toAccountBriefModel(): AccountBriefModel
+        = AccountBriefModel(
             id = id,
             name = name,
             balance = balance,

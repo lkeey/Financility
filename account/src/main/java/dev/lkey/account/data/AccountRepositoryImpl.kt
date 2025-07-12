@@ -1,62 +1,61 @@
-package dev.lkey.articles.data
+package dev.lkey.account.data
 
-import dev.lkey.articles.domain.ArticlesRepository
+import dev.lkey.account.domain.AccountRepository
 import dev.lkey.common.constants.Constants
-import dev.lkey.common.core.model.CategoryModel
+import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.core.error.ApiException
 import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.ktorClient
 import dev.lkey.core.network.safeCall
-import dev.lkey.storage.data.dao.CategoryDao
-import dev.lkey.storage.data.mappers.category.toCategoryEntity
-import dev.lkey.storage.data.mappers.category.toCategoryModel
+import dev.lkey.storage.data.dao.AccountDao
+import dev.lkey.storage.data.mappers.account.toAccountBriefModel
+import dev.lkey.storage.data.mappers.account.toAccountEntity
 import dev.lkey.storage.data.sync.AppSyncStorage
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import io.ktor.client.request.put
+import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
 import jakarta.inject.Inject
 
 /**
- * Репозиторий для получения статей
+ * Репозиторий для получения счетов
  * */
 
-class ArticlesRepositoryImpl @Inject constructor(
-    private val categoryDao: CategoryDao,
+class AccountRepositoryImpl @Inject constructor(
+    private val accountDao: AccountDao,
     private val appSyncStorage: AppSyncStorage
-): ArticlesRepository {
+) : AccountRepository {
 
-    override suspend fun getArticles(): Result<List<CategoryModel>> {
-
+    override suspend fun getBillInfo(): Result<List<AccountBriefModel>> {
         return safeCall {
             try {
-
-                val response: HttpResponse = ktorClient.get("categories")
+                val response: HttpResponse = ktorClient.get("accounts")
 
                 if (response.status != HttpStatusCode.Companion.OK) {
                     throw ApiException("Ошибка API: ${response.status}")
                 }
 
-                val articles = response.body<List<CategoryModel>>()
+                val accounts = response.body<List<AccountBriefModel>>()
 
                 /* save to local DB */
-                categoryDao.insertAll(articles.map {
-                    it.toCategoryEntity()
+                accountDao.insertAll(accounts.map {
+                    it.toAccountEntity()
                 })
 
                 /* save last sync */
                 appSyncStorage.saveSyncTime(
-                    feature = Constants.ARTICLES_SYNC,
+                    feature = Constants.BILL_SYNC,
                     timestamp = System.currentTimeMillis()
                 )
 
-                return@safeCall articles
-
+                return@safeCall accounts
             } catch (e: Exception) {
 
                 /* get cashed articles */
-                val cached = categoryDao.getAll().map {
-                    it.toCategoryModel()
+                val cached = accountDao.getAll().map {
+                    it.toAccountBriefModel()
                 }
 
                 /* if not cashed data */
@@ -68,5 +67,4 @@ class ArticlesRepositoryImpl @Inject constructor(
             }
         }
     }
-
 }
