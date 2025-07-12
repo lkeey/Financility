@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dev.lkey.storage.data.dao.AccountDao
 import dev.lkey.storage.data.dao.CategoryDao
+import dev.lkey.storage.data.dao.TransactionDao
 import dev.lkey.storage.data.database.AppDatabase
 
 @Module
@@ -25,5 +26,9 @@ class AppRoomModule {
 
     @Provides
     fun provideAccountDao(db: AppDatabase): AccountDao = db.accountDao()
+
+    @Provides
+    fun provideTransactionDao(db: AppDatabase): TransactionDao = db.transactionDao()
+
 
 }
