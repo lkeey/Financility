@@ -2,9 +2,11 @@ package dev.lkey.transations.di.module
 
 import dagger.Module
 import dagger.Provides
+import dev.lkey.articles.domain.ArticlesRepository
 import dev.lkey.transations.domain.repository.TransactionsRepository
 import dev.lkey.transations.domain.usecase.DeleteTransactionUseCase
 import dev.lkey.transations.domain.usecase.GetAccountUseCase
+import dev.lkey.transations.domain.usecase.GetArticlesUseCase
 import dev.lkey.transations.domain.usecase.GetTransactionsUseCase
 import dev.lkey.transations.domain.usecase.PostTransactionUseCase
 import dev.lkey.transations.domain.usecase.UpdateTransactionUseCase
@@ -50,5 +52,11 @@ class TransactionsUseCaseModule {
         return DeleteTransactionUseCase(transactionsRepository)
     }
 
+    @Provides
+    fun provideGetArticlesUseCase(
+        articlesRepository: ArticlesRepository
+    ): GetArticlesUseCase {
+        return GetArticlesUseCase(articlesRepository)
+    }
 
 }

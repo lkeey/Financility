@@ -1,8 +1,8 @@
 package dev.lkey.transations.domain.usecase
 
+import dev.lkey.articles.domain.ArticlesRepository
 import dev.lkey.common.core.model.CategoryModel
 import dev.lkey.core.network.retryRequest
-import dev.lkey.transations.domain.repository.TransactionsRepository
 import jakarta.inject.Inject
 
 /**
@@ -10,7 +10,7 @@ import jakarta.inject.Inject
  * */
 
 class GetArticlesUseCase @Inject constructor(
-    private val repository: TransactionsRepository
+    private val repository: ArticlesRepository
 ) {
 
     suspend operator fun invoke(): Result<List<CategoryModel>> {

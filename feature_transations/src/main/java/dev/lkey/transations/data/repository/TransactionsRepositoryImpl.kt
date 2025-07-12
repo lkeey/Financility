@@ -2,7 +2,6 @@ package dev.lkey.transations.data.repository
 
 import dev.lkey.common.constants.Constants
 import dev.lkey.common.core.model.AccountBriefModel
-import dev.lkey.common.core.model.CategoryModel
 import dev.lkey.common.core.model.TransactionModel
 import dev.lkey.core.error.ApiException
 import dev.lkey.core.error.OfflineDataException
@@ -147,16 +146,4 @@ class TransactionsRepositoryImpl @Inject constructor(
         }
     }
 
-    // TODO share from articles module
-    override suspend fun getArticles(): Result<List<CategoryModel>> {
-        return safeCall {
-            val response: HttpResponse = ktorClient.get("categories")
-
-            if (response.status != HttpStatusCode.OK) {
-                throw ApiException("Ошибка API: ${response.status}")
-            }
-
-            response.body()
-        }
-    }
 }

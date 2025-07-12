@@ -18,6 +18,7 @@ import dev.lkey.transations.presentation.income.today.viewmodel.IncomeViewModel
 
 @Module
 interface TransactionsViewModelModule {
+
     @Binds
     @IntoMap
     @ViewModelKey(ExpensesViewModel::class)

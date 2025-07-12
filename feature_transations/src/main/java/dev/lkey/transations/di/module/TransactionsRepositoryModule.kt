@@ -2,6 +2,9 @@ package dev.lkey.transations.di.module
 
 import dagger.Module
 import dagger.Provides
+import dev.lkey.articles.data.ArticlesRepositoryImpl
+import dev.lkey.articles.domain.ArticlesRepository
+import dev.lkey.storage.data.dao.CategoryDao
 import dev.lkey.storage.data.dao.TransactionDao
 import dev.lkey.storage.data.sync.AppSyncStorage
 import dev.lkey.transations.data.repository.TransactionsRepositoryImpl
@@ -21,6 +24,17 @@ class TransactionsRepositoryModule {
     ): TransactionsRepository {
         return TransactionsRepositoryImpl(
             transactionDao = transactionDao,
+            appSyncStorage = syncStorage
+        )
+    }
+
+    @Provides
+    fun provideArticlesRepository(
+        categoryDao: CategoryDao,
+        syncStorage: AppSyncStorage
+    ): ArticlesRepository {
+        return ArticlesRepositoryImpl(
+            categoryDao = categoryDao,
             appSyncStorage = syncStorage
         )
     }
