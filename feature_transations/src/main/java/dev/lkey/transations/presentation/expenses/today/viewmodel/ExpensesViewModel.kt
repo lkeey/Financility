@@ -67,8 +67,6 @@ class ExpensesViewModel @Inject constructor(
                 )
             }
 
-            print("financility error 1")
-
             val result = transactionUseCase.invoke(
                 id = id,
                 startDate = LocalDate.now().format(DateTimeFormatter.ISO_DATE),
@@ -85,10 +83,7 @@ class ExpensesViewModel @Inject constructor(
                     }
                 }
                 .onFailure { err ->
-                    print("financility error 2")
-
                     if (err is OfflineDataException) {
-                        print(err.data)
                         _state.update {
                             it.copy(
                                 status = FinancilityResult.Success,

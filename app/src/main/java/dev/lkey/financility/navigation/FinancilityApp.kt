@@ -17,14 +17,15 @@ import dev.lkey.articles.presentation.ui.ArticlesScreen
 import dev.lkey.bill.di.DaggerBillComponent
 import dev.lkey.bill.presentation.current.ui.BillScreen
 import dev.lkey.bill.presentation.edit.ui.EditBillScreen
+import dev.lkey.common.core.model.TransactionModel
 import dev.lkey.common.navigation.Route
 import dev.lkey.common.theme.FinancilityTheme
 import dev.lkey.core.di.utils.CoreProvider
-import dev.lkey.financility.splash.SplashScreen
+import dev.lkey.feature_splash.di.DaggerSplashComponent
+import dev.lkey.feature_splash.presentation.ui.SplashScreen
 import dev.lkey.settings.SettingsScreen
 import dev.lkey.storage.di.DaggerDatabaseComponent
 import dev.lkey.transations.di.DaggerTransactionComponent
-import dev.lkey.common.core.model.TransactionModel
 import dev.lkey.transations.presentation.create.ui.CreateTransactionScreen
 import dev.lkey.transations.presentation.detail.ui.UpdateTransactionScreen
 import dev.lkey.transations.presentation.expenses.history.ui.HistoryExpensesScreen
@@ -44,6 +45,7 @@ fun FinancilityApp() {
     val provider = LocalContext.current.applicationContext as CoreProvider
     val db = DaggerDatabaseComponent.factory().create(provider.coreComponent)
 
+    val splashComponent = DaggerSplashComponent.factory().create(provider.coreComponent, db)
     val billComponent = DaggerBillComponent.factory().create(provider.coreComponent, db)
     val articlesComponent = DaggerArticlesComponent.factory().create(provider.coreComponent, db)
     val transactionsComponent = DaggerTransactionComponent.factory().create(provider.coreComponent, db)
@@ -61,7 +63,8 @@ fun FinancilityApp() {
                 popEnterTransition = { slideInHorizontally() }
             ) {
                 SplashScreen(
-                    navController = navController
+                    navController = navController,
+                    viewModel = viewModel(factory = splashComponent.viewModelFactory()),
                 )
             }
 

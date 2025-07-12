@@ -26,7 +26,7 @@ class AccountRepositoryImpl @Inject constructor(
     private val appSyncStorage: AppSyncStorage
 ) : AccountRepository {
 
-    override suspend fun getAccounts(): Result<List<AccountBriefModel>> {
+    override suspend fun getRemoteAccounts(): Result<List<AccountBriefModel>> {
         return safeCall {
             try {
                 val response: HttpResponse = ktorClient.get("accounts")
