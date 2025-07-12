@@ -26,6 +26,10 @@ class AccountRepositoryImpl @Inject constructor(
     private val appSyncStorage: AppSyncStorage
 ) : AccountRepository {
 
+    /**
+     * Может выбоасить [OfflineDataException]
+     * использовать только там, где нужно показать, что это оффлайн запрос
+     */
     override suspend fun getRemoteAccounts(): Result<List<AccountBriefModel>> {
         return safeCall {
             try {

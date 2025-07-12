@@ -15,7 +15,7 @@ class GetBillInfoUseCase @Inject constructor(
     suspend operator fun invoke(): Result<List<AccountBriefModel>> {
 
         return retryRequest {
-            val accounts = accountRepository.getCashedAccounts()
+            val accounts = accountRepository.getRemoteAccounts()
 
             accounts
         }
