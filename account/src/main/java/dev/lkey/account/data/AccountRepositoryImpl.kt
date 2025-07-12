@@ -84,6 +84,17 @@ class AccountRepositoryImpl @Inject constructor(
 
                 val accounts = response.body<List<AccountBriefModel>>()
 
+                /* save to local DB */
+                accountDao.insertAll(accounts.map {
+                    it.toAccountEntity()
+                })
+
+                /* save last sync */
+                appSyncStorage.saveSyncTime(
+                    feature = Constants.BILL_SYNC,
+                    timestamp = System.currentTimeMillis()
+                )
+
                 return@safeCall accounts
             }
         }
