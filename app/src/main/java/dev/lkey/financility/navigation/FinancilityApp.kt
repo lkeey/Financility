@@ -46,7 +46,7 @@ fun FinancilityApp() {
 
     val billComponent = DaggerBillComponent.factory().create(provider.coreComponent, db)
     val articlesComponent = DaggerArticlesComponent.factory().create(provider.coreComponent, db)
-    val transactionsComponent = DaggerTransactionComponent.factory().create(provider.coreComponent)
+    val transactionsComponent = DaggerTransactionComponent.factory().create(provider.coreComponent, db)
 
     FinancilityTheme {
 

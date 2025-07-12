@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dev.lkey.core.error.ApiException
 import dev.lkey.core.error.ErrorHandler
 import dev.lkey.core.network.FinancilityResult
-import dev.lkey.transations.data.remote.dto.TransactionDto
+import dev.lkey.transations.data.dto.TransactionDto
 import dev.lkey.transations.domain.usecase.DeleteTransactionUseCase
 import dev.lkey.transations.domain.usecase.GetArticlesUseCase
 import dev.lkey.transations.domain.usecase.UpdateTransactionUseCase

@@ -3,9 +3,15 @@ package dev.lkey.transations.data.repository
 import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.common.core.model.CategoryModel
 import dev.lkey.core.error.ApiException
+import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.ktorClient
 import dev.lkey.core.network.safeCall
-import dev.lkey.transations.data.remote.dto.TransactionDto
+import dev.lkey.storage.data.dao.TransactionDao
+import dev.lkey.storage.data.sync.AppSyncStorage
+import dev.lkey.transations.data.constants.Constants
+import dev.lkey.transations.data.dto.TransactionDto
+import dev.lkey.transations.data.mappers.toTransactionEntity
+import dev.lkey.transations.data.mappers.toTransactionModel
 import dev.lkey.transations.domain.model.TransactionModel
 import dev.lkey.transations.domain.repository.TransactionsRepository
 import io.ktor.client.call.body
@@ -16,6 +22,7 @@ import io.ktor.client.request.put
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
+import jakarta.inject.Inject
 
 /**
  * Репозиторий, который выолняет функции
@@ -26,7 +33,10 @@ import io.ktor.http.HttpStatusCode
  * - удаления транзакций
  * */
 
-class TransactionsRepositoryImpl : TransactionsRepository {
+class TransactionsRepositoryImpl @Inject constructor(
+    private val transactionDao: TransactionDao,
+    private val appSyncStorage: AppSyncStorage
+) : TransactionsRepository {
 
     override suspend fun getTransactions(
         accountId: Int,
@@ -34,18 +44,49 @@ class TransactionsRepositoryImpl : TransactionsRepository {
         endDate: String,
     ): Result<List<TransactionModel>> {
         return safeCall {
-            val response = ktorClient.get("transactions/account/${accountId}/period") {
-                url {
-                    parameters.append("startDate", startDate)
-                    parameters.append("endDate", endDate)
+            try {
+                val response = ktorClient.get("transactions/account/${accountId}/period") {
+                    url {
+                        parameters.append("startDate", startDate)
+                        parameters.append("endDate", endDate)
+                    }
                 }
-            }
 
-            if (response.status != HttpStatusCode.OK) {
-                throw ApiException("Ошибка API: ${response.status}")
-            }
+                if (response.status != HttpStatusCode.OK) {
+                    throw ApiException("Ошибка API: ${response.status}")
+                }
 
-            response.body()
+                val transactions = response.body<List<TransactionModel>>()
+
+                /* save to local DB */
+                transactionDao.insertAll(transactions.map {
+                    it.toTransactionEntity(
+                        isSynced = true
+                    )
+                })
+
+                /* save last sync */
+                appSyncStorage.saveSyncTime(
+                    feature = Constants.TRANSACTION_SYNC,
+                    timestamp = System.currentTimeMillis()
+                )
+
+                return@safeCall transactions
+
+            } catch (e: Exception) {
+
+                /* get cashed articles */
+                val cached = transactionDao.getAll().map {
+                    it.toTransactionModel()
+                }
+
+                /* if not cashed data */
+                if (cached.isNotEmpty()) {
+                    throw OfflineDataException(cached)
+                }
+
+                throw e
+            }
         }
     }
 
@@ -106,6 +147,7 @@ class TransactionsRepositoryImpl : TransactionsRepository {
         }
     }
 
+    // TODO share from articles module
     override suspend fun getArticles(): Result<List<CategoryModel>> {
         return safeCall {
             val response: HttpResponse = ktorClient.get("categories")
