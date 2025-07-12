@@ -8,7 +8,7 @@ import dev.lkey.core.error.ErrorHandler
 import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.FinancilityResult
 import dev.lkey.storage.data.sync.AppSyncStorage
-import dev.lkey.transations.domain.usecase.GetAccountUseCase
+import dev.lkey.transations.domain.usecase.GetAccountsUseCase
 import dev.lkey.transations.domain.usecase.GetTransactionsUseCase
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -26,7 +26,7 @@ import java.time.format.DateTimeFormatter
  * */
 
 class ExpensesViewModel @Inject constructor(
-    private val accountsUseCase : GetAccountUseCase,
+    private val accountsUseCase : GetAccountsUseCase,
     private val transactionUseCase : GetTransactionsUseCase,
     private val appSyncStorage: AppSyncStorage
 ) : ViewModel() {
@@ -67,6 +67,8 @@ class ExpensesViewModel @Inject constructor(
                 )
             }
 
+            print("financility error 1")
+
             val result = transactionUseCase.invoke(
                 id = id,
                 startDate = LocalDate.now().format(DateTimeFormatter.ISO_DATE),
@@ -83,7 +85,10 @@ class ExpensesViewModel @Inject constructor(
                     }
                 }
                 .onFailure { err ->
+                    print("financility error 2")
+
                     if (err is OfflineDataException) {
+                        print(err.data)
                         _state.update {
                             it.copy(
                                 status = FinancilityResult.Success,

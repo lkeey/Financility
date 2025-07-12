@@ -1,7 +1,6 @@
 package dev.lkey.transations.data.repository
 
 import dev.lkey.common.constants.Constants
-import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.common.core.model.TransactionModel
 import dev.lkey.core.error.ApiException
 import dev.lkey.core.error.OfflineDataException
@@ -74,7 +73,9 @@ class TransactionsRepositoryImpl @Inject constructor(
 
             } catch (e: Exception) {
 
-                /* get cashed articles */
+                print("financility error 3")
+
+                /* get cashed transactions */
                 val cached = transactionDao.getAll().map {
                     it.toTransactionModel()
                 }
@@ -86,18 +87,6 @@ class TransactionsRepositoryImpl @Inject constructor(
 
                 throw e
             }
-        }
-    }
-
-    override suspend fun getAccounts(): Result<List<AccountBriefModel>> {
-        return safeCall {
-            val response: HttpResponse = ktorClient.get("accounts")
-
-            if (response.status != HttpStatusCode.OK) {
-                throw ApiException("Ошибка API: ${response.status}")
-            }
-
-            response.body()
         }
     }
 

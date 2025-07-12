@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.lkey.core.error.ErrorHandler
 import dev.lkey.core.network.FinancilityResult
-import dev.lkey.transations.domain.usecase.GetAccountUseCase
+import dev.lkey.transations.domain.usecase.GetAccountsUseCase
 import dev.lkey.transations.domain.usecase.GetTransactionsUseCase
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
  * */
 
 class HistoryIncomeViewModel @Inject constructor(
-    private val accountsUseCase : GetAccountUseCase,
+    private val accountsUseCase : GetAccountsUseCase,
     private val transactionUseCase : GetTransactionsUseCase
 
 ) : ViewModel() {

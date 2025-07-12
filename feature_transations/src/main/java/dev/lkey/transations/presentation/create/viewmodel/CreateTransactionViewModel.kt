@@ -6,7 +6,7 @@ import dev.lkey.core.error.ApiException
 import dev.lkey.core.error.ErrorHandler
 import dev.lkey.core.network.FinancilityResult
 import dev.lkey.transations.data.dto.TransactionDto
-import dev.lkey.transations.domain.usecase.GetAccountUseCase
+import dev.lkey.transations.domain.usecase.GetAccountsUseCase
 import dev.lkey.transations.domain.usecase.GetArticlesUseCase
 import dev.lkey.transations.domain.usecase.PostTransactionUseCase
 import jakarta.inject.Inject
@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
  * */
 
 class CreateTransactionViewModel @Inject constructor (
-    private val accountUseCase : GetAccountUseCase,
+    private val accountUseCase : GetAccountsUseCase,
     private val articlesUseCase : GetArticlesUseCase,
     private val createTransactionUseCase : PostTransactionUseCase
 ) : ViewModel() {

@@ -4,6 +4,8 @@ import dev.lkey.common.core.model.AccountBriefModel
 
 interface AccountRepository {
 
-    suspend fun getBillInfo(): Result<List<AccountBriefModel>>
+    suspend fun getAccounts(): Result<List<AccountBriefModel>>
+
+    suspend fun getCashedAccounts(): Result<List<AccountBriefModel>>
 
 }

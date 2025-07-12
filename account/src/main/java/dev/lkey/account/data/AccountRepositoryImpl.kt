@@ -13,8 +13,6 @@ import dev.lkey.storage.data.mappers.account.toAccountEntity
 import dev.lkey.storage.data.sync.AppSyncStorage
 import io.ktor.client.call.body
 import io.ktor.client.request.get
-import io.ktor.client.request.put
-import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
 import jakarta.inject.Inject
@@ -28,7 +26,7 @@ class AccountRepositoryImpl @Inject constructor(
     private val appSyncStorage: AppSyncStorage
 ) : AccountRepository {
 
-    override suspend fun getBillInfo(): Result<List<AccountBriefModel>> {
+    override suspend fun getAccounts(): Result<List<AccountBriefModel>> {
         return safeCall {
             try {
                 val response: HttpResponse = ktorClient.get("accounts")
@@ -53,7 +51,7 @@ class AccountRepositoryImpl @Inject constructor(
                 return@safeCall accounts
             } catch (e: Exception) {
 
-                /* get cashed articles */
+                /* get cashed accounts */
                 val cached = accountDao.getAll().map {
                     it.toAccountBriefModel()
                 }
@@ -64,6 +62,29 @@ class AccountRepositoryImpl @Inject constructor(
                 }
 
                 throw e
+            }
+        }
+    }
+
+    override suspend fun getCashedAccounts(): Result<List<AccountBriefModel>> {
+        return safeCall {
+
+            val cached = accountDao.getAll().map {
+                it.toAccountBriefModel()
+            }
+
+            if (cached.isNotEmpty()) {
+                return@safeCall cached
+            } else {
+                val response: HttpResponse = ktorClient.get("accounts")
+
+                if (response.status != HttpStatusCode.Companion.OK) {
+                    throw ApiException("Ошибка API: ${response.status}")
+                }
+
+                val accounts = response.body<List<AccountBriefModel>>()
+
+                return@safeCall accounts
             }
         }
     }

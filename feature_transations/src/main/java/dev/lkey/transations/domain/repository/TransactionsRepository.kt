@@ -1,6 +1,5 @@
 package dev.lkey.transations.domain.repository
 
-import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.common.core.model.TransactionModel
 import dev.lkey.transations.data.dto.TransactionDto
 
@@ -11,8 +10,6 @@ interface TransactionsRepository {
         startDate: String,
         endDate: String
     ): Result<List<TransactionModel>>
-
-    suspend fun getAccounts(): Result<List<AccountBriefModel>>
 
     suspend fun createTransaction(
         transaction: TransactionDto

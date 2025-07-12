@@ -13,7 +13,6 @@ import dev.lkey.storage.data.mappers.category.toCategoryModel
 import dev.lkey.storage.data.sync.AppSyncStorage
 import io.ktor.client.call.body
 import io.ktor.client.request.get
-import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
 import jakarta.inject.Inject
 
@@ -31,7 +30,7 @@ class ArticlesRepositoryImpl @Inject constructor(
         return safeCall {
             try {
 
-                val response: HttpResponse = ktorClient.get("categories")
+                val response = ktorClient.get("categories")
 
                 if (response.status != HttpStatusCode.Companion.OK) {
                     throw ApiException("Ошибка API: ${response.status}")

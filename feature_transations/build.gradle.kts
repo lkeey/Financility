@@ -84,4 +84,8 @@ dependencies {
     // to get articles
     implementation(project(":articles"))
 
+    // to get account
+    implementation(project(":account"))
+
+
 }
