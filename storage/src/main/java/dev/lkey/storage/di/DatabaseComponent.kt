@@ -3,6 +3,8 @@ package dev.lkey.storage.di
 import dagger.Component
 import dev.lkey.core.di.CoreComponent
 import dev.lkey.storage.data.dao.CategoryDao
+import dev.lkey.storage.di.module.AppRoomModule
+import dev.lkey.storage.di.module.ArticlesSyncModule
 
 
 /**
@@ -15,7 +17,8 @@ import dev.lkey.storage.data.dao.CategoryDao
         CoreComponent::class
     ],
     modules = [
-        AppRoomModule::class
+        AppRoomModule::class,
+        ArticlesSyncModule::class
     ]
 )
 interface DatabaseComponent {

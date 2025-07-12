@@ -1,4 +1,4 @@
-package dev.lkey.storage.di
+package dev.lkey.storage.di.module
 
 import android.content.Context
 import androidx.room.Room

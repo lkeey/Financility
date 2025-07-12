@@ -1,14 +1,15 @@
 package dev.lkey.articles.domain.repository
 
+import dev.lkey.articles.data.constants.Constants.ARTICLES_SYNC
 import dev.lkey.articles.data.mappers.toCategoryEntity
 import dev.lkey.articles.data.mappers.toCategoryModel
-import dev.lkey.articles.data.sync.ArticlesSyncStorage
 import dev.lkey.common.core.model.CategoryModel
 import dev.lkey.core.error.ApiException
 import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.ktorClient
 import dev.lkey.core.network.safeCall
 import dev.lkey.storage.data.dao.CategoryDao
+import dev.lkey.storage.data.sync.AppSyncStorage
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
@@ -21,7 +22,7 @@ import jakarta.inject.Inject
 
 class ArticlesRepositoryImpl @Inject constructor(
     private val categoryDao: CategoryDao,
-    private val articlesSyncStorage: ArticlesSyncStorage
+    private val articlesSyncStorage: AppSyncStorage
 ): ArticlesRepository {
 
     override suspend fun getArticles(): Result<List<CategoryModel>> {
@@ -43,7 +44,10 @@ class ArticlesRepositoryImpl @Inject constructor(
                 })
 
                 /* save last sync */
-                articlesSyncStorage.saveArticlesSyncTime(System.currentTimeMillis())
+                articlesSyncStorage.saveSyncTime(
+                    feature = ARTICLES_SYNC,
+                    timestamp = System.currentTimeMillis()
+                )
 
                 return@safeCall articles
 
