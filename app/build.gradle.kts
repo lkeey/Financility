@@ -85,6 +85,9 @@ dependencies {
     implementation(project(":feature_transations"))
     implementation(project(":feature_settings"))
 
+    // db
+    implementation(project(":storage"))
+
     implementation(project(":core"))
     implementation(project(":common_ui"))
 

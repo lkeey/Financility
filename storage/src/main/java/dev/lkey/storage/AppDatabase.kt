@@ -1,15 +1,15 @@
-package dev.lkey.articles.data
+package dev.lkey.storage
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import dev.lkey.articles.data.dao.CategoryDao
-import dev.lkey.articles.data.model.CategoryEntity
+import dev.lkey.storage.data.dao.CategoryDao
+import dev.lkey.storage.data.model.CategoryEntity
 
 @Database(
     entities = [CategoryEntity::class],
     version = 1,
     exportSchema = false
 )
-abstract class ArticlesDatabase : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
     abstract fun categoryDao(): CategoryDao
 }

@@ -1,10 +1,10 @@
-package dev.lkey.articles.data.dao
+package dev.lkey.storage.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import dev.lkey.articles.data.model.CategoryEntity
+import dev.lkey.storage.data.model.CategoryEntity
 
 @Dao
 interface CategoryDao {

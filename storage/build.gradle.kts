@@ -2,13 +2,12 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
 
-    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.kotlin.kapt)
 }
 
 android {
-    namespace = "dev.lkey.articles"
+    namespace = "dev.lkey.storage"
     compileSdk = 35
 
     defaultConfig {
@@ -34,60 +33,25 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-
-    // testing
+    implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    // ui
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-
-
-    // network
-//    implementation(libs.ktor.client.core)
-//    implementation(libs.ktor.client.negotiation)
-//    implementation(libs.ktor.json)
-//    implementation(libs.ktor.client.logging)
-    implementation(libs.ktor.client.okhttp)
 
     // Dagger 2
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
 
-    // Navigation
-    implementation(libs.jetbrains.compose.navigation)
-
     // Room
     implementation(libs.androidx.room.runtime)
     kapt(libs.androidx.room.compiler)
 
-//    coroutines
-//    implementation "androidx.room:room-ktx:2.6.1"
-
-    // ktor-client
+    // Core-Component
     implementation(project(":core"))
-
-    // ui-components
-    implementation(project(":common_ui"))
-
-    // room-module
-    implementation(project(":storage"))
-
-
 }

@@ -1,4 +1,4 @@
-package dev.lkey.articles.data.model
+package dev.lkey.storage.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

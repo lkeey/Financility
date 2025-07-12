@@ -1,4 +1,4 @@
-package dev.lkey.common.ui.message
+package dev.lkey.common.ui.item
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 @Composable
-fun SyncMessage (
+fun FinancilitySyncMessage (
     time : Long
 ) {
 
@@ -30,7 +30,7 @@ fun SyncMessage (
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
-        text = "Показаны оффлайн-данные.\n Последняя синхронизация: $formatted",
+        text = "Показаны оффлайн-данные.\nПоследняя синхронизация: $formatted",
         color = MaterialTheme.colorScheme.surfaceContainer,
         fontWeight = FontWeight.W400,
         fontSize = 14.sp,

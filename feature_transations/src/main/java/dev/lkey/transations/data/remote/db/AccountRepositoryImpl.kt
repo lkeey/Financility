@@ -1,4 +1,4 @@
-package dev.lkey.transations.data.db
+package dev.lkey.transations.data.remote.db
 
 import android.content.Context
 import androidx.core.content.edit

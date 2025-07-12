@@ -5,7 +5,7 @@ import dev.lkey.common.core.model.CategoryModel
 import dev.lkey.core.error.ApiException
 import dev.lkey.core.network.ktorClient
 import dev.lkey.core.network.safeCall
-import dev.lkey.transations.data.dto.TransactionDto
+import dev.lkey.transations.data.remote.dto.TransactionDto
 import dev.lkey.transations.domain.model.TransactionModel
 import dev.lkey.transations.domain.repository.TransactionsRepository
 import io.ktor.client.call.body

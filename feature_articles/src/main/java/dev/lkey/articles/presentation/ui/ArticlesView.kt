@@ -1,7 +1,5 @@
 package dev.lkey.articles.presentation.ui
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,9 +15,8 @@ import dev.lkey.articles.presentation.viewmodel.ArticlesEvent
 import dev.lkey.articles.presentation.viewmodel.ArticlesState
 import dev.lkey.common.ui.field.FinancilityEditText
 import dev.lkey.common.ui.item.FinancilityListItem
-import dev.lkey.common.ui.message.SyncMessage
+import dev.lkey.common.ui.item.FinancilitySyncMessage
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ArticlesView (
     modifier: Modifier = Modifier,
@@ -38,7 +35,7 @@ fun ArticlesView (
     ){
 
         state.lastSync?.let {
-            SyncMessage(it)
+            FinancilitySyncMessage(it)
         }
 
         FinancilityEditText(

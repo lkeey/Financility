@@ -75,6 +75,10 @@ dependencies {
     // ktor-client
     implementation(project(":core"))
 
+    // Room
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
+
     // ui-components
     implementation(project(":common_ui"))
 

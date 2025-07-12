@@ -1,10 +1,7 @@
-package dev.lkey.articles.data.mapper
+package dev.lkey.articles.data.mappers
 
-import dev.lkey.articles.data.model.CategoryEntity
 import dev.lkey.common.core.model.CategoryModel
-
-class toCategoryModel {
-}
+import dev.lkey.storage.data.model.CategoryEntity
 
 fun CategoryEntity.toCategoryModel(): CategoryModel
     = CategoryModel(

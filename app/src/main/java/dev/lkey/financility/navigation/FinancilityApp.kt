@@ -22,6 +22,7 @@ import dev.lkey.common.theme.FinancilityTheme
 import dev.lkey.core.di.utils.CoreProvider
 import dev.lkey.financility.splash.SplashScreen
 import dev.lkey.settings.SettingsScreen
+import dev.lkey.storage.di.DaggerDatabaseComponent
 import dev.lkey.transations.di.DaggerTransactionComponent
 import dev.lkey.transations.domain.model.TransactionModel
 import dev.lkey.transations.presentation.create.ui.CreateTransactionScreen
@@ -41,8 +42,10 @@ import kotlinx.serialization.json.Json
 fun FinancilityApp() {
 
     val provider = LocalContext.current.applicationContext as CoreProvider
+    val db = DaggerDatabaseComponent.factory().create(provider.coreComponent)
+
     val billComponent = DaggerBillComponent.factory().create(provider.coreComponent)
-    val articlesComponent = DaggerArticlesComponent.factory().create(provider.coreComponent)
+    val articlesComponent = DaggerArticlesComponent.factory().create(provider.coreComponent, db)
     val transactionsComponent = DaggerTransactionComponent.factory().create(provider.coreComponent)
 
     FinancilityTheme {

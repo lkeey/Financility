@@ -1,14 +1,14 @@
 package dev.lkey.articles.domain.repository
 
-import dev.lkey.articles.data.dao.CategoryDao
-import dev.lkey.articles.data.mapper.toCategoryEntity
-import dev.lkey.articles.data.mapper.toCategoryModel
+import dev.lkey.articles.data.mappers.toCategoryEntity
+import dev.lkey.articles.data.mappers.toCategoryModel
 import dev.lkey.articles.data.sync.ArticlesSyncStorage
 import dev.lkey.common.core.model.CategoryModel
 import dev.lkey.core.error.ApiException
 import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.ktorClient
 import dev.lkey.core.network.safeCall
+import dev.lkey.storage.data.dao.CategoryDao
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse

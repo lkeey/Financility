@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/feature_bill" />
             <option value="$PROJECT_DIR$/feature_settings" />
             <option value="$PROJECT_DIR$/feature_transations" />
+            <option value="$PROJECT_DIR$/storage" />
           </set>
         </option>
       </GradleProjectSettings>
