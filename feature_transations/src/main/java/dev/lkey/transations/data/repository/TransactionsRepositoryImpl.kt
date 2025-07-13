@@ -85,7 +85,7 @@ class TransactionsRepositoryImpl @Inject constructor(
                 if (cached.isNotEmpty()) {
                     throw OfflineDataException(
                         cached.filter {
-                            startDate < it.transactionDate && it.transactionDate < endDate
+                            startDate <= it.transactionDate && it.transactionDate <= endDate
                         }
                     )
                 }
