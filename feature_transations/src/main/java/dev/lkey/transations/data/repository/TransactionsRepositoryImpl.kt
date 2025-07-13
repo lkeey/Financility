@@ -11,9 +11,11 @@ import dev.lkey.storage.data.dao.TransactionDao
 import dev.lkey.storage.data.mappers.transaction.toTransactionEntity
 import dev.lkey.storage.data.mappers.transaction.toTransactionModel
 import dev.lkey.storage.data.sync.AppSyncStorage
-import dev.lkey.transations.data.dto.TransactionDto
+import dev.lkey.transations.data.dto.RequestTransactionDto
+import dev.lkey.transations.data.dto.ResponseTransactionDto
+import dev.lkey.transations.data.mappers.RequesttoTransactionEntity
+import dev.lkey.transations.data.mappers.ResponsetoTransactionEntity
 import dev.lkey.transations.data.mappers.toTransactionDto
-import dev.lkey.transations.data.mappers.toTransactionEntity
 import dev.lkey.transations.domain.repository.TransactionsRepository
 import io.ktor.client.call.body
 import io.ktor.client.request.delete
@@ -107,32 +109,36 @@ class TransactionsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun createTransaction(transactionDto: TransactionDto): Result<Unit> {
+    override suspend fun createTransaction(requestTransactionDto: RequestTransactionDto): Result<Unit> {
         return safeCall {
 
             try {
                 val response: HttpResponse = ktorClient.post("transactions") {
-                    setBody(transactionDto)
+                    setBody(requestTransactionDto)
                 }
 
                 if (response.status != HttpStatusCode.OK && response.status != HttpStatusCode.Created) {
                     throw ApiException("Ошибка API: ${response.status}")
                 }
 
-                val transaction = response.body<TransactionModel>()
+                val transaction = response.body<ResponseTransactionDto>()
 
                 /* save to local db */
-                val entity = transaction.toTransactionEntity(isSynced = true)
+                val entity = transaction.ResponsetoTransactionEntity(
+                    isSynced = true
+                )
+
                 transactionDao.insert(entity)
 
-                transactionDao.markAsSynced(entity.id)
-
                 return@safeCall
-            } catch (_: Exception) {
+            } catch (e: Exception) {
+
                 /* добавляем в бд, но не помечаем как синхронизованный */
-                val entity = transactionDto.toTransactionEntity(
+                val entity = requestTransactionDto.RequesttoTransactionEntity(
                     isSynced = false
                 )
+
+                Log.d("OfflineData", "добавляем в кэш $e $entity")
 
                 transactionDao.insert(entity)
             }
@@ -141,7 +147,7 @@ class TransactionsRepositoryImpl @Inject constructor(
 
     override suspend fun updateTransaction(
         id: Int,
-        transaction: TransactionDto
+        transaction: RequestTransactionDto
     ): Result<Unit> {
         return safeCall {
             val response: HttpResponse = ktorClient.put("transactions/${id}") {
@@ -166,6 +172,9 @@ class TransactionsRepositoryImpl @Inject constructor(
                 throw ApiException("Ошибка API: ${response.status}")
             }
 
+            /* delete from local */
+            transactionDao.delete(id)
+
             response.body()
         }
     }
@@ -175,15 +184,34 @@ class TransactionsRepositoryImpl @Inject constructor(
         return safeCall {
             val unsyncedTransactions = transactionDao.getUnsynced()
 
+            Log.d("OfflineData", "1. unsynced cached = $unsyncedTransactions")
+
             if (unsyncedTransactions.isEmpty()) return@safeCall
 
-            for (transaction in unsyncedTransactions) {
-                createTransaction(
-                    transactionDto = transaction.toTransactionDto()
-                ).onSuccess {
-                    transactionDao.delete(transaction.id)
+            for (unsyncedTransaction in unsyncedTransactions) {
+
+                val response: HttpResponse = ktorClient.post("transactions") {
+                    setBody(unsyncedTransaction.toTransactionDto())
                 }
+
+                if (response.status != HttpStatusCode.OK && response.status != HttpStatusCode.Created) {
+                    throw ApiException("Ошибка API: ${response.status}")
+                }
+
+                /* удаляем из локального хранилища */
+                transactionDao.delete(unsyncedTransaction.id)
+
+                val transaction = response.body<ResponseTransactionDto>()
+
+                /* сохраняем с ID в локальное хранилище */
+                val entity = transaction.ResponsetoTransactionEntity(
+                    isSynced = true
+                )
+
+                transactionDao.insert(entity)
             }
+
+            Log.d("OfflineData", "2. unsynced cached = ${transactionDao.getUnsynced()}")
 
         }
 

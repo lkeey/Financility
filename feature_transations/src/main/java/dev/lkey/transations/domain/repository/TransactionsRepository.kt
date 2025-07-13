@@ -1,7 +1,7 @@
 package dev.lkey.transations.domain.repository
 
 import dev.lkey.common.core.model.TransactionModel
-import dev.lkey.transations.data.dto.TransactionDto
+import dev.lkey.transations.data.dto.RequestTransactionDto
 
 interface TransactionsRepository {
 
@@ -12,12 +12,12 @@ interface TransactionsRepository {
     ): Result<List<TransactionModel>>
 
     suspend fun createTransaction(
-        transaction: TransactionDto
+        transaction: RequestTransactionDto
     ): Result<Unit>
 
     suspend fun updateTransaction(
         id: Int,
-        transaction: TransactionDto
+        transaction: RequestTransactionDto
     ): Result<Unit>
 
     suspend fun deleteTransaction(

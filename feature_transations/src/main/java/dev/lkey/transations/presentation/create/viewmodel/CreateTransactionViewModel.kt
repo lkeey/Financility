@@ -9,7 +9,7 @@ import dev.lkey.core.error.ErrorHandler
 import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.FinancilityResult
 import dev.lkey.storage.data.sync.AppSyncStorage
-import dev.lkey.transations.data.dto.TransactionDto
+import dev.lkey.transations.data.dto.RequestTransactionDto
 import dev.lkey.transations.domain.usecase.GetAccountsUseCase
 import dev.lkey.transations.domain.usecase.GetArticlesUseCase
 import dev.lkey.transations.domain.usecase.PostTransactionUseCase
@@ -190,7 +190,7 @@ class CreateTransactionViewModel @Inject constructor (
 
             try {
                 val result = createTransactionUseCase.invoke(
-                    TransactionDto(
+                    RequestTransactionDto(
                         accountId = state.value.accounts[0].id,
                         categoryId = state.value.article?.id ?: throw ApiException("Заполните все поля"),
                         amount = state.value.sum ?: throw ApiException("Заполните все поля"),

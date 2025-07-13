@@ -2,9 +2,9 @@ package dev.lkey.transations.data.mappers
 
 import dev.lkey.common.core.converter.convertMillisToDate
 import dev.lkey.storage.data.model.TransactionEntity
-import dev.lkey.transations.data.dto.TransactionDto
+import dev.lkey.transations.data.dto.RequestTransactionDto
 
-fun TransactionDto.toTransactionEntity(
+fun RequestTransactionDto.RequesttoTransactionEntity(
     isSynced : Boolean
 ): TransactionEntity {
     val timeStamp = System.currentTimeMillis()

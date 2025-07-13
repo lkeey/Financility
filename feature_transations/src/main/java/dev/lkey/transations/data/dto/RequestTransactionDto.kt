@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
  * */
 
 @Serializable
-data class TransactionDto (
+data class RequestTransactionDto (
     val accountId: Int,
     val categoryId: Int,
     val amount: String,

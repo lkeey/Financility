@@ -1,11 +1,11 @@
 package dev.lkey.transations.data.mappers
 
 import dev.lkey.storage.data.model.TransactionEntity
-import dev.lkey.transations.data.dto.TransactionDto
+import dev.lkey.transations.data.dto.RequestTransactionDto
 
-fun TransactionEntity.toTransactionDto(): TransactionDto {
+fun TransactionEntity.toTransactionDto(): RequestTransactionDto {
 
-    return TransactionDto(
+    return RequestTransactionDto(
         accountId = accountId,
         categoryId = categoryId,
         amount = amount,
