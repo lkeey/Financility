@@ -45,6 +45,7 @@ fun AnalysisView (
         FinancilityDayPicker (
             title = "Период: начало",
             previousValue = state.startDate,
+            isChip = true,
         ) {
             onEvent(AnalysisEvent.OnChangedStartDate(
                 start = it,
@@ -55,6 +56,7 @@ fun AnalysisView (
         FinancilityDayPicker (
             title = "Период: конец",
             previousValue = state.endDate,
+            isChip = true,
         ) {
             onEvent(AnalysisEvent.OnChangedEndDate(
                 end = it,

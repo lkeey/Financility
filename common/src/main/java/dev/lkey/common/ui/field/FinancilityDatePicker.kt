@@ -1,5 +1,16 @@
 package dev.lkey.common.ui.field
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material3.DatePicker
@@ -8,6 +19,8 @@ import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SuggestionChip
+import androidx.compose.material3.SuggestionChipDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
@@ -17,12 +30,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
 import dev.lkey.common.core.converter.convertDateToMillis
 import dev.lkey.common.core.converter.convertMillisToDate
-import dev.lkey.common.ui.item.FinancilityListItem
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -30,6 +46,7 @@ import dev.lkey.common.ui.item.FinancilityListItem
 fun FinancilityDayPicker(
     title: String,
     previousValue: String,
+    isChip: Boolean = false,
     backgroundColor: Color = MaterialTheme.colorScheme.onSurface,
     onChangeDate: (String) -> Unit
 ) {
@@ -91,7 +108,6 @@ fun FinancilityDayPicker(
         )
     )
 
-
     if (showDialog) {
         DatePickerDialog(
             properties = DialogProperties(
@@ -139,17 +155,68 @@ fun FinancilityDayPicker(
             )
         }
     }
-    
-    
 
-    FinancilityListItem(
-        title = title,
-        description = null,
-        backgroundColor = backgroundColor,
-        trailingText = selectedDateLabel.value,
-        isClickable = true,
+    Column (
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(backgroundColor),
+        verticalArrangement = Arrangement.Center
     ) {
-        showDialog = true
+        Row (
+            modifier = Modifier
+                .height(56.dp)
+                .fillMaxSize()
+                .clickable {
+                    showDialog = true
+                }
+                .padding(horizontal = 12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                modifier = Modifier
+                    .weight(1f),
+                text = title,
+                fontWeight = FontWeight.W400,
+                fontSize = 16.sp,
+                lineHeight = 24.sp,
+                letterSpacing = 0.5.sp,
+                color = MaterialTheme.colorScheme.inverseOnSurface
+            )
+
+            if (isChip) {
+                SuggestionChip(
+                    onClick = {
+                        showDialog = true
+                    },
+                    label = {
+                        Text(
+                            text = selectedDateLabel.value,
+                            color = MaterialTheme.colorScheme.inverseOnSurface,
+                            fontWeight = FontWeight.W500,
+                            fontSize = 16.sp,
+                            lineHeight = 24.sp,
+                            letterSpacing = 0.5.sp,
+                        )
+                    },
+                    colors = SuggestionChipDefaults.suggestionChipColors(
+                        containerColor = MaterialTheme.colorScheme.primary,
+                    ),
+                    shape = RoundedCornerShape(100.dp)
+                )
+            } else {
+                Text(
+                    text = selectedDateLabel.value,
+                    color = MaterialTheme.colorScheme.inverseOnSurface,
+                    fontWeight = FontWeight.W400,
+                    fontSize = 16.sp,
+                    lineHeight = 24.sp,
+                    letterSpacing = 0.5.sp,
+                )
+
+                Spacer(modifier = Modifier.width(12.dp))
+
+            }
+        }
     }
 }
 
