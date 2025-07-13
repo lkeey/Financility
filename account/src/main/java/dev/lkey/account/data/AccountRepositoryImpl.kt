@@ -27,7 +27,7 @@ class AccountRepositoryImpl @Inject constructor(
 ) : AccountRepository {
 
     /**
-     * Может выбоасить [OfflineDataException]
+     * Может выбросить [OfflineDataException]
      * использовать только там, где нужно показать, что это оффлайн запрос
      */
     override suspend fun getRemoteAccounts(): Result<List<AccountBriefModel>> {

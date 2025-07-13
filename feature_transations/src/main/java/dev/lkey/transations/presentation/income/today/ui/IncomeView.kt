@@ -7,11 +7,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.lkey.common.R
+import dev.lkey.common.core.model.TransactionModel
 import dev.lkey.common.ui.item.FinancilityListItem
+import dev.lkey.common.ui.item.FinancilitySyncMessage
 import dev.lkey.core.converter.toEmoji
 import dev.lkey.core.converter.toFormat
-import dev.lkey.common.core.model.TransactionModel
-import dev.lkey.common.ui.item.FinancilitySyncMessage
 import dev.lkey.transations.presentation.income.today.viewmodel.IncomeState
 
 @Composable
@@ -35,7 +35,11 @@ fun IncomeView (
                 title = "Всего",
                 description = null,
                 backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
-                trailingText = "${state.transactions.sumOf { it.amount.toDouble() }.toFormat()} ${state.accounts[0].currency.toEmoji()}",
+                trailingText = buildString {
+                    append(state.transactions.sumOf { it.amount.toDouble() }.toFormat())
+                    append(" ")
+                    append(state.accounts[0].currency.toEmoji())
+                },
                 isClickable = false,
             ) { }
         }

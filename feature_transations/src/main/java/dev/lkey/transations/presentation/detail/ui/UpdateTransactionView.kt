@@ -17,6 +17,7 @@ import dev.lkey.common.ui.field.FinancilityEditText
 import dev.lkey.common.ui.field.FinancilityNumTextField
 import dev.lkey.common.ui.field.FinancilityTimePicker
 import dev.lkey.common.ui.item.FinancilityListItem
+import dev.lkey.common.ui.item.FinancilitySyncMessage
 import dev.lkey.transations.presentation.detail.viewmodel.UpdateTransactionEvent
 import dev.lkey.transations.presentation.detail.viewmodel.UpdateTransactionState
 
@@ -31,6 +32,11 @@ fun UpdateTransactionView (
         modifier = modifier
             .fillMaxSize()
     ){
+
+        state.lastSync?.let {
+            FinancilitySyncMessage(it)
+        }
+
         if (state.accounts.isNotEmpty()) {
             FinancilityListItem (
                 title = "Счет",

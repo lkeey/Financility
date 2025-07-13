@@ -76,13 +76,18 @@ class TransactionsRepositoryImpl @Inject constructor(
                 print("financility error 3")
 
                 /* get cashed transactions */
-                val cached = transactionDao.getAll().map {
-                    it.toTransactionModel()
-                }
+                val cached = transactionDao.getAll()
+                    .map {
+                        it.toTransactionModel()
+                    }
 
                 /* if not cashed data */
                 if (cached.isNotEmpty()) {
-                    throw OfflineDataException(cached)
+                    throw OfflineDataException(
+                        cached.filter {
+                            startDate < it.transactionDate && it.transactionDate < endDate
+                        }
+                    )
                 }
 
                 throw e
