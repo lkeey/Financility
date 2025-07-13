@@ -9,11 +9,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.lkey.common.R
+import dev.lkey.common.core.model.TransactionModel
 import dev.lkey.common.ui.field.FinancilityDayPicker
 import dev.lkey.common.ui.item.FinancilityListItem
+import dev.lkey.common.ui.item.FinancilitySyncMessage
 import dev.lkey.core.converter.toEmoji
 import dev.lkey.core.converter.toFormat
-import dev.lkey.common.core.model.TransactionModel
 import dev.lkey.transations.presentation.income.history.viewmodel.HistoryIncomeEvent
 import dev.lkey.transations.presentation.income.history.viewmodel.HistoryIncomeState
 
@@ -34,6 +35,10 @@ fun HistoryIncomeView (
                 state = scrollState,
             )
     ){
+
+        state.lastSync?.let {
+            FinancilitySyncMessage(it)
+        }
 
         FinancilityDayPicker (
             title = "Начало",

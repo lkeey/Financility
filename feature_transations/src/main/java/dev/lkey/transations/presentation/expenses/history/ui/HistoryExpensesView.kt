@@ -61,7 +61,11 @@ fun HistoryExpensesView (
                 title = "Сумма",
                 description = null,
                 backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
-                trailingText = "${state.transactions.sumOf { it.amount.toDouble() }.toFormat()} ${state.accounts[0].currency.toEmoji()}",
+                trailingText = buildString {
+                    append(state.transactions.sumOf { it.amount.toDouble() }.toFormat())
+                    append(" ")
+                    append(state.accounts[0].currency.toEmoji())
+                },
                 isClickable = false,
                 isShowDivider = false
             )
