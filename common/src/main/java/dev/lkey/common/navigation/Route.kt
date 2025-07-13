@@ -27,6 +27,9 @@ sealed interface Route {
     data object UpdateExpense : Route
 
     @Serializable
+    data object AnalysisExpense : Route
+
+    @Serializable
     data object Income : Route
 
     @Serializable
@@ -40,6 +43,9 @@ sealed interface Route {
 
     @Serializable
     data object UpdateIncome : Route
+
+    @Serializable
+    data object AnalysisIncome : Route
 
     @Serializable
     data object Bill : Route

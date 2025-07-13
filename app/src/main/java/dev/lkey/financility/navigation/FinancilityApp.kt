@@ -26,6 +26,7 @@ import dev.lkey.feature_splash.presentation.ui.SplashScreen
 import dev.lkey.settings.SettingsScreen
 import dev.lkey.storage.di.DaggerDatabaseComponent
 import dev.lkey.transations.di.DaggerTransactionComponent
+import dev.lkey.transations.presentation.analysis.ui.AnalysisScreen
 import dev.lkey.transations.presentation.create.ui.CreateTransactionScreen
 import dev.lkey.transations.presentation.detail.ui.UpdateTransactionScreen
 import dev.lkey.transations.presentation.expenses.history.ui.HistoryExpensesScreen
@@ -112,6 +113,14 @@ fun FinancilityApp() {
                         )
                     }
                 }
+
+                composable<Route.AnalysisExpense>{ backStackEntry ->
+                    AnalysisScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = transactionsComponent.viewModelFactory()),
+                        isIncome = false
+                    )
+                }
             }
 
             navigation<Route.Income>(
@@ -157,6 +166,14 @@ fun FinancilityApp() {
                             isIncome = true
                         )
                     }
+                }
+
+                composable<Route.AnalysisIncome>{ backStackEntry ->
+                    AnalysisScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = transactionsComponent.viewModelFactory()),
+                        isIncome = true
+                    )
                 }
 
             }

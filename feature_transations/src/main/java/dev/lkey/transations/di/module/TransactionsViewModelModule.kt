@@ -5,6 +5,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import dev.lkey.core.di.utils.ViewModelKey
+import dev.lkey.transations.presentation.analysis.viewmodel.AnalysisViewModel
 import dev.lkey.transations.presentation.create.viewmodel.CreateTransactionViewModel
 import dev.lkey.transations.presentation.detail.viewmodel.UpdateTransactionViewModel
 import dev.lkey.transations.presentation.expenses.history.viewmodel.HistoryExpensesViewModel
@@ -49,5 +50,10 @@ interface TransactionsViewModelModule {
     @IntoMap
     @ViewModelKey(UpdateTransactionViewModel::class)
     fun bindUpdateTransactionViewModel(viewModel: UpdateTransactionViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AnalysisViewModel::class)
+    fun bindAnalysisViewModel(viewModel: AnalysisViewModel): ViewModel
 
 }

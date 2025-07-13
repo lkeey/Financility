@@ -18,13 +18,11 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun FinancilityTopBar (
     title: String,
+    containerColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.primary,
     navIcon: @Composable () -> Unit = { },
     actions: @Composable () -> Unit = { }
 ) {
     TopAppBar(
-        navigationIcon = {
-            navIcon.invoke()
-        },
         title = {
             Text(
                 modifier = Modifier
@@ -41,10 +39,11 @@ fun FinancilityTopBar (
 
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primary
+            containerColor = containerColor
         ),
         actions = {
             actions.invoke()
         },
+        navigationIcon = navIcon,
     )
 }

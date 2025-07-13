@@ -1,4 +1,4 @@
-package dev.lkey.transations.presentation.income.history.ui
+package dev.lkey.transations.presentation.analysis.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -25,37 +25,39 @@ import dev.lkey.common.ui.item.FinancilitySnackBar
 import dev.lkey.common.ui.nav.FinancilityBottomBar
 import dev.lkey.common.ui.nav.FinancilityTopBar
 import dev.lkey.core.network.FinancilityResult
-import dev.lkey.transations.presentation.income.history.viewmodel.HistoryIncomeAction
-import dev.lkey.transations.presentation.income.history.viewmodel.HistoryIncomeEvent
-import dev.lkey.transations.presentation.income.history.viewmodel.HistoryIncomeViewModel
+import dev.lkey.transations.presentation.analysis.viewmodel.AnalysisAction
+import dev.lkey.transations.presentation.analysis.viewmodel.AnalysisEvent
+import dev.lkey.transations.presentation.analysis.viewmodel.AnalysisViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.serialization.json.Json
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
 @Composable
-fun HistoryIncomeScreen(
-    viewModel: HistoryIncomeViewModel,
-    navController: NavController
+fun AnalysisScreen (
+    viewModel: AnalysisViewModel,
+    navController: NavController,
+    isIncome : Boolean,
 ) {
-
     var error: String? by remember {
         mutableStateOf(null)
     }
 
     val state by viewModel.state.collectAsStateWithLifecycle()
     val snackBarHostState = remember { SnackbarHostState() }
-
-    LaunchedEffect(Unit) {
-        viewModel.onEvent(HistoryIncomeEvent.OnLoadIncomes)
+    LaunchedEffect(true) {
+        viewModel.onEvent(AnalysisEvent.OnLoadTransactions(
+            isIncome = isIncome
+        ))
 
         viewModel.action.collectLatest { action ->
             when (action) {
-                is HistoryIncomeAction.ShowSnackBar -> {
+                is AnalysisAction.ShowSnackBar -> {
                     error = action.message
 
                     snackBarHostState.showSnackbar(action.message)
                 }
+
             }
         }
     }
@@ -68,20 +70,8 @@ fun HistoryIncomeScreen(
         },
         topBar = {
             FinancilityTopBar(
-                title = "Моя история",
-                actions = {
-                    IconButton(
-                        onClick = {
-                            navController.navigate(Route.AnalysisIncome)
-                        }
-                    ) {
-                        Icon(
-                            painter = painterResource(R.drawable.ic_statistics),
-                            contentDescription = "Статистика",
-                            tint = MaterialTheme.colorScheme.surfaceContainer
-                        )
-                    }
-                },
+                title = "Анализ",
+                containerColor = MaterialTheme.colorScheme.onSurface,
                 navIcon = {
                     IconButton(
                         onClick = { navController.popBackStack() }
@@ -108,7 +98,9 @@ fun HistoryIncomeScreen(
                         .padding(padding),
                     text = error,
                     onUpdate = {
-                        viewModel.onEvent(HistoryIncomeEvent.OnLoadIncomes)
+                        viewModel.onEvent(AnalysisEvent.OnLoadTransactions(
+                            isIncome = isIncome
+                        ))
                     }
                 )
             }
@@ -119,10 +111,12 @@ fun HistoryIncomeScreen(
                 )
             }
             FinancilityResult.Success -> {
-                HistoryIncomeView(
+
+                AnalysisView (
                     modifier = Modifier
                         .padding(padding),
                     state = state,
+                    isIncome = isIncome,
                     onEvent = {
                         viewModel.onEvent(it)
                     }
@@ -130,12 +124,16 @@ fun HistoryIncomeScreen(
                     val json = Json.encodeToString(it)
                     val encoded = URLEncoder.encode(json, StandardCharsets.UTF_8.toString())
 
+                    val route = if (!isIncome) Route.UpdateExpense else Route.UpdateIncome
+
                     navController.navigate(
-                        "${Route.UpdateIncome}/${encoded}"
+                        "$route/${encoded}"
                     )
                 }
+
             }
         }
 
     }
+
 }

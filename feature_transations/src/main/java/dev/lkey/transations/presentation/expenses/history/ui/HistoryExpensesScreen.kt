@@ -71,7 +71,9 @@ fun HistoryExpensesScreen (
                 title = "Моя история",
                 actions = {
                     IconButton(
-                        onClick = { /* TODO */ }
+                        onClick = {
+                            navController.navigate(Route.AnalysisExpense)
+                        }
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.ic_statistics),
@@ -118,7 +120,8 @@ fun HistoryExpensesScreen (
             }
             FinancilityResult.Success -> {
                 HistoryExpensesView(
-                    modifier = Modifier.padding(padding),
+                    modifier = Modifier
+                        .padding(padding),
                     state = state,
                     onEvent = {
                         viewModel.onEvent(it)
