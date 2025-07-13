@@ -66,7 +66,6 @@ class HistoryExpensesViewModel @Inject constructor(
                 loadExpenses(state.value.accounts[0].id)
             }
         }
-
     }
 
     private fun loadData() {

@@ -16,9 +16,15 @@ interface TransactionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(transaction: List<TransactionEntity>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(transaction: TransactionEntity)
+
+    @Query("DELETE FROM transactions WHERE id = :id")
+    suspend fun delete(id: Int)
+
     @Query("SELECT * FROM transactions WHERE isSynced = 0")
     suspend fun getUnsynced(): List<TransactionEntity>
 
     @Query("UPDATE transactions SET isSynced = 1 WHERE id = :id")
-    suspend fun markAsSynced(id: String)
+    suspend fun markAsSynced(id: Int)
 }

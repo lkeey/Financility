@@ -24,4 +24,6 @@ interface TransactionsRepository {
         id: Int
     ): Result<Unit>
 
+    suspend fun uploadUnsyncedTransactions(): Result<Unit>
+
 }

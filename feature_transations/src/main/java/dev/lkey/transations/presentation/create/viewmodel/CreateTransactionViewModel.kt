@@ -2,9 +2,13 @@ package dev.lkey.transations.presentation.create.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.lkey.common.constants.Constants.TRANSACTION_SYNC
+import dev.lkey.common.core.model.CategoryModel
 import dev.lkey.core.error.ApiException
 import dev.lkey.core.error.ErrorHandler
+import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.FinancilityResult
+import dev.lkey.storage.data.sync.AppSyncStorage
 import dev.lkey.transations.data.dto.TransactionDto
 import dev.lkey.transations.domain.usecase.GetAccountsUseCase
 import dev.lkey.transations.domain.usecase.GetArticlesUseCase
@@ -25,7 +29,8 @@ import kotlinx.coroutines.launch
 class CreateTransactionViewModel @Inject constructor (
     private val accountUseCase : GetAccountsUseCase,
     private val articlesUseCase : GetArticlesUseCase,
-    private val createTransactionUseCase : PostTransactionUseCase
+    private val createTransactionUseCase : PostTransactionUseCase,
+    private val appSyncStorage: AppSyncStorage
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(CreateTransactionState())
@@ -150,13 +155,27 @@ class CreateTransactionViewModel @Inject constructor (
                     }
                 }
                 .onFailure { err ->
-                    _state.update {
-                        it.copy(
-                            status = FinancilityResult.Error
-                        )
-                    }
+                    if (err is OfflineDataException) {
+                        val articles = err.data as List<CategoryModel>
 
-                    _action.emit(CreateTransactionAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                        _state.update {
+                            it.copy(
+                                status = FinancilityResult.Success,
+                                articles = articles.filter {
+                                    it.isIncome == isIncome
+                                },
+                                lastSync = appSyncStorage.getSyncTime(
+                                    feature = TRANSACTION_SYNC,
+                                )
+                            )
+                        }
+                    } else {
+                        _state.update {
+                            it.copy(status = FinancilityResult.Error)
+                        }
+
+                        _action.emit(CreateTransactionAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    }
                 }
         }
     }
@@ -169,35 +188,46 @@ class CreateTransactionViewModel @Inject constructor (
                 )
             }
 
-            val result = createTransactionUseCase.invoke(
-                TransactionDto(
-                    accountId = state.value.accounts[0].id,
-                    categoryId = state.value.article?.id ?: throw ApiException("Заполните все поля"),
-                    amount = state.value.sum ?: throw ApiException("Заполните все поля"),
-                    transactionDate = "${state.value.date}T${state.value.time}:00.000Z",
-                    comment = state.value.comment
+            try {
+                val result = createTransactionUseCase.invoke(
+                    TransactionDto(
+                        accountId = state.value.accounts[0].id,
+                        categoryId = state.value.article?.id ?: throw ApiException("Заполните все поля"),
+                        amount = state.value.sum ?: throw ApiException("Заполните все поля"),
+                        transactionDate = "${state.value.date}T${state.value.time}:00.000Z",
+                        comment = state.value.comment
+                    )
                 )
-            )
 
-            result
-                .onSuccess { res ->
-                    _state.update {
-                        it.copy(
-                            status = FinancilityResult.Success
-                        )
+                result
+                    .onSuccess { res ->
+                        _state.update {
+                            it.copy(
+                                status = FinancilityResult.Success
+                            )
+                        }
+
+                        _action.emit(CreateTransactionAction.OnOpenScreen)
                     }
+                    .onFailure { err ->
+                        _state.update {
+                            it.copy(
+                                status = FinancilityResult.Error
+                            )
+                        }
 
-                    _action.emit(CreateTransactionAction.OnOpenScreen)
-                }
-                .onFailure { err ->
-                    _state.update {
-                        it.copy(
-                            status = FinancilityResult.Error
-                        )
+                        _action.emit(CreateTransactionAction.ShowSnackBar(ErrorHandler().handleException(err)))
                     }
-
-                    _action.emit(CreateTransactionAction.ShowSnackBar(ErrorHandler().handleException(err)))
+            } catch (err : Exception) {
+                // show business errors
+                _state.update {
+                    it.copy(
+                        status = FinancilityResult.Success
+                    )
                 }
+
+                _action.emit(CreateTransactionAction.ShowSnackBar(ErrorHandler().handleException(err)))
+            }
         }
     }
 }

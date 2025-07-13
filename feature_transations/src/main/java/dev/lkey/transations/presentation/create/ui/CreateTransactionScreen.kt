@@ -10,12 +10,15 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import dev.lkey.common.R
+import dev.lkey.common.ui.item.FinancilityErrorMessage
 import dev.lkey.common.ui.item.FinancilityLoadingBar
 import dev.lkey.common.ui.item.FinancilitySnackBar
 import dev.lkey.common.ui.nav.FinancilityBottomBar
@@ -32,6 +35,10 @@ fun CreateTransactionScreen (
     navController: NavController,
     isIncome : Boolean,
 ) {
+    var error: String? by remember {
+        mutableStateOf(null)
+    }
+
     val state by viewModel.state.collectAsStateWithLifecycle()
     val snackBarHostState = remember { SnackbarHostState() }
 
@@ -45,6 +52,8 @@ fun CreateTransactionScreen (
         viewModel.action.collectLatest { action ->
             when (action) {
                 is CreateTransactionAction.ShowSnackBar -> {
+                    error = action.message
+
                     snackBarHostState.showSnackbar(action.message)
                 }
 
@@ -96,18 +105,33 @@ fun CreateTransactionScreen (
         snackbarHost = { FinancilitySnackBar(snackBarHostState) }
     ) { padding ->
 
-        if (state.status == FinancilityResult.Loading) {
-            FinancilityLoadingBar(
-                modifier = Modifier
-                    .padding(padding)
-            )
-        } else {
-            CreateTransactionView (
-                modifier = Modifier.padding(padding),
-                state = state,
-                isIncome = isIncome
-            ) {
-                viewModel.onEvent(it)
+        when (state.status) {
+            FinancilityResult.Error -> {
+                FinancilityErrorMessage(
+                    modifier = Modifier
+                        .padding(padding),
+                    text = error,
+                    onUpdate = {
+                        CreateTransactionEvent.OnLoadData(
+                            isIncome = isIncome
+                        )
+                    }
+                )
+            }
+            FinancilityResult.Loading -> {
+                FinancilityLoadingBar(
+                    modifier = Modifier
+                        .padding(padding)
+                )
+            }
+            FinancilityResult.Success -> {
+                CreateTransactionView(
+                    modifier = Modifier.padding(padding),
+                    state = state,
+                    isIncome = isIncome
+                ) {
+                    viewModel.onEvent(it)
+                }
             }
         }
 
