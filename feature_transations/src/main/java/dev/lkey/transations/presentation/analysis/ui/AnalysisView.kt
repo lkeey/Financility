@@ -83,17 +83,21 @@ fun AnalysisView (
             .sortedBy {
                 it.createdAt
             }
+            .groupBy {
+                it.categoryModel
+            }
             .forEach {
+                val categorySum = it.value.sumOf { it.amount.toDouble() }
                 FinancilityListItem(
                     trailingIcon = R.drawable.ic_light_arrow,
-                    emoji = it.categoryModel.emoji,
-                    title = it.categoryModel.name,
-                    description = it.comment,
-                    trailingText = "${(it.amount.toDouble() / totalSum * 100).toFormat()}%",
-                    trailingSubText = "${it.amount} ${state.accounts[0].currency.toEmoji()}",
+                    emoji = it.key.emoji,
+                    title = it.key.name,
+//                    description = it.comment,
+                    trailingText = "${(categorySum / totalSum * 100).toFormat()}%",
+                    trailingSubText = "$categorySum ${state.accounts[0].currency.toEmoji()}",
                     height = 70.dp
                 ) {
-                    onItemClick(it)
+//                    onItemClick(it)
                 }
             }
     }
