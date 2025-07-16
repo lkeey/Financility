@@ -120,16 +120,7 @@ fun AnalysisScreen (
                     onEvent = {
                         viewModel.onEvent(it)
                     }
-                ) {
-                    val json = Json.encodeToString(it)
-                    val encoded = URLEncoder.encode(json, StandardCharsets.UTF_8.toString())
-
-                    val route = if (!isIncome) Route.UpdateExpense else Route.UpdateIncome
-
-                    navController.navigate(
-                        "$route/${encoded}"
-                    )
-                }
+                )
 
             }
         }
