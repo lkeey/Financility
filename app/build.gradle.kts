@@ -63,6 +63,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    // worker
+    implementation(libs.androidx.work.runtime.ktx)
+
     // DI
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
@@ -85,5 +88,10 @@ dependencies {
     // common-components
     implementation(project(":common"))
 
+    // to get articles
+    implementation(project(":articles"))
+
+    // to get account
+    implementation(project(":account"))
 
 }
