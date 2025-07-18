@@ -1,9 +1,7 @@
 package dev.lkey.transations.domain.repository
 
-import dev.lkey.common.core.model.AccountBriefModel
-import dev.lkey.common.core.model.CategoryModel
-import dev.lkey.transations.data.dto.TransactionDto
-import dev.lkey.transations.domain.model.TransactionModel
+import dev.lkey.common.core.model.TransactionModel
+import dev.lkey.transations.data.dto.RequestTransactionDto
 
 interface TransactionsRepository {
 
@@ -13,21 +11,19 @@ interface TransactionsRepository {
         endDate: String
     ): Result<List<TransactionModel>>
 
-    suspend fun getAccounts(): Result<List<AccountBriefModel>>
-
     suspend fun createTransaction(
-        transaction: TransactionDto
+        transaction: RequestTransactionDto
     ): Result<Unit>
 
     suspend fun updateTransaction(
         id: Int,
-        transaction: TransactionDto
+        transaction: RequestTransactionDto
     ): Result<Unit>
 
     suspend fun deleteTransaction(
         id: Int
     ): Result<Unit>
 
-    suspend fun getArticles(): Result<List<CategoryModel>>
+    suspend fun uploadUnsyncedTransactions(): Result<Unit>
 
 }

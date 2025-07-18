@@ -2,9 +2,13 @@ package dev.lkey.transations.presentation.income.history.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.lkey.common.constants.Constants.TRANSACTION_SYNC
+import dev.lkey.common.core.model.TransactionModel
 import dev.lkey.core.error.ErrorHandler
+import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.FinancilityResult
-import dev.lkey.transations.domain.usecase.GetAccountUseCase
+import dev.lkey.storage.data.sync.AppSyncStorage
+import dev.lkey.transations.domain.usecase.GetAccountsUseCase
 import dev.lkey.transations.domain.usecase.GetTransactionsUseCase
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -20,15 +24,15 @@ import kotlinx.coroutines.launch
  * */
 
 class HistoryIncomeViewModel @Inject constructor(
-    private val accountsUseCase : GetAccountUseCase,
-    private val transactionUseCase : GetTransactionsUseCase
-
+    private val accountsUseCase : GetAccountsUseCase,
+    private val transactionUseCase : GetTransactionsUseCase,
+    private val appSyncStorage: AppSyncStorage
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(HistoryIncomeState())
     val state = _state.stateIn(
         viewModelScope,
-        SharingStarted.WhileSubscribed(5000L),
+        SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000L),
         _state.value
     )
 
@@ -49,7 +53,7 @@ class HistoryIncomeViewModel @Inject constructor(
                         endDate = event.end
                     )
                 }
-                loadExpenses(state.value.accounts[0].id)
+                loadIncomes(state.value.accounts[0].id)
             }
 
             is HistoryIncomeEvent.OnChangedStartDate -> {
@@ -58,7 +62,7 @@ class HistoryIncomeViewModel @Inject constructor(
                         startDate = event.start
                     )
                 }
-                loadExpenses(state.value.accounts[0].id)
+                loadIncomes(state.value.accounts[0].id)
             }
         }
 
@@ -66,11 +70,11 @@ class HistoryIncomeViewModel @Inject constructor(
 
     private fun loadData() {
         loadAccounts {
-            loadExpenses(it)
+            loadIncomes(it)
         }
     }
 
-    private fun loadExpenses(
+    private fun loadIncomes(
         id: Int
     ) {
         viewModelScope.launch {
@@ -96,13 +100,28 @@ class HistoryIncomeViewModel @Inject constructor(
                     }
                 }
                 .onFailure { err ->
-                    _state.update {
-                        it.copy(
-                            status = FinancilityResult.Error,
-                        )
+                    if (err is OfflineDataException) {
+                        val transactions = err.data as List<TransactionModel>
+
+                        _state.update {
+                            it.copy(
+                                status = FinancilityResult.Success,
+                                transactions = transactions.filter {
+                                    it.categoryModel.isIncome
+                                },
+                                lastSync = appSyncStorage.getSyncTime(
+                                    feature = TRANSACTION_SYNC,
+                                )
+                            )
+                        }
+                    } else {
+                        _state.update {
+                            it.copy(status = FinancilityResult.Error)
+                        }
+
+                        _action.emit(HistoryIncomeAction.ShowSnackBar(ErrorHandler().handleException(err)))
                     }
 
-                    _action.emit(HistoryIncomeAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }
     }

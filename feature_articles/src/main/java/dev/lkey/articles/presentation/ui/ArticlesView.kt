@@ -15,6 +15,7 @@ import dev.lkey.articles.presentation.viewmodel.ArticlesEvent
 import dev.lkey.articles.presentation.viewmodel.ArticlesState
 import dev.lkey.common.ui.field.FinancilityEditText
 import dev.lkey.common.ui.item.FinancilityListItem
+import dev.lkey.common.ui.item.FinancilitySyncMessage
 
 @Composable
 fun ArticlesView (
@@ -32,6 +33,11 @@ fun ArticlesView (
                 state = scrollState,
             )
     ){
+
+        state.lastSync?.let {
+            FinancilitySyncMessage(it)
+        }
+
         FinancilityEditText(
             previousData = "",
             label = "Найти статью",

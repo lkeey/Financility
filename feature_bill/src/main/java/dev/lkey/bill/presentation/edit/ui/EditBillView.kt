@@ -21,6 +21,7 @@ import dev.lkey.common.core.model.CurrencyOption
 import dev.lkey.common.ui.field.FinancilityEditText
 import dev.lkey.common.ui.field.FinancilityNumTextField
 import dev.lkey.common.ui.item.FinancilityListItem
+import dev.lkey.common.ui.item.FinancilitySyncMessage
 import dev.lkey.common.ui.sheet.FinancilityCurrencySheet
 
 @Composable
@@ -50,6 +51,11 @@ fun EditBillView (
         modifier = modifier
             .fillMaxSize()
     ) {
+
+        state.lastSync?.let {
+            FinancilitySyncMessage(it)
+        }
+
         state.accounts.forEach {
             FinancilityEditText(
                 previousData = state.enteredName,

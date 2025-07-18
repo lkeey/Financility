@@ -22,4 +22,5 @@ data class CreateTransactionState (
         .format(DateTimeFormatter.ofPattern("HH:mm")),
     val comment: String? = null,
     val status: FinancilityResult = FinancilityResult.Loading,
+    val lastSync: Long? = null
 )

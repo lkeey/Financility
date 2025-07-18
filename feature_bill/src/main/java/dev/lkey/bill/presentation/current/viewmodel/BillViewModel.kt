@@ -3,8 +3,12 @@ package dev.lkey.bill.presentation.current.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.lkey.bill.domain.usecase.GetBillInfoUseCase
+import dev.lkey.common.constants.Constants.BILL_SYNC
+import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.core.error.ErrorHandler
+import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.FinancilityResult
+import dev.lkey.storage.data.sync.AppSyncStorage
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,6 +24,7 @@ import kotlinx.coroutines.launch
 
 class BillViewModel @Inject constructor(
     private val billInfoUseCase : GetBillInfoUseCase,
+    private val appSyncStorage: AppSyncStorage
 ): ViewModel() {
 
     private val _state = MutableStateFlow(BillState())
@@ -44,7 +49,6 @@ class BillViewModel @Inject constructor(
 
     private fun loadData() {
         viewModelScope.launch {
-            _action.emit(BillAction.ShowSnackBar("..."))
 
             _state.update {
                 it.copy(
@@ -72,13 +76,25 @@ class BillViewModel @Inject constructor(
                     _action.emit(BillAction.ShowSnackBar("Не удалось найти аккаунт"))
                 }
             }.onFailure { err ->
-                _state.update {
-                    it.copy(
-                        status = FinancilityResult.Error
-                    )
+
+                if (err is OfflineDataException) {
+                    _state.update {
+                        it.copy(
+                            status = FinancilityResult.Success,
+                            accounts = err.data as List<AccountBriefModel>,
+                            lastSync = appSyncStorage.getSyncTime(
+                                feature = BILL_SYNC,
+                            )
+                        )
+                    }
+                } else {
+                    _state.update {
+                        it.copy(status = FinancilityResult.Error)
+                    }
+
+                    _action.emit(BillAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
 
-                _action.emit(BillAction.ShowSnackBar(ErrorHandler().handleException(err)))
             }
         }
     }

@@ -11,7 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
@@ -20,6 +22,7 @@ import dev.lkey.bill.presentation.edit.viewmodel.EditBillEvent
 import dev.lkey.bill.presentation.edit.viewmodel.EditBillViewModel
 import dev.lkey.common.R
 import dev.lkey.common.navigation.Route
+import dev.lkey.common.ui.item.FinancilityErrorMessage
 import dev.lkey.common.ui.item.FinancilityLoadingBar
 import dev.lkey.common.ui.item.FinancilitySnackBar
 import dev.lkey.common.ui.nav.FinancilityBottomBar
@@ -32,6 +35,10 @@ fun EditBillScreen (
     navController: NavController,
     viewModel: EditBillViewModel
 ) {
+    var error: String? by remember {
+        mutableStateOf(null)
+    }
+
     val state by viewModel.state.collectAsState()
     val snackBarHostState = remember { SnackbarHostState() }
 
@@ -41,6 +48,8 @@ fun EditBillScreen (
         viewModel.action.collectLatest { action ->
             when (action) {
                 is EditBillAction.ShowSnackBar -> {
+                    error = action.message
+
                     snackBarHostState.showSnackbar(action.message)
                 }
 
@@ -94,19 +103,31 @@ fun EditBillScreen (
         snackbarHost = { FinancilitySnackBar(snackBarHostState) }
     ) { padding ->
 
-        if (state.status != FinancilityResult.Success) {
-            FinancilityLoadingBar(
-                modifier = Modifier
-                    .padding(padding)
-            )
-        } else {
-            EditBillView(
-                modifier = Modifier.padding(padding),
-                state = state
-            ) {
-                viewModel.onEvent(it)
+        when (state.status) {
+            FinancilityResult.Error -> {
+                FinancilityErrorMessage(
+                    modifier = Modifier
+                        .padding(padding),
+                    text = error,
+                    onUpdate = {
+                        viewModel.onEvent(EditBillEvent.OnLoadBill)
+                    }
+                )
+            }
+            FinancilityResult.Loading -> {
+                FinancilityLoadingBar(
+                    modifier = Modifier
+                        .padding(padding)
+                )
+            }
+            FinancilityResult.Success -> {
+                EditBillView(
+                    modifier = Modifier.padding(padding),
+                    state = state
+                ) {
+                    viewModel.onEvent(it)
+                }
             }
         }
-
     }
 }

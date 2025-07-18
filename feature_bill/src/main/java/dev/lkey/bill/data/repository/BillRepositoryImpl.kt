@@ -1,6 +1,5 @@
 package dev.lkey.bill.data.repository
 
-
 import dev.lkey.bill.data.model.UpdateAccountDto
 import dev.lkey.bill.domain.repository.BillRepository
 import dev.lkey.common.core.model.AccountBriefModel
@@ -8,30 +7,17 @@ import dev.lkey.core.error.ApiException
 import dev.lkey.core.network.ktorClient
 import dev.lkey.core.network.safeCall
 import io.ktor.client.call.body
-import io.ktor.client.request.get
 import io.ktor.client.request.put
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
+import jakarta.inject.Inject
 
 /**
- * Репозиторий для получения счетов
+ * Репозиторий для обновления счетов
  * */
 
-class BillRepositoryImpl : BillRepository {
-
-    override suspend fun getBillInfo(): Result<List<AccountBriefModel>> {
-        return safeCall {
-
-            val response: HttpResponse = ktorClient.get("accounts")
-
-            if (response.status != HttpStatusCode.OK) {
-                throw ApiException("Ошибка API: ${response.status}")
-            }
-
-            response.body()
-        }
-    }
+class BillRepositoryImpl @Inject constructor() : BillRepository {
 
     override suspend fun updateBill(
         id: Int,
@@ -43,11 +29,11 @@ class BillRepositoryImpl : BillRepository {
                 setBody(newBill)
             }
 
-            if (response.status != HttpStatusCode.OK) {
+            if (response.status != HttpStatusCode.Companion.OK) {
                 throw ApiException("Ошибка API: ${response.status}")
             }
 
-            response.body()
+            return@safeCall response.body()
 
         }
     }

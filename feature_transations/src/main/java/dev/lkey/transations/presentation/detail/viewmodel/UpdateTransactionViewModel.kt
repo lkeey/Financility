@@ -2,10 +2,14 @@ package dev.lkey.transations.presentation.detail.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.lkey.common.constants.Constants.TRANSACTION_SYNC
+import dev.lkey.common.core.model.CategoryModel
 import dev.lkey.core.error.ApiException
 import dev.lkey.core.error.ErrorHandler
+import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.FinancilityResult
-import dev.lkey.transations.data.dto.TransactionDto
+import dev.lkey.storage.data.sync.AppSyncStorage
+import dev.lkey.transations.data.dto.RequestTransactionDto
 import dev.lkey.transations.domain.usecase.DeleteTransactionUseCase
 import dev.lkey.transations.domain.usecase.GetArticlesUseCase
 import dev.lkey.transations.domain.usecase.UpdateTransactionUseCase
@@ -26,6 +30,7 @@ class UpdateTransactionViewModel @Inject constructor (
     private val articlesUseCase : GetArticlesUseCase,
     private val updateUseCase : UpdateTransactionUseCase,
     private val deleteUseCase : DeleteTransactionUseCase,
+    private val appSyncStorage: AppSyncStorage
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(UpdateTransactionState())
@@ -113,7 +118,7 @@ class UpdateTransactionViewModel @Inject constructor (
 
             val result = updateUseCase.invoke(
                 id = state.value.id,
-                transaction = TransactionDto(
+                transaction = RequestTransactionDto(
                     accountId = state.value.accounts[0].id,
                     categoryId = state.value.article?.id ?: throw ApiException("Заполните все поля"),
                     amount = state.value.sum ?: throw ApiException("Заполните все поля"),
@@ -167,13 +172,26 @@ class UpdateTransactionViewModel @Inject constructor (
                     }
                 }
                 .onFailure { err ->
-                    _state.update {
-                        it.copy(
-                            status = FinancilityResult.Error
-                        )
+                    if (err is OfflineDataException) {
+                        val articles = err.data as List<CategoryModel>
+
+                        _state.update {
+                            it.copy(
+                                status = FinancilityResult.Success,
+                                articles = articles.filter { it.isIncome == isIncome },
+                                lastSync = appSyncStorage.getSyncTime(
+                                    feature = TRANSACTION_SYNC,
+                                )
+                            )
+                        }
+                    } else {
+                        _state.update {
+                            it.copy(status = FinancilityResult.Error)
+                        }
+
+                        _action.emit(UpdateTransactionAction.ShowSnackBar(ErrorHandler().handleException(err)))
                     }
 
-                    _action.emit(UpdateTransactionAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }
     }

@@ -2,9 +2,13 @@ package dev.lkey.articles.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.lkey.common.constants.Constants.ARTICLES_SYNC
 import dev.lkey.articles.domain.usecase.GetArticlesUseCase
+import dev.lkey.common.core.model.CategoryModel
 import dev.lkey.core.error.ErrorHandler
+import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.FinancilityResult
+import dev.lkey.storage.data.sync.AppSyncStorage
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +23,8 @@ import kotlinx.coroutines.launch
  * */
 
 class ArticlesViewModel @Inject constructor(
-    private val articlesUseCase : GetArticlesUseCase
+    private val articlesUseCase : GetArticlesUseCase,
+    private val appSyncStorage: AppSyncStorage
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(ArticlesState())
@@ -70,14 +75,27 @@ class ArticlesViewModel @Inject constructor(
                     }
                 }
                 .onFailure { err ->
-                    _state.update {
-                        it.copy(
-                            status = FinancilityResult.Error
-                        )
+
+                    if (err is OfflineDataException) {
+                        _state.update {
+                            it.copy(
+                                status = FinancilityResult.Success,
+                                articles = err.data as List<CategoryModel>,
+                                lastSync = appSyncStorage.getSyncTime(
+                                    feature = ARTICLES_SYNC,
+                                )
+                            )
+                        }
+                    } else {
+                        _state.update {
+                            it.copy(status = FinancilityResult.Error)
+                        }
+
+                        _action.emit(ArticleAction.ShowSnackBar(ErrorHandler().handleException(err)))
                     }
 
-                    _action.emit(ArticleAction.ShowSnackBar(ErrorHandler().handleException(err)))
                 }
         }
     }
+
 }

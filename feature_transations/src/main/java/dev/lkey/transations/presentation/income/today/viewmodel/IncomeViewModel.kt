@@ -2,9 +2,13 @@ package dev.lkey.transations.presentation.income.today.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.lkey.common.constants.Constants.TRANSACTION_SYNC
+import dev.lkey.common.core.model.TransactionModel
 import dev.lkey.core.error.ErrorHandler
+import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.FinancilityResult
-import dev.lkey.transations.domain.usecase.GetAccountUseCase
+import dev.lkey.storage.data.sync.AppSyncStorage
+import dev.lkey.transations.domain.usecase.GetAccountsUseCase
 import dev.lkey.transations.domain.usecase.GetTransactionsUseCase
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -22,8 +26,9 @@ import java.time.format.DateTimeFormatter
  * */
 
 class IncomeViewModel @Inject constructor(
-    private val accountsUseCase : GetAccountUseCase,
-    private val transactionUseCase : GetTransactionsUseCase
+    private val accountsUseCase : GetAccountsUseCase,
+    private val transactionUseCase : GetTransactionsUseCase,
+    private val appSyncStorage: AppSyncStorage
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(IncomeState())
@@ -55,7 +60,6 @@ class IncomeViewModel @Inject constructor(
     private fun loadExpenses(
         id : Int
     ) {
-
         viewModelScope.launch {
             _state.update {
                 it.copy(
@@ -79,13 +83,25 @@ class IncomeViewModel @Inject constructor(
                     }
                 }
                 .onFailure { err ->
-                    _state.update {
-                        it.copy(
-                            status = FinancilityResult.Error
-                        )
-                    }
+                    if (err is OfflineDataException) {
+                        val transactions = err.data as List<TransactionModel>
 
-                    _action.emit(IncomeAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                        _state.update {
+                            it.copy(
+                                status = FinancilityResult.Success,
+                                transactions = transactions.filter { it.categoryModel.isIncome  },
+                                lastSync = appSyncStorage.getSyncTime(
+                                    feature = TRANSACTION_SYNC,
+                                )
+                            )
+                        }
+                    } else {
+                        _state.update {
+                            it.copy(status = FinancilityResult.Error)
+                        }
+
+                        _action.emit(IncomeAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    }
                 }
         }
     }

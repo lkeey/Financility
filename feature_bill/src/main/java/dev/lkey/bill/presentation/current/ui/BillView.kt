@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
 import dev.lkey.bill.presentation.current.viewmodel.BillEvent
 import dev.lkey.bill.presentation.current.viewmodel.BillState
 import dev.lkey.common.ui.item.FinancilityListItem
+import dev.lkey.common.ui.item.FinancilitySyncMessage
 import dev.lkey.core.converter.toEmoji
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -24,6 +25,11 @@ fun BillView (
         modifier = modifier
             .fillMaxSize()
     ){
+
+        state.lastSync?.let {
+            FinancilitySyncMessage(it)
+        }
+
         state.accounts.forEach {
             FinancilityListItem(
                 emoji = "\uD83D\uDC7B",

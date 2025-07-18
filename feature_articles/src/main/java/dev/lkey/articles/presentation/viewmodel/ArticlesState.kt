@@ -12,4 +12,5 @@ data class ArticlesState (
     val articles: List<CategoryModel> = emptyList(),
     val searchValue: String = "",
     val status: FinancilityResult = FinancilityResult.Loading,
+    val lastSync: Long? = null,
 )

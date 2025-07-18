@@ -4,6 +4,7 @@ import android.app.Application
 import dev.lkey.core.di.CoreComponent
 import dev.lkey.core.di.DaggerCoreComponent
 import dev.lkey.core.di.utils.CoreProvider
+import dev.lkey.financility.worker.scheduleSyncDataWorker
 
 /**
  * При запуске приложения запускает Dagger и инициазизирует [coreComponent]
@@ -16,7 +17,11 @@ class MainApplication : Application(), CoreProvider {
         DaggerCoreComponent.factory().create(this)
     }
 
+
+
     override fun onCreate() {
         super.onCreate()
+
+        scheduleSyncDataWorker(this)
     }
 }

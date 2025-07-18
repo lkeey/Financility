@@ -5,10 +5,13 @@ import androidx.lifecycle.viewModelScope
 import dev.lkey.bill.data.model.UpdateAccountDto
 import dev.lkey.bill.domain.usecase.GetBillInfoUseCase
 import dev.lkey.bill.domain.usecase.UpdateBillUseCase
+import dev.lkey.common.constants.Constants.BILL_SYNC
 import dev.lkey.common.core.model.AccountBriefModel
 import dev.lkey.common.core.model.CurrencyOption
 import dev.lkey.core.error.ErrorHandler
+import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.FinancilityResult
+import dev.lkey.storage.data.sync.AppSyncStorage
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,7 +27,8 @@ import kotlinx.coroutines.launch
 
 class EditBillViewModel @Inject constructor(
     private val billInfoUseCase : GetBillInfoUseCase,
-    private val updateBillUseCase : UpdateBillUseCase
+    private val updateBillUseCase : UpdateBillUseCase,
+    private val appSyncStorage: AppSyncStorage
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(EditBillState())
@@ -111,13 +115,29 @@ class EditBillViewModel @Inject constructor(
                     _action.emit(EditBillAction.ShowSnackBar("Не удалось найти аккаунт"))
                 }
             }.onFailure { err ->
-                _state.update {
-                    it.copy(
-                        status = FinancilityResult.Error
-                    )
-                }
+                if (err is OfflineDataException) {
+                    val accounts = err.data as List<AccountBriefModel>
 
-                _action.emit(EditBillAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    _state.update {
+                        it.copy(
+
+                            status = FinancilityResult.Success,
+                            accounts = accounts,
+                            enteredName = accounts[0].name,
+                            chosenCurrency = accounts[0].currency.toCurrency(),
+                            enteredAmount = accounts[0].balance,
+                            lastSync = appSyncStorage.getSyncTime(
+                                feature = BILL_SYNC,
+                            )
+                        )
+                    }
+                } else {
+                    _state.update {
+                        it.copy(status = FinancilityResult.Error)
+                    }
+
+                    _action.emit(EditBillAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                }
             }
         }
     }

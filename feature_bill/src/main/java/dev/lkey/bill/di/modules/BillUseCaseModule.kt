@@ -2,6 +2,7 @@ package dev.lkey.bill.di.modules
 
 import dagger.Module
 import dagger.Provides
+import dev.lkey.account.domain.AccountRepository
 import dev.lkey.bill.domain.repository.BillRepository
 import dev.lkey.bill.domain.usecase.GetBillInfoUseCase
 import dev.lkey.bill.domain.usecase.UpdateBillUseCase
@@ -15,9 +16,9 @@ class BillUseCaseModule {
 
     @Provides
     fun provideGetBillInfoUseCase(
-        billRepository: BillRepository
+        accountRepository: AccountRepository
     ): GetBillInfoUseCase {
-        return GetBillInfoUseCase(billRepository)
+        return GetBillInfoUseCase(accountRepository)
     }
 
     @Provides

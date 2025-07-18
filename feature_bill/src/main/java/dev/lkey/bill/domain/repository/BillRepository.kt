@@ -5,8 +5,6 @@ import dev.lkey.common.core.model.AccountBriefModel
 
 interface BillRepository {
 
-    suspend fun getBillInfo(): Result<List<AccountBriefModel>>
-
     suspend fun updateBill(
         id: Int,
         newBill : UpdateAccountDto

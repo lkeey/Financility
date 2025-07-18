@@ -7,6 +7,7 @@ import dev.lkey.bill.di.modules.BillUseCaseModule
 import dev.lkey.bill.di.modules.BillViewModelModule
 import dev.lkey.core.di.CoreComponent
 import dev.lkey.core.di.modules.SharedViewModelModule
+import dev.lkey.storage.di.DatabaseComponent
 
 /**
  * Компонент, который хранит в себе VM, репозитории и use-case фичи счета
@@ -14,7 +15,10 @@ import dev.lkey.core.di.modules.SharedViewModelModule
 
 @BillScope
 @Component(
-    dependencies = [CoreComponent::class],
+    dependencies = [
+        CoreComponent::class,
+        DatabaseComponent::class,
+    ],
     modules = [
         BillRepositoryModule::class,
         BillUseCaseModule::class,
@@ -28,7 +32,10 @@ interface BillComponent {
 
     @Component.Factory
     interface Factory {
-        fun create(core: CoreComponent): BillComponent
+        fun create(
+            core: CoreComponent,
+            db: DatabaseComponent
+        ): BillComponent
     }
 
 }
