@@ -1,10 +1,13 @@
 package dev.lkey.financility
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import dev.lkey.financility.navigation.FinancilityApp
+import dev.lkey.storage.data.sync.AppSyncStorage
 
 /**
  * Главный Actitivy приложения
@@ -21,5 +24,16 @@ class MainActivity : ComponentActivity() {
         setContent {
             FinancilityApp()
         }
+    }
+
+    // привязываем язык, выбранный в приложении
+    override fun attachBaseContext(base: Context) {
+
+        val syncer = AppSyncStorage(context = base)
+        val context = syncer.setLocale(syncer.getSavedLocale())
+        Log.i("--APP", "язык - ${syncer.getSavedLocale()}")
+        Log.i("--APP", "контекст - $context")
+
+        super.attachBaseContext(context)
     }
 }

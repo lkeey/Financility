@@ -23,8 +23,8 @@ fun SettingsView (
         "Код пароль",
 
         "Синхронизация",
-
         "Язык",
+
         "О программе"
     )
 
@@ -35,8 +35,8 @@ fun SettingsView (
         Route.AllSettings,
 
         Route.SyncSettings,
+        Route.LanguageSettings,
 
-        Route.AllSettings,
         Route.AllSettings,
     )
 

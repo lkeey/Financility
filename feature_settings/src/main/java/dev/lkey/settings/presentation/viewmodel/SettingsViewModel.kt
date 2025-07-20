@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 /**
  * VM для экрана настроек
@@ -47,8 +48,22 @@ class SettingsViewModel @Inject constructor(
                 _state.update {
                     it.copy(
                         syncDuration = appSyncStorage.getSyncDuration().toFloat(),
+                        language = appSyncStorage.getSavedLocale(),
                         status = FinancilityResult.Success
                     )
+                }
+            }
+            is SettingsEvent.OnChooseLanguage -> {
+                _state.update {
+                    it.copy(
+                        language = event.lang
+                    )
+                }
+
+                appSyncStorage.setLocale(event.lang)
+
+                viewModelScope.launch {
+                    _action.emit(SettingsAction.ShowSnackBar("Перезапустите приложение, чтобы язык изменился"))
                 }
             }
         }

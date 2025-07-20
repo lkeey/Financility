@@ -1,4 +1,4 @@
-package dev.lkey.settings.presentation.ui.sync
+package dev.lkey.settings.presentation.ui.language
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -28,7 +28,7 @@ import dev.lkey.settings.presentation.viewmodel.SettingsViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun SyncSettingsScreen (
+fun LanguageSettingScreen (
     navController: NavController,
     viewModel: SettingsViewModel,
 ) {
@@ -60,7 +60,7 @@ fun SyncSettingsScreen (
         },
         topBar = {
             FinancilityTopBar(
-                title = stringResource(R.string.settings_sync),
+                title = stringResource(R.string.setting_lang),
                 actions = { }
             )
         },
@@ -88,7 +88,7 @@ fun SyncSettingsScreen (
                 )
             }
             FinancilityResult.Success -> {
-                SyncSettingsView(
+                LanguageSettingView (
                     modifier = Modifier.padding(padding),
                     state = state,
                     onEvent = {

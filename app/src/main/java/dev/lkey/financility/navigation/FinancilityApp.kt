@@ -25,6 +25,7 @@ import dev.lkey.feature_splash.di.DaggerSplashComponent
 import dev.lkey.feature_splash.presentation.ui.SplashScreen
 import dev.lkey.settings.di.DaggerSettingsComponent
 import dev.lkey.settings.presentation.ui.common.SettingsScreen
+import dev.lkey.settings.presentation.ui.language.LanguageSettingScreen
 import dev.lkey.settings.presentation.ui.sync.SyncSettingsScreen
 import dev.lkey.storage.di.DaggerDatabaseComponent
 import dev.lkey.transations.di.DaggerTransactionComponent
@@ -222,6 +223,13 @@ fun FinancilityApp() {
 
                 composable<Route.SyncSettings> {
                     SyncSettingsScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = settingsComponent.viewModelFactory())
+                    )
+                }
+
+                composable<Route.LanguageSettings> {
+                    LanguageSettingScreen(
                         navController = navController,
                         viewModel = viewModel(factory = settingsComponent.viewModelFactory())
                     )

@@ -71,4 +71,7 @@ sealed interface Route {
     @Serializable
     data object SyncSettings : Route
 
+    @Serializable
+    data object LanguageSettings : Route
+
 }

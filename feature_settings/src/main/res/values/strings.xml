@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_sync">Настройки синхронизации</string>
+    <string name="setting_lang">Настройки языка</string>
+    <string name="choose_lang">Выберите язык</string>
+    <string name="english">Английский</string>
+    <string name="russian">Русский</string>
+</resources>

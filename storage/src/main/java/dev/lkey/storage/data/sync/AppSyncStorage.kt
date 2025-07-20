@@ -2,6 +2,7 @@ package dev.lkey.storage.data.sync
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import androidx.core.content.edit
 import java.util.Locale
 import javax.inject.Inject
@@ -60,9 +61,8 @@ class AppSyncStorage @Inject constructor(
         val locale = Locale(language)
         Locale.setDefault(locale)
 
-        val config = context.resources.configuration
+        val config = Configuration()
         config.setLocale(locale)
-        config.setLayoutDirection(locale)
 
         return context.createConfigurationContext(config)
     }
