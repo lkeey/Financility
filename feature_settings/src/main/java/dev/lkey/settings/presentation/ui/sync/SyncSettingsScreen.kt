@@ -88,7 +88,10 @@ fun SyncSettingsScreen (
             FinancilityResult.Success -> {
                 SyncSettingsView(
                     modifier = Modifier.padding(padding),
-                    state = state
+                    state = state,
+                    onEvent = {
+                        viewModel.onEvent(it)
+                    }
                 )
             }
         }

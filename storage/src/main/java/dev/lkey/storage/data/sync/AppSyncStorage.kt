@@ -11,6 +11,7 @@ class AppSyncStorage @Inject constructor(
 
     companion object {
         private const val SHARED_PREFS = "sync_prefs"
+        private const val SYNC_DURATION = "sync_duration"
     }
 
     private val prefs: SharedPreferences =
@@ -29,6 +30,18 @@ class AppSyncStorage @Inject constructor(
         feature: String
     ): Long {
         return prefs.getLong(feature, 0L)
+    }
+
+    fun setSyncDuration(
+        time: Long
+    ) {
+        prefs.edit {
+            putLong(SYNC_DURATION, time)
+        }
+    }
+
+    fun getSyncDuration(): Long {
+        return prefs.getLong(SYNC_DURATION, 15L)
     }
 
 }

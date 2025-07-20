@@ -2,8 +2,8 @@ package dev.lkey.articles.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.lkey.common.constants.Constants.ARTICLES_SYNC
 import dev.lkey.articles.domain.usecase.GetArticlesUseCase
+import dev.lkey.common.constants.Constants.ARTICLES_SYNC
 import dev.lkey.common.core.model.CategoryModel
 import dev.lkey.core.error.ErrorHandler
 import dev.lkey.core.error.OfflineDataException

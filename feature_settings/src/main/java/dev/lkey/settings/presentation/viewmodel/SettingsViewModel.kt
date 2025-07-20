@@ -2,6 +2,9 @@ package dev.lkey.settings.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.lkey.core.network.FinancilityResult
+import dev.lkey.storage.data.sync.AppSyncStorage
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -13,7 +16,9 @@ import kotlinx.coroutines.flow.update
  * VM для экрана настроек
  * */
 
-class SettingsViewModel : ViewModel() {
+class SettingsViewModel @Inject constructor(
+    private val appSyncStorage: AppSyncStorage
+) : ViewModel() {
 
     private val _state = MutableStateFlow(SettingsState())
     val state = _state.stateIn(
@@ -35,10 +40,16 @@ class SettingsViewModel : ViewModel() {
                         syncDuration = event.duration
                     )
                 }
-                // TODO update it in storage
+
+                appSyncStorage.setSyncDuration(event.duration.toLong())
             }
             SettingsEvent.OnLoadData -> {
-                // TODO load duration from storage
+                _state.update {
+                    it.copy(
+                        syncDuration = appSyncStorage.getSyncDuration().toFloat(),
+                        status = FinancilityResult.Success
+                    )
+                }
             }
         }
     }

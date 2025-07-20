@@ -23,6 +23,7 @@ import dev.lkey.common.theme.FinancilityTheme
 import dev.lkey.core.di.utils.CoreProvider
 import dev.lkey.feature_splash.di.DaggerSplashComponent
 import dev.lkey.feature_splash.presentation.ui.SplashScreen
+import dev.lkey.settings.di.DaggerSettingsComponent
 import dev.lkey.settings.presentation.ui.common.SettingsScreen
 import dev.lkey.settings.presentation.ui.sync.SyncSettingsScreen
 import dev.lkey.storage.di.DaggerDatabaseComponent
@@ -51,6 +52,7 @@ fun FinancilityApp() {
     val billComponent = DaggerBillComponent.factory().create(provider.coreComponent, db)
     val articlesComponent = DaggerArticlesComponent.factory().create(provider.coreComponent, db)
     val transactionsComponent = DaggerTransactionComponent.factory().create(provider.coreComponent, db)
+    val settingsComponent = DaggerSettingsComponent.factory().create(provider.coreComponent, db)
 
     FinancilityTheme {
 
@@ -220,7 +222,8 @@ fun FinancilityApp() {
 
                 composable<Route.SyncSettings> {
                     SyncSettingsScreen(
-                        navController = navController
+                        navController = navController,
+                        viewModel = viewModel(factory = settingsComponent.viewModelFactory())
                     )
                 }
             }
