@@ -1,4 +1,4 @@
-package dev.lkey.settings
+package dev.lkey.settings.presentation.ui.common
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -32,7 +32,10 @@ fun SettingsScreen (
     ) { padding ->
 
         SettingsView(
-            modifier = Modifier.padding(padding)
+            modifier = Modifier.padding(padding),
+            onNavigate = {
+                navController.navigate(it)
+            }
         )
 
     }

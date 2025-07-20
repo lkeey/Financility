@@ -23,7 +23,8 @@ import dev.lkey.common.theme.FinancilityTheme
 import dev.lkey.core.di.utils.CoreProvider
 import dev.lkey.feature_splash.di.DaggerSplashComponent
 import dev.lkey.feature_splash.presentation.ui.SplashScreen
-import dev.lkey.settings.SettingsScreen
+import dev.lkey.settings.presentation.ui.common.SettingsScreen
+import dev.lkey.settings.presentation.ui.sync.SyncSettingsScreen
 import dev.lkey.storage.di.DaggerDatabaseComponent
 import dev.lkey.transations.di.DaggerTransactionComponent
 import dev.lkey.transations.presentation.analysis.ui.AnalysisScreen
@@ -213,6 +214,12 @@ fun FinancilityApp() {
             ) {
                 composable<Route.AllSettings> {
                     SettingsScreen(
+                        navController = navController
+                    )
+                }
+
+                composable<Route.SyncSettings> {
+                    SyncSettingsScreen(
                         navController = navController
                     )
                 }

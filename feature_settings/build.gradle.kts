@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
 
     alias(libs.plugins.kotlin.compose)
-
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -57,12 +57,19 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
 
+    // Dagger 2
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
+
     // Navigation
     implementation(libs.jetbrains.compose.navigation)
 
+    // room-module
+    implementation(project(":storage"))
+
     // ktor-client
     implementation(project(":core"))
-    implementation(project(":common"))
 
     // ui-components
+    implementation(project(":common"))
 }
