@@ -20,6 +20,7 @@ import dev.lkey.bill.presentation.edit.ui.EditBillScreen
 import dev.lkey.common.core.model.TransactionModel
 import dev.lkey.common.navigation.Route
 import dev.lkey.common.theme.FinancilityTheme
+import dev.lkey.common.theme.ThemeMode
 import dev.lkey.core.di.utils.CoreProvider
 import dev.lkey.feature_splash.di.DaggerSplashComponent
 import dev.lkey.feature_splash.presentation.ui.SplashScreen
@@ -44,7 +45,9 @@ import kotlinx.serialization.json.Json
  */
 
 @Composable
-fun FinancilityApp() {
+fun FinancilityApp(
+    theme: ThemeMode
+) {
 
     val provider = LocalContext.current.applicationContext as CoreProvider
     val db = DaggerDatabaseComponent.factory().create(provider.coreComponent)
@@ -55,7 +58,9 @@ fun FinancilityApp() {
     val transactionsComponent = DaggerTransactionComponent.factory().create(provider.coreComponent, db)
     val settingsComponent = DaggerSettingsComponent.factory().create(provider.coreComponent, db)
 
-    FinancilityTheme {
+    FinancilityTheme (
+        themeMode = theme
+    ) {
 
         val navController = rememberNavController()
 
@@ -217,7 +222,8 @@ fun FinancilityApp() {
             ) {
                 composable<Route.AllSettings> {
                     SettingsScreen(
-                        navController = navController
+                        navController = navController,
+                        viewModel = viewModel(factory = settingsComponent.viewModelFactory())
                     )
                 }
 

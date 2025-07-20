@@ -10,11 +10,16 @@ import dev.lkey.common.R
 import dev.lkey.common.navigation.Route
 import dev.lkey.common.ui.field.FinancilityToggleListItem
 import dev.lkey.common.ui.item.FinancilityListItem
+import dev.lkey.settings.presentation.viewmodel.SettingsEvent
+import dev.lkey.settings.presentation.viewmodel.SettingsEvent.OnUpdateTheme
+import dev.lkey.settings.presentation.viewmodel.SettingsState
 
 @Composable
 fun SettingsView (
     modifier: Modifier = Modifier,
-    onNavigate: (Route) -> Unit
+    onNavigate: (Route) -> Unit,
+    state: SettingsState,
+    onEvent: (SettingsEvent) -> Unit
 ) {
 
     val options = listOf(
@@ -45,13 +50,13 @@ fun SettingsView (
         modifier = modifier
             .fillMaxSize()
     ){
+
         FinancilityToggleListItem(
             title = stringResource(dev.lkey.settings.R.string.theme_color),
-            isChecked = false,
-            onClick = {
-                /* TODO */
-            }
-        )
+            current = state.theme
+        ) {
+            onEvent(OnUpdateTheme(it))
+        }
 
         options.forEachIndexed { num, option ->
             FinancilityListItem(

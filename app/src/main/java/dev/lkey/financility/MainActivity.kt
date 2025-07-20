@@ -21,8 +21,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+        val syncer = AppSyncStorage(context = this)
+
         setContent {
-            FinancilityApp()
+            FinancilityApp(
+                theme = syncer.getThemeMode()
+            )
         }
     }
 

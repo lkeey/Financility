@@ -15,7 +15,7 @@ private val DarkColorScheme = darkColorScheme(
     primary = Color(0xFF2AE881),
     surface = Color(0xFF1C1B1F),
     onSurfaceVariant = Color(0xFFBAC8C9),
-    onSurface = Color(0xFFE6E1E5),
+    onSurface = Color(0xFF504D50),
     inverseOnSurface = Color(0xFFF3EDF7),
     outline = Color(0xFF6FCF97),
     surfaceTint = Color(0xFF2AE881),
@@ -49,17 +49,23 @@ private val LightColorScheme = lightColorScheme(
 
 @Composable
 fun FinancilityTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    themeMode: ThemeMode = ThemeMode.SYSTEM,
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
+    val isDark = when (themeMode) {
+        ThemeMode.LIGHT -> false
+        ThemeMode.DARK -> true
+        ThemeMode.SYSTEM -> isSystemInDarkTheme()
+    }
+
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+            if (isDark) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
 
-        darkTheme -> DarkColorScheme
+        isDark -> DarkColorScheme
         else -> LightColorScheme
     }
 

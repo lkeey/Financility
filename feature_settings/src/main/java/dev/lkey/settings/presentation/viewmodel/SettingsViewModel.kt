@@ -3,6 +3,7 @@ package dev.lkey.settings.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.lkey.core.network.FinancilityResult
+import dev.lkey.settings.presentation.viewmodel.SettingsAction.ShowSnackBar
 import dev.lkey.storage.data.sync.AppSyncStorage
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -49,6 +50,7 @@ class SettingsViewModel @Inject constructor(
                     it.copy(
                         syncDuration = appSyncStorage.getSyncDuration().toFloat(),
                         language = appSyncStorage.getSavedLocale(),
+                        theme = appSyncStorage.getThemeMode(),
                         status = FinancilityResult.Success
                     )
                 }
@@ -63,7 +65,20 @@ class SettingsViewModel @Inject constructor(
                 appSyncStorage.setLocale(event.lang)
 
                 viewModelScope.launch {
-                    _action.emit(SettingsAction.ShowSnackBar("Перезапустите приложение, чтобы язык изменился"))
+                    _action.emit(ShowSnackBar("Перезапустите приложение, чтобы язык изменился"))
+                }
+            }
+
+            is SettingsEvent.OnUpdateTheme -> {
+                _state.update {
+                    it.copy(
+                        theme = event.theme
+                    )
+                }
+
+                appSyncStorage.saveThemeMode(event.theme)
+                viewModelScope.launch {
+                    _action.emit(ShowSnackBar("Перезапустите приложение, чтобы тема изменилась"))
                 }
             }
         }
