@@ -35,7 +35,8 @@ fun SettingsView (
     )
 
     val routes = listOf(
-        Route.AllSettings,
+        Route.ColorSettings,
+
         Route.AllSettings,
         Route.AllSettings,
         Route.AllSettings,

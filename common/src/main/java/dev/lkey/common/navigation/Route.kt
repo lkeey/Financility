@@ -74,4 +74,6 @@ sealed interface Route {
     @Serializable
     data object LanguageSettings : Route
 
+    @Serializable
+    data object ColorSettings : Route
 }

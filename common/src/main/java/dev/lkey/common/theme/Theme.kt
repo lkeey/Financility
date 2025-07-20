@@ -50,6 +50,7 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun FinancilityTheme(
     themeMode: ThemeMode = ThemeMode.SYSTEM,
+    primaryColor: Color = Color(0xFF2AE881),
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
@@ -70,8 +71,9 @@ fun FinancilityTheme(
     }
 
     MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
+        colorScheme = colorScheme.copy(
+            primary = primaryColor
+        ),
         content = content
     )
 }

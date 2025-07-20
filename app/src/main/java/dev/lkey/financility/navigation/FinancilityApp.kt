@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
@@ -25,6 +26,7 @@ import dev.lkey.core.di.utils.CoreProvider
 import dev.lkey.feature_splash.di.DaggerSplashComponent
 import dev.lkey.feature_splash.presentation.ui.SplashScreen
 import dev.lkey.settings.di.DaggerSettingsComponent
+import dev.lkey.settings.presentation.ui.color.ColorSettingsScreen
 import dev.lkey.settings.presentation.ui.common.SettingsScreen
 import dev.lkey.settings.presentation.ui.language.LanguageSettingScreen
 import dev.lkey.settings.presentation.ui.sync.SyncSettingsScreen
@@ -46,7 +48,8 @@ import kotlinx.serialization.json.Json
 
 @Composable
 fun FinancilityApp(
-    theme: ThemeMode
+    theme: ThemeMode,
+    primaryColor: Color
 ) {
 
     val provider = LocalContext.current.applicationContext as CoreProvider
@@ -59,9 +62,9 @@ fun FinancilityApp(
     val settingsComponent = DaggerSettingsComponent.factory().create(provider.coreComponent, db)
 
     FinancilityTheme (
-        themeMode = theme
+        themeMode = theme,
+        primaryColor = primaryColor
     ) {
-
         val navController = rememberNavController()
 
         NavHost(
@@ -236,6 +239,13 @@ fun FinancilityApp(
 
                 composable<Route.LanguageSettings> {
                     LanguageSettingScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = settingsComponent.viewModelFactory())
+                    )
+                }
+
+                composable<Route.ColorSettings> {
+                    ColorSettingsScreen(
                         navController = navController,
                         viewModel = viewModel(factory = settingsComponent.viewModelFactory())
                     )

@@ -1,5 +1,7 @@
 package dev.lkey.settings.presentation.viewmodel
 
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.lkey.core.network.FinancilityResult
@@ -46,11 +48,13 @@ class SettingsViewModel @Inject constructor(
                 appSyncStorage.setSyncDuration(event.duration.toLong())
             }
             SettingsEvent.OnLoadData -> {
+                val color = appSyncStorage.getPrimaryColor()
                 _state.update {
                     it.copy(
                         syncDuration = appSyncStorage.getSyncDuration().toFloat(),
                         language = appSyncStorage.getSavedLocale(),
                         theme = appSyncStorage.getThemeMode(),
+                        color = if (color != null) Color(color) else Color(0xFF2AE881),
                         status = FinancilityResult.Success
                     )
                 }
@@ -79,6 +83,20 @@ class SettingsViewModel @Inject constructor(
                 appSyncStorage.saveThemeMode(event.theme)
                 viewModelScope.launch {
                     _action.emit(ShowSnackBar("Перезапустите приложение, чтобы тема изменилась"))
+                }
+            }
+
+            is SettingsEvent.OnSetColor -> {
+                _state.update {
+                    it.copy(
+                        color = event.color
+                    )
+                }
+
+                appSyncStorage.savePrimaryColor(event.color.toArgb())
+
+                viewModelScope.launch {
+                    _action.emit(ShowSnackBar("Перезапустите приложение, чтобы язык изменился"))
                 }
             }
         }

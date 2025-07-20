@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.ui.graphics.Color
 import dev.lkey.financility.navigation.FinancilityApp
 import dev.lkey.storage.data.sync.AppSyncStorage
 
@@ -22,10 +23,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         val syncer = AppSyncStorage(context = this)
+        val color = syncer.getPrimaryColor()
 
         setContent {
             FinancilityApp(
-                theme = syncer.getThemeMode()
+                theme = syncer.getThemeMode(),
+                primaryColor = if (color != null) Color(color) else Color(0xFF2AE881),
             )
         }
     }

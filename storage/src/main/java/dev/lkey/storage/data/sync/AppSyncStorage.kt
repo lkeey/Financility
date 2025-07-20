@@ -14,9 +14,11 @@ class AppSyncStorage @Inject constructor(
 
     companion object {
         private const val SHARED_PREFS = "sync_prefs"
+
         private const val SYNC_DURATION = "sync_duration"
         private const val LANGUAGE_KEY = "language"
         private const val THEME_KEY = "theme"
+        private const val COLOR_KEY = "primary_color"
     }
 
     private val prefs: SharedPreferences =
@@ -95,5 +97,19 @@ class AppSyncStorage @Inject constructor(
         val name = prefs.getString(THEME_KEY, ThemeMode.SYSTEM.name)
 
         return ThemeMode.valueOf(name ?: ThemeMode.SYSTEM.name)
+    }
+
+    // primary color
+
+    fun savePrimaryColor(color: Int) {
+        prefs.edit {
+            putInt(COLOR_KEY, color).apply()
+        }
+    }
+
+    fun getPrimaryColor(): Int? {
+        val color = prefs.getInt(COLOR_KEY, 0)
+
+        return if (color == 0) null else color
     }
 }
