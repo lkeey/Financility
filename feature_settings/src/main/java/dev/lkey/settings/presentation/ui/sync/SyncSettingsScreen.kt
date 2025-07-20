@@ -1,5 +1,6 @@
 package dev.lkey.settings.presentation.ui.sync
 
+import android.app.Activity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -12,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -39,6 +41,9 @@ fun SyncSettingsScreen (
     val state by viewModel.state.collectAsStateWithLifecycle()
     val snackBarHostState = remember { SnackbarHostState() }
 
+    val context = LocalContext.current
+    val activity = context as? Activity
+
     LaunchedEffect(Unit) {
         viewModel.onEvent(SettingsEvent.OnLoadData)
 
@@ -47,6 +52,10 @@ fun SyncSettingsScreen (
                 is SettingsAction.ShowSnackBar -> {
                     error = action.message
                     snackBarHostState.showSnackbar(action.message)
+                }
+
+                SettingsAction.RestartActivity -> {
+                    activity?.recreate()
                 }
             }
         }

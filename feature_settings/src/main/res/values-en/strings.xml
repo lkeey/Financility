@@ -15,4 +15,5 @@
     <string name="about">About</string>
     <string name="time_sync">Sync interval: %1$s minutes</string>
     <string name="theme_color">Light Dark Auto</string>
+    <string name="choose_main_color">Choose main color</string>
 </resources>

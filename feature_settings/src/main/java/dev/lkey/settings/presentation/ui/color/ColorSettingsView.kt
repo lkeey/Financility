@@ -17,7 +17,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import dev.lkey.settings.R
 import dev.lkey.settings.presentation.viewmodel.SettingsEvent
 import dev.lkey.settings.presentation.viewmodel.SettingsState
 
@@ -40,7 +42,7 @@ fun ColorSettingsView (
         modifier = modifier
             .padding(16.dp)
     ) {
-        Text("Выберите основной цвет")
+        Text(stringResource(R.string.choose_main_color))
 
         Spacer(modifier = Modifier.height(16.dp))
 
