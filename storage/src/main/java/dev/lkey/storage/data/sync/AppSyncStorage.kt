@@ -3,19 +3,23 @@ package dev.lkey.storage.data.sync
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import java.util.Locale
 import javax.inject.Inject
 
 class AppSyncStorage @Inject constructor(
-    context: Context
+    private val context: Context
 ) {
 
     companion object {
         private const val SHARED_PREFS = "sync_prefs"
         private const val SYNC_DURATION = "sync_duration"
+        private const val LANGUAGE_KEY = "language"
     }
 
     private val prefs: SharedPreferences =
         context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
+
+    // get last duration
 
     fun saveSyncTime(
         timestamp: Long,
@@ -32,6 +36,8 @@ class AppSyncStorage @Inject constructor(
         return prefs.getLong(feature, 0L)
     }
 
+    // Duration of syncing
+
     fun setSyncDuration(
         time: Long
     ) {
@@ -42,6 +48,38 @@ class AppSyncStorage @Inject constructor(
 
     fun getSyncDuration(): Long {
         return prefs.getLong(SYNC_DURATION, 15L)
+    }
+
+    // locale language
+
+    fun setLocale(
+        language: String
+    ): Context {
+        persistLanguage(language)
+
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+
+        val config = context.resources.configuration
+        config.setLocale(locale)
+        config.setLayoutDirection(locale)
+
+        return context.createConfigurationContext(config)
+    }
+
+    fun getSavedLocale(): String {
+        val prefs = context.getSharedPreferences(LANGUAGE_KEY, Context.MODE_PRIVATE)
+
+        return prefs.getString(LANGUAGE_KEY, "ru") ?: "ru"
+    }
+
+    private fun persistLanguage(language: String) {
+        val prefs = context.getSharedPreferences(LANGUAGE_KEY, Context.MODE_PRIVATE)
+
+        prefs.edit {
+            putString(LANGUAGE_KEY, language)
+        }
+
     }
 
 }

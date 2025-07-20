@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Financility</string>
+    <string name="find_article">My articles</string>
+    <string name="my_bill">My bill</string>
+    <string name="current_bill">Balance</string>
+    <string name="finance">Currency</string>
+    <string name="comm">Comm</string>
+    <string name="expenses_bar">Expenses</string>
+    <string name="income_bar">Incomes</string>
+    <string name="bill_bar">Bill</string>
+    <string name="articles_bar">Articles</string>
+    <string name="settings_bar">Settings</string>
+</resources>
