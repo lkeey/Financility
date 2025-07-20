@@ -15,6 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import dev.lkey.common.R
@@ -68,7 +69,7 @@ fun HistoryExpensesScreen (
         },
         topBar = {
             FinancilityTopBar(
-                title = "Моя история",
+                title = stringResource(dev.lkey.transations.R.string.my_history),
                 actions = {
                     IconButton(
                         onClick = {

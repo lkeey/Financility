@@ -7,6 +7,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.lkey.common.R
 import dev.lkey.common.core.model.TransactionModel
@@ -41,7 +42,7 @@ fun HistoryExpensesView (
         }
 
         FinancilityDayPicker (
-            title = "Начало",
+            title = stringResource(dev.lkey.transations.R.string.begin),
             previousValue = state.startDate,
             backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow
         ) {
@@ -49,7 +50,7 @@ fun HistoryExpensesView (
         }
 
         FinancilityDayPicker (
-            title = "Конец",
+            title = stringResource(dev.lkey.transations.R.string.end),
             previousValue = state.endDate,
             backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow
         ) {
@@ -58,7 +59,7 @@ fun HistoryExpensesView (
 
         if (state.accounts.isNotEmpty()) {
             FinancilityListItem(
-                title = "Сумма",
+                title = stringResource(dev.lkey.transations.R.string.sum),
                 description = null,
                 backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
                 trailingText = buildString {

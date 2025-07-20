@@ -6,9 +6,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import dev.lkey.common.ui.nav.FinancilityBottomBar
 import dev.lkey.common.ui.nav.FinancilityTopBar
+import dev.lkey.settings.R
 
 @Composable
 fun SettingsScreen (
@@ -22,7 +24,7 @@ fun SettingsScreen (
         },
         topBar = {
             FinancilityTopBar(
-                title = "Настройки",
+                title = stringResource(R.string.settings),
                 actions = { }
             )
         },

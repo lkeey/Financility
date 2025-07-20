@@ -5,4 +5,14 @@
     <string name="choose_lang">Выберите язык</string>
     <string name="english">Английский</string>
     <string name="russian">Русский</string>
+    <string name="settings">Настройки</string>
+    <string name="main_color">Основной цвет</string>
+    <string name="sound">Звуки</string>
+    <string name="haptics">Хаптики</string>
+    <string name="code">Код пароль</string>
+    <string name="sync">Синхронизация</string>
+    <string name="lang">Язык</string>
+    <string name="about">О программе</string>
+    <string name="time_sync">Интервал синхронизации: %1$s минут</string>
+    <string name="theme_color">Светлая темная авто</string>
 </resources>

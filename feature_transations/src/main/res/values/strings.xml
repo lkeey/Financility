@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="todat_expenses">Расходы сегодня</string>
+    <string name="all">Всего</string>
+    <string name="my_history">Моя история</string>
+    <string name="begin">Начало</string>
+    <string name="end">Конец</string>
+    <string name="sum">Сумма</string>
+    <string name="analysys">Анализ</string>
+    <string name="pediod_start">Период: начало</string>
+    <string name="pediod_end">Период: конец</string>
+    <string name="today_income">Доходы сегодня</string>
+</resources>

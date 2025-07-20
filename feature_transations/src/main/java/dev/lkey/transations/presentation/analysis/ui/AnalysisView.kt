@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -47,7 +48,7 @@ fun AnalysisView (
         }
 
         FinancilityDayPicker(
-            title = "Период: начало",
+            title = stringResource(dev.lkey.transations.R.string.pediod_start),
             previousValue = state.startDate,
             isChip = true,
         ) {
@@ -60,7 +61,7 @@ fun AnalysisView (
         }
 
         FinancilityDayPicker(
-            title = "Период: конец",
+            title = stringResource(dev.lkey.transations.R.string.pediod_end),
             previousValue = state.endDate,
             isChip = true,
         ) {
@@ -75,7 +76,7 @@ fun AnalysisView (
 
         if (state.accounts.isNotEmpty()) {
             FinancilityListItem(
-                title = "Сумма",
+                title = stringResource(dev.lkey.transations.R.string.sum),
                 description = null,
                 trailingText = buildString {
                     append(totalSum.toFormat())

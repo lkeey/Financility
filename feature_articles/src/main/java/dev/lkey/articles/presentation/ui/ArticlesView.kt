@@ -10,7 +10,9 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import dev.lkey.articles.R
 import dev.lkey.articles.presentation.viewmodel.ArticlesEvent
 import dev.lkey.articles.presentation.viewmodel.ArticlesState
 import dev.lkey.common.ui.field.FinancilityEditText
@@ -40,7 +42,7 @@ fun ArticlesView (
 
         FinancilityEditText(
             previousData = "",
-            label = "Найти статью",
+            label = stringResource(R.string.search_articles),
             isShowLeadingIcon = false,
             onTrailingIconClick = {
                 onEvent(ArticlesEvent.OnSearchValueChanged(

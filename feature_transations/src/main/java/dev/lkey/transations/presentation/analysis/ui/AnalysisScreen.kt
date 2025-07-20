@@ -15,10 +15,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import dev.lkey.common.R
-import dev.lkey.common.navigation.Route
 import dev.lkey.common.ui.item.FinancilityErrorMessage
 import dev.lkey.common.ui.item.FinancilityLoadingBar
 import dev.lkey.common.ui.item.FinancilitySnackBar
@@ -29,9 +29,6 @@ import dev.lkey.transations.presentation.analysis.viewmodel.AnalysisAction
 import dev.lkey.transations.presentation.analysis.viewmodel.AnalysisEvent
 import dev.lkey.transations.presentation.analysis.viewmodel.AnalysisViewModel
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.serialization.json.Json
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
 
 @Composable
 fun AnalysisScreen (
@@ -70,7 +67,7 @@ fun AnalysisScreen (
         },
         topBar = {
             FinancilityTopBar(
-                title = "Анализ",
+                title = stringResource(dev.lkey.transations.R.string.analysys),
                 containerColor = MaterialTheme.colorScheme.onSurface,
                 navIcon = {
                     IconButton(

@@ -16,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import dev.lkey.bill.presentation.edit.viewmodel.EditBillAction
 import dev.lkey.bill.presentation.edit.viewmodel.EditBillEvent
@@ -68,7 +69,7 @@ fun EditBillScreen (
         },
         topBar = {
             FinancilityTopBar(
-                title = "Мой счет",
+                title = stringResource(dev.lkey.bill.R.string.my_bill),
                 actions = {
                     IconButton(
                         onClick = {

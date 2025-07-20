@@ -7,6 +7,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.lkey.common.R
 import dev.lkey.common.core.model.TransactionModel
@@ -39,7 +40,7 @@ fun IncomeView (
 
         if (state.accounts.isNotEmpty()) {
             FinancilityListItem(
-                title = "Всего",
+                title = stringResource(dev.lkey.transations.R.string.all),
                 description = null,
                 backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
                 trailingText = buildString {

@@ -2,23 +2,21 @@ package dev.lkey.bill.presentation.current.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import dev.lkey.bill.presentation.current.viewmodel.BillEvent
+import androidx.compose.ui.res.stringResource
+import dev.lkey.bill.R
 import dev.lkey.bill.presentation.current.viewmodel.BillState
 import dev.lkey.common.ui.item.FinancilityListItem
 import dev.lkey.common.ui.item.FinancilitySyncMessage
 import dev.lkey.core.converter.toEmoji
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BillView (
     modifier: Modifier = Modifier,
     state: BillState,
-    onEvent: (BillEvent) -> Unit
 ) {
 
     Column (
@@ -33,7 +31,7 @@ fun BillView (
         state.accounts.forEach {
             FinancilityListItem(
                 emoji = "\uD83D\uDC7B",
-                title = "Счет",
+                title = stringResource(R.string.bill),
                 description = null,
                 backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
                 trailingText = it.name,
@@ -43,7 +41,7 @@ fun BillView (
 
             FinancilityListItem(
                 emoji = "\uD83D\uDCB0",
-                title = "Баланс",
+                title = stringResource(R.string.balance),
                 description = null,
                 backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
                 trailingText = "${it.balance} ${it.currency.toEmoji()}",
@@ -52,7 +50,7 @@ fun BillView (
             )
 
             FinancilityListItem(
-                title = "Валюта",
+                title = stringResource(R.string.currency),
                 description = null,
                 backgroundColor = MaterialTheme.colorScheme.surfaceContainerLow,
                 trailingText = it.currency.toEmoji(),

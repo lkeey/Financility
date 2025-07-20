@@ -29,7 +29,6 @@ fun LanguageSettingView (
             .padding(16.dp)
     ) {
         Text(text = stringResource(dev.lkey.settings.R.string.choose_lang))
-        Text(text = state.language)
 
         Spacer(modifier = Modifier.height(16.dp))
 

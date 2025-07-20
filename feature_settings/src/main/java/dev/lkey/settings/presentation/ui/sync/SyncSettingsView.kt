@@ -12,8 +12,10 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.lkey.settings.R
 import dev.lkey.settings.presentation.viewmodel.SettingsEvent
 import dev.lkey.settings.presentation.viewmodel.SettingsState
 
@@ -30,7 +32,7 @@ fun SyncSettingsView (
 
     Column(modifier = modifier.padding(16.dp)) {
         Text(
-            text = "Интервал синхронизации: ${state.syncDuration.toLong()} минут"
+            text = stringResource(R.string.time_sync, state.syncDuration.toLong())
         )
 
         Slider(

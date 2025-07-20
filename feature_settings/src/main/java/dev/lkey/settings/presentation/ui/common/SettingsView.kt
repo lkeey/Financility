@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.lkey.common.R
 import dev.lkey.common.navigation.Route
@@ -17,15 +18,15 @@ fun SettingsView (
 ) {
 
     val options = listOf(
-        "Основной цвет",
-        "Звуки",
-        "Хаптики",
-        "Код пароль",
+        stringResource(dev.lkey.settings.R.string.main_color),
+        stringResource(dev.lkey.settings.R.string.sound),
+        stringResource(dev.lkey.settings.R.string.haptics),
+        stringResource(dev.lkey.settings.R.string.code),
 
-        "Синхронизация",
-        "Язык",
+        stringResource(dev.lkey.settings.R.string.sync),
+        stringResource(dev.lkey.settings.R.string.lang),
 
-        "О программе"
+        stringResource(dev.lkey.settings.R.string.about)
     )
 
     val routes = listOf(
@@ -45,7 +46,7 @@ fun SettingsView (
             .fillMaxSize()
     ){
         FinancilityToggleListItem(
-            title = "Светлая темная авто",
+            title = stringResource(dev.lkey.settings.R.string.theme_color),
             isChecked = false,
             onClick = {
                 /* TODO */
