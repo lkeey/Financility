@@ -57,6 +57,10 @@ fun SyncSettingsScreen (
                 SettingsAction.RestartActivity -> {
                     activity?.recreate()
                 }
+
+                SettingsAction.OnOpenSettingsScreen -> {
+                    navController.popBackStack()
+                }
             }
         }
     }

@@ -26,8 +26,8 @@ fun SettingsView (
         stringResource(dev.lkey.settings.R.string.main_color),
         stringResource(dev.lkey.settings.R.string.sound),
         stringResource(dev.lkey.settings.R.string.haptics),
-        stringResource(dev.lkey.settings.R.string.code),
 
+        stringResource(dev.lkey.settings.R.string.code),
         stringResource(dev.lkey.settings.R.string.sync),
         stringResource(dev.lkey.settings.R.string.lang),
 
@@ -39,8 +39,8 @@ fun SettingsView (
 
         Route.AllSettings,
         Route.AllSettings,
-        Route.AllSettings,
 
+        Route.CodeSettings,
         Route.SyncSettings,
         Route.LanguageSettings,
 

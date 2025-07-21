@@ -10,5 +10,6 @@ sealed interface SettingsEvent {
     data class OnChooseLanguage(val lang: String): SettingsEvent
     data class OnUpdateTheme(val theme: ThemeMode): SettingsEvent
     data class OnSetColor(val color: Color): SettingsEvent
+    data class OnEnterPin(val pin: String): SettingsEvent
 
 }

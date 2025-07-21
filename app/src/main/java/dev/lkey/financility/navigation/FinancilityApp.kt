@@ -26,6 +26,7 @@ import dev.lkey.core.di.utils.CoreProvider
 import dev.lkey.feature_splash.di.DaggerSplashComponent
 import dev.lkey.feature_splash.presentation.ui.SplashScreen
 import dev.lkey.settings.di.DaggerSettingsComponent
+import dev.lkey.settings.presentation.ui.code.CodeSettingsScreen
 import dev.lkey.settings.presentation.ui.color.ColorSettingsScreen
 import dev.lkey.settings.presentation.ui.common.SettingsScreen
 import dev.lkey.settings.presentation.ui.language.LanguageSettingScreen
@@ -226,6 +227,13 @@ fun FinancilityApp(
             ) {
                 composable<Route.AllSettings> {
                     SettingsScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = settingsComponent.viewModelFactory())
+                    )
+                }
+
+                composable<Route.CodeSettings> {
+                    CodeSettingsScreen(
                         navController = navController,
                         viewModel = viewModel(factory = settingsComponent.viewModelFactory())
                     )

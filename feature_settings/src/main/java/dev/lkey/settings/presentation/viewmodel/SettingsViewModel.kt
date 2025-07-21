@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.lkey.common.core.model.AppInfo
 import dev.lkey.core.network.FinancilityResult
+import dev.lkey.settings.presentation.viewmodel.SettingsAction.ShowSnackBar
+import dev.lkey.storage.data.encrypted.EncryptedStorage
 import dev.lkey.storage.data.sync.AppSyncStorage
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -21,7 +23,8 @@ import kotlinx.coroutines.launch
  * */
 
 class SettingsViewModel @Inject constructor(
-    private val appSyncStorage: AppSyncStorage
+    private val appSyncStorage: AppSyncStorage,
+    private val encryptedStorage: EncryptedStorage
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(SettingsState())
@@ -47,7 +50,7 @@ class SettingsViewModel @Inject constructor(
 
                 appSyncStorage.setSyncDuration(event.duration.toLong())
                 viewModelScope.launch {
-                    _action.emit(SettingsAction.ShowSnackBar("Интервал синхронизации успешно обновлен"))
+                    _action.emit(ShowSnackBar("Интервал синхронизации успешно обновлен"))
                 }
             }
             SettingsEvent.OnLoadData -> {
@@ -101,6 +104,54 @@ class SettingsViewModel @Inject constructor(
 
                 viewModelScope.launch {
                     _action.emit(SettingsAction.RestartActivity)
+                }
+            }
+
+            is SettingsEvent.OnEnterPin -> {
+                if (state.value.stage == 0) {
+                    _state.update {
+                        it.copy(
+                            firstEntry = event.pin
+                        )
+                    }
+                } else {
+                    _state.update {
+                        it.copy(
+                            confirmEntry = event.pin
+                        )
+                    }
+                }
+
+                if ((state.value.stage == 0 && state.value.firstEntry.length == 4) || (state.value.stage == 1 && state.value.confirmEntry.length == 4)) {
+
+                    if (state.value.stage == 0) {
+                        _state.update {
+                            it.copy(
+                                stage = 1
+                            )
+                        }
+                    } else {
+                        if (state.value.firstEntry == state.value.confirmEntry) {
+                            encryptedStorage.savePin(state.value.confirmEntry)
+                            viewModelScope.launch {
+                                _action.emit(SettingsAction.OnOpenSettingsScreen)
+                                _action.emit(ShowSnackBar("PIN установлен"))
+                            }
+
+                        } else {
+                            viewModelScope.launch {
+                                _action.emit(ShowSnackBar("PIN не совпадает"))
+                            }
+
+                            _state.update {
+                                it.copy(
+                                    firstEntry = "",
+                                    confirmEntry = "",
+                                    stage = 0
+                                )
+                            }
+                        }
+                    }
                 }
             }
         }

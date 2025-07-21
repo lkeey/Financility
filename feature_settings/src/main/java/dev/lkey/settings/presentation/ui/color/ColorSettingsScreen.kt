@@ -57,6 +57,10 @@ fun ColorSettingsScreen (
                 SettingsAction.RestartActivity -> {
                     activity?.recreate()
                 }
+
+                SettingsAction.OnOpenSettingsScreen -> {
+                    navController.popBackStack()
+                }
             }
         }
     }

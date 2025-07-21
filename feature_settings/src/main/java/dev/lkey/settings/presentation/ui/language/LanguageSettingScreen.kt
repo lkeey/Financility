@@ -57,6 +57,10 @@ fun LanguageSettingScreen (
                 SettingsAction.RestartActivity -> {
                     activity?.recreate()
                 }
+
+                SettingsAction.OnOpenSettingsScreen -> {
+                    navController.popBackStack()
+                }
             }
         }
     }

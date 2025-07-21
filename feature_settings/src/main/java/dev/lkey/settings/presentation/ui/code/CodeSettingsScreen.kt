@@ -1,4 +1,4 @@
-package dev.lkey.settings.presentation.ui.common
+package dev.lkey.settings.presentation.ui.code
 
 import android.app.Activity
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,9 +17,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import dev.lkey.common.ui.item.FinancilityErrorMessage
+import dev.lkey.common.ui.item.FinancilityLoadingBar
 import dev.lkey.common.ui.item.FinancilitySnackBar
 import dev.lkey.common.ui.nav.FinancilityBottomBar
 import dev.lkey.common.ui.nav.FinancilityTopBar
+import dev.lkey.core.network.FinancilityResult
 import dev.lkey.settings.R
 import dev.lkey.settings.presentation.viewmodel.SettingsAction
 import dev.lkey.settings.presentation.viewmodel.SettingsEvent
@@ -27,7 +30,7 @@ import dev.lkey.settings.presentation.viewmodel.SettingsViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun SettingsScreen (
+fun CodeSettingsScreen (
     navController: NavController,
     viewModel: SettingsViewModel,
 ) {
@@ -70,7 +73,7 @@ fun SettingsScreen (
         },
         topBar = {
             FinancilityTopBar(
-                title = stringResource(R.string.settings),
+                title = stringResource(R.string.settings_sync),
                 actions = { }
             )
         },
@@ -80,16 +83,32 @@ fun SettingsScreen (
         snackbarHost = { FinancilitySnackBar(snackBarHostState) }
     ) { padding ->
 
-        SettingsView(
-            modifier = Modifier.padding(padding),
-            onNavigate = {
-                navController.navigate(it)
-            },
-            state = state,
-            onEvent = {
-                viewModel.onEvent(it)
+        when (state.status) {
+            FinancilityResult.Error -> {
+                FinancilityErrorMessage(
+                    modifier = Modifier
+                        .padding(padding),
+                    text = error,
+                    onUpdate = {
+                        viewModel.onEvent(SettingsEvent.OnLoadData)
+                    }
+                )
             }
-        )
-
+            FinancilityResult.Loading -> {
+                FinancilityLoadingBar(
+                    modifier = Modifier
+                        .padding(padding)
+                )
+            }
+            FinancilityResult.Success -> {
+                CodeSettingsView(
+                    modifier = Modifier.padding(padding),
+                    state = state,
+                    onEvent = {
+                        viewModel.onEvent(it)
+                    }
+                )
+            }
+        }
     }
 }

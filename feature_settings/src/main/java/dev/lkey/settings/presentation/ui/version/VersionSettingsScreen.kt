@@ -56,6 +56,10 @@ fun VersionSettingsScreen (
                 SettingsAction.RestartActivity -> {
                     activity?.recreate()
                 }
+
+                SettingsAction.OnOpenSettingsScreen -> {
+                    navController.popBackStack()
+                }
             }
         }
     }

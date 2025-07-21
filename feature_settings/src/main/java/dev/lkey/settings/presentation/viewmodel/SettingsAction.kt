@@ -9,4 +9,5 @@ package dev.lkey.settings.presentation.viewmodel
 sealed class SettingsAction {
     data class ShowSnackBar(val message: String) : SettingsAction()
     object RestartActivity : SettingsAction()
+    object OnOpenSettingsScreen : SettingsAction()
 }
