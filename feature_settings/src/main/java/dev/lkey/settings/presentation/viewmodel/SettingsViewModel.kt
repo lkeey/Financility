@@ -136,7 +136,6 @@ class SettingsViewModel @Inject constructor(
                             encryptedStorage.savePin(state.value.confirmEntry)
                             viewModelScope.launch {
                                 _action.emit(SettingsAction.OnOpenSettingsScreen)
-                                _action.emit(ShowSnackBar("PIN установлен"))
                             }
 
                         } else {

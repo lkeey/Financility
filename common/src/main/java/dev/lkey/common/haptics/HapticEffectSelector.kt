@@ -46,11 +46,4 @@ fun HapticEffectSelector(
     }
 }
 
-fun HapticEffect.toReadableLabel(): String = when (this) {
-    HapticEffect.CLICK -> "Клик"
-    HapticEffect.HEAVY_CLICK -> "Сильный клик"
-    HapticEffect.DOUBLE_CLICK -> "Двойной"
-    HapticEffect.TICK -> "Тик"
-    HapticEffect.CUSTOM_SHORT -> "Короткий"
-}
 

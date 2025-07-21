@@ -19,7 +19,6 @@ import dev.lkey.common.navigation.Bar
 fun FinancilityBottomBar (
     navController : NavController,
 ) {
-
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
     BottomAppBar(
@@ -30,7 +29,7 @@ fun FinancilityBottomBar (
             NavigationBarItem(
                 selected = isSelected,
                 colors = NavigationBarItemDefaults.colors(
-                    indicatorColor = MaterialTheme.colorScheme.outline
+                    indicatorColor = MaterialTheme.colorScheme.primary.darken(factor = 0.5f)
                 ),
                 onClick = {
                     navController.navigate(bar.route)
@@ -58,4 +57,13 @@ fun FinancilityBottomBar (
             )
         }
     }
+}
+
+fun androidx.compose.ui.graphics.Color.darken(factor: Float = 0.85f): androidx.compose.ui.graphics.Color {
+    return androidx.compose.ui.graphics.Color(
+        red = (red * factor).coerceIn(0f, 1f),
+        green = (green * factor).coerceIn(0f, 1f),
+        blue = (blue * factor).coerceIn(0f, 1f),
+        alpha = alpha
+    )
 }

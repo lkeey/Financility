@@ -11,5 +11,9 @@
     <string name="articles_bar">Articles</string>
     <string name="settings_bar">Settings</string>
     <string name="offline_data_exception">Offline data.\nLast update: %1$s</string>
-
+    <string name="click">Click</string>
+    <string name="power_click">Strong click</string>
+    <string name="double_click">Double click</string>
+    <string name="tick_click">Tick</string>
+    <string name="quick_click">Short click</string>
 </resources>

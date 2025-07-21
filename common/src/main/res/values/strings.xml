@@ -11,4 +11,9 @@
     <string name="articles_bar">Статьи</string>
     <string name="settings_bar">Настройки</string>
     <string name="offline_data_exception">Показаны оффлайн-данные.\nПоследняя синхронизация: %1$s</string>
+    <string name="click">Клик</string>
+    <string name="power_click">Сильный клик</string>
+    <string name="double_click">Двойной</string>
+    <string name="tick_click">Тик</string>
+    <string name="quick_click">Короткий</string>
 </resources>
