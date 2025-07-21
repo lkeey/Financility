@@ -19,4 +19,6 @@
     <string name="info_about_app">Информация о приложении</string>
     <string name="version">Версия: %1$s</string>
     <string name="last_update">Последнее обновление: %1$s</string>
+    <string name="effect_vibration">Эффект вибрации</string>
+    <string name="vibration">Вибрация</string>
 </resources>

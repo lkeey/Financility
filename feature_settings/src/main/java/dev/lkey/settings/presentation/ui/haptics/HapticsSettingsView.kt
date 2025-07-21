@@ -13,9 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.lkey.common.core.model.HapticSettings
+import dev.lkey.common.haptics.HapticEffectSelector
 import dev.lkey.common.haptics.performHaptic
+import dev.lkey.settings.R
 import dev.lkey.settings.presentation.viewmodel.SettingsEvent
 import dev.lkey.settings.presentation.viewmodel.SettingsState
 
@@ -33,16 +36,13 @@ fun HapticsSettingsView (
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        Text(
-            text = "Хаптики",
-        )
 
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text("Вибрация")
+            Text(stringResource(R.string.vibration))
 
             Switch(
                 checked = state.haptics.enabled,
@@ -58,7 +58,7 @@ fun HapticsSettingsView (
             Column(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Text("Эффект вибрации")
+                Text(stringResource(R.string.effect_vibration))
 
                 HapticEffectSelector(
                     selected = state.haptics.effect,

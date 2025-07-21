@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.lkey.common.R
@@ -13,6 +14,7 @@ import dev.lkey.common.ui.item.FinancilityListItem
 import dev.lkey.settings.presentation.viewmodel.SettingsEvent
 import dev.lkey.settings.presentation.viewmodel.SettingsEvent.OnUpdateTheme
 import dev.lkey.settings.presentation.viewmodel.SettingsState
+import dev.lkey.storage.data.sync.AppSyncStorage
 
 @Composable
 fun SettingsView (
@@ -21,6 +23,9 @@ fun SettingsView (
     state: SettingsState,
     onEvent: (SettingsEvent) -> Unit
 ) {
+
+    val context = LocalContext.current
+    val hapticSettings = AppSyncStorage(context).loadHaptics()
 
     val options = listOf(
         stringResource(dev.lkey.settings.R.string.main_color),
@@ -63,7 +68,9 @@ fun SettingsView (
             FinancilityListItem(
                 trailingIcon = R.drawable.ic_dark_arrow,
                 title = option,
-                height = 56.dp
+                height = 56.dp,
+                context = context,
+                hapticSettings = hapticSettings
             ) {
                 onNavigate(routes[num])
             }

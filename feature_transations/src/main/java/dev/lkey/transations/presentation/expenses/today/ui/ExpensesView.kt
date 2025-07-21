@@ -7,6 +7,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.lkey.common.R
@@ -15,6 +16,7 @@ import dev.lkey.common.ui.item.FinancilityListItem
 import dev.lkey.common.ui.item.FinancilitySyncMessage
 import dev.lkey.core.converter.toEmoji
 import dev.lkey.core.converter.toFormat
+import dev.lkey.storage.data.sync.AppSyncStorage
 import dev.lkey.transations.presentation.expenses.today.viewmodel.ExpensesState
 
 @Composable
@@ -24,6 +26,8 @@ fun ExpensesView (
     onItemClick: (TransactionModel) -> Unit,
 ) {
     val scrollState = rememberScrollState()
+    val context = LocalContext.current
+    val hapticSettings = AppSyncStorage(context).loadHaptics()
 
     Column (
         modifier = modifier
@@ -58,7 +62,9 @@ fun ExpensesView (
                 title = it.categoryModel.name,
                 description = it.comment,
                 trailingText = "${it.amount} ${state.accounts[0].currency.toEmoji()}",
-                height = 69.dp
+                height = 69.dp,
+                context = context,
+                hapticSettings = hapticSettings
             ) {
                 onItemClick(it)
             }

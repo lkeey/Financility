@@ -1,4 +1,4 @@
-package dev.lkey.settings.presentation.ui.haptics
+package dev.lkey.common.haptics
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
