@@ -10,6 +10,10 @@ import androidx.annotation.RequiresPermission
 import dev.lkey.common.core.model.HapticEffect
 import dev.lkey.common.core.model.HapticSettings
 
+/**
+ * Здесь происходит вызов вибрации
+ * - учитывается SDK версия устройства
+ */
 
 @RequiresPermission(Manifest.permission.VIBRATE)
 fun performHaptic(
@@ -46,7 +50,6 @@ fun performHaptic(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 VibrationEffect.createPredefined(VibrationEffect.EFFECT_DOUBLE_CLICK)
             } else {
-                // waveform: vibrate-pause-vibrate
                 VibrationEffect.createWaveform(longArrayOf(0, 30, 40, 30), -1)
             }
         }
@@ -58,7 +61,6 @@ fun performHaptic(
             }
         }
         HapticEffect.CUSTOM_SHORT -> {
-            // мини-короткий кастом
             VibrationEffect.createOneShot(20, 128)
         }
     }

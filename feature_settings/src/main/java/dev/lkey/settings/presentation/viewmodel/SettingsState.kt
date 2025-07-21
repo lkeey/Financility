@@ -2,6 +2,7 @@ package dev.lkey.settings.presentation.viewmodel
 
 import androidx.compose.ui.graphics.Color
 import dev.lkey.common.core.model.AppInfo
+import dev.lkey.common.core.model.HapticSettings
 import dev.lkey.common.theme.ThemeMode
 import dev.lkey.core.network.FinancilityResult
 
@@ -18,6 +19,8 @@ data class SettingsState (
     val firstEntry: String = "",
     val confirmEntry: String = "",
     val stage: Int = 0,
+
+    val haptics: HapticSettings = HapticSettings(),
 
     val status: FinancilityResult = FinancilityResult.Loading
 )

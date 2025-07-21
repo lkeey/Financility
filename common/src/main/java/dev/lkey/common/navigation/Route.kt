@@ -81,5 +81,8 @@ sealed interface Route {
     data object ColorSettings : Route
 
     @Serializable
+    data object HapticsSettings : Route
+
+    @Serializable
     data object VersionSettings : Route
 }

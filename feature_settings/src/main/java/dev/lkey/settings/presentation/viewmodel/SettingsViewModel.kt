@@ -62,7 +62,8 @@ class SettingsViewModel @Inject constructor(
                         theme = appSyncStorage.getThemeMode(),
                         color = if (color != null) Color(color) else Color(0xFF2AE881),
                         appInfo = appSyncStorage.getAppInfo() ?: AppInfo("null", "null"),
-                        status = FinancilityResult.Success
+                        haptics = appSyncStorage.loadHaptics(),
+                        status = FinancilityResult.Success,
                     )
                 }
             }
@@ -153,6 +154,28 @@ class SettingsViewModel @Inject constructor(
                         }
                     }
                 }
+            }
+            is SettingsEvent.OnSelectEffect -> {
+                _state.update {
+                    it.copy(
+                        haptics = state.value.haptics.copy(
+                            effect = event.effect
+                        )
+                    )
+                }
+
+                appSyncStorage.saveEffect(event.effect)
+            }
+            is SettingsEvent.OnToggleHaptics -> {
+                _state.update {
+                    it.copy(
+                        haptics = state.value.haptics.copy(
+                            enabled = event.enabled
+                        )
+                    )
+                }
+
+                appSyncStorage.saveHapticsEnabled(event.enabled)
             }
         }
     }

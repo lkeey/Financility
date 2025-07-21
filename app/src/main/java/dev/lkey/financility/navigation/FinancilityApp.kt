@@ -29,6 +29,7 @@ import dev.lkey.settings.di.DaggerSettingsComponent
 import dev.lkey.settings.presentation.ui.code.CodeSettingsScreen
 import dev.lkey.settings.presentation.ui.color.ColorSettingsScreen
 import dev.lkey.settings.presentation.ui.common.SettingsScreen
+import dev.lkey.settings.presentation.ui.haptics.HapticsSettingsScreen
 import dev.lkey.settings.presentation.ui.language.LanguageSettingScreen
 import dev.lkey.settings.presentation.ui.sync.SyncSettingsScreen
 import dev.lkey.settings.presentation.ui.version.VersionSettingsScreen
@@ -227,6 +228,13 @@ fun FinancilityApp(
             ) {
                 composable<Route.AllSettings> {
                     SettingsScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = settingsComponent.viewModelFactory())
+                    )
+                }
+
+                composable<Route.HapticsSettings> {
+                    HapticsSettingsScreen(
                         navController = navController,
                         viewModel = viewModel(factory = settingsComponent.viewModelFactory())
                     )

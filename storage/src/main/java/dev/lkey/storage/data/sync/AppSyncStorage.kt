@@ -136,7 +136,7 @@ class AppSyncStorage @Inject constructor(
     }
 
     // haptics
-    fun saveEnabled(enabled: Boolean) {
+    fun saveHapticsEnabled(enabled: Boolean) {
         prefs.edit {
             putBoolean(HAPTICS_KEY, enabled)
         }
