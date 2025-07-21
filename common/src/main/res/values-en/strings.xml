@@ -10,4 +10,6 @@
     <string name="bill_bar">Bill</string>
     <string name="articles_bar">Articles</string>
     <string name="settings_bar">Settings</string>
+    <string name="offline_data_exception">Offline data.\nLast update: %1$s</string>
+
 </resources>

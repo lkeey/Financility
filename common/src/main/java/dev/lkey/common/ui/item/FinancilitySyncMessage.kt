@@ -6,10 +6,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.lkey.common.R
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -30,7 +32,7 @@ fun FinancilitySyncMessage (
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
-        text = "Показаны оффлайн-данные.\nПоследняя синхронизация: $formatted",
+        text = stringResource(R.string.offline_data_exception, formatted),
         color = MaterialTheme.colorScheme.surfaceContainer,
         fontWeight = FontWeight.W400,
         fontSize = 14.sp,
