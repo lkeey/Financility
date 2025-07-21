@@ -69,6 +69,9 @@ sealed interface Route {
     data object AllSettings : Route
 
     @Serializable
+    data object PinSettings : Route
+
+    @Serializable
     data object SyncSettings : Route
 
     @Serializable
