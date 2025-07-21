@@ -6,6 +6,8 @@ import android.content.res.Configuration
 import androidx.core.content.edit
 import com.google.gson.Gson
 import dev.lkey.common.core.model.AppInfo
+import dev.lkey.common.core.model.HapticEffect
+import dev.lkey.common.core.model.HapticSettings
 import dev.lkey.common.theme.ThemeMode
 import java.util.Locale
 import javax.inject.Inject
@@ -22,6 +24,8 @@ class AppSyncStorage @Inject constructor(
         private const val THEME_KEY = "theme"
         private const val COLOR_KEY = "primary_color"
         private const val INFO_KEY = "info_app"
+        private const val HAPTICS_KEY = "haptics_enabled"
+        private const val EFFECT_KEY = "haptics_effect"
     }
 
     private val prefs: SharedPreferences =
@@ -129,5 +133,29 @@ class AppSyncStorage @Inject constructor(
         val json = prefs.getString(INFO_KEY, null) ?: return null
 
         return Gson().fromJson(json, AppInfo::class.java)
+    }
+
+    // haptics
+    fun saveEnabled(enabled: Boolean) {
+        prefs.edit {
+            putBoolean(HAPTICS_KEY, enabled)
+        }
+    }
+
+    fun saveEffect(effect: HapticEffect) {
+        prefs.edit {
+            putString(EFFECT_KEY, effect.name)
+        }
+    }
+
+    fun loadHaptics(): HapticSettings {
+        val enabled = prefs.getBoolean(HAPTICS_KEY, true)
+        val effectName = prefs.getString(EFFECT_KEY, HapticEffect.CLICK.name)
+
+        val effect = runCatching {
+            HapticEffect.valueOf(effectName!!)
+        }.getOrElse { HapticEffect.CLICK }
+
+        return HapticSettings(enabled, effect)
     }
 }
