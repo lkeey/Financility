@@ -16,4 +16,7 @@
     <string name="time_sync">Интервал синхронизации: %1$s минут</string>
     <string name="theme_color">Светлая темная авто</string>
     <string name="choose_main_color">Выберите основной цвет</string>
+    <string name="info_about_app">Информация о приложении</string>
+    <string name="version">Версия: %1$s</string>
+    <string name="last_update">Последнее обновление: %1$s</string>
 </resources>

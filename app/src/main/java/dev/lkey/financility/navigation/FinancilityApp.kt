@@ -30,6 +30,7 @@ import dev.lkey.settings.presentation.ui.color.ColorSettingsScreen
 import dev.lkey.settings.presentation.ui.common.SettingsScreen
 import dev.lkey.settings.presentation.ui.language.LanguageSettingScreen
 import dev.lkey.settings.presentation.ui.sync.SyncSettingsScreen
+import dev.lkey.settings.presentation.ui.version.VersionSettingsScreen
 import dev.lkey.storage.di.DaggerDatabaseComponent
 import dev.lkey.transations.di.DaggerTransactionComponent
 import dev.lkey.transations.presentation.analysis.ui.AnalysisScreen
@@ -246,6 +247,13 @@ fun FinancilityApp(
 
                 composable<Route.ColorSettings> {
                     ColorSettingsScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = settingsComponent.viewModelFactory())
+                    )
+                }
+
+                composable<Route.VersionSettings> {
+                    VersionSettingsScreen(
                         navController = navController,
                         viewModel = viewModel(factory = settingsComponent.viewModelFactory())
                     )

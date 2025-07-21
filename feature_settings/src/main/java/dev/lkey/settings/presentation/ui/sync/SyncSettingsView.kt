@@ -4,10 +4,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,7 +19,6 @@ import dev.lkey.settings.R
 import dev.lkey.settings.presentation.viewmodel.SettingsEvent
 import dev.lkey.settings.presentation.viewmodel.SettingsState
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SyncSettingsView (
     modifier: Modifier = Modifier,
@@ -30,7 +29,11 @@ fun SyncSettingsView (
     val stepCount = 5
     val stepSize = (sliderRange.endInclusive - sliderRange.start) / stepCount
 
-    Column(modifier = modifier.padding(16.dp)) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
         Text(
             text = stringResource(R.string.time_sync, state.syncDuration.toLong())
         )

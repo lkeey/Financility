@@ -44,7 +44,7 @@ fun SettingsView (
         Route.SyncSettings,
         Route.LanguageSettings,
 
-        Route.AllSettings,
+        Route.VersionSettings,
     )
 
     Column (

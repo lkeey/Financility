@@ -16,4 +16,7 @@
     <string name="time_sync">Sync interval: %1$s minutes</string>
     <string name="theme_color">Light Dark Auto</string>
     <string name="choose_main_color">Choose main color</string>
+    <string name="info_about_app">Info about app</string>
+    <string name="version">Version: %1$s</string>
+    <string name="last_update">Last update: %1$s</string>
 </resources>

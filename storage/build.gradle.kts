@@ -48,6 +48,9 @@ dependencies {
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
 
+    // GSON
+    implementation(libs.gson)
+
     // Room
     implementation(libs.androidx.room.runtime)
     kapt(libs.androidx.room.compiler)
@@ -57,4 +60,6 @@ dependencies {
 
     // common-components
     implementation(project(":common"))
+
+
 }

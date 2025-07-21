@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import androidx.core.content.edit
+import com.google.gson.Gson
+import dev.lkey.common.core.model.AppInfo
 import dev.lkey.common.theme.ThemeMode
 import java.util.Locale
 import javax.inject.Inject
@@ -19,6 +21,7 @@ class AppSyncStorage @Inject constructor(
         private const val LANGUAGE_KEY = "language"
         private const val THEME_KEY = "theme"
         private const val COLOR_KEY = "primary_color"
+        private const val INFO_KEY = "info_app"
     }
 
     private val prefs: SharedPreferences =
@@ -111,5 +114,20 @@ class AppSyncStorage @Inject constructor(
         val color = prefs.getInt(COLOR_KEY, 0)
 
         return if (color == 0) null else color
+    }
+
+    // version
+    fun saveAppInfo(info: AppInfo) {
+        val json = Gson().toJson(info)
+
+        prefs.edit {
+            putString(INFO_KEY, json)
+        }
+    }
+
+    fun getAppInfo(): AppInfo? {
+        val json = prefs.getString(INFO_KEY, null) ?: return null
+
+        return Gson().fromJson(json, AppInfo::class.java)
     }
 }

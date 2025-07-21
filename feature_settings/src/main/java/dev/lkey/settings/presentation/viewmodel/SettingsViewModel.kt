@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.lkey.common.core.model.AppInfo
 import dev.lkey.core.network.FinancilityResult
 import dev.lkey.storage.data.sync.AppSyncStorage
 import jakarta.inject.Inject
@@ -45,6 +46,9 @@ class SettingsViewModel @Inject constructor(
                 }
 
                 appSyncStorage.setSyncDuration(event.duration.toLong())
+                viewModelScope.launch {
+                    _action.emit(SettingsAction.ShowSnackBar("Интервал синхронизации успешно обновлен"))
+                }
             }
             SettingsEvent.OnLoadData -> {
                 val color = appSyncStorage.getPrimaryColor()
@@ -54,6 +58,7 @@ class SettingsViewModel @Inject constructor(
                         language = appSyncStorage.getSavedLocale(),
                         theme = appSyncStorage.getThemeMode(),
                         color = if (color != null) Color(color) else Color(0xFF2AE881),
+                        appInfo = appSyncStorage.getAppInfo() ?: AppInfo("null", "null"),
                         status = FinancilityResult.Success
                     )
                 }
