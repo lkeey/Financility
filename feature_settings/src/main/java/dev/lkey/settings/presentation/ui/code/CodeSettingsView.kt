@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
@@ -36,6 +37,8 @@ fun CodeSettingsView (
             Text(if (state.stage == 0) "Введите PIN" else "Повторите PIN")
 
             OutlinedTextField(
+                modifier = Modifier
+                    .testTag("PinInput"),
                 value = if (state.stage == 0) state.firstEntry else state.confirmEntry,
                 onValueChange = {
                     if (it.length <= 4 && it.all { ch -> ch.isDigit() }) {
