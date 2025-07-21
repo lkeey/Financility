@@ -39,7 +39,7 @@ fun FinancilityBottomBar (
                     Icon(
                         painter = painterResource(id = bar.icon),
                         contentDescription = stringResource(bar.title),
-                        tint = if (isSelected) MaterialTheme.colorScheme.surfaceTint
+                        tint = if (isSelected) MaterialTheme.colorScheme.primary
                         else MaterialTheme.colorScheme.inverseOnSurface
                     )
                 },
@@ -48,8 +48,8 @@ fun FinancilityBottomBar (
                         text = stringResource(bar.title),
                         color = MaterialTheme.colorScheme.inverseOnSurface,
                         fontWeight =
-                            if (isSelected) FontWeight(600)
-                            else FontWeight(500),
+                            if (isSelected) FontWeight(weight = 600)
+                            else FontWeight(weight = 500),
                         fontSize = 12.sp,
                         lineHeight = 16.sp,
                         letterSpacing = 0.5.sp
