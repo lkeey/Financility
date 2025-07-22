@@ -3,10 +3,12 @@ package dev.lkey.transations.presentation.analysis.ui
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.lkey.common.R
 import dev.lkey.common.core.model.graphics.PieChartItem
+import dev.lkey.common.core.model.transaction.TransactionModel
 import dev.lkey.common.ui.field.FinancilityDayPicker
 import dev.lkey.common.ui.graphics.DrawCircleGraphWithIcon
 import dev.lkey.common.ui.item.FinancilityListItem
@@ -35,13 +38,6 @@ fun AnalysisView (
     isIncome: Boolean,
     onEvent: (AnalysisEvent) -> Unit,
 ) {
-    val availablePrimaryColors = listOf(
-        Color(0xFF2AE881),
-        Color(0xFF2979FF),
-        Color(0xFFFF5722),
-        Color(0xFFAB47BC),
-        Color(0xFFFFC107)
-    )
 
     val scrollState = rememberScrollState()
     val totalSum = state.transactions.sumOf { it.amount.toDouble() }
@@ -98,59 +94,21 @@ fun AnalysisView (
             )
         }
 
-        val grouped = state.transactions
-            .groupBy { it.categoryModel }
-
-        val totalSum = grouped.values.flatten().sumOf { it.amount.toDouble() }
-
-        val categorySums = grouped.map { (category, items) ->
-            category to items.sumOf { it.amount.toDouble() }
-        }
-
-        // Сортировка по убыванию
-        val sorted = categorySums.sortedByDescending { it.second }
-
-        // Топ-5 категорий
-        val topCategories = sorted.take(5)
-
-        // Остальные
-        val otherCategories = sorted.drop(5)
-        val otherSum = otherCategories.sumOf { it.second }
-
-        // Цвета
-        var index = 0
-        val data = mutableListOf<PieChartItem>()
-
-        topCategories.forEach { (category, sum) ->
-            data.add(
-                PieChartItem(
-                    valuePercent = ((sum / totalSum) * 100f).toFloat(),
-                    label = category.name,
-                    color = availablePrimaryColors[index % availablePrimaryColors.size]
-                )
-            )
-            index++
-        }
-
-        // Добавляем "Другое", если есть
-        if (otherSum > 0) {
-            data.add(
-                PieChartItem(
-                    valuePercent = ((otherSum / totalSum) * 100f).toFloat(),
-                    label = "Другое",
-                    color = Color.LightGray // или любой другой цвет
-                )
-            )
-        }
-
-        DrawCircleGraphWithIcon(
-            data = data,
-            modifier = Modifier
-                .padding(vertical = 8.dp)
-                .size(250.dp)
-        )
-
         if (state.transactions.isNotEmpty()) {
+
+            DrawCircleGraphWithIcon(
+                data = getPieItems(state.transactions),
+                modifier = Modifier
+                    .padding(vertical = 24.dp)
+                    .size(250.dp)
+            )
+
+            HorizontalDivider(
+                modifier = Modifier
+                    .height(1.dp)
+                    .fillMaxWidth(),
+                color = MaterialTheme.colorScheme.surfaceDim,
+            )
 
             state.transactions
                 .sortedBy {
@@ -186,4 +144,60 @@ fun AnalysisView (
         }
     }
 
+}
+
+private fun getPieItems(
+    transactions: List<TransactionModel>
+) : List<PieChartItem> {
+    val availablePrimaryColors = listOf(
+        Color(0xFF2AE881),
+        Color(0xFF2979FF),
+        Color(0xFFFF5722),
+        Color(0xFFAB47BC),
+        Color(0xFFFFC107)
+    )
+
+    val grouped = transactions
+        .groupBy { it.categoryModel }
+
+    val totalSum = grouped.values.flatten().sumOf { it.amount.toDouble() }
+
+    val categorySums = grouped.map { (category, items) ->
+        val sum = items.sumOf { it.amount.toDouble() }
+        val percent = (sum / totalSum) * 100f
+        Triple(category, sum, percent)
+    }
+
+    // Отфильтровали по проценту
+    val majorCategories = categorySums.filter { it.third > 5f }
+    val otherCategories = categorySums.filter { it.third <= 5f }
+    val otherSum = otherCategories.sumOf { it.second }
+
+    var index = 0
+    val data = mutableListOf<PieChartItem>()
+
+    // Добавляем категории > 5%
+    majorCategories.forEach { (category, sum, _) ->
+        data.add(
+            PieChartItem(
+                valuePercent = (((sum / totalSum) * 100f).toFloat()),
+                label = category.name,
+                color = availablePrimaryColors[index % availablePrimaryColors.size]
+            )
+        )
+        index++
+    }
+
+    // Добавляем "Другое", если есть что добавить
+    if (otherSum > 0) {
+        data.add(
+            PieChartItem(
+                valuePercent = (((otherSum / totalSum) * 100f).toFloat()),
+                label = "Другое",
+                color = Color.LightGray
+            )
+        )
+    }
+
+    return data
 }

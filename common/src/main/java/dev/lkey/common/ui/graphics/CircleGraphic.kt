@@ -7,13 +7,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,11 +34,12 @@ fun DrawCircleGraphWithIcon(
     val sweepAngles = data.map { it.valuePercent / 100f * 360f }
 
     Box(
-        modifier = modifier,
+        modifier = Modifier
+            .fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
 
-        Canvas(modifier = Modifier.fillMaxSize()) {
+        Canvas(modifier = modifier) {
 
             var startAngle = -90f
 
@@ -59,8 +58,7 @@ fun DrawCircleGraphWithIcon(
         // Центральный блок со всеми категориями
         Column(
             modifier = Modifier
-                .padding(horizontal = 8.dp)
-                .verticalScroll(rememberScrollState()),
+                .padding(horizontal = 8.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             data.forEach { item ->
