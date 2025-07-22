@@ -1,6 +1,6 @@
 package dev.lkey.transations.domain.repository
 
-import dev.lkey.common.core.model.TransactionModel
+import dev.lkey.common.core.model.transaction.TransactionModel
 import dev.lkey.transations.data.dto.RequestTransactionDto
 
 interface TransactionsRepository {

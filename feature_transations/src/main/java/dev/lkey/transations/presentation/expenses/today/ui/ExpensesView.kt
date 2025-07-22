@@ -11,7 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.lkey.common.R
-import dev.lkey.common.core.model.TransactionModel
+import dev.lkey.common.core.model.transaction.TransactionModel
 import dev.lkey.common.ui.item.FinancilityListItem
 import dev.lkey.common.ui.item.FinancilitySyncMessage
 import dev.lkey.core.converter.toEmoji

@@ -3,7 +3,7 @@ package dev.lkey.transations.presentation.create.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.lkey.common.constants.Constants.TRANSACTION_SYNC
-import dev.lkey.common.core.model.CategoryModel
+import dev.lkey.common.core.model.category.CategoryModel
 import dev.lkey.core.error.ApiException
 import dev.lkey.core.error.ErrorHandler
 import dev.lkey.core.error.OfflineDataException

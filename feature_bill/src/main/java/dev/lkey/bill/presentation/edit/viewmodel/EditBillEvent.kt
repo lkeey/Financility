@@ -1,6 +1,6 @@
 package dev.lkey.bill.presentation.edit.viewmodel
 
-import dev.lkey.common.core.model.CurrencyOption
+import dev.lkey.common.core.model.account.CurrencyOption
 
 /**
  * События экрана редактирования счетов

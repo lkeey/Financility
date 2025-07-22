@@ -1,4 +1,4 @@
-package dev.lkey.common.core.model
+package dev.lkey.common.core.model.account
 
 import kotlinx.serialization.Serializable
 

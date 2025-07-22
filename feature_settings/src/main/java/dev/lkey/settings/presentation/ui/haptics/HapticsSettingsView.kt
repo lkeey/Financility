@@ -15,9 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import dev.lkey.common.core.model.HapticSettings
-import dev.lkey.common.haptics.HapticEffectSelector
-import dev.lkey.common.haptics.performHaptic
+import dev.lkey.common.core.model.haptics.HapticSettings
+import dev.lkey.common.ui.haptics.HapticEffectSelector
+import dev.lkey.common.ui.haptics.performHaptic
 import dev.lkey.settings.R
 import dev.lkey.settings.presentation.viewmodel.SettingsEvent
 import dev.lkey.settings.presentation.viewmodel.SettingsState

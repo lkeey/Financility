@@ -7,7 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.ui.graphics.Color
 import dev.lkey.common.core.converter.convertMillisToDate
-import dev.lkey.common.core.model.AppInfo
+import dev.lkey.common.core.model.versions.AppInfo
 import dev.lkey.financility.navigation.FinancilityApp
 import dev.lkey.storage.data.sync.AppSyncStorage
 

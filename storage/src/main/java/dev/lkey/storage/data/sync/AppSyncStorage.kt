@@ -5,10 +5,10 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import androidx.core.content.edit
 import com.google.gson.Gson
-import dev.lkey.common.core.model.AppInfo
-import dev.lkey.common.core.model.HapticEffect
-import dev.lkey.common.core.model.HapticSettings
-import dev.lkey.common.theme.ThemeMode
+import dev.lkey.common.core.model.versions.AppInfo
+import dev.lkey.common.core.model.haptics.HapticEffect
+import dev.lkey.common.core.model.haptics.HapticSettings
+import dev.lkey.common.ui.theme.ThemeMode
 import java.util.Locale
 import javax.inject.Inject
 

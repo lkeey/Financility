@@ -1,4 +1,4 @@
-package dev.lkey.common.core.model
+package dev.lkey.common.core.model.account
 
 data class CurrencyOption(
     val code: String,

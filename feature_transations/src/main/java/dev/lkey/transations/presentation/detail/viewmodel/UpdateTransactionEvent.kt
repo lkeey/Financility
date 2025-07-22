@@ -1,7 +1,7 @@
 package dev.lkey.transations.presentation.detail.viewmodel
 
-import dev.lkey.common.core.model.CategoryModel
-import dev.lkey.common.core.model.TransactionModel
+import dev.lkey.common.core.model.category.CategoryModel
+import dev.lkey.common.core.model.transaction.TransactionModel
 
 /**
  * События экрана обновления транзакций

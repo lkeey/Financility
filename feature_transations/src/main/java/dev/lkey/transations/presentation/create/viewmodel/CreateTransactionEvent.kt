@@ -1,6 +1,6 @@
 package dev.lkey.transations.presentation.create.viewmodel
 
-import dev.lkey.common.core.model.CategoryModel
+import dev.lkey.common.core.model.category.CategoryModel
 
 /**
  * События экрана добавления транзакций

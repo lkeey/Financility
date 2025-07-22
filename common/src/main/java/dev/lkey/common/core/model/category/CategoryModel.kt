@@ -1,4 +1,4 @@
-package dev.lkey.common.core.model
+package dev.lkey.common.core.model.category
 
 import kotlinx.serialization.Serializable
 

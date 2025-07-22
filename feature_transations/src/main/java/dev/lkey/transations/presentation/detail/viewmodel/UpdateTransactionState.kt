@@ -1,7 +1,7 @@
 package dev.lkey.transations.presentation.detail.viewmodel
 
-import dev.lkey.common.core.model.AccountBriefModel
-import dev.lkey.common.core.model.CategoryModel
+import dev.lkey.common.core.model.account.AccountBriefModel
+import dev.lkey.common.core.model.category.CategoryModel
 import dev.lkey.core.network.FinancilityResult
 import java.time.LocalDate
 import java.time.LocalTime

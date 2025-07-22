@@ -1,6 +1,6 @@
 package dev.lkey.account.domain
 
-import dev.lkey.common.core.model.AccountBriefModel
+import dev.lkey.common.core.model.account.AccountBriefModel
 
 interface AccountRepository {
 

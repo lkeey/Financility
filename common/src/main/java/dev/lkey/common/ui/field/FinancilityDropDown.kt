@@ -13,7 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import dev.lkey.common.R
-import dev.lkey.common.core.model.CategoryModel
+import dev.lkey.common.core.model.category.CategoryModel
 import dev.lkey.common.ui.item.FinancilityListItem
 
 

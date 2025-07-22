@@ -1,7 +1,7 @@
 package dev.lkey.bill.domain.usecase
 
 import dev.lkey.account.domain.AccountRepository
-import dev.lkey.common.core.model.AccountBriefModel
+import dev.lkey.common.core.model.account.AccountBriefModel
 import dev.lkey.core.network.retryRequest
 import jakarta.inject.Inject
 

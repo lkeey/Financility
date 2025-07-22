@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import dev.lkey.bill.presentation.edit.viewmodel.EditBillEvent
 import dev.lkey.bill.presentation.edit.viewmodel.EditBillState
 import dev.lkey.common.R
-import dev.lkey.common.core.model.CurrencyOption
+import dev.lkey.common.core.model.account.CurrencyOption
 import dev.lkey.common.ui.field.FinancilityEditText
 import dev.lkey.common.ui.field.FinancilityNumTextField
 import dev.lkey.common.ui.item.FinancilityListItem

@@ -1,8 +1,8 @@
 package dev.lkey.settings.presentation.viewmodel
 
 import androidx.compose.ui.graphics.Color
-import dev.lkey.common.core.model.HapticEffect
-import dev.lkey.common.theme.ThemeMode
+import dev.lkey.common.core.model.haptics.HapticEffect
+import dev.lkey.common.ui.theme.ThemeMode
 
 sealed interface SettingsEvent {
 

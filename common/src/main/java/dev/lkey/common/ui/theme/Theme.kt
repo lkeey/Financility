@@ -1,4 +1,4 @@
-package dev.lkey.common.theme
+package dev.lkey.common.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

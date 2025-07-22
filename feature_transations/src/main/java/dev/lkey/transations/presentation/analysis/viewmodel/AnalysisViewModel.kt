@@ -3,7 +3,7 @@ package dev.lkey.transations.presentation.analysis.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.lkey.common.constants.Constants.TRANSACTION_SYNC
-import dev.lkey.common.core.model.TransactionModel
+import dev.lkey.common.core.model.transaction.TransactionModel
 import dev.lkey.core.error.ErrorHandler
 import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.FinancilityResult

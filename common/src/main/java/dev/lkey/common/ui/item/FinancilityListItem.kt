@@ -28,8 +28,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.lkey.common.core.model.HapticSettings
-import dev.lkey.common.haptics.performHaptic
+import dev.lkey.common.core.model.haptics.HapticSettings
+import dev.lkey.common.ui.haptics.performHaptic
 
 
 @Composable

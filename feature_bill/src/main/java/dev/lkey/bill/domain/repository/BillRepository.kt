@@ -1,7 +1,7 @@
 package dev.lkey.bill.domain.repository
 
 import dev.lkey.bill.data.model.UpdateAccountDto
-import dev.lkey.common.core.model.AccountBriefModel
+import dev.lkey.common.core.model.account.AccountBriefModel
 
 interface BillRepository {
 

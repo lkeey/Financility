@@ -25,7 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.lkey.common.R
-import dev.lkey.common.core.model.CurrencyOption
+import dev.lkey.common.core.model.account.CurrencyOption
 import dev.lkey.common.ui.item.FinancilityListItem
 
 @OptIn(ExperimentalMaterial3Api::class)

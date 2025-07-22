@@ -2,7 +2,7 @@ package dev.lkey.bill.data.repository
 
 import dev.lkey.bill.data.model.UpdateAccountDto
 import dev.lkey.bill.domain.repository.BillRepository
-import dev.lkey.common.core.model.AccountBriefModel
+import dev.lkey.common.core.model.account.AccountBriefModel
 import dev.lkey.core.error.ApiException
 import dev.lkey.core.network.ktorClient
 import dev.lkey.core.network.safeCall

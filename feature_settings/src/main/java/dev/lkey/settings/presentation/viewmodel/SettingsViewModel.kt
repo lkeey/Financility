@@ -4,7 +4,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.lkey.common.core.model.AppInfo
+import dev.lkey.common.core.model.versions.AppInfo
 import dev.lkey.core.network.FinancilityResult
 import dev.lkey.settings.presentation.viewmodel.SettingsAction.ShowSnackBar
 import dev.lkey.storage.data.encrypted.EncryptedStorage

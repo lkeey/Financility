@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.lkey.bill.domain.usecase.GetBillInfoUseCase
 import dev.lkey.common.constants.Constants.BILL_SYNC
-import dev.lkey.common.core.model.AccountBriefModel
+import dev.lkey.common.core.model.account.AccountBriefModel
 import dev.lkey.core.error.ErrorHandler
 import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.FinancilityResult

@@ -6,8 +6,8 @@ import dev.lkey.bill.data.model.UpdateAccountDto
 import dev.lkey.bill.domain.usecase.GetBillInfoUseCase
 import dev.lkey.bill.domain.usecase.UpdateBillUseCase
 import dev.lkey.common.constants.Constants.BILL_SYNC
-import dev.lkey.common.core.model.AccountBriefModel
-import dev.lkey.common.core.model.CurrencyOption
+import dev.lkey.common.core.model.account.AccountBriefModel
+import dev.lkey.common.core.model.account.CurrencyOption
 import dev.lkey.core.error.ErrorHandler
 import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.FinancilityResult

@@ -1,4 +1,4 @@
-package dev.lkey.common.theme
+package dev.lkey.common.ui.theme
 
 /**
  * Все типы тем, которые могут быть

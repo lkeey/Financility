@@ -1,7 +1,7 @@
 package dev.lkey.transations.presentation.analysis.viewmodel
 
-import dev.lkey.common.core.model.AccountBriefModel
-import dev.lkey.common.core.model.TransactionModel
+import dev.lkey.common.core.model.account.AccountBriefModel
+import dev.lkey.common.core.model.transaction.TransactionModel
 import dev.lkey.core.network.FinancilityResult
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter

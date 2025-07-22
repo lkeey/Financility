@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.lkey.common.theme.ThemeMode
+import dev.lkey.common.ui.theme.ThemeMode
 
 @Composable
 fun FinancilityToggleListItem (

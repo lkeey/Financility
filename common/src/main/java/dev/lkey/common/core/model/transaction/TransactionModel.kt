@@ -1,5 +1,7 @@
-package dev.lkey.common.core.model
+package dev.lkey.common.core.model.transaction
 
+import dev.lkey.common.core.model.category.CategoryModel
+import dev.lkey.common.core.model.account.AccountBriefModel
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

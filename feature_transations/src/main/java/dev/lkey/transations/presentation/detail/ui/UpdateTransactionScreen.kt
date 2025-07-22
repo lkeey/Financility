@@ -18,7 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import dev.lkey.common.R
-import dev.lkey.common.core.model.TransactionModel
+import dev.lkey.common.core.model.transaction.TransactionModel
 import dev.lkey.common.ui.item.FinancilityErrorMessage
 import dev.lkey.common.ui.item.FinancilityLoadingBar
 import dev.lkey.common.ui.item.FinancilitySnackBar

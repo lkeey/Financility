@@ -1,4 +1,4 @@
-package dev.lkey.common.core.model
+package dev.lkey.common.core.model.versions
 
 data class AppInfo(
     val version: String,

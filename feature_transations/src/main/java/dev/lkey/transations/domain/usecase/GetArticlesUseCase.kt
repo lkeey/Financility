@@ -1,7 +1,7 @@
 package dev.lkey.transations.domain.usecase
 
 import dev.lkey.articles.domain.ArticlesRepository
-import dev.lkey.common.core.model.CategoryModel
+import dev.lkey.common.core.model.category.CategoryModel
 import dev.lkey.core.network.retryRequest
 import jakarta.inject.Inject
 

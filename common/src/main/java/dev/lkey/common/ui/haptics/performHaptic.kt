@@ -1,4 +1,4 @@
-package dev.lkey.common.haptics
+package dev.lkey.common.ui.haptics
 
 import android.Manifest
 import android.content.Context
@@ -7,8 +7,8 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import androidx.annotation.RequiresPermission
-import dev.lkey.common.core.model.HapticEffect
-import dev.lkey.common.core.model.HapticSettings
+import dev.lkey.common.core.model.haptics.HapticEffect
+import dev.lkey.common.core.model.haptics.HapticSettings
 
 /**
  * Здесь происходит вызов вибрации

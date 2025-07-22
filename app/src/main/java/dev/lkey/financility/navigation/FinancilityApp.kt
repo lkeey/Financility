@@ -18,10 +18,10 @@ import dev.lkey.articles.presentation.ui.ArticlesScreen
 import dev.lkey.bill.di.DaggerBillComponent
 import dev.lkey.bill.presentation.current.ui.BillScreen
 import dev.lkey.bill.presentation.edit.ui.EditBillScreen
-import dev.lkey.common.core.model.TransactionModel
+import dev.lkey.common.core.model.transaction.TransactionModel
 import dev.lkey.common.navigation.Route
-import dev.lkey.common.theme.FinancilityTheme
-import dev.lkey.common.theme.ThemeMode
+import dev.lkey.common.ui.theme.FinancilityTheme
+import dev.lkey.common.ui.theme.ThemeMode
 import dev.lkey.core.di.utils.CoreProvider
 import dev.lkey.feature_splash.di.DaggerSplashComponent
 import dev.lkey.feature_splash.presentation.ui.SplashScreen

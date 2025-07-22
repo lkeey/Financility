@@ -2,7 +2,7 @@ package dev.lkey.transations.data.repository
 
 import android.util.Log
 import dev.lkey.common.constants.Constants
-import dev.lkey.common.core.model.TransactionModel
+import dev.lkey.common.core.model.transaction.TransactionModel
 import dev.lkey.core.error.ApiException
 import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.ktorClient

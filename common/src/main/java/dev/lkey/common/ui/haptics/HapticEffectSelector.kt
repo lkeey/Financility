@@ -1,4 +1,4 @@
-package dev.lkey.common.haptics
+package dev.lkey.common.ui.haptics
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
@@ -10,7 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dev.lkey.common.core.model.HapticEffect
+import dev.lkey.common.core.model.haptics.HapticEffect
 
 @Composable
 fun HapticEffectSelector(

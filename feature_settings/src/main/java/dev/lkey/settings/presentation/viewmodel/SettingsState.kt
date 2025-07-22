@@ -1,9 +1,9 @@
 package dev.lkey.settings.presentation.viewmodel
 
 import androidx.compose.ui.graphics.Color
-import dev.lkey.common.core.model.AppInfo
-import dev.lkey.common.core.model.HapticSettings
-import dev.lkey.common.theme.ThemeMode
+import dev.lkey.common.core.model.versions.AppInfo
+import dev.lkey.common.core.model.haptics.HapticSettings
+import dev.lkey.common.ui.theme.ThemeMode
 import dev.lkey.core.network.FinancilityResult
 
 data class SettingsState (
