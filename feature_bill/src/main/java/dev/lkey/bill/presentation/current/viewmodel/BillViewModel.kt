@@ -4,11 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.lkey.bill.domain.usecase.GetBillInfoUseCase
 import dev.lkey.common.constants.Constants.BILL_SYNC
+import dev.lkey.common.constants.Constants.TRANSACTION_SYNC
 import dev.lkey.common.core.model.account.AccountBriefModel
+import dev.lkey.common.core.model.transaction.TransactionModel
 import dev.lkey.core.error.ErrorHandler
 import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.FinancilityResult
 import dev.lkey.storage.data.sync.AppSyncStorage
+import dev.lkey.transations.domain.usecase.GetTransactionsUseCase
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,6 +20,8 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 /**
  * VM для экрана счетов
@@ -24,7 +29,8 @@ import kotlinx.coroutines.launch
 
 class BillViewModel @Inject constructor(
     private val billInfoUseCase : GetBillInfoUseCase,
-    private val appSyncStorage: AppSyncStorage
+    private val appSyncStorage: AppSyncStorage,
+    private val transactionUseCase: GetTransactionsUseCase,
 ): ViewModel() {
 
     private val _state = MutableStateFlow(BillState())
@@ -66,6 +72,9 @@ class BillViewModel @Inject constructor(
                             status = FinancilityResult.Success
                         )
                     }
+
+                    loadTransactions(res[0].id)
+
                 } else {
                     _state.update {
                         it.copy(
@@ -78,15 +87,19 @@ class BillViewModel @Inject constructor(
             }.onFailure { err ->
 
                 if (err is OfflineDataException) {
+                    val accouns = err.data as List<AccountBriefModel>
                     _state.update {
                         it.copy(
                             status = FinancilityResult.Success,
-                            accounts = err.data as List<AccountBriefModel>,
+                            accounts = accouns,
                             lastSync = appSyncStorage.getSyncTime(
                                 feature = BILL_SYNC,
                             )
                         )
                     }
+
+                    loadTransactions(accouns[0].id)
+
                 } else {
                     _state.update {
                         it.copy(status = FinancilityResult.Error)
@@ -99,4 +112,57 @@ class BillViewModel @Inject constructor(
         }
     }
 
+    private fun loadTransactions(
+        id : Int
+    ) {
+        viewModelScope.launch {
+            _state.update {
+                it.copy(
+                    status = FinancilityResult.Loading,
+                )
+            }
+
+            val result = transactionUseCase.invoke(
+                id = id,
+                startDate = LocalDate.now()
+                    .withDayOfMonth(1)
+                    .format(DateTimeFormatter.ISO_DATE),
+                endDate = LocalDate.now()
+                    .format(DateTimeFormatter.ISO_DATE)
+            )
+
+            result
+                .onSuccess { res ->
+                    _state.update {
+                        it.copy(
+                            status = FinancilityResult.Success,
+                            transactions = res
+                        )
+                    }
+                }
+                .onFailure { err ->
+                    if (err is OfflineDataException) {
+                        val transactions = err.data as List<TransactionModel>
+
+                        _state.update {
+                            it.copy(
+                                status = FinancilityResult.Success,
+                                transactions = transactions.filter {
+                                    !it.categoryModel.isIncome
+                                },
+                                lastSync = appSyncStorage.getSyncTime(
+                                    feature = TRANSACTION_SYNC,
+                                )
+                            )
+                        }
+                    } else {
+                        _state.update {
+                            it.copy(status = FinancilityResult.Error)
+                        }
+
+                        _action.emit(BillAction.ShowSnackBar(ErrorHandler().handleException(err)))
+                    }
+                }
+        }
+    }
 }

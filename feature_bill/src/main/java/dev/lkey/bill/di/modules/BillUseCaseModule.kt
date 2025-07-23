@@ -6,6 +6,8 @@ import dev.lkey.account.domain.AccountRepository
 import dev.lkey.bill.domain.repository.BillRepository
 import dev.lkey.bill.domain.usecase.GetBillInfoUseCase
 import dev.lkey.bill.domain.usecase.UpdateBillUseCase
+import dev.lkey.transations.domain.repository.TransactionsRepository
+import dev.lkey.transations.domain.usecase.GetTransactionsUseCase
 
 /**
  * Модуль use-case счета
@@ -26,6 +28,13 @@ class BillUseCaseModule {
         billRepository: BillRepository
     ): UpdateBillUseCase {
         return UpdateBillUseCase(billRepository)
+    }
+
+    @Provides
+    fun provideGetTransactionsUseCase(
+        transactionsRepository: TransactionsRepository
+    ): GetTransactionsUseCase {
+        return GetTransactionsUseCase(transactionsRepository)
     }
 
 }

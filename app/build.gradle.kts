@@ -76,7 +76,7 @@ dependencies {
 
     // modules
     implementation(project(":feature_bill"))
-    implementation(project(":feature_transations"))
+    implementation(project(":feature_transactions"))
     implementation(project(":feature_settings"))
     implementation(project(":feature_splash"))
 
