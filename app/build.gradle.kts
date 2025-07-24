@@ -94,4 +94,7 @@ dependencies {
     // to get account
     implementation(project(":account"))
 
+    // to get transactions
+    implementation(project(":transactions"))
+
 }

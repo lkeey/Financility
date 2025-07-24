@@ -10,6 +10,8 @@ import dev.lkey.storage.data.dao.AccountDao
 import dev.lkey.storage.data.dao.CategoryDao
 import dev.lkey.storage.data.dao.TransactionDao
 import dev.lkey.storage.data.sync.AppSyncStorage
+import dev.lkey.transactions.data.TransactionsDatasourceImpl
+import dev.lkey.transactions.domain.TransactionsDatasource
 import dev.lkey.transations.data.repository.TransactionsRepositoryImpl
 import dev.lkey.transations.domain.repository.TransactionsRepository
 
@@ -26,6 +28,17 @@ class TransactionsRepositoryModule {
         syncStorage: AppSyncStorage
     ): TransactionsRepository {
         return TransactionsRepositoryImpl(
+            transactionDao = transactionDao,
+            appSyncStorage = syncStorage
+        )
+    }
+
+    @Provides
+    fun provideTransactionsDatasource(
+        transactionDao: TransactionDao,
+        syncStorage: AppSyncStorage
+    ): TransactionsDatasource {
+        return TransactionsDatasourceImpl(
             transactionDao = transactionDao,
             appSyncStorage = syncStorage
         )

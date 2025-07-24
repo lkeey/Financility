@@ -1,4 +1,4 @@
-package dev.lkey.transations.domain.usecase
+package dev.lkey.bill.domain.usecase
 
 import dev.lkey.common.core.model.transaction.TransactionModel
 import dev.lkey.core.network.retryRequest

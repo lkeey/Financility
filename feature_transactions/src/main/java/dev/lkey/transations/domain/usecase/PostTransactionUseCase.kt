@@ -1,7 +1,7 @@
 package dev.lkey.transations.domain.usecase
 
 import dev.lkey.core.network.retryRequest
-import dev.lkey.transations.data.dto.RequestTransactionDto
+import dev.lkey.transactions.data.dto.RequestTransactionDto
 import dev.lkey.transations.domain.repository.TransactionsRepository
 
 /**

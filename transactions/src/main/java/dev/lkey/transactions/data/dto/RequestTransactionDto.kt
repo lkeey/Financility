@@ -1,4 +1,4 @@
-package dev.lkey.transations.data.dto
+package dev.lkey.transactions.data.dto
 
 import kotlinx.serialization.Serializable
 

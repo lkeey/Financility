@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/feature_splash" />
             <option value="$PROJECT_DIR$/feature_transactions" />
             <option value="$PROJECT_DIR$/storage" />
+            <option value="$PROJECT_DIR$/transactions" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -2,13 +2,11 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
 
-    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.jetbrains.kotlin.serialization)
-    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
-    namespace = "dev.lkey.bill"
+    namespace = "dev.lkey.transactions"
     compileSdk = 35
 
     defaultConfig {
@@ -34,39 +32,22 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-
-    // testing
+    implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // ui
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
+    // Dagger 2
+    implementation(libs.dagger)
 
     // network
     implementation(libs.ktor.client.okhttp)
-
-    // Dagger 2
-    implementation(libs.dagger)
-    kapt(libs.dagger.compiler)
-
-    // Navigation
-    implementation(libs.jetbrains.compose.navigation)
 
     // serialization
     implementation(libs.kotlinx.serialization.json)
@@ -79,11 +60,4 @@ dependencies {
 
     // room-module
     implementation(project(":storage"))
-
-    // to get account
-    implementation(project(":account"))
-
-    // to get transactions
-    implementation(project(":transactions"))
-
 }

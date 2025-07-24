@@ -59,7 +59,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
 
-
     // network
     implementation(libs.ktor.client.okhttp)
 
@@ -88,5 +87,6 @@ dependencies {
     // to get account
     implementation(project(":account"))
 
-
+    // to get transactions
+    implementation(project(":transactions"))
 }

@@ -9,8 +9,8 @@ import dev.lkey.bill.domain.repository.BillRepository
 import dev.lkey.storage.data.dao.AccountDao
 import dev.lkey.storage.data.dao.TransactionDao
 import dev.lkey.storage.data.sync.AppSyncStorage
-import dev.lkey.transations.data.repository.TransactionsRepositoryImpl
-import dev.lkey.transations.domain.repository.TransactionsRepository
+import dev.lkey.transactions.data.TransactionsDatasourceImpl
+import dev.lkey.transactions.domain.TransactionsDatasource
 
 /**
  * Модуль репозиториев счета
@@ -31,18 +31,19 @@ class BillRepositoryModule {
     }
 
     @Provides
-    fun provideBillRepository(): BillRepository {
-        return BillRepositoryImpl()
-    }
-
-    @Provides
-    fun provideTransactionsRepository(
+    fun provideTransactionsDatasource(
         transactionDao: TransactionDao,
         syncStorage: AppSyncStorage
-    ): TransactionsRepository {
-        return TransactionsRepositoryImpl(
+    ): TransactionsDatasource {
+        return TransactionsDatasourceImpl(
             transactionDao = transactionDao,
             appSyncStorage = syncStorage
         )
     }
+
+    @Provides
+    fun provideBillRepository(): BillRepository {
+        return BillRepositoryImpl()
+    }
+
 }

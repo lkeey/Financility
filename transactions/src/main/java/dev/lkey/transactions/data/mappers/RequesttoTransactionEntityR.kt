@@ -1,8 +1,8 @@
-package dev.lkey.transations.data.mappers
+package dev.lkey.transactions.data.mappers
 
 import dev.lkey.common.core.converter.convertMillisToDate
 import dev.lkey.storage.data.model.TransactionEntity
-import dev.lkey.transations.data.dto.RequestTransactionDto
+import dev.lkey.transactions.data.dto.RequestTransactionDto
 
 fun RequestTransactionDto.RequesttoTransactionEntity(
     isSynced : Boolean

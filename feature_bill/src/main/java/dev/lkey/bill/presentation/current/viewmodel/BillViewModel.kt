@@ -3,6 +3,7 @@ package dev.lkey.bill.presentation.current.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.lkey.bill.domain.usecase.GetBillInfoUseCase
+import dev.lkey.bill.domain.usecase.GetTransactionsUseCase
 import dev.lkey.common.constants.Constants.BILL_SYNC
 import dev.lkey.common.constants.Constants.TRANSACTION_SYNC
 import dev.lkey.common.core.model.account.AccountBriefModel
@@ -11,7 +12,6 @@ import dev.lkey.core.error.ErrorHandler
 import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.FinancilityResult
 import dev.lkey.storage.data.sync.AppSyncStorage
-import dev.lkey.transations.domain.usecase.GetTransactionsUseCase
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

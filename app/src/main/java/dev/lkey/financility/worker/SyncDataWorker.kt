@@ -9,7 +9,7 @@ import dev.lkey.articles.data.ArticlesRepositoryImpl
 import dev.lkey.core.di.utils.CoreProvider
 import dev.lkey.storage.data.sync.AppSyncStorage
 import dev.lkey.storage.di.DaggerDatabaseComponent
-import dev.lkey.transations.data.repository.TransactionsRepositoryImpl
+import dev.lkey.transactions.data.TransactionsDatasourceImpl
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -42,7 +42,7 @@ class SyncDataWorker(
         appSyncStorage = syncer
     )
 
-    private val transactionsRepository = TransactionsRepositoryImpl(
+    private val transactionsRepository = TransactionsDatasourceImpl(
         transactionDao = db.transactionDao(),
         appSyncStorage = syncer
     )
