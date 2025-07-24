@@ -82,7 +82,7 @@ fun BillView (
     }
 }
 
-
+@Composable
 private fun getData(
     transactions: List<TransactionModel>
 ) : List<BarChartItem> {
@@ -101,7 +101,10 @@ private fun getData(
 
         BarChartItem(
             dateLabel = date,
-            value = (incomeSum - expenseSum).toFloat()
+            value = (incomeSum - expenseSum).toFloat(),
+            color = if ((incomeSum - expenseSum).toFloat() <= 0) {
+                MaterialTheme.colorScheme.tertiaryContainer
+            } else MaterialTheme.colorScheme.surfaceTint
         )
     }.sortedBy { it.dateLabel }
 }

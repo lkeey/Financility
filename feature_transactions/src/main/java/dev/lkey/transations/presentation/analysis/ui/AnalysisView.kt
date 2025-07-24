@@ -12,6 +12,10 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -20,9 +24,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.lkey.common.R
+import dev.lkey.common.core.model.graphics.BarChartItem
 import dev.lkey.common.core.model.graphics.PieChartItem
 import dev.lkey.common.core.model.transaction.TransactionModel
+import dev.lkey.common.ui.btn.FinancilityButton
 import dev.lkey.common.ui.field.FinancilityDayPicker
+import dev.lkey.common.ui.graphics.BarChart
 import dev.lkey.common.ui.graphics.DrawCircleGraphWithIcon
 import dev.lkey.common.ui.item.FinancilityListItem
 import dev.lkey.common.ui.item.FinancilitySyncMessage
@@ -41,6 +48,9 @@ fun AnalysisView (
 
     val scrollState = rememberScrollState()
     val totalSum = state.transactions.sumOf { it.amount.toDouble() }
+    var isPieChart by remember {
+        mutableStateOf(true)
+    }
 
     Column (
         modifier = modifier
@@ -96,12 +106,34 @@ fun AnalysisView (
 
         if (state.transactions.isNotEmpty()) {
 
-            DrawCircleGraphWithIcon(
-                data = getPieItems(state.transactions),
-                modifier = Modifier
-                    .padding(vertical = 24.dp)
-                    .size(250.dp)
-            )
+            if (isPieChart) {
+                DrawCircleGraphWithIcon(
+                    data = getPieItems(state.transactions),
+                    modifier = Modifier
+                        .padding(vertical = 24.dp)
+                        .size(250.dp)
+                )
+            } else {
+                BarChart(
+                    data = getPieItems(state.transactions).map {
+                        BarChartItem(
+                            dateLabel = it.label,
+                            value = it.valuePercent,
+                            color = it.color
+                        )
+                    },
+                    modifier = Modifier
+                        .padding(vertical = 24.dp),
+                    maxBarHeight = 300.dp
+                )
+            }
+
+            FinancilityButton(
+                text = "Сменить вид",
+                backgroundColor = MaterialTheme.colorScheme.primary,
+            ) {
+                isPieChart = !isPieChart
+            }
 
             HorizontalDivider(
                 modifier = Modifier
