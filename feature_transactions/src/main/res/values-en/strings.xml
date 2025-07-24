@@ -10,4 +10,5 @@
     <string name="pediod_start">Period: Start</string>
     <string name="pediod_end">Period: End</string>
     <string name="today_income">Income Today</string>
+    <string name="change_view_chart">Change type</string>
 </resources>

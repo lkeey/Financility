@@ -10,4 +10,5 @@
     <string name="pediod_start">Период: начало</string>
     <string name="pediod_end">Период: конец</string>
     <string name="today_income">Доходы сегодня</string>
+    <string name="change_view_chart">Сменить вид</string>
 </resources>

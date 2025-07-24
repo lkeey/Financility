@@ -129,7 +129,7 @@ fun AnalysisView (
             }
 
             FinancilityButton(
-                text = "Сменить вид",
+                text = stringResource(dev.lkey.transations.R.string.change_view_chart),
                 backgroundColor = MaterialTheme.colorScheme.primary,
             ) {
                 isPieChart = !isPieChart

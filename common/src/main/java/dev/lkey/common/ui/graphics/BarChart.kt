@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.lkey.common.core.model.graphics.BarChartItem
+import kotlinx.coroutines.delay
 import kotlin.math.abs
 
 @Composable
@@ -35,6 +36,7 @@ fun BarChart(
     val maxAbsValue = data.maxOf { abs(it.value) }
 
     LaunchedEffect(data) {
+        delay(timeMillis = 1000L)
         scrollState.animateScrollTo(scrollState.maxValue)
     }
 
