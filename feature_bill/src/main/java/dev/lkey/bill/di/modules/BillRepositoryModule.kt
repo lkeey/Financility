@@ -7,7 +7,10 @@ import dev.lkey.account.domain.AccountRepository
 import dev.lkey.bill.data.repository.BillRepositoryImpl
 import dev.lkey.bill.domain.repository.BillRepository
 import dev.lkey.storage.data.dao.AccountDao
+import dev.lkey.storage.data.dao.TransactionDao
 import dev.lkey.storage.data.sync.AppSyncStorage
+import dev.lkey.transactions.data.TransactionsDatasourceImpl
+import dev.lkey.transactions.domain.TransactionsDatasource
 
 /**
  * Модуль репозиториев счета
@@ -24,6 +27,17 @@ class BillRepositoryModule {
         return AccountRepositoryImpl(
             accountDao = accountDao,
             appSyncStorage = appSyncStorage
+        )
+    }
+
+    @Provides
+    fun provideTransactionsDatasource(
+        transactionDao: TransactionDao,
+        syncStorage: AppSyncStorage
+    ): TransactionsDatasource {
+        return TransactionsDatasourceImpl(
+            transactionDao = transactionDao,
+            appSyncStorage = syncStorage
         )
     }
 

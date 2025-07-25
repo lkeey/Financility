@@ -6,7 +6,7 @@ import dev.lkey.storage.data.dao.AccountDao
 import dev.lkey.storage.data.dao.CategoryDao
 import dev.lkey.storage.data.dao.TransactionDao
 import dev.lkey.storage.di.module.AppRoomModule
-import dev.lkey.storage.di.module.ArticlesSyncModule
+import dev.lkey.storage.di.module.ArticlesStorageModule
 
 
 /**
@@ -20,7 +20,7 @@ import dev.lkey.storage.di.module.ArticlesSyncModule
     ],
     modules = [
         AppRoomModule::class,
-        ArticlesSyncModule::class
+        ArticlesStorageModule::class
     ]
 )
 interface DatabaseComponent {

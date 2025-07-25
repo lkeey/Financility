@@ -68,4 +68,21 @@ sealed interface Route {
     @Serializable
     data object AllSettings : Route
 
+    @Serializable
+    data object CodeSettings : Route
+
+    @Serializable
+    data object SyncSettings : Route
+
+    @Serializable
+    data object LanguageSettings : Route
+
+    @Serializable
+    data object ColorSettings : Route
+
+    @Serializable
+    data object HapticsSettings : Route
+
+    @Serializable
+    data object VersionSettings : Route
 }

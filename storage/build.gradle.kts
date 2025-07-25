@@ -48,13 +48,22 @@ dependencies {
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
 
+    // GSON
+    implementation(libs.gson)
+
     // Room
     implementation(libs.androidx.room.runtime)
     kapt(libs.androidx.room.compiler)
+
+    // Encrypted shared preferences
+    implementation(libs.androidx.security.crypto)
+
 
     // Core-Component
     implementation(project(":core"))
 
     // common-components
     implementation(project(":common"))
+
+
 }

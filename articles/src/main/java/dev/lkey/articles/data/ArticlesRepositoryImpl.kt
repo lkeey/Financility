@@ -2,7 +2,7 @@ package dev.lkey.articles.data
 
 import dev.lkey.articles.domain.ArticlesRepository
 import dev.lkey.common.constants.Constants
-import dev.lkey.common.core.model.CategoryModel
+import dev.lkey.common.core.model.category.CategoryModel
 import dev.lkey.core.error.ApiException
 import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.ktorClient

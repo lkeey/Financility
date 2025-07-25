@@ -2,7 +2,7 @@ package dev.lkey.account.data
 
 import dev.lkey.account.domain.AccountRepository
 import dev.lkey.common.constants.Constants
-import dev.lkey.common.core.model.AccountBriefModel
+import dev.lkey.common.core.model.account.AccountBriefModel
 import dev.lkey.core.error.ApiException
 import dev.lkey.core.error.OfflineDataException
 import dev.lkey.core.network.ktorClient

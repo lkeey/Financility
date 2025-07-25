@@ -12,7 +12,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -82,5 +82,8 @@ dependencies {
 
     // to get account
     implementation(project(":account"))
+
+    // to get transactions
+    implementation(project(":transactions"))
 
 }

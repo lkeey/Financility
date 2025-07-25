@@ -27,7 +27,7 @@ fun FinancilityButton (
         modifier = modifier
             .fillMaxWidth()
             .padding(20.dp),
-        shape = RoundedCornerShape(40),
+        shape = RoundedCornerShape(percent = 40),
         colors = ButtonDefaults.buttonColors(
             containerColor = backgroundColor
         ),

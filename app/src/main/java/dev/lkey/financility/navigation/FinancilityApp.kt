@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
@@ -17,13 +18,21 @@ import dev.lkey.articles.presentation.ui.ArticlesScreen
 import dev.lkey.bill.di.DaggerBillComponent
 import dev.lkey.bill.presentation.current.ui.BillScreen
 import dev.lkey.bill.presentation.edit.ui.EditBillScreen
-import dev.lkey.common.core.model.TransactionModel
+import dev.lkey.common.core.model.transaction.TransactionModel
 import dev.lkey.common.navigation.Route
-import dev.lkey.common.theme.FinancilityTheme
+import dev.lkey.common.ui.theme.FinancilityTheme
+import dev.lkey.common.ui.theme.ThemeMode
 import dev.lkey.core.di.utils.CoreProvider
 import dev.lkey.feature_splash.di.DaggerSplashComponent
 import dev.lkey.feature_splash.presentation.ui.SplashScreen
-import dev.lkey.settings.SettingsScreen
+import dev.lkey.settings.di.DaggerSettingsComponent
+import dev.lkey.settings.presentation.ui.code.CodeSettingsScreen
+import dev.lkey.settings.presentation.ui.color.ColorSettingsScreen
+import dev.lkey.settings.presentation.ui.common.SettingsScreen
+import dev.lkey.settings.presentation.ui.haptics.HapticsSettingsScreen
+import dev.lkey.settings.presentation.ui.language.LanguageSettingScreen
+import dev.lkey.settings.presentation.ui.sync.SyncSettingsScreen
+import dev.lkey.settings.presentation.ui.version.VersionSettingsScreen
 import dev.lkey.storage.di.DaggerDatabaseComponent
 import dev.lkey.transations.di.DaggerTransactionComponent
 import dev.lkey.transations.presentation.analysis.ui.AnalysisScreen
@@ -41,7 +50,10 @@ import kotlinx.serialization.json.Json
  */
 
 @Composable
-fun FinancilityApp() {
+fun FinancilityApp(
+    theme: ThemeMode,
+    primaryColor: Color
+) {
 
     val provider = LocalContext.current.applicationContext as CoreProvider
     val db = DaggerDatabaseComponent.factory().create(provider.coreComponent)
@@ -50,9 +62,12 @@ fun FinancilityApp() {
     val billComponent = DaggerBillComponent.factory().create(provider.coreComponent, db)
     val articlesComponent = DaggerArticlesComponent.factory().create(provider.coreComponent, db)
     val transactionsComponent = DaggerTransactionComponent.factory().create(provider.coreComponent, db)
+    val settingsComponent = DaggerSettingsComponent.factory().create(provider.coreComponent, db)
 
-    FinancilityTheme {
-
+    FinancilityTheme (
+        themeMode = theme,
+        primaryColor = primaryColor
+    ) {
         val navController = rememberNavController()
 
         NavHost(
@@ -213,7 +228,50 @@ fun FinancilityApp() {
             ) {
                 composable<Route.AllSettings> {
                     SettingsScreen(
-                        navController = navController
+                        navController = navController,
+                        viewModel = viewModel(factory = settingsComponent.viewModelFactory())
+                    )
+                }
+
+                composable<Route.HapticsSettings> {
+                    HapticsSettingsScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = settingsComponent.viewModelFactory())
+                    )
+                }
+
+                composable<Route.CodeSettings> {
+                    CodeSettingsScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = settingsComponent.viewModelFactory())
+                    )
+                }
+
+                composable<Route.SyncSettings> {
+                    SyncSettingsScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = settingsComponent.viewModelFactory())
+                    )
+                }
+
+                composable<Route.LanguageSettings> {
+                    LanguageSettingScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = settingsComponent.viewModelFactory())
+                    )
+                }
+
+                composable<Route.ColorSettings> {
+                    ColorSettingsScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = settingsComponent.viewModelFactory())
+                    )
+                }
+
+                composable<Route.VersionSettings> {
+                    VersionSettingsScreen(
+                        navController = navController,
+                        viewModel = viewModel(factory = settingsComponent.viewModelFactory())
                     )
                 }
             }

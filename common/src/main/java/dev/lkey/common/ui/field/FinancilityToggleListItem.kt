@@ -2,38 +2,40 @@ package dev.lkey.common.ui.field
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.lkey.common.ui.theme.ThemeMode
 
 @Composable
 fun FinancilityToggleListItem (
     title: String,
-    isChecked : Boolean = false,
+    current: ThemeMode,
     backgroundColor: Color = MaterialTheme.colorScheme.onSurface,
-    onClick: (Boolean) -> Unit
+    onToggle: (ThemeMode) -> Unit
 ) {
 
-    var checked by remember { mutableStateOf(isChecked) }
+    val next = when (current) {
+        ThemeMode.LIGHT -> ThemeMode.DARK
+        ThemeMode.DARK -> ThemeMode.SYSTEM
+        ThemeMode.SYSTEM -> ThemeMode.LIGHT
+    }
 
     Column (
         modifier = Modifier
@@ -59,21 +61,28 @@ fun FinancilityToggleListItem (
                 color = MaterialTheme.colorScheme.inverseOnSurface
             )
 
-            Switch(
-                checked = checked,
-                onCheckedChange = {
-                    checked = it
-                    onClick(it)
-                },
-                colors = SwitchDefaults.colors(
-                    checkedThumbColor = MaterialTheme.colorScheme.primary,
-                    checkedTrackColor = MaterialTheme.colorScheme.primaryContainer,
-                    checkedBorderColor = MaterialTheme.colorScheme.primary,
-                    uncheckedThumbColor = MaterialTheme.colorScheme.secondaryContainer,
-                    uncheckedTrackColor = MaterialTheme.colorScheme.onSecondary,
-                    uncheckedBorderColor = MaterialTheme.colorScheme.secondaryContainer
-                )
-            )
+            Surface(
+                onClick = { onToggle(next) },
+                shape = RoundedCornerShape(8.dp),
+                tonalElevation = 4.dp,
+                color = MaterialTheme.colorScheme.primaryContainer,
+
+            ) {
+                Box(
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp, vertical = 4.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = when (current) {
+                            ThemeMode.LIGHT -> "🌞 Light"
+                            ThemeMode.DARK -> "🌙 Dark"
+                            ThemeMode.SYSTEM -> "⚙️ System"
+                        },
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                }
+            }
         }
 
         HorizontalDivider(

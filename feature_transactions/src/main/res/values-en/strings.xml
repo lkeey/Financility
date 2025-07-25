@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="todat_expenses">Expenses Today</string>
+    <string name="all">Total</string>
+    <string name="my_history">My History</string>
+    <string name="begin">Start</string>
+    <string name="end">End</string>
+    <string name="sum">Sum</string>
+    <string name="analysys">Analysis</string>
+    <string name="pediod_start">Period: Start</string>
+    <string name="pediod_end">Period: End</string>
+    <string name="today_income">Income Today</string>
+    <string name="change_view_chart">Change type</string>
+</resources>

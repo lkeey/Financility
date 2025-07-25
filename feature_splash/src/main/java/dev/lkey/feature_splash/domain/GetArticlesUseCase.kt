@@ -1,7 +1,7 @@
 package dev.lkey.feature_splash.domain
 
 import dev.lkey.articles.domain.ArticlesRepository
-import dev.lkey.common.core.model.CategoryModel
+import dev.lkey.common.core.model.category.CategoryModel
 import jakarta.inject.Inject
 
 /**

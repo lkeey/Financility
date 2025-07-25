@@ -1,7 +1,7 @@
 package dev.lkey.bill.presentation.edit.viewmodel
 
-import dev.lkey.common.core.model.AccountBriefModel
-import dev.lkey.common.core.model.CurrencyOption
+import dev.lkey.common.core.model.account.AccountBriefModel
+import dev.lkey.common.core.model.account.CurrencyOption
 import dev.lkey.core.network.FinancilityResult
 
 /**

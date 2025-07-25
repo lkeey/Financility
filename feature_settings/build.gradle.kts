@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
 
     alias(libs.plugins.kotlin.compose)
-
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -11,7 +11,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -42,6 +42,7 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.ui.test.junit4.android)
 
     // testing
     testImplementation(libs.junit)
@@ -57,12 +58,20 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
 
+    // Dagger 2
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
+
     // Navigation
     implementation(libs.jetbrains.compose.navigation)
 
+    // room-module
+    implementation(project(":storage"))
+
     // ktor-client
     implementation(project(":core"))
-    implementation(project(":common"))
 
     // ui-components
+    implementation(project(":common"))
+    testImplementation(kotlin("test"))
 }

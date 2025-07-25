@@ -1,6 +1,6 @@
 package dev.lkey.storage.data.mappers.transaction
 
-import dev.lkey.common.core.model.TransactionModel
+import dev.lkey.common.core.model.transaction.TransactionModel
 import dev.lkey.storage.data.mappers.account.toAccountBriefModel
 import dev.lkey.storage.data.mappers.category.toCategoryModel
 import dev.lkey.storage.data.model.TransactionWithRelations

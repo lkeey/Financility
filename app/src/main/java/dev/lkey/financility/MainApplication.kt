@@ -17,11 +17,10 @@ class MainApplication : Application(), CoreProvider {
         DaggerCoreComponent.factory().create(this)
     }
 
-
-
     override fun onCreate() {
         super.onCreate()
 
         scheduleSyncDataWorker(this)
     }
+
 }

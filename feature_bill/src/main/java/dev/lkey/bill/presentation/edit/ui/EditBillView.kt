@@ -13,11 +13,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.lkey.bill.presentation.edit.viewmodel.EditBillEvent
 import dev.lkey.bill.presentation.edit.viewmodel.EditBillState
 import dev.lkey.common.R
-import dev.lkey.common.core.model.CurrencyOption
+import dev.lkey.common.core.model.account.CurrencyOption
 import dev.lkey.common.ui.field.FinancilityEditText
 import dev.lkey.common.ui.field.FinancilityNumTextField
 import dev.lkey.common.ui.item.FinancilityListItem
@@ -75,7 +76,7 @@ fun EditBillView (
             )
 
             FinancilityNumTextField (
-                title = "Баланс",
+                title = stringResource(dev.lkey.bill.R.string.balance),
                 previousData = state.enteredAmount,
                 backgroundColor = White,
             ) {
@@ -90,7 +91,7 @@ fun EditBillView (
             )
 
             FinancilityListItem(
-                title = "Валюта",
+                title = stringResource(dev.lkey.bill.R.string.currency),
                 description = null,
                 backgroundColor = White,
                 trailingText = state.chosenCurrency.symbol,

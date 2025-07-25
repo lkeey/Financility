@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Financility</string>
+    <string name="find_article">Найти статью</string>
+    <string name="my_bill">Мой счет</string>
+    <string name="current_bill">Баланс</string>
+    <string name="finance">Валюта</string>
+    <string name="comm">Комментарий</string>
+    <string name="expenses_bar">Расходы</string>
+    <string name="income_bar">Доходы</string>
+    <string name="bill_bar">Счет</string>
+    <string name="articles_bar">Статьи</string>
+    <string name="settings_bar">Настройки</string>
+    <string name="offline_data_exception">Показаны оффлайн-данные.\nПоследняя синхронизация: %1$s</string>
+    <string name="click">Клик</string>
+    <string name="power_click">Сильный клик</string>
+    <string name="double_click">Двойной</string>
+    <string name="tick_click">Тик</string>
+    <string name="quick_click">Короткий</string>
+</resources>

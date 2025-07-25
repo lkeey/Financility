@@ -1,7 +1,7 @@
 package dev.lkey.feature_splash.domain
 
 import dev.lkey.account.domain.AccountRepository
-import dev.lkey.common.core.model.AccountBriefModel
+import dev.lkey.common.core.model.account.AccountBriefModel
 
 /**
  * Use Case для получения счетов пользователя
