@@ -26,8 +26,17 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- pop://lkey.ru/transaction  -->
+                <data android:scheme="pop" />
+                <data android:host="lkey.ru" />
+                <data android:pathPrefix="/transaction/" />
             </intent-filter>
         </activity>
     </application>

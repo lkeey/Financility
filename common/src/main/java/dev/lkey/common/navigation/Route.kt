@@ -27,6 +27,11 @@ sealed interface Route {
     data object UpdateExpense : Route
 
     @Serializable
+    data class DetailTransaction(
+        val transactionId : Int,
+    ) : Route
+
+    @Serializable
     data object AnalysisExpense : Route
 
     @Serializable

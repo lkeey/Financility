@@ -3,6 +3,7 @@ package dev.lkey.financility.navigation
 import android.net.Uri
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -13,6 +14,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
+import androidx.navigation.toRoute
 import dev.lkey.articles.di.DaggerArticlesComponent
 import dev.lkey.articles.presentation.ui.ArticlesScreen
 import dev.lkey.bill.di.DaggerBillComponent
@@ -127,6 +130,21 @@ fun FinancilityApp(
                             isIncome = false
                         )
                     }
+                }
+
+                /* deeplink */
+
+                composable<Route.DetailTransaction>(
+                    deepLinks = listOf(
+                        navDeepLink {
+                            this.uriPattern = "pop://lkey.ru/transaction/{transactionId}"
+                        },
+                    )
+                ) { backStackEntry ->
+
+                    val route = backStackEntry.toRoute<Route.DetailTransaction>()
+
+                    Text("Deeplink for ${route.transactionId}")
                 }
 
                 composable<Route.AnalysisExpense>{ backStackEntry ->
