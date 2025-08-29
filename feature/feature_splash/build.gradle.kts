@@ -69,10 +69,10 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     // to get account
-    implementation(project(":account"))
+    implementation(project(":datasource:account"))
 
     // to get articles
-    implementation(project(":articles"))
+    implementation(project(":datasource:articles"))
 
     // common-components
     implementation(project(":common"))
@@ -81,6 +81,6 @@ dependencies {
     implementation(project(":core"))
 
     // storage
-    implementation(project(":storage"))
+    implementation(project(":datasource:storage"))
 
 }

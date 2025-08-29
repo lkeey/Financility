@@ -78,7 +78,7 @@ dependencies {
     implementation(project(":feature:feature_splash"))
 
     // db
-    implementation(project(":storage"))
+    implementation(project(":datasource:storage"))
 
     implementation(project(":core"))
 
@@ -86,12 +86,12 @@ dependencies {
     implementation(project(":common"))
 
     // to get articles
-    implementation(project(":articles"))
+    implementation(project(":datasource:articles"))
 
     // to get account
-    implementation(project(":account"))
+    implementation(project(":datasource:account"))
 
     // to get transactions
-    implementation(project(":transactions"))
+    implementation(project(":datasource:transactions"))
 
 }

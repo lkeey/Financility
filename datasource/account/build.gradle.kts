@@ -1,16 +1,14 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-
-    alias(libs.plugins.jetbrains.kotlin.serialization)
 }
 
 android {
-    namespace = "dev.lkey.transactions"
+    namespace = "dev.lkey.account"
     compileSdk = 35
 
     defaultConfig {
-        minSdk = 26
+        minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -43,14 +41,11 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // Dagger 2
-    implementation(libs.dagger)
-
     // network
     implementation(libs.ktor.client.okhttp)
 
-    // serialization
-    implementation(libs.kotlinx.serialization.json)
+    // Dagger 2
+    implementation(libs.dagger)
 
     // ktor-client
     implementation(project(":core"))
@@ -59,5 +54,6 @@ dependencies {
     implementation(project(":common"))
 
     // room-module
-    implementation(project(":storage"))
+    implementation(project(":datasource:storage"))
+
 }

@@ -76,9 +76,9 @@ dependencies {
     implementation(project(":common"))
 
     // room-module
-    implementation(project(":storage"))
+    implementation(project(":datasource:storage"))
 
     // to get articles
-    implementation(project(":articles"))
+    implementation(project(":datasource:articles"))
 
 }

@@ -48,6 +48,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation(kotlin("test"))
 
     // ui
     implementation(platform(libs.androidx.compose.bom))
@@ -66,12 +67,11 @@ dependencies {
     implementation(libs.jetbrains.compose.navigation)
 
     // room-module
-    implementation(project(":storage"))
+    implementation(project(":datasource:storage"))
 
     // ktor-client
     implementation(project(":core"))
 
     // ui-components
     implementation(project(":common"))
-    testImplementation(kotlin("test"))
 }

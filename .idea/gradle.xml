@@ -10,19 +10,20 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/account" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/articles" />
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/datasource" />
+            <option value="$PROJECT_DIR$/datasource/account" />
+            <option value="$PROJECT_DIR$/datasource/articles" />
+            <option value="$PROJECT_DIR$/datasource/storage" />
+            <option value="$PROJECT_DIR$/datasource/transactions" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/feature_articles" />
             <option value="$PROJECT_DIR$/feature/feature_bill" />
             <option value="$PROJECT_DIR$/feature/feature_settings" />
             <option value="$PROJECT_DIR$/feature/feature_splash" />
             <option value="$PROJECT_DIR$/feature/feature_transactions" />
-            <option value="$PROJECT_DIR$/storage" />
-            <option value="$PROJECT_DIR$/transactions" />
           </set>
         </option>
       </GradleProjectSettings>

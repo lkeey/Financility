@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.lkey.account"
+    namespace = "dev.lkey.articles"
     compileSdk = 35
 
     defaultConfig {
@@ -54,6 +54,6 @@ dependencies {
     implementation(project(":common"))
 
     // room-module
-    implementation(project(":storage"))
+    implementation(project(":datasource:storage"))
 
 }

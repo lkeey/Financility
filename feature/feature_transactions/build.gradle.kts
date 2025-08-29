@@ -79,14 +79,14 @@ dependencies {
     implementation(project(":common"))
 
     // room-module
-    implementation(project(":storage"))
+    implementation(project(":datasource:storage"))
 
     // to get articles
-    implementation(project(":articles"))
+    implementation(project(":datasource:articles"))
 
     // to get account
-    implementation(project(":account"))
+    implementation(project(":datasource:account"))
 
     // to get transactions
-    implementation(project(":transactions"))
+    implementation(project(":datasource:transactions"))
 }
