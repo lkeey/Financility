@@ -55,9 +55,6 @@ dependencies {
 
     implementation(libs.jetbrains.compose.navigation)
 
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
@@ -72,13 +69,13 @@ dependencies {
 
     // serialization
     implementation(libs.kotlinx.serialization.json)
-    implementation(project(":feature_articles"))
 
     // modules
-    implementation(project(":feature_bill"))
-    implementation(project(":feature_transactions"))
-    implementation(project(":feature_settings"))
-    implementation(project(":feature_splash"))
+    implementation(project(":feature:feature_articles"))
+    implementation(project(":feature:feature_bill"))
+    implementation(project(":feature:feature_transactions"))
+    implementation(project(":feature:feature_settings"))
+    implementation(project(":feature:feature_splash"))
 
     // db
     implementation(project(":storage"))

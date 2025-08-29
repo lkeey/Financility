@@ -16,14 +16,17 @@ dependencyResolutionManagement {
 
 rootProject.name = "Financility"
 include(":app")
-include(":feature_articles")
-include(":core")
-include(":common")
-include(":feature_settings")
-include(":feature_bill")
-include(":feature_transactions")
+
+include(":feature:feature_articles")
+include(":feature:feature_settings")
+include(":feature:feature_bill")
+include(":feature:feature_transactions")
+include(":feature:feature_splash")
+
 include(":storage")
 include(":articles")
 include(":account")
-include(":feature_splash")
 include(":transactions")
+
+include(":core")
+include(":common")

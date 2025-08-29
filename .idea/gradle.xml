@@ -15,11 +15,12 @@
             <option value="$PROJECT_DIR$/articles" />
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/core" />
-            <option value="$PROJECT_DIR$/feature_articles" />
-            <option value="$PROJECT_DIR$/feature_bill" />
-            <option value="$PROJECT_DIR$/feature_settings" />
-            <option value="$PROJECT_DIR$/feature_splash" />
-            <option value="$PROJECT_DIR$/feature_transactions" />
+            <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/feature_articles" />
+            <option value="$PROJECT_DIR$/feature/feature_bill" />
+            <option value="$PROJECT_DIR$/feature/feature_settings" />
+            <option value="$PROJECT_DIR$/feature/feature_splash" />
+            <option value="$PROJECT_DIR$/feature/feature_transactions" />
             <option value="$PROJECT_DIR$/storage" />
             <option value="$PROJECT_DIR$/transactions" />
           </set>
